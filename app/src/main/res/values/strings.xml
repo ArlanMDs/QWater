@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name">QWater</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="S1">Água com baixo teor de sódio: pode ser usada para irrigação em quase todos os solos, com pouco perigo de desenvolvimento de problemas de sodificação.</string>
+
+    <string name="S2">Água com teor médio de sódio: estas águas só devem ser usadas em solos de textura arenosa ou em solos orgânicos de boa permeabilidade, uma vez que em solos de textura fina (argilosos) o
+sódio representa perigo.</string>
+
+    <string name="S3">Água com alto teor de sódio. Pode produzir níveis tóxicos de sódio trocável na maior parte dos solos, necessitando assim de práticas especiais de manejo tais como: drenagem, fácil lavagem,
+aplicação de matéria orgânica.</string>
+
+    <string name="S4">Água com teor muito alto de sódio. É geralmente inadequada para irrigação exceto quando a salinidade for baixa ou média ou o uso de gesso ou outro corretivo torne possível o uso dessa água.</string>
+
+    <string name="C1">Água de baixa salinidade. Pode ser usada para irrigação da maioria das culturas, em quase todos os tipos de solos, com muito pouca probabilidade de que se desenvolvam problemas de salinidade.
+        Se necessária alguma lixiviação de sais, esta é conseguida em condições normais de irrigação, exceto em solos de muito baixa permeabilidade.</string>
+    <string name="C2">Água de média salinidade. Pode ser usada sempre e quando houver uma lixiviação moderada de sais. Em quase todos os casos se adequa ao cultivo de plantas moderadamente tolerante aos sais,
+        sem necessidade de práticas especiais de controle de salinidade.</string>
+
+    <string name="C3">Água de alta salinidade. Pode ser usada em solos com drenagem deficiente. Mesmo com drenagem adequada pode ser necessário práticas especiais de controlada salinidade, devendo, portanto,
+        ser utilizada na irrigação de espécies vegetais de alta tolerância aos sais. Os riscos apresentados por esta classe de água podem ser amenizados quando do emprego do método de irrigação localizada mantendo
+        o solo continuamente úmido.</string>
+
+    <string name="C4"> Água de muito alta salinidade. Não é apropriada para irrigação sob condições normais, porém pode ser usada ocasionalmente, em circunstâncias especiais. Os solos devem ser permeáveis,
+        a drenagem adequada, devendo ser aplicada água em excesso para se obter uma boa lixiviação dos sais e, mesmo assim devem ser explorados com culturas altamente tolerantes aos sais.</string>
+
+    <string name="relacaoTabela">Relação de adsorção de sódio corrigida</string>
+
+    <!-- -->
+    <string name="HCO3">HCO<sub><small>3</small></sub></string>
+    <string name="CO3">CO<sub><small>3</small></sub></string>
+    <string name="CEa">CE<sub><small>a</small></sub></string>
+
+    <string-array name="molecules">
+        <item>mmol<small>c</small> L<sup><small>- 1</small></sup></item>
+        <item>mg L<sup><small>-1</small></sup></item>
+    </string-array>
+
+    <string-array name="condutividade">
+        <item>dS m<sub><small>-1</small></sub></item>
+        <item>mS cm<sub><small>-1</small></sub></item>
+        <item>uS cm<sub><small>-1</small></sub></item>
+
+    </string-array>
+
+</resources>
