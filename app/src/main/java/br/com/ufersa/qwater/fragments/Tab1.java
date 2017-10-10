@@ -24,6 +24,7 @@ public class Tab1 extends Fragment implements AdapterView.OnItemSelectedListener
     private interfaceDataCommunicator mCallback;
     private Button calcular;
     private View view;
+    private Spinner spinnerCEa, spinnerMolecules;
 
     @Nullable
     @Override
@@ -70,19 +71,20 @@ public class Tab1 extends Fragment implements AdapterView.OnItemSelectedListener
      */
     private double calculaRASCorrigido() {
         RAS ras;
-        Double Ca, Mg, Na, CE, HCO3;
+        Double Ca, Mg, Na, CEa, HCO3;
         try {
             Ca = Double.parseDouble(this.edt_Ca.getText().toString());
             Mg = Double.parseDouble(this.edt_Mg.getText().toString());
             Na = Double.parseDouble(this.edt_Na.getText().toString());
-            CE = Double.parseDouble(this.edt_CEa.getText().toString());
+            CEa = Double.parseDouble(this.edt_CEa.getText().toString());
             HCO3 =  Double.parseDouble(this.edt_HCO3.getText().toString());
-            ras = new RAS(Ca, Mg, Na, CE, HCO3);
+            ras = new RAS(Ca, Mg, Na, CEa, HCO3);
         }catch(Exception e){
-            Toast.makeText(getContext(), "Algum valor digitado está com formato errado", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Algum valor digitado está com formato incorreto", Toast.LENGTH_SHORT).show();
             ras = null;
         }
-        if(ras!= null) return ras.calculaRASCorrigido();
+        if(ras!= null)
+            return ras.calculaRASCorrigido(spinnerMolecules.getSelectedItemPosition(), spinnerCEa.getSelectedItemPosition());
 
         return 0.0;
     }
@@ -96,12 +98,12 @@ public class Tab1 extends Fragment implements AdapterView.OnItemSelectedListener
             result = Double.parseDouble(this.edt_CEa.getText().toString());
         }catch (Exception e){
             result=null;
-            Toast.makeText(getContext(), "Algum valor digitado está com formato errado", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), "O valor do CEa digitado está com formato incorreto", Toast.LENGTH_SHORT).show();
         }
-        if(result != null) return result;
+        if(result != null)
+            return result;
 
         return 0.0;
-
     }
 
     private void findViews() {
@@ -116,10 +118,10 @@ public class Tab1 extends Fragment implements AdapterView.OnItemSelectedListener
         edt_Cl = (EditText)view.findViewById(R.id.Cl);
         calcular = (Button)view.findViewById(R.id.calcular);
 
-        Spinner spinnerMolecules = (Spinner) view.findViewById(R.id.spinnerMolecules);
+        spinnerMolecules = (Spinner) view.findViewById(R.id.spinnerMolecules);
         spinnerMolecules.setOnItemSelectedListener(this);
 
-        Spinner spinnerCEa = (Spinner) view.findViewById(R.id.spinnerCEa);
+        spinnerCEa = (Spinner) view.findViewById(R.id.spinnerCEa);
         spinnerCEa.setOnItemSelectedListener(this);
 
     }
@@ -147,7 +149,8 @@ public class Tab1 extends Fragment implements AdapterView.OnItemSelectedListener
                 case 2:
 
                     break;
-            }        }
+            }
+        }
         else if(spinner.getId() == R.id.spinnerCEa)
         {
             switch (position) {
@@ -160,9 +163,8 @@ public class Tab1 extends Fragment implements AdapterView.OnItemSelectedListener
                 case 2:
 
                     break;
-            }        }
-
-
+            }
+        }
     }
 
     @Override
@@ -202,6 +204,4 @@ public class Tab1 extends Fragment implements AdapterView.OnItemSelectedListener
         mCallback = null; //avoid leaking
         super.onDetach();
     }
-
-
 }

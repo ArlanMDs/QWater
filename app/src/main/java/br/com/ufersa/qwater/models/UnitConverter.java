@@ -9,32 +9,32 @@ public class UnitConverter {
     /**
      * Converte valores de meq/L^-1 para mg/L^-1
      * @param element elemento químico envolvido na conversão
-     * @param meqL_1 valor em meq/L^-1
+     * @param mEqL valor em meq/L^-1
      * @return valor em mg/L^-1
      */
-    public double meqL_1ToMgL_1(String element, double meqL_1){
+    public double mEqLToMgL(String element, double mEqL){
 
         switch (element){
             case "Ca":
-                return meqL_1 * (Ca / 2);
+                return mEqL * (Ca / 2);
 
             case "Mg":
-                return meqL_1 * (Mg / 2);
+                return mEqL * (Mg / 2);
 
             case "K":
-                return meqL_1 * K;
+                return mEqL * K;
 
             case "Na":
-                return meqL_1 * Na;
+                return mEqL * Na;
 
             case "CO3":
-                return meqL_1 * (CO3 / 2);
+                return mEqL * (CO3 / 2);
 
             case "HCO3":
-                return meqL_1 * HCO3;
+                return mEqL * HCO3;
 
             case "Cl":
-                return meqL_1 * Cl;
+                return mEqL * Cl;
 
         }
 
@@ -44,32 +44,60 @@ public class UnitConverter {
     /**
      * Converte valores de mg/L^-1 para meq/L^-1
      * @param element elemento químico envolvido na conversão
-     * @param mgL_1 valor em mg/L^-1
+     * @param mgL valor em mg/L^-1
      * @return valor e meq/L^-1
      */
-    public double mgL_1ToMeqL_1(String element, double mgL_1){
+    public double mgLToMeqL(String element, double mgL){
 
         switch (element){
             case "Ca":
-                return mgL_1 / (Ca/2);
+                return mgL / (Ca/2);
 
             case "Mg":
-                return mgL_1 / (Mg/2);
+                return mgL / (Mg/2);
 
             case "K":
-                return mgL_1 / K;
+                return mgL / K;
 
             case "Na":
-                return mgL_1 / Na;
+                return mgL / Na;
 
             case "CO3":
-                return mgL_1 / (CO3/2);
+                return mgL / (CO3/2);
 
             case "HCO3":
-                return mgL_1 / HCO3;
+                return mgL / HCO3;
 
             case "Cl":
-                return mgL_1 / Cl;
+                return mgL / Cl;
+
+        }
+        return 0.0;
+    }
+
+    public double mmolLToMeqL(String element, double mmolL){
+
+        switch (element){
+            case "Ca":
+                return mmolL * 2;
+
+            case "Mg":
+                return mmolL * 2;
+
+            case "K":
+                return mmolL;
+
+            case "Na":
+                return mmolL;
+
+            case "CO3":
+                return mmolL * 2;
+
+            case "HCO3":
+                return mmolL;
+
+            case "Cl":
+                return mmolL;
 
         }
         return 0.0;

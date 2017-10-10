@@ -29,11 +29,12 @@ aplicação de matéria orgânica.</string>
     <!-- -->
     <string name="HCO3">HCO<sub><small>3</small></sub></string>
     <string name="CO3">CO<sub><small>3</small></sub></string>
-    <string name="CEa">CE<sub><small>a</small></sub></string>
+    <string name="CEa">CEa<sub><small>a</small></sub></string>
 
     <string-array name="molecules">
         <item>mmol<small>c</small> L<sup><small>- 1</small></sup></item>
         <item>mg L<sup><small>-1</small></sup></item>
+        <item>mEq L<sup><small>-1</small></sup></item>
     </string-array>
 
     <string-array name="condutividade">

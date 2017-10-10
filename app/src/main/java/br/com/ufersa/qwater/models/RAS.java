@@ -9,15 +9,20 @@ public class RAS {
     private Double Na;
     private Double CO3;
     private Double HCO3;
-    private Double CE;
-    private Double pHc;
+    private Double CEa;
 
-    public RAS(Double Ca, Double Mg, Double Na, Double CE, Double HCO3){
+    public RAS(Double Ca, Double Mg, Double Na, Double CEa, Double HCO3){
         this.Ca = Ca;
         this.Mg = Mg;
         this.Na = Na;
-        this.CE = CE;
+        this.CEa = CEa;
         this.HCO3 = HCO3;
+
+
+    }
+
+    private void formatUnits() {
+
 
     }
 
@@ -26,22 +31,87 @@ public class RAS {
         return Na / sqrt((Ca+Mg)/2);
     }
 
-    public Double calculaRASCorrigido(){
+    /**
+     * calcula o RAS corrigido de acordo com os valores do objeto. Antes do cálculo é feito uma checagem
+     * no formato das unidades de medida, pois a fórmula usa o formato meq/l
+     * @param CEaUnit unidade do CEa
+     * @param elementsUnit unidade dos elementos
+     * @return valor do RAS corrigido
+     */
+    public Double calculaRASCorrigido(int CEaUnit, int elementsUnit){
+
+        formatUnits(CEaUnit,elementsUnit);
 
         return Na / sqrt( (calculaCalcioCorrigido()+Mg) /2 );
+    }
+
+    /**
+     * formata os dados para mEq/L e dS/m, que são as unidades usadas nas fórmulas de cálculo do RAS corrigido
+     * @param CEaUnit unidade do CEa
+     * @param elementsUnit unidade dos elementos
+     */
+    private void formatUnits(int CEaUnit, int elementsUnit) {
+        /*
+             spinners positions
+             molecules:
+             mmol/l = 0
+             mg/l = 1
+             mEq/L = 2
+
+             CEa:
+             dS/m = 0
+             mS/cm = 1
+             uS/cm = 2
+
+         */
+        //elements convertion
+
+        UnitConverter uc = new UnitConverter();
+
+        switch (elementsUnit){
+            case 0:
+                Ca = uc.mmolLToMeqL("Ca",Ca);
+                Mg = uc.mmolLToMeqL("Mg",Mg);
+                Na = uc.mmolLToMeqL("Na",Na);
+                HCO3 = uc.mmolLToMeqL("HCO3",HCO3);
+                //CO3;
+
+                break;
+            case 1:
+
+                Ca = uc.mgLToMeqL("Ca",Ca);
+                Mg = uc.mgLToMeqL("Mg",Mg);
+                Na = uc.mgLToMeqL("Na",Na);
+                HCO3 = uc.mgLToMeqL("HCO3",HCO3);
+
+                //CO3;
+                break;
+
+            default:
+                    //nothing to do, already mEq/L
+                break;
+
+        }
+
+        //CEa convertion
+
+        //Caso estiver no formato uS/cm, é necessário dividir por 1000 para transformar em dS/m.
+        if(CEaUnit == 2)
+            CEa = CEa / 1000;
+
     }
 
 
     private Double calculaCalcioCorrigido(){
 
-        return (0.956 + (0.0564*CE) + (1.0645 * (Math.pow(CE,0.09565)))) * Math.pow((HCO3/Ca),-0.667);
+        return (0.956 + (0.0564* CEa) + (1.0645 * (Math.pow(CEa,0.09565)))) * Math.pow((HCO3/Ca),-0.667);
     }
-
+/*
     /**
      *  O pHc se refere ao pH de equilíbrio para o CaCO3, serve para calcular a RAS ajustada e pode ser calculada de acordo com a seguinte fórmula:
      *  pHc = (pK - pKc) + p (Ca + Mg) + pAlc
      * @return valor do pHc
-     */
+     /
     private Double calculaPHc() {
         Double pKpKc = calculaPKpKc();
         Double pCaMg = calculaPCaMg();
@@ -49,7 +119,7 @@ public class RAS {
         return  pKpKc + pCaMg + pAlc;
     }
 
-    //TODO fazer
+
     private Double calculaPAlc() {
         Double pAlc=0.0;
         return pAlc;
@@ -134,5 +204,5 @@ public class RAS {
 
         return pKpck;
     }
-
+*/
 }
