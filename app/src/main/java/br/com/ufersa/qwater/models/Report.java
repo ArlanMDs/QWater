@@ -4,9 +4,7 @@ package br.com.ufersa.qwater.models;
 
 public class Report {
 
-
-    private double correctedSAR, CEa;
-
+    private double normalSAR, correctedSAR, CEa;
 
     public double getCorrectedSAR() {
         return correctedSAR;
@@ -24,5 +22,12 @@ public class Report {
         this.CEa = CEa;
     }
 
+    public double getNormalSAR() {
+        return normalSAR;
+    }
+
+    public void setNormalSAR(double normalSAR) {
+        this.normalSAR = normalSAR;
+    }
 
 }

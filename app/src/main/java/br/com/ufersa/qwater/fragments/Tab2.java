@@ -29,7 +29,7 @@ import br.com.ufersa.qwater.models.Report;
 public class Tab2 extends Fragment implements View.OnClickListener {
 
     private Button btnSARDetails, btnSalinityDetails;
-    private TextView txtviewSARResult, salinityResult, txtviewSARClassification, txtviewCEaValue;
+    private TextView txtviewCorrectedSARResult, txtviewNormalSARResult, salinityResult, txtviewSARClassification, txtviewCEaValue;
     private int currentSARClassification, currentSalinityClassification;
     private GraphView graph;
 
@@ -127,7 +127,8 @@ public class Tab2 extends Fragment implements View.OnClickListener {
         categorizeSAR(report.getCorrectedSAR());
         categorizeSalinity(report.getCEa());
 
-        showSARClassification(report.getCorrectedSAR());
+        showNormalSAR(report.getNormalSAR());
+        showCorrectedSARClassification(report.getCorrectedSAR());
         showSalinityClassification(report.getCEa());
 
         addPointIntoGraph(report.getCEa(), report.getCorrectedSAR());
@@ -197,21 +198,26 @@ public class Tab2 extends Fragment implements View.OnClickListener {
         salinityResult.setText("C" + String.valueOf(currentSalinityClassification));
     }
 
+    private void showNormalSAR(double nomalSAR){
+        txtviewNormalSARResult.setText(String.valueOf(nomalSAR));
+    }
+
     /**
      * classifica o valor do RAS entre intervalos
      * @param correctedSAR valor do RAS
      */
-    private void showSARClassification(Double correctedSAR) {
+    private void showCorrectedSARClassification(Double correctedSAR) {
 
         btnSARDetails.setVisibility(View.VISIBLE);
 
-        txtviewSARResult.setText(String.valueOf(correctedSAR));
+        txtviewCorrectedSARResult.setText(String.valueOf(correctedSAR));
         txtviewSARClassification.setText("S" + String.valueOf(currentSARClassification));
     }
 
     private void findViewsIds() {
 
-        txtviewSARResult = (TextView)getView().findViewById(R.id.txtviewSARResult);
+        txtviewCorrectedSARResult = (TextView)getView().findViewById(R.id.txtviewCorrectedSARResult);
+        txtviewNormalSARResult = (TextView)getView().findViewById(R.id.txtviewNormalSARResult);
         txtviewSARClassification = (TextView)getView().findViewById(R.id.txtviewSARClassification);
         txtviewCEaValue = (TextView)getView().findViewById(R.id.txtviewCEaValue);
         salinityResult = (TextView)getView().findViewById(R.id.txtviewSalinityResults);

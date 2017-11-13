@@ -11,23 +11,42 @@ public class SARCalculator {
     private Double HCO3;
     private Double CEa;
 
+    /**
+     * Construtor para calcular o RAS corrigido
+     * @param Ca valor do cálcio
+     * @param Mg valor do magnésio
+     * @param Na valor do sódio
+     * @param CEa valor da condutividade elétrica
+     * @param HCO3 valor do bicarbonato
+     */
     public SARCalculator(Double Ca, Double Mg, Double Na, Double CEa, Double HCO3){
         this.Ca = Ca;
         this.Mg = Mg;
         this.Na = Na;
         this.CEa = CEa;
         this.HCO3 = HCO3;
-
-
     }
 
-    private void formatUnits() {
-
-
+    /**
+     * Construtor para calcular o RAS normal
+     * @param Ca valor do cálcio
+     * @param Mg valor do magnésio
+     * @param Na valor do sódio
+     */
+    public SARCalculator(Double Ca, Double Mg, Double Na){
+        this.Ca = Ca;
+        this.Mg = Mg;
+        this.Na = Na;
     }
 
-    public Double calculateSAR(){
-
+    /**
+     * calcula o valor do RAS normal, Antes do cálculo é feito uma checagem
+     * no formato das unidades de medida, pois a fórmula usa o formato meq/l
+     * @param elementsUnit  unidade dos elementos
+     * @return valor do RAS normal
+     */
+    public Double calculateSAR(int elementsUnit){
+        formatElementsUnit(elementsUnit);
         return Na / sqrt((Ca+Mg)/2);
     }
 
@@ -38,42 +57,37 @@ public class SARCalculator {
      * @param elementsUnit unidade dos elementos
      * @return valor do RAS corrigido
      */
-    public Double calculateCorrectedSAR(int CEaUnit, int elementsUnit){
+    public Double calculateCorrectedSAR(int elementsUnit, int CEaUnit){
 
-        formatUnits(CEaUnit,elementsUnit);
-
+        formatElementsUnit(elementsUnit);
+        formatCEaUnit(CEaUnit);
         return Na / sqrt( (calculateCorrectedCalcium()+Mg) /2 );
     }
 
     /**
      * formata os dados para mEq/L e dS/m, que são as unidades usadas nas fórmulas de cálculo do RAS corrigido
-     * @param CEaUnit unidade do CEa
      * @param elementsUnit unidade dos elementos
      */
-    private void formatUnits(int CEaUnit, int elementsUnit) {
+    private void formatElementsUnit(int elementsUnit) {
         /*
-             spinners positions
-             molecules:
-             mmol/l = 0
-             mg/l = 1
-             mEq/L = 2
-
-             CEa:
-             dS/m = 0
-             mS/cm = 1
-             uS/cm = 2
-
-         */
-        //elements convertion
-
+         spinners positions
+         molecules:
+         mmol/l = 0
+         mg/l = 1
+         mEq/L = 2
+        */
         UnitConverter uc = new UnitConverter();
 
         switch (elementsUnit){
+            /*
+            A checagem de null é feito somente no HCO3 poque os outros são usados tanto
+            no RAS quanto no RAS corrigido
+             */
             case 0:
                 Ca = uc.mmolLToMeqL("Ca",Ca);
                 Mg = uc.mmolLToMeqL("Mg",Mg);
                 Na = uc.mmolLToMeqL("Na",Na);
-                HCO3 = uc.mmolLToMeqL("HCO3",HCO3);
+                if(HCO3 != null) HCO3 = uc.mmolLToMeqL("HCO3",HCO3);
                 //CO3;
 
                 break;
@@ -82,7 +96,7 @@ public class SARCalculator {
                 Ca = uc.mgLToMeqL("Ca",Ca);
                 Mg = uc.mgLToMeqL("Mg",Mg);
                 Na = uc.mgLToMeqL("Na",Na);
-                HCO3 = uc.mgLToMeqL("HCO3",HCO3);
+                if(HCO3 != null) HCO3 = uc.mgLToMeqL("HCO3",HCO3);
 
                 //CO3;
                 break;
@@ -93,7 +107,18 @@ public class SARCalculator {
 
         }
 
-        //CEa convertion
+    }
+    /**
+     * formata os dados dS/m
+     * @param CEaUnit unidade da condutividade elétrica CEa
+     */
+    private void formatCEaUnit(int CEaUnit){
+        /*
+         CEa:
+         dS/m = 0
+         mS/cm = 1
+         uS/cm = 2
+        */
 
         //Caso estiver no formato uS/cm, é necessário dividir por 1000 para transformar em dS/m.
         if(CEaUnit == 2)

@@ -49,8 +49,10 @@ public class Tab1 extends Fragment implements AdapterView.OnItemSelectedListener
         calcular.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            double CEa = 0.0, correctedSAR = 0.0;
-
+            double CEa = 0.0, correctedSAR = 0.0, normalSAR = 0.0;
+            /*
+            checa ser o length é maior que zero para garantir que tem algum valor digitado
+             */
             if (edt_CEa.getText().length() > 0) {
                 CEa = calculateSalinity();
             }
@@ -59,10 +61,15 @@ public class Tab1 extends Fragment implements AdapterView.OnItemSelectedListener
                 correctedSAR = calculateCorrectedSAR();
             }
 
-            if (CEa != 0.0 && correctedSAR != 0.0) {
+            if (edt_Ca.getText().length() > 0 && edt_Mg.getText().length() > 0 && edt_Na.getText().length() >0){
+                normalSAR = calculateNormalSAR();
+            }
+
+            //TODO mudar para que seja possível fazer os cálculos separadamente
+            if (CEa != 0.0 && correctedSAR != 0.0 && normalSAR != 0.0) {
 
                 //se os dados estiverem ok, é gerado um novo relatório e enviado para a outra tab
-                Report report = generateReport(correctedSAR, CEa);
+                Report report = generateReport(normalSAR, correctedSAR, CEa);
                 mCallback.sendData(report);
 
                 ViewPager viewPager = (ViewPager) getActivity().findViewById(R.id.container);
@@ -75,11 +82,31 @@ public class Tab1 extends Fragment implements AdapterView.OnItemSelectedListener
 
     }
 
-    private Report generateReport(double correctedSAR, double CEa) {
+    private Report generateReport(double normalSAR, double correctedSAR, double CEa) {
         Report report = new Report();
+
+        report.setNormalSAR(normalSAR);
         report.setCorrectedSAR(correctedSAR);
         report.setCEa(CEa);
         return report;
+    }
+
+    private double calculateNormalSAR(){
+        SARCalculator sarCalculator;
+        Double Ca, Mg, Na;
+        try {
+            Ca = Double.parseDouble(this.edt_Ca.getText().toString());
+            Mg = Double.parseDouble(this.edt_Mg.getText().toString());
+            Na = Double.parseDouble(this.edt_Na.getText().toString());
+            sarCalculator = new SARCalculator(Ca, Mg, Na);
+        }catch(Exception e){
+            Toast.makeText(getContext(), getString(R.string.valorIncorreto), Toast.LENGTH_LONG).show();
+            sarCalculator = null;
+        }
+        if(sarCalculator != null)
+            return sarCalculator.calculateSAR(spinnerMolecules.getSelectedItemPosition());
+
+        return 0.0;
     }
 
     /**
