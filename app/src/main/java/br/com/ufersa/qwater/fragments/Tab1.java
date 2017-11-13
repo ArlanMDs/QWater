@@ -16,7 +16,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import br.com.ufersa.qwater.R;
-import br.com.ufersa.qwater.models.RAS;
+import br.com.ufersa.qwater.models.SARCalculator;
 import br.com.ufersa.qwater.models.Report;
 
 public class Tab1 extends Fragment implements AdapterView.OnItemSelectedListener{
@@ -44,36 +44,40 @@ public class Tab1 extends Fragment implements AdapterView.OnItemSelectedListener
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        findViews();
+        findViewsIDs();
 
         calcular.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                double CEa=0.0, correctedRas=0.0;
-                if (edt_CEa.getText().length() > 0) {
-                    CEa = calculaSalinidade();
-                }
-                if (edt_Ca.getText().length() > 0 && edt_Mg.getText().length() > 0 && edt_Na.getText().length() > 0 && edt_CEa.getText().length() > 0 && edt_HCO3.getText().length() > 0) {
-                    correctedRas = calculaRASCorrigido();
-                }
-                if (CEa != 0.0 && correctedRas != 0.0) {
+            double CEa = 0.0, correctedSAR = 0.0;
 
-                    //se os dados estiverem ok, é gerado um novo relatório e enviado para a outra tab
-                    Report report = generateReport(correctedRas, CEa);
-                    mCallback.sendData(report);
-                    ViewPager viewPager = (ViewPager) getActivity().findViewById(R.id.container);
-                    viewPager.setCurrentItem(1);
+            if (edt_CEa.getText().length() > 0) {
+                CEa = calculateSalinity();
+            }
 
-                }else
-                    Toast.makeText(getContext(), "Ocorreu algum erro na leitura dos dados" , Toast.LENGTH_SHORT).show();
+            if (edt_Ca.getText().length() > 0 && edt_Mg.getText().length() > 0 && edt_Na.getText().length() > 0 && edt_CEa.getText().length() > 0 && edt_HCO3.getText().length() > 0) {
+                correctedSAR = calculateCorrectedSAR();
+            }
+
+            if (CEa != 0.0 && correctedSAR != 0.0) {
+
+                //se os dados estiverem ok, é gerado um novo relatório e enviado para a outra tab
+                Report report = generateReport(correctedSAR, CEa);
+                mCallback.sendData(report);
+
+                ViewPager viewPager = (ViewPager) getActivity().findViewById(R.id.container);
+                viewPager.setCurrentItem(1);
+
+            }else
+                Toast.makeText(getContext(), getString(R.string.erroNaLeituraDeDados) , Toast.LENGTH_LONG).show();
             }
         });
 
     }
 
-    private Report generateReport(double correctedRAS, double CEa) {
+    private Report generateReport(double correctedSAR, double CEa) {
         Report report = new Report();
-        report.setCorrectedRAS(correctedRAS);
+        report.setCorrectedSAR(correctedSAR);
         report.setCEa(CEa);
         return report;
     }
@@ -81,8 +85,8 @@ public class Tab1 extends Fragment implements AdapterView.OnItemSelectedListener
     /**
      * Usa uma instância da classe RAS para calcular o valor do ras corrigido
      */
-    private double calculaRASCorrigido() {
-        RAS ras;
+    private double calculateCorrectedSAR() {
+        SARCalculator sarCalculator;
         Double Ca, Mg, Na, CEa, HCO3;
         try {
             Ca = Double.parseDouble(this.edt_Ca.getText().toString());
@@ -90,13 +94,13 @@ public class Tab1 extends Fragment implements AdapterView.OnItemSelectedListener
             Na = Double.parseDouble(this.edt_Na.getText().toString());
             CEa = Double.parseDouble(this.edt_CEa.getText().toString());
             HCO3 =  Double.parseDouble(this.edt_HCO3.getText().toString());
-            ras = new RAS(Ca, Mg, Na, CEa, HCO3);
+            sarCalculator = new SARCalculator(Ca, Mg, Na, CEa, HCO3);
         }catch(Exception e){
-            Toast.makeText(getContext(), "Algum valor digitado está com formato incorreto", Toast.LENGTH_SHORT).show();
-            ras = null;
+            Toast.makeText(getContext(), getString(R.string.valorIncorreto), Toast.LENGTH_LONG).show();
+            sarCalculator = null;
         }
-        if(ras!= null)
-            return ras.calculaRASCorrigido(spinnerMolecules.getSelectedItemPosition(), spinnerCEa.getSelectedItemPosition());
+        if(sarCalculator != null)
+            return sarCalculator.calculateCorrectedSAR(spinnerMolecules.getSelectedItemPosition(), spinnerCEa.getSelectedItemPosition());
 
         return 0.0;
     }
@@ -104,13 +108,13 @@ public class Tab1 extends Fragment implements AdapterView.OnItemSelectedListener
     /**
      * O calculo da salinidade é feita com base apenas no valor do CEa. O valor do TextView é passado para o Fragmento de exibição Tab2
      */
-    private double calculaSalinidade() {
+    private double calculateSalinity() {
         Double result;
         try {
             result = Double.parseDouble(this.edt_CEa.getText().toString());
         }catch (Exception e){
             result = null;
-            Toast.makeText(getContext(), "O valor do CEa digitado está com formato incorreto", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), getString(R.string.valorIncorreto), Toast.LENGTH_LONG).show();
         }
         if(result != null)
             return result;
@@ -118,7 +122,7 @@ public class Tab1 extends Fragment implements AdapterView.OnItemSelectedListener
         return 0.0;
     }
 
-    private void findViews() {
+    private void findViewsIDs() {
         view = getView();
         edt_CEa = (EditText)view.findViewById(R.id.CEa);
         edt_Ca = (EditText)view.findViewById(R.id.Ca);

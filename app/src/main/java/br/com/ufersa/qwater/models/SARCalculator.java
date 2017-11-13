@@ -3,7 +3,7 @@ package br.com.ufersa.qwater.models;
 
 import static java.lang.Math.sqrt;
 
-public class RAS {
+public class SARCalculator {
     private Double Ca;
     private Double Mg;
     private Double Na;
@@ -11,7 +11,7 @@ public class RAS {
     private Double HCO3;
     private Double CEa;
 
-    public RAS(Double Ca, Double Mg, Double Na, Double CEa, Double HCO3){
+    public SARCalculator(Double Ca, Double Mg, Double Na, Double CEa, Double HCO3){
         this.Ca = Ca;
         this.Mg = Mg;
         this.Na = Na;
@@ -26,7 +26,7 @@ public class RAS {
 
     }
 
-    public Double calculaRas(){
+    public Double calculateSAR(){
 
         return Na / sqrt((Ca+Mg)/2);
     }
@@ -38,11 +38,11 @@ public class RAS {
      * @param elementsUnit unidade dos elementos
      * @return valor do RAS corrigido
      */
-    public Double calculaRASCorrigido(int CEaUnit, int elementsUnit){
+    public Double calculateCorrectedSAR(int CEaUnit, int elementsUnit){
 
         formatUnits(CEaUnit,elementsUnit);
 
-        return Na / sqrt( (calculaCalcioCorrigido()+Mg) /2 );
+        return Na / sqrt( (calculateCorrectedCalcium()+Mg) /2 );
     }
 
     /**
@@ -105,7 +105,7 @@ public class RAS {
      * usa a fórmula para cálculo do RAS corrigido dada no apêndice 2, do livro "A qualidade da água para irrigação", autor: José Franscismar de Medeiros
      * @return valor do RAS corrigido
      */
-    private Double calculaCalcioCorrigido(){
+    private Double calculateCorrectedCalcium(){
 
         return (0.956 + (0.0564* CEa) + (1.0645 * (Math.pow(CEa,0.09565)))) * Math.pow((HCO3/Ca),-0.667);
     }

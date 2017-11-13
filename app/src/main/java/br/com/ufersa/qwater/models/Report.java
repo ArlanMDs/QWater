@@ -5,15 +5,15 @@ package br.com.ufersa.qwater.models;
 public class Report {
 
 
-    private double correctedRAS, CEa;
+    private double correctedSAR, CEa;
 
 
-    public double getCorrectedRAS() {
-        return correctedRAS;
+    public double getCorrectedSAR() {
+        return correctedSAR;
     }
 
-    public void setCorrectedRAS(double correctedRAS) {
-        this.correctedRAS = correctedRAS;
+    public void setCorrectedSAR(double correctedSAR) {
+        this.correctedSAR = correctedSAR;
     }
 
     public double getCEa() {

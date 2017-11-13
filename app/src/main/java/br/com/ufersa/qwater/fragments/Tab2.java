@@ -28,9 +28,9 @@ import br.com.ufersa.qwater.models.Report;
 
 public class Tab2 extends Fragment implements View.OnClickListener {
 
-    private Button btnRASDetails, btnSalinityDetails;
-    private TextView txtviewRASResult, salinityResult, txtviewRASClassification;
-    private int currentRASClassification, currentSalinityClassification;
+    private Button btnSARDetails, btnSalinityDetails;
+    private TextView txtviewSARResult, salinityResult, txtviewSARClassification, txtviewCEaValue;
+    private int currentSARClassification, currentSalinityClassification;
     private GraphView graph;
 
     @Nullable
@@ -47,30 +47,32 @@ public class Tab2 extends Fragment implements View.OnClickListener {
 
         findViewsIds();
         //addLine();
-        //adjustGraph();
+        adjustGraph();
 
     }
 
     private void adjustGraph() {
-        addScrolling();
         graph.setTitle("Classificação de água para irrigação");
 
         // set manual X bounds
         graph.getViewport().setXAxisBoundsManual(true);
-        graph.getViewport().setMinX(0.5);
-        graph.getViewport().setMaxX(3.5);
+        graph.getViewport().setMinX(0);
+        graph.getViewport().setMaxX(5500);
 
         // set manual Y bounds
         graph.getViewport().setYAxisBoundsManual(true);
-        graph.getViewport().setMinY(3.5);
-        graph.getViewport().setMaxY(8);
+        graph.getViewport().setMinY(0);
+        graph.getViewport().setMaxY(40);
+
+        addScrolling();
+
     }
 
     private void addPointIntoGraph(double x, double y){
 
-        /*para o gráfico da figura 1, página 55 do livro "Manejo de salinidade na agricultura: estudos básicos e aplicados,
+        /*
+        para o gráfico da figura 1, página 55 do livro "Manejo de salinidade na agricultura: estudos básicos e aplicados,
          a CEa é expressa em micro mhos/cm, a conversão é feita multiplicando o valor da CEa, expressa em dS/m, por 1000
-
          */
         x *= 1000;
 
@@ -107,15 +109,6 @@ public class Tab2 extends Fragment implements View.OnClickListener {
     }
 
     private void addScrolling(){
-        // set manual X bounds
-        graph.getViewport().setYAxisBoundsManual(true);
-        graph.getViewport().setMinY(0);
-        graph.getViewport().setMaxY(25);
-
-        graph.getViewport().setXAxisBoundsManual(true);
-        graph.getViewport().setMinX(0);
-        graph.getViewport().setMaxX(5);
-
         // enable scaling and scrolling
         graph.getViewport().setScalable(true);
         graph.getViewport().setScalableY(true);
@@ -131,13 +124,13 @@ public class Tab2 extends Fragment implements View.OnClickListener {
      */
     public void updateData(Report report){
 
-        categorizeRAS(report.getCorrectedRAS());
+        categorizeSAR(report.getCorrectedSAR());
         categorizeSalinity(report.getCEa());
 
-        showRASClassification(report.getCorrectedRAS());
+        showSARClassification(report.getCorrectedSAR());
         showSalinityClassification(report.getCEa());
 
-        addPointIntoGraph(report.getCEa(), report.getCorrectedRAS());
+        addPointIntoGraph(report.getCEa(), report.getCorrectedSAR());
 
     }
 
@@ -154,16 +147,16 @@ public class Tab2 extends Fragment implements View.OnClickListener {
 
     }
 
-    private void categorizeRAS(double correctedRAS) {
+    private void categorizeSAR(double correctedSAR) {
 
-        if(correctedRAS < 10.0)
-            currentRASClassification = 1;
-        else if(correctedRAS >= 10.0 && correctedRAS < 18.0)
-            currentRASClassification = 2;
-        else if(correctedRAS >=18.0 && correctedRAS < 26.0)
-            currentRASClassification = 3;
+        if(correctedSAR < 10.0)
+            currentSARClassification = 1;
+        else if(correctedSAR >= 10.0 && correctedSAR < 18.0)
+            currentSARClassification = 2;
+        else if(correctedSAR >=18.0 && correctedSAR < 26.0)
+            currentSARClassification = 3;
         else
-            currentRASClassification = 4;
+            currentSARClassification = 4;
     }
 
 
@@ -197,32 +190,34 @@ public class Tab2 extends Fragment implements View.OnClickListener {
      * @param CEa parametro de classificação
      */
     private void showSalinityClassification(double CEa) {
+
         btnSalinityDetails.setVisibility(View.VISIBLE);
 
-        salinityResult.setText(String.valueOf(currentSalinityClassification));
+        txtviewCEaValue.setText(String.valueOf(CEa));
+        salinityResult.setText("C" + String.valueOf(currentSalinityClassification));
     }
 
     /**
      * classifica o valor do RAS entre intervalos
-     * @param correctedRAS valor do RAS
+     * @param correctedSAR valor do RAS
      */
-    private void showRASClassification(Double correctedRAS) {
+    private void showSARClassification(Double correctedSAR) {
 
-        btnRASDetails.setVisibility(View.VISIBLE);
+        btnSARDetails.setVisibility(View.VISIBLE);
 
-        txtviewRASResult.setText(String.valueOf(correctedRAS));
-        txtviewRASClassification.setText(String.valueOf(currentRASClassification));
-
+        txtviewSARResult.setText(String.valueOf(correctedSAR));
+        txtviewSARClassification.setText("S" + String.valueOf(currentSARClassification));
     }
 
     private void findViewsIds() {
 
-        txtviewRASResult = (TextView)getView().findViewById(R.id.txtviewRASResult);
-        txtviewRASClassification = (TextView)getView().findViewById(R.id.txtviewRASClassification);
+        txtviewSARResult = (TextView)getView().findViewById(R.id.txtviewSARResult);
+        txtviewSARClassification = (TextView)getView().findViewById(R.id.txtviewSARClassification);
+        txtviewCEaValue = (TextView)getView().findViewById(R.id.txtviewCEaValue);
         salinityResult = (TextView)getView().findViewById(R.id.txtviewSalinityResults);
 
-        btnRASDetails = (Button)getView().findViewById(R.id.btnRASDetails);
-        btnRASDetails.setOnClickListener(this);
+        btnSARDetails = (Button)getView().findViewById(R.id.btnSARDetails);
+        btnSARDetails.setOnClickListener(this);
 
         btnSalinityDetails = (Button)getView().findViewById(R.id.btnSalinityDetails);
         btnSalinityDetails.setOnClickListener(this);
@@ -234,7 +229,7 @@ public class Tab2 extends Fragment implements View.OnClickListener {
 
     /**
      * manipula os clicks nos botões
-     * @param v id do botão
+     * @param v view que contém o ID do botão
      */
     @Override
     public void onClick(View v) {
@@ -245,8 +240,8 @@ public class Tab2 extends Fragment implements View.OnClickListener {
             buscar o valor em strings.xml e montar a tela de dialog.
              */
 
-            case R.id.btnRASDetails:
-                showInfoDialogue("S" + currentRASClassification);
+            case R.id.btnSARDetails:
+                showInfoDialogue("S" + currentSARClassification);
 
                 break;
 

@@ -26,16 +26,14 @@ aplicação de matéria orgânica.</string>
         a drenagem adequada, devendo ser aplicada água em excesso para se obter uma boa lixiviação dos sais e, mesmo assim devem ser explorados com culturas altamente tolerantes aos sais.</string>
 
     <string name="relacaoTabela">Relação de adsorção de sódio corrigida</string>
-    <string name="detalhes">Ver detalhes</string>
-    <string name="correctedRAS">RAS corrigido: </string>
+    <string name="detalhes" translatable="false">Ver detalhes</string>
+    <string name="correctedSAR">RAS corrigido: </string>
     <string name="classeSalinidade">Classe de Salinidade: </string>
     <string name="classificacao">Classificação: </string>
 
-
-
+    <string name="CEa">CE<small>a</small>:</string>
     <string name="HCO3">HCO<sub><small>3</small></sub></string>
     <string name="CO3">CO<sub><small>3</small></sub></string>
-    <string name="CEa">CE<small>a</small></string>
 
     <!-- a ordem dos itens afeta o método formatUnits, em RAS -->
     <string-array name="molecules">
@@ -43,12 +41,14 @@ aplicação de matéria orgânica.</string>
         <item>mg L<sup><small>-1</small></sup></item>
         <item>mEq L<sup><small>-1</small></sup></item>
     </string-array>
-
     <string-array name="condutividade">
         <item>dS m<sup><small>-1</small></sup></item>
         <item>mS cm<sup><small>-1</small></sup></item>
         <item>μS cm<sup><small>-1</small></sup></item>
 
     </string-array>
+
+    <string name="valorIncorreto">Algum valor digitado está com formato incorreto</string>
+    <string name="erroNaLeituraDeDados">Ocorreu algum erro na leitura dos dados</string>
 
 </resources>
