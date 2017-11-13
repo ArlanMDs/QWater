@@ -101,7 +101,10 @@ public class RAS {
 
     }
 
-
+    /**
+     * usa a fórmula para cálculo do RAS corrigido dada no apêndice 2, do livro "A qualidade da água para irrigação", autor: José Franscismar de Medeiros
+     * @return valor do RAS corrigido
+     */
     private Double calculaCalcioCorrigido(){
 
         return (0.956 + (0.0564* CEa) + (1.0645 * (Math.pow(CEa,0.09565)))) * Math.pow((HCO3/Ca),-0.667);

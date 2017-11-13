@@ -20,9 +20,10 @@ import android.view.ViewGroup;
 import br.com.ufersa.qwater.R;
 import br.com.ufersa.qwater.fragments.Tab1;
 import br.com.ufersa.qwater.fragments.Tab2;
-import br.com.ufersa.qwater.fragments.Tab3;
+import br.com.ufersa.qwater.models.Report;
 
-public class MainActivity extends AppCompatActivity implements Tab1.interfaceDataCommunicator {
+public class MainActivity extends AppCompatActivity implements Tab1.interfaceDataCommunicator, ViewPager.OnPageChangeListener,
+        TabLayout.OnTabSelectedListener{
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -38,6 +39,10 @@ public class MainActivity extends AppCompatActivity implements Tab1.interfaceDat
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+    private TabLayout tabLayout;
+
+    private Tab1 tab1 = new Tab1();
+    private Tab2 tab2 = new Tab2();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +59,11 @@ public class MainActivity extends AppCompatActivity implements Tab1.interfaceDat
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
+
+        mViewPager.addOnPageChangeListener(this);
+        tabLayout.addOnTabSelectedListener(this);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -91,9 +99,43 @@ public class MainActivity extends AppCompatActivity implements Tab1.interfaceDat
     }
 
     @Override
-    public void sendData(double correctedRas, double sal) {
-        Tab2 frag = (Tab2)getSupportFragmentManager().findFragmentById(R.id.container);
-        frag.updateData(correctedRas, sal);
+    public void sendData(Report report) {
+        try {
+            Tab2 frag = (Tab2) getSupportFragmentManager().findFragmentById(R.id.container);
+            frag.updateData(report);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onTabSelected(TabLayout.Tab tab) {
+        mViewPager.setCurrentItem(tab.getPosition());
+    }
+
+    @Override
+    public void onTabUnselected(TabLayout.Tab tab) {
+
+    }
+
+    @Override
+    public void onTabReselected(TabLayout.Tab tab) {
+
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        tabLayout.getTabAt(position).select();
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
     }
 
     /**
@@ -124,8 +166,7 @@ public class MainActivity extends AppCompatActivity implements Tab1.interfaceDat
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            return rootView;
+            return inflater.inflate(R.layout.fragment_main, container, false);
         }
     }
 
@@ -143,11 +184,9 @@ public class MainActivity extends AppCompatActivity implements Tab1.interfaceDat
         public Fragment getItem(int position) {
             switch(position){
                 case 0:
-                    return new Tab1();
+                    return tab1;
                 case 1:
-                    return new Tab2();
-                case 2:
-                    return new Tab3();
+                    return tab2;
             }
             return null;
         }
@@ -155,7 +194,7 @@ public class MainActivity extends AppCompatActivity implements Tab1.interfaceDat
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return 2;
         }
 
         @Override
@@ -165,8 +204,6 @@ public class MainActivity extends AppCompatActivity implements Tab1.interfaceDat
                     return "Valores";
                 case 1:
                     return "Resultados";
-                case 2:
-                    return "Gráficos";
             }
             return null;
         }

@@ -14,7 +14,8 @@ aplicação de matéria orgânica.</string>
 
     <string name="C1">Água de baixa salinidade. Pode ser usada para irrigação da maioria das culturas, em quase todos os tipos de solos, com muito pouca probabilidade de que se desenvolvam problemas de salinidade.
         Se necessária alguma lixiviação de sais, esta é conseguida em condições normais de irrigação, exceto em solos de muito baixa permeabilidade.</string>
-    <string name="C2">Água de média salinidade. Pode ser usada sempre e quando houver uma lixiviação moderada de sais. Em quase todos os casos se adequa ao cultivo de plantas moderadamente tolerante aos sais,
+
+    <string name="C2">Água de média salinidade. Pode ser usada sempre e quando houver uma lixiviação moderada de sais. Em quase todos os casos se adequa ao cultivo de plantas moderadamente tolerantes aos sais,
         sem necessidade de práticas especiais de controle de salinidade.</string>
 
     <string name="C3">Água de alta salinidade. Pode ser usada em solos com drenagem deficiente. Mesmo com drenagem adequada pode ser necessário práticas especiais de controlada salinidade, devendo, portanto,
@@ -25,12 +26,18 @@ aplicação de matéria orgânica.</string>
         a drenagem adequada, devendo ser aplicada água em excesso para se obter uma boa lixiviação dos sais e, mesmo assim devem ser explorados com culturas altamente tolerantes aos sais.</string>
 
     <string name="relacaoTabela">Relação de adsorção de sódio corrigida</string>
+    <string name="detalhes">Ver detalhes</string>
+    <string name="correctedRAS">RAS corrigido: </string>
+    <string name="classeSalinidade">Classe de Salinidade: </string>
+    <string name="classificacao">Classificação: </string>
 
-    <!-- -->
+
+
     <string name="HCO3">HCO<sub><small>3</small></sub></string>
     <string name="CO3">CO<sub><small>3</small></sub></string>
-    <string name="CEa">CEa<sub><small>a</small></sub></string>
+    <string name="CEa">CE<small>a</small></string>
 
+    <!-- a ordem dos itens afeta o método formatUnits, em RAS -->
     <string-array name="molecules">
         <item>mmol<small>c</small> L<sup><small>- 1</small></sup></item>
         <item>mg L<sup><small>-1</small></sup></item>
@@ -38,9 +45,9 @@ aplicação de matéria orgânica.</string>
     </string-array>
 
     <string-array name="condutividade">
-        <item>dS m<sub><small>-1</small></sub></item>
-        <item>mS cm<sub><small>-1</small></sub></item>
-        <item>uS cm<sub><small>-1</small></sub></item>
+        <item>dS m<sup><small>-1</small></sup></item>
+        <item>mS cm<sup><small>-1</small></sup></item>
+        <item>μS cm<sup><small>-1</small></sup></item>
 
     </string-array>
 

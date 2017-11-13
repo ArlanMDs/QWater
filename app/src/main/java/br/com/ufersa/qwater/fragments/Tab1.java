@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import br.com.ufersa.qwater.R;
 import br.com.ufersa.qwater.models.RAS;
+import br.com.ufersa.qwater.models.Report;
 
 public class Tab1 extends Fragment implements AdapterView.OnItemSelectedListener{
 
@@ -36,7 +37,7 @@ public class Tab1 extends Fragment implements AdapterView.OnItemSelectedListener
      * Interface de comunicação do RAS
      */
     public interface interfaceDataCommunicator {
-        void sendData(double correctedRas, double sal);
+        void sendData(Report report);
     }
 
 
@@ -48,22 +49,33 @@ public class Tab1 extends Fragment implements AdapterView.OnItemSelectedListener
         calcular.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                double sal=0.0, correctedRas=0.0;
+                double CEa=0.0, correctedRas=0.0;
                 if (edt_CEa.getText().length() > 0) {
-                    sal = calculaSalinidade();
+                    CEa = calculaSalinidade();
                 }
                 if (edt_Ca.getText().length() > 0 && edt_Mg.getText().length() > 0 && edt_Na.getText().length() > 0 && edt_CEa.getText().length() > 0 && edt_HCO3.getText().length() > 0) {
                     correctedRas = calculaRASCorrigido();
                 }
-                if (sal != 0.0 && correctedRas != 0.0) {
-                    mCallback.sendData(correctedRas, sal);
+                if (CEa != 0.0 && correctedRas != 0.0) {
+
+                    //se os dados estiverem ok, é gerado um novo relatório e enviado para a outra tab
+                    Report report = generateReport(correctedRas, CEa);
+                    mCallback.sendData(report);
                     ViewPager viewPager = (ViewPager) getActivity().findViewById(R.id.container);
                     viewPager.setCurrentItem(1);
+
                 }else
                     Toast.makeText(getContext(), "Ocorreu algum erro na leitura dos dados" , Toast.LENGTH_SHORT).show();
             }
         });
 
+    }
+
+    private Report generateReport(double correctedRAS, double CEa) {
+        Report report = new Report();
+        report.setCorrectedRAS(correctedRAS);
+        report.setCEa(CEa);
+        return report;
     }
 
     /**
@@ -97,12 +109,12 @@ public class Tab1 extends Fragment implements AdapterView.OnItemSelectedListener
         try {
             result = Double.parseDouble(this.edt_CEa.getText().toString());
         }catch (Exception e){
-            result=null;
+            result = null;
             Toast.makeText(getContext(), "O valor do CEa digitado está com formato incorreto", Toast.LENGTH_SHORT).show();
         }
         if(result != null)
             return result;
-
+        //TODO esse result precisa estar formatado em dS/m
         return 0.0;
     }
 
