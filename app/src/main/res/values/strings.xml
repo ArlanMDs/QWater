@@ -34,13 +34,14 @@
     <string name="classificacao">Classificação: </string>
 
     <string name="CEa">CE<small>a</small>:</string>
+    <string name="CEa2">CE<small>a</small></string>
     <string name="HCO3">HCO<sub><small>3</small></sub></string>
     <string name="CO3">CO<sub><small>3</small></sub></string>
     <string name="RAS">RAS:</string>
 
     <!-- a ordem dos itens afeta o método formatUnits, em SARCalculator -->
     <string-array name="molecules">
-        <item>mmol<small>c</small> L<sup><small>- 1</small></sup></item>
+        <item>mmol<small>c</small> L<sup><small>-1</small></sup></item>
         <item>mg L<sup><small>-1</small></sup></item>
         <item>mEq L<sup><small>-1</small></sup></item>
     </string-array>

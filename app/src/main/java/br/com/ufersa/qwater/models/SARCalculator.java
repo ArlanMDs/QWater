@@ -70,7 +70,7 @@ public class SARCalculator {
      */
     private void formatElementsUnit(int elementsUnit) {
         /*
-         spinners positions
+         spinner positions
          molecules:
          mmol/l = 0
          mg/l = 1
@@ -121,6 +121,7 @@ public class SARCalculator {
         */
 
         //Caso estiver no formato uS/cm, é necessário dividir por 1000 para transformar em dS/m.
+        //dS/m e mS/cm são valores equivalentes
         if(CEaUnit == 2)
             CEa = CEa / 1000;
 
@@ -132,7 +133,7 @@ public class SARCalculator {
      */
     private Double calculateCorrectedCalcium(){
 
-        return (0.956 + (0.0564* CEa) + (1.0645 * (Math.pow(CEa,0.09565)))) * Math.pow((HCO3/Ca),-0.667);
+        return (0.956 + (0.0564 * CEa) + (1.0645 * (Math.pow(CEa,0.09565)))) * Math.pow((HCO3/Ca),-0.667);
     }
 /*
     /**
