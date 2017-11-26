@@ -6,7 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="br.com.ufersa.qwater.activities.MainActivity$PlaceholderFragment">
+    tools:context="br.com.ufersa.qwater.activities.TabHostActivity$PlaceholderFragment">
 
     <TextView
         android:id="@+id/section_label"

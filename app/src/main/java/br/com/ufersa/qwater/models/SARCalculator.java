@@ -4,39 +4,39 @@ package br.com.ufersa.qwater.models;
 import static java.lang.Math.sqrt;
 
 public class SARCalculator {
-    private Double Ca;
-    private Double Mg;
-    private Double Na;
-    private Double CO3;
-    private Double HCO3;
-    private Double CEa;
+    private Double ca;
+    private Double mg;
+    private Double na;
+    private Double co3;
+    private Double hco3;
+    private Double cea;
 
     /**
      * Construtor para calcular o RAS corrigido
-     * @param Ca valor do cálcio
-     * @param Mg valor do magnésio
-     * @param Na valor do sódio
-     * @param CEa valor da condutividade elétrica
-     * @param HCO3 valor do bicarbonato
+     * @param ca valor do cálcio
+     * @param mg valor do magnésio
+     * @param na valor do sódio
+     * @param cea valor da condutividade elétrica
+     * @param hco3 valor do bicarbonato
      */
-    public SARCalculator(Double Ca, Double Mg, Double Na, Double CEa, Double HCO3){
-        this.Ca = Ca;
-        this.Mg = Mg;
-        this.Na = Na;
-        this.CEa = CEa;
-        this.HCO3 = HCO3;
+    public SARCalculator(Double ca, Double mg, Double na, Double cea, Double hco3){
+        this.ca = ca;
+        this.mg = mg;
+        this.na = na;
+        this.cea = cea;
+        this.hco3 = hco3;
     }
 
     /**
      * Construtor para calcular o RAS normal
-     * @param Ca valor do cálcio
-     * @param Mg valor do magnésio
-     * @param Na valor do sódio
+     * @param ca valor do cálcio
+     * @param mg valor do magnésio
+     * @param na valor do sódio
      */
-    public SARCalculator(Double Ca, Double Mg, Double Na){
-        this.Ca = Ca;
-        this.Mg = Mg;
-        this.Na = Na;
+    public SARCalculator(Double ca, Double mg, Double na){
+        this.ca = ca;
+        this.mg = mg;
+        this.na = na;
     }
 
     /**
@@ -46,29 +46,37 @@ public class SARCalculator {
      * @return valor do RAS normal
      */
     public Double calculateSAR(int elementsUnit){
-        formatElementsUnit(elementsUnit);
-        return Na / sqrt((Ca+Mg)/2);
+        formatNaMgCaToMeq_L(elementsUnit);
+        return na / sqrt((ca + mg)/2);
     }
 
     /**
      * calcula o RAS corrigido de acordo com os valores do objeto. Antes do cálculo é feito uma checagem
-     * no formato das unidades de medida, pois a fórmula usa o formato meq/l
-     * @param CEaUnit unidade do CEa
-     * @param elementsUnit unidade dos elementos
+     * no formato das unidades de medida, pois a fórmula usa o formato mmol/L, já a fórmula para calcular
+     * o cálcio corrigido utiliza meq/l
+     * @param ceaUnit unidade do cea
+     * @param spinnerCurrentUnit unidade dos elementos
      * @return valor do RAS corrigido
      */
-    public Double calculateCorrectedSAR(int elementsUnit, int CEaUnit){
+    public Double calculateCorrectedSAR(int spinnerCurrentUnit, int ceaUnit){
 
-        formatElementsUnit(elementsUnit);
-        formatCEaUnit(CEaUnit);
-        return Na / sqrt( (calculateCorrectedCalcium()+Mg) /2 );
+        formatCaHco3ToMeq_L(spinnerCurrentUnit);
+        formatNaMgToMmol_L(spinnerCurrentUnit);
+        formatCeaToDs_m(ceaUnit);
+        /*
+            IMPORTANTE:
+            o valor do cálcio corrigido está em meq/L, dividí-lo por 2 é
+            a forma de transformá-lo para mmol/L, que é a unidade usada nessa
+            fórmula.
+         */
+        double ca = calculateCorrectedCalcium();
+        return na / sqrt( (ca / 2 + mg) /2 );
     }
-
     /**
-     * formata os dados para mEq/L e dS/m, que são as unidades usadas nas fórmulas de cálculo do RAS corrigido
+     * formata os dados para mEq/L, que são as unidades usadas nas fórmulas de cálculo do cálcio corrigido
      * @param elementsUnit unidade dos elementos
      */
-    private void formatElementsUnit(int elementsUnit) {
+    private void formatNaMgCaToMeq_L(int elementsUnit) {
         /*
          spinner positions
          molecules:
@@ -80,41 +88,121 @@ public class SARCalculator {
 
         switch (elementsUnit){
             /*
-            A checagem de null é feito somente no HCO3 poque os outros são usados tanto
-            no RAS quanto no RAS corrigido
+            A checagem de null é feito somente no hco3 poque os outros são usados tanto
+            no RAS quanto no RAS corrigido, daria nullpointer sem a checagem no RAS normal.
              */
             case 0:
-                Ca = uc.mmolLToMeqL("Ca",Ca);
-                Mg = uc.mmolLToMeqL("Mg",Mg);
-                Na = uc.mmolLToMeqL("Na",Na);
-                if(HCO3 != null) HCO3 = uc.mmolLToMeqL("HCO3",HCO3);
-                //CO3;
+                na = uc.mmol_LToMeq_L("na", na);
+                mg = uc.mmol_LToMeq_L("mg", mg);
+                ca = uc.mmol_LToMeq_L("ca", ca);
+
+                break;
+            case 1:
+                na = uc.mg_LToMeq_L("na", na);
+                mg = uc.mg_LToMeq_L("mg", mg);
+                ca = uc.mg_LToMeq_L("ca", ca);
+
+                break;
+            case 2:
+                //nothing to do, already meq/l
+                break;
+
+            default:
+                break;
+        }
+
+    }
+
+    /**
+     * formata os dados para mEq/L, que são as unidades usadas nas fórmulas de cálculo do cálcio corrigido
+     * @param elementsUnit unidade dos elementos
+     */
+    private void formatCaHco3ToMeq_L(int elementsUnit) {
+        /*
+         spinner positions
+         molecules:
+         mmol/l = 0
+         mg/l = 1
+         mEq/L = 2
+        */
+        UnitConverter uc = new UnitConverter();
+
+        switch (elementsUnit){
+            /*
+            A checagem de null é feito somente no hco3 poque os outros são usados tanto
+            no RAS quanto no RAS corrigido, daria nullpointer sem a checagem no RAS normal.
+             */
+            case 0:
+                ca = uc.mmol_LToMeq_L("ca", ca);
+                hco3 = uc.mmol_LToMeq_L("hco3", hco3);
 
                 break;
             case 1:
 
-                Ca = uc.mgLToMeqL("Ca",Ca);
-                Mg = uc.mgLToMeqL("Mg",Mg);
-                Na = uc.mgLToMeqL("Na",Na);
-                if(HCO3 != null) HCO3 = uc.mgLToMeqL("HCO3",HCO3);
+                ca = uc.mg_LToMeq_L("ca", ca);
+                hco3 = uc.mg_LToMeq_L("hco3", hco3);
 
-                //CO3;
+                break;
+
+            case 2:
+                //nothing to do, already meq/l
+
                 break;
 
             default:
-                    //nothing to do, already mEq/L
                 break;
-
         }
 
     }
+
     /**
-     * formata os dados dS/m
-     * @param CEaUnit unidade da condutividade elétrica CEa
+     * formata os dados para mmol/L, que são as unidades usadas nas fórmulas de cálculo do RAS corrigido
+     * @param elementsUnit unidade dos elementos
      */
-    private void formatCEaUnit(int CEaUnit){
+    private void formatNaMgToMmol_L(int elementsUnit) {
         /*
-         CEa:
+         spinner positions
+         molecules:
+         mmol/l = 0
+         mg/l = 1
+         mEq/L = 2
+        */
+        UnitConverter uc = new UnitConverter();
+
+        switch (elementsUnit){
+            /*
+            A checagem de null é feito somente no hco3 poque os outros são usados tanto
+            no RAS quanto no RAS corrigido, daria nullpointer sem a checagem no RAS normal.
+             */
+            case 0:
+                //nothing to do, already mmol/L
+                break;
+            case 1:
+
+                mg = uc.mg_LToMmol_L("mg", mg);
+                na = uc.mg_LToMeq_L("na", na);
+
+                //co3;
+                break;
+
+            case 2:
+                mg = uc.meq_LToMmol_L("mg", mg);
+                na = uc.meq_LToMmol_L("na", na);
+                break;
+
+            default:
+                break;
+        }
+
+    }
+
+    /**
+     * formata a ce para dS/m
+     * @param spinnerCeaUnit unidade da condutividade elétrica cea
+     */
+    private void formatCeaToDs_m(int spinnerCeaUnit){
+        /*
+         cea:
          dS/m = 0
          mS/cm = 1
          uS/cm = 2
@@ -122,8 +210,8 @@ public class SARCalculator {
 
         //Caso estiver no formato uS/cm, é necessário dividir por 1000 para transformar em dS/m.
         //dS/m e mS/cm são valores equivalentes
-        if(CEaUnit == 2)
-            CEa = CEa / 1000;
+        if(spinnerCeaUnit == 2)
+            cea = cea / 1000;
 
     }
 
@@ -133,105 +221,7 @@ public class SARCalculator {
      */
     private Double calculateCorrectedCalcium(){
 
-        return (0.956 + (0.0564 * CEa) + (1.0645 * (Math.pow(CEa,0.09565)))) * Math.pow((HCO3/Ca),-0.667);
-    }
-/*
-    /**
-     *  O pHc se refere ao pH de equilíbrio para o CaCO3, serve para calcular a RAS ajustada e pode ser calculada de acordo com a seguinte fórmula:
-     *  pHc = (pK - pKc) + p (Ca + Mg) + pAlc
-     * @return valor do pHc
-     /
-    private Double calculaPHc() {
-        Double pKpKc = calculaPKpKc();
-        Double pCaMg = calculaPCaMg();
-        Double pAlc = calculaPAlc();
-        return  pKpKc + pCaMg + pAlc;
+        return 0.956 + 0.0564 * cea + 1.0645 * Math.pow(cea, 0.09565) * Math.pow((hco3 / ca), -0.667);
     }
 
-
-    private Double calculaPAlc() {
-        Double pAlc=0.0;
-        return pAlc;
-    }
-
-    private Double calculaPCaMg() {
-        Double soma = Ca + Mg;
-        Double pCaMg = 0.0;
-        if(soma >=0.05 && soma <0.10) {
-            pCaMg = 4.6;
-        }else if (soma >=0.10 && soma <0.15) {
-            pCaMg = 4.3;
-        }else if (soma >=0.15 && soma <0.20) {
-            pCaMg = 4.1;
-        }else if (soma >=0.20 && soma <0.25) {
-            pCaMg = 4.0;
-        }else if (soma >=0.25 && soma <0.30) {
-            pCaMg = 3.9;
-        }else if (soma >=0.30 && soma <0.40) {
-            pCaMg = 3.8;
-        }else if (soma >=0.40 && soma <0.50) {
-            pCaMg = 3.7;
-        }else if (soma >=0.50 && soma <0.75) {
-            pCaMg = 3.6;
-        }else if (soma >=0.75 && soma <1.00) {
-            pCaMg = 3.4;
-        }else if (soma >=1.00 && soma <1.25) {
-            pCaMg = 3.3;
-        }else if (soma >=1.25 && soma <1.5) {
-            pCaMg = 3.2;
-        }else if (soma >=1.50 && soma <2.0) {
-            pCaMg = 3.4;
-        }else if (soma >=2.0 && soma <2.5) {
-            pCaMg = 3.0;
-        }else if (soma >=2.5 && soma <3.0) {
-            pCaMg = 2.9;
-        }else if (soma >=3.0 && soma <4.0) {
-            pCaMg = 2.8;
-        }else if (soma >=4.0 && soma <5.0) {
-            pCaMg = 2.7;
-        }else if (soma >=5.0 && soma <6.0) {
-            pCaMg = 2.6;
-        }else if (soma >=6.0 && soma <8.0) {
-            pCaMg = 2.5;
-        }else if (soma >=8.0 && soma <10.0) {
-            pCaMg = 2.4;
-        }else if (soma >=10.0 && soma <12.5) {
-            pCaMg = 2.3;
-        }else if (soma >=12.5 && soma <15.0) {
-            pCaMg = 2.2;
-        }else if (soma >=15.0 && soma <20.0) {
-            pCaMg = 2.1;
-        }else if (soma >=20.0 && soma <30.0) {
-            pCaMg = 2.0;
-        }else if (soma >=30.0 && soma <50.0) {
-            pCaMg = 1.8;
-        }else if (soma >=50.0 && soma <80.0) {
-            pCaMg = 1.6;
-        }else if (soma >=80.0) {
-            pCaMg = 1.4;
-        }
-
-        return pCaMg;
-    }
-
-    private Double calculaPKpKc() {
-        Double soma = Ca - Mg + Na;
-        Double pKpck = 0.0;
-        if(soma >=0.05 && soma <0.50) {
-            pKpck = 2.0;
-        }else if (soma >=0.50 && soma <2.0){
-            pKpck = 2.1;
-        }else if(soma >=2.0 && soma <8.0){
-            pKpck = 2.2;
-        }else if (soma >=8.0 && soma <20.0){
-            pKpck = 2.3;
-        }else if (soma >=20.0 && soma <50.0){
-            pKpck = 2.4;
-        }else if (soma >=50.0){
-            pKpck = 2.5;
-        }
-
-        return pKpck;
-    }
-*/
 }

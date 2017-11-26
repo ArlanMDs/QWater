@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">QWater</string>
     <string name="action_settings">Settings</string>
+    <string name="newTest">Calcular RAS</string>
+    <string name="savedReports">Relatórios armazenados</string>
 
     <string name="S1">Água com baixo teor de sódio: pode ser usada para irrigação em quase todos os solos, com pouco perigo de desenvolvimento
         de problemas de sodificação.</string>
@@ -33,10 +35,10 @@
     <string name="classeSalinidade">Classe de Salinidade: </string>
     <string name="classificacao">Classificação: </string>
 
-    <string name="CEa">CE<small>a</small>:</string>
+    <string name="cea">CE<small>a</small>:</string>
     <string name="CEa2">CE<small>a</small></string>
-    <string name="HCO3">HCO<sub><small>3</small></sub></string>
-    <string name="CO3">CO<sub><small>3</small></sub></string>
+    <string name="hco3">HCO<sub><small>3</small></sub></string>
+    <string name="co3">CO<sub><small>3</small></sub></string>
     <string name="RAS">RAS:</string>
 
     <!-- a ordem dos itens afeta o método formatUnits, em SARCalculator -->
@@ -45,11 +47,11 @@
         <item>mg L<sup><small>-1</small></sup></item>
         <item>mEq L<sup><small>-1</small></sup></item>
     </string-array>
+
     <string-array name="condutividade">
         <item>dS m<sup><small>-1</small></sup></item>
         <item>mS cm<sup><small>-1</small></sup></item>
         <item>μS cm<sup><small>-1</small></sup></item>
-
     </string-array>
 
     <string name="valorIncorreto">Algum valor digitado está com formato incorreto</string>

@@ -125,13 +125,13 @@ public class Tab2 extends Fragment implements View.OnClickListener {
     public void updateData(Report report){
 
         categorizeSAR(report.getCorrectedSAR());
-        categorizeSalinity(report.getCEa());
+        categorizeSalinity(report.getCea());
 
         showNormalSAR(report.getNormalSAR());
         showCorrectedSARClassification(report.getCorrectedSAR());
-        showSalinityClassification(report.getCEa());
+        showSalinityClassification(report.getCea());
 
-        addPointIntoGraph(report.getCEa(), report.getCorrectedSAR());
+        addPointIntoGraph(report.getCea(), report.getCorrectedSAR());
 
     }
 

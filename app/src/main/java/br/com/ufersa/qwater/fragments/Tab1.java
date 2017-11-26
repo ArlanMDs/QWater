@@ -21,7 +21,7 @@ import br.com.ufersa.qwater.models.Report;
 
 public class Tab1 extends Fragment implements AdapterView.OnItemSelectedListener{
 
-    private EditText edt_CEa, edt_Ca, edt_Mg, edt_K, edt_Na, edt_CO3, edt_HCO3, edt_Cl;
+    private EditText edtCea, edtCa, edtMg, edtK, edtNa, edtCo3, edtHco3, edtCl;
     private interfaceDataCommunicator mCallback;
     private Button calcular;
     private View view;
@@ -53,15 +53,15 @@ public class Tab1 extends Fragment implements AdapterView.OnItemSelectedListener
             /*
             checa ser o length é maior que zero para garantir que tem algum valor digitado
              */
-            if (edt_CEa.getText().length() > 0) {
+            if (edtCea.getText().length() > 0) {
                 CEa = calculateSalinity();
             }
 
-            if (edt_Ca.getText().length() > 0 && edt_Mg.getText().length() > 0 && edt_Na.getText().length() > 0 && edt_CEa.getText().length() > 0 && edt_HCO3.getText().length() > 0) {
+            if (edtCa.getText().length() > 0 && edtMg.getText().length() > 0 && edtNa.getText().length() > 0 && edtCea.getText().length() > 0 && edtHco3.getText().length() > 0) {
                 correctedSAR = calculateCorrectedSAR();
             }
 
-            if (edt_Ca.getText().length() > 0 && edt_Mg.getText().length() > 0 && edt_Na.getText().length() >0){
+            if (edtCa.getText().length() > 0 && edtMg.getText().length() > 0 && edtNa.getText().length() >0){
                 normalSAR = calculateNormalSAR();
             }
 
@@ -87,7 +87,7 @@ public class Tab1 extends Fragment implements AdapterView.OnItemSelectedListener
 
         report.setNormalSAR(normalSAR);
         report.setCorrectedSAR(correctedSAR);
-        report.setCEa(CEa);
+        report.setCea(CEa);
         return report;
     }
 
@@ -95,9 +95,9 @@ public class Tab1 extends Fragment implements AdapterView.OnItemSelectedListener
         SARCalculator sarCalculator;
         Double Ca, Mg, Na;
         try {
-            Ca = Double.parseDouble(this.edt_Ca.getText().toString());
-            Mg = Double.parseDouble(this.edt_Mg.getText().toString());
-            Na = Double.parseDouble(this.edt_Na.getText().toString());
+            Ca = Double.parseDouble(this.edtCa.getText().toString());
+            Mg = Double.parseDouble(this.edtMg.getText().toString());
+            Na = Double.parseDouble(this.edtNa.getText().toString());
             sarCalculator = new SARCalculator(Ca, Mg, Na);
         }catch(Exception e){
             Toast.makeText(getContext(), getString(R.string.valorIncorreto), Toast.LENGTH_LONG).show();
@@ -116,11 +116,11 @@ public class Tab1 extends Fragment implements AdapterView.OnItemSelectedListener
         SARCalculator sarCalculator;
         Double Ca, Mg, Na, CEa, HCO3;
         try {
-            Ca = Double.parseDouble(this.edt_Ca.getText().toString());
-            Mg = Double.parseDouble(this.edt_Mg.getText().toString());
-            Na = Double.parseDouble(this.edt_Na.getText().toString());
-            CEa = Double.parseDouble(this.edt_CEa.getText().toString());
-            HCO3 =  Double.parseDouble(this.edt_HCO3.getText().toString());
+            Ca = Double.parseDouble(this.edtCa.getText().toString());
+            Mg = Double.parseDouble(this.edtMg.getText().toString());
+            Na = Double.parseDouble(this.edtNa.getText().toString());
+            CEa = Double.parseDouble(this.edtCea.getText().toString());
+            HCO3 =  Double.parseDouble(this.edtHco3.getText().toString());
             sarCalculator = new SARCalculator(Ca, Mg, Na, CEa, HCO3);
         }catch(Exception e){
             Toast.makeText(getContext(), getString(R.string.valorIncorreto), Toast.LENGTH_LONG).show();
@@ -138,7 +138,7 @@ public class Tab1 extends Fragment implements AdapterView.OnItemSelectedListener
     private double calculateSalinity() {
         Double result;
         try {
-            result = Double.parseDouble(this.edt_CEa.getText().toString());
+            result = Double.parseDouble(this.edtCea.getText().toString());
         }catch (Exception e){
             result = null;
             Toast.makeText(getContext(), getString(R.string.valorIncorreto), Toast.LENGTH_LONG).show();
@@ -151,14 +151,14 @@ public class Tab1 extends Fragment implements AdapterView.OnItemSelectedListener
 
     private void findViewsIDs() {
         view = getView();
-        edt_CEa = (EditText)view.findViewById(R.id.CEa);
-        edt_Ca = (EditText)view.findViewById(R.id.Ca);
-        edt_Mg = (EditText)view.findViewById(R.id.Mg);
-        edt_K = (EditText)view.findViewById(R.id.K);
-        edt_Na = (EditText)view.findViewById(R.id.Na);
-        edt_CO3 = (EditText)view.findViewById(R.id.CO3);
-        edt_HCO3 = (EditText)view.findViewById(R.id.HCO3);
-        edt_Cl = (EditText)view.findViewById(R.id.Cl);
+        edtCea = (EditText)view.findViewById(R.id.cea);
+        edtCa = (EditText)view.findViewById(R.id.Ca);
+        edtMg = (EditText)view.findViewById(R.id.Mg);
+        edtK = (EditText)view.findViewById(R.id.K);
+        edtNa = (EditText)view.findViewById(R.id.Na);
+        edtCo3 = (EditText)view.findViewById(R.id.co3);
+        edtHco3 = (EditText)view.findViewById(R.id.hco3);
+        edtCl = (EditText)view.findViewById(R.id.Cl);
         calcular = (Button)view.findViewById(R.id.calcular);
 
         spinnerMolecules = (Spinner) view.findViewById(R.id.spinnerMolecules);
