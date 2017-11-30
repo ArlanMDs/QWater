@@ -5,9 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import br.com.ufersa.qwater.R;
 import br.com.ufersa.qwater.database.Create;
+import br.com.ufersa.qwater.database.MainDB;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -42,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
-/*
+
     @Override
     protected void onStop() {
         Toast.makeText(this, "fechando DB...", Toast.LENGTH_SHORT).show();
@@ -53,5 +55,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         super.onStop();
     }
-*/
+
 }
