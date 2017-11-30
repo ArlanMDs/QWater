@@ -17,7 +17,7 @@ public class Update {
 
         ContentValues cv = new ContentValues();
 
-        cv.put("id", report.getId());
+        //cv.put("id", report.getId());
         cv.put("ca", report.getCa());
         cv.put("mg", report.getMg());
         cv.put("k", report.getK());

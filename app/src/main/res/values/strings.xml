@@ -34,6 +34,7 @@
     <string name="correctedSAR">RAS corrigido: </string>
     <string name="classeSalinidade">Classe de Salinidade: </string>
     <string name="classificacao">Classificação: </string>
+    <string name="salvarRelatorio">Salvar Relatório</string>
 
     <string name="cea">CE<small>a</small>:</string>
     <string name="CEa2">CE<small>a</small></string>

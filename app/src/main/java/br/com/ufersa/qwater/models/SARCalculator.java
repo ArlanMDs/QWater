@@ -40,38 +40,39 @@ public class SARCalculator {
     }
 
     /**
-     * calcula o valor do RAS normal, Antes do cálculo é feito uma checagem
-     * no formato das unidades de medida, pois a fórmula usa o formato meq/l
-     * @param elementsUnit  unidade dos elementos
+     * calcula o valor do RAS normal. Antes do cálculo é feita uma checagem
+     * no formato das unidades de medida, pois a fórmula usa o formato mEq/L
+     * @param moleculesSpinnerPosition  posição do spinner de escolha do formato dos elementos
      * @return valor do RAS normal
      */
-    public Double calculateSAR(int elementsUnit){
-        formatNaMgCaToMeq_L(elementsUnit);
+    public Double calculateNormalSAR(int moleculesSpinnerPosition){
+        formatNaMgCaToMeq_L(moleculesSpinnerPosition);
         return na / sqrt((ca + mg)/2);
     }
 
     /**
-     * calcula o RAS corrigido de acordo com os valores do objeto. Antes do cálculo é feito uma checagem
-     * no formato das unidades de medida, pois a fórmula usa o formato mmol/L, já a fórmula para calcular
-     * o cálcio corrigido utiliza meq/l
-     * @param ceaUnit unidade do cea
-     * @param spinnerCurrentUnit unidade dos elementos
+     * calcula o valor do RAS corrigido. Antes do cálculo é feita uma checagem
+     * no formato das unidades de medida, pois a fórmula usa o formato mmol/L para as moléculas e ds/m para a
+     * CEa, já a fórmula para calcular o cálcio corrigido utiliza mEq/L
+     * @param ceaSpinnerPosition unidade do cea
+     * @param moleculesSpinnerPosition unidade dos elementos
      * @return valor do RAS corrigido
      */
-    public Double calculateCorrectedSAR(int spinnerCurrentUnit, int ceaUnit){
+    public Double calculateCorrectedSAR(int moleculesSpinnerPosition, int ceaSpinnerPosition){
 
-        formatCaHco3ToMeq_L(spinnerCurrentUnit);
-        formatNaMgToMmol_L(spinnerCurrentUnit);
-        formatCeaToDs_m(ceaUnit);
+        formatCaHco3ToMeq_L(moleculesSpinnerPosition);
+        formatNaMgToMmol_L(moleculesSpinnerPosition);
+        formatCeaToDs_m(ceaSpinnerPosition);
         /*
             IMPORTANTE:
-            o valor do cálcio corrigido está em meq/L, dividí-lo por 2 é
+            o valor do cálcio corrigido está em mEq/L, dividí-lo por 2 é
             a forma de transformá-lo para mmol/L, que é a unidade usada nessa
             fórmula.
          */
         double ca = calculateCorrectedCalcium();
-        return na / sqrt( (ca / 2 + mg) /2 );
+        return na / sqrt( (ca / 2 + mg) / 2 );
     }
+
     /**
      * formata os dados para mEq/L, que são as unidades usadas nas fórmulas de cálculo do cálcio corrigido
      * @param elementsUnit unidade dos elementos
@@ -87,10 +88,7 @@ public class SARCalculator {
         UnitConverter uc = new UnitConverter();
 
         switch (elementsUnit){
-            /*
-            A checagem de null é feito somente no hco3 poque os outros são usados tanto
-            no RAS quanto no RAS corrigido, daria nullpointer sem a checagem no RAS normal.
-             */
+
             case 0:
                 na = uc.mmol_LToMeq_L("na", na);
                 mg = uc.mmol_LToMeq_L("mg", mg);
@@ -128,10 +126,7 @@ public class SARCalculator {
         UnitConverter uc = new UnitConverter();
 
         switch (elementsUnit){
-            /*
-            A checagem de null é feito somente no hco3 poque os outros são usados tanto
-            no RAS quanto no RAS corrigido, daria nullpointer sem a checagem no RAS normal.
-             */
+
             case 0:
                 ca = uc.mmol_LToMeq_L("ca", ca);
                 hco3 = uc.mmol_LToMeq_L("hco3", hco3);
@@ -170,10 +165,7 @@ public class SARCalculator {
         UnitConverter uc = new UnitConverter();
 
         switch (elementsUnit){
-            /*
-            A checagem de null é feito somente no hco3 poque os outros são usados tanto
-            no RAS quanto no RAS corrigido, daria nullpointer sem a checagem no RAS normal.
-             */
+
             case 0:
                 //nothing to do, already mmol/L
                 break;

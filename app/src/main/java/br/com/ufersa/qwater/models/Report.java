@@ -14,7 +14,7 @@ public class Report {
     private double cea;
     private double normalSAR;
     private double correctedSAR;
-
+    //TODO data do relatório
     public void setId(int id){
         this.id = id;
     }

@@ -24,8 +24,11 @@ public class Tab1 extends Fragment implements AdapterView.OnItemSelectedListener
     private EditText edtCea, edtCa, edtMg, edtK, edtNa, edtCo3, edtHco3, edtCl;
     private interfaceDataCommunicator mCallback;
     private Button calcular;
-    private View view;
     private Spinner spinnerCEa, spinnerMolecules;
+    private Double ca, mg, na, cea, hco3, k=0.0, co3=0.0, cl=0.0;
+
+    //TODO o cea está sendo convertido tanto aqui quanto no SARCalculator
+    //TODO alguns valores do relatório não estão sendo usados
 
     @Nullable
     @Override
@@ -40,7 +43,6 @@ public class Tab1 extends Fragment implements AdapterView.OnItemSelectedListener
         void sendData(Report report);
     }
 
-
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -49,12 +51,12 @@ public class Tab1 extends Fragment implements AdapterView.OnItemSelectedListener
         calcular.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            double CEa = 0.0, correctedSAR = 0.0, normalSAR = 0.0;
+            double cea = 0.0, correctedSAR = 0.0, normalSAR = 0.0;
             /*
             checa ser o length é maior que zero para garantir que tem algum valor digitado
              */
             if (edtCea.getText().length() > 0) {
-                CEa = calculateSalinity();
+                cea = getCeaInDs_m();
             }
 
             if (edtCa.getText().length() > 0 && edtMg.getText().length() > 0 && edtNa.getText().length() > 0 && edtCea.getText().length() > 0 && edtHco3.getText().length() > 0) {
@@ -66,10 +68,10 @@ public class Tab1 extends Fragment implements AdapterView.OnItemSelectedListener
             }
 
             //TODO mudar para que seja possível fazer os cálculos separadamente
-            if (CEa != 0.0 && correctedSAR != 0.0 && normalSAR != 0.0) {
+            if (cea != 0.0 && correctedSAR != 0.0 && normalSAR != 0.0) {
 
                 //se os dados estiverem ok, é gerado um novo relatório e enviado para a outra tab
-                Report report = generateReport(normalSAR, correctedSAR, CEa);
+                Report report = generateReport(normalSAR, correctedSAR, cea);
                 mCallback.sendData(report);
 
                 ViewPager viewPager = (ViewPager) getActivity().findViewById(R.id.container);
@@ -85,26 +87,34 @@ public class Tab1 extends Fragment implements AdapterView.OnItemSelectedListener
     private Report generateReport(double normalSAR, double correctedSAR, double CEa) {
         Report report = new Report();
 
+        report.setCa(ca);
+        report.setMg(mg);
+        report.setK(k);
+        report.setNa(na);
+        report.setCo3(co3);
+        report.setHco3(hco3);
+        report.setCl(cl);
+        report.setCea(CEa);
         report.setNormalSAR(normalSAR);
         report.setCorrectedSAR(correctedSAR);
-        report.setCea(CEa);
+
         return report;
     }
 
     private double calculateNormalSAR(){
         SARCalculator sarCalculator;
-        Double Ca, Mg, Na;
+        //Double ca, mg, na;
         try {
-            Ca = Double.parseDouble(this.edtCa.getText().toString());
-            Mg = Double.parseDouble(this.edtMg.getText().toString());
-            Na = Double.parseDouble(this.edtNa.getText().toString());
-            sarCalculator = new SARCalculator(Ca, Mg, Na);
+            ca = Double.parseDouble(this.edtCa.getText().toString());
+            mg = Double.parseDouble(this.edtMg.getText().toString());
+            na = Double.parseDouble(this.edtNa.getText().toString());
+            sarCalculator = new SARCalculator(ca, mg, na);
         }catch(Exception e){
             Toast.makeText(getContext(), getString(R.string.valorIncorreto), Toast.LENGTH_LONG).show();
             sarCalculator = null;
         }
         if(sarCalculator != null)
-            return sarCalculator.calculateSAR(spinnerMolecules.getSelectedItemPosition());
+            return sarCalculator.calculateNormalSAR(spinnerMolecules.getSelectedItemPosition());
 
         return 0.0;
     }
@@ -114,14 +124,14 @@ public class Tab1 extends Fragment implements AdapterView.OnItemSelectedListener
      */
     private double calculateCorrectedSAR() {
         SARCalculator sarCalculator;
-        Double Ca, Mg, Na, CEa, HCO3;
+        //Double ca, mg, na, cea, hco3;
         try {
-            Ca = Double.parseDouble(this.edtCa.getText().toString());
-            Mg = Double.parseDouble(this.edtMg.getText().toString());
-            Na = Double.parseDouble(this.edtNa.getText().toString());
-            CEa = Double.parseDouble(this.edtCea.getText().toString());
-            HCO3 =  Double.parseDouble(this.edtHco3.getText().toString());
-            sarCalculator = new SARCalculator(Ca, Mg, Na, CEa, HCO3);
+            ca = Double.parseDouble(this.edtCa.getText().toString());
+            mg = Double.parseDouble(this.edtMg.getText().toString());
+            na = Double.parseDouble(this.edtNa.getText().toString());
+            cea = Double.parseDouble(this.edtCea.getText().toString());
+            hco3 =  Double.parseDouble(this.edtHco3.getText().toString());
+            sarCalculator = new SARCalculator(ca, mg, na, cea, hco3);
         }catch(Exception e){
             Toast.makeText(getContext(), getString(R.string.valorIncorreto), Toast.LENGTH_LONG).show();
             sarCalculator = null;
@@ -133,33 +143,38 @@ public class Tab1 extends Fragment implements AdapterView.OnItemSelectedListener
     }
 
     /**
-     * O calculo da salinidade é feita com base apenas no valor do CEa. O valor do TextView é passado para o Fragmento de exibição Tab2
+     * O calculo da salinidade é feita com base apenas no valor do cea. O valor do TextView é passado para o Fragmento de exibição Tab2
      */
-    private double calculateSalinity() {
-        Double result;
+    private double getCeaInDs_m() {
+        Double cea;
         try {
-            result = Double.parseDouble(this.edtCea.getText().toString());
+            cea = Double.parseDouble(this.edtCea.getText().toString());
         }catch (Exception e){
-            result = null;
+            cea = null;
             Toast.makeText(getContext(), getString(R.string.valorIncorreto), Toast.LENGTH_LONG).show();
         }
-        if(result != null)
-            return result;
-        //TODO esse result precisa estar formatado em dS/m
+        if(cea != null){
+            //Caso estiver no formato uS/cm, é necessário dividir por 1000 para transformar em dS/m.
+            //dS/m e mS/cm são valores equivalentes
+            if(spinnerCEa.getSelectedItemPosition() == 2)
+                cea = cea / 1000;
+
+            return cea;
+        }
         return 0.0;
     }
 
     private void findViewsIDs() {
-        view = getView();
-        edtCea = (EditText)view.findViewById(R.id.cea);
-        edtCa = (EditText)view.findViewById(R.id.Ca);
-        edtMg = (EditText)view.findViewById(R.id.Mg);
-        edtK = (EditText)view.findViewById(R.id.K);
-        edtNa = (EditText)view.findViewById(R.id.Na);
-        edtCo3 = (EditText)view.findViewById(R.id.co3);
-        edtHco3 = (EditText)view.findViewById(R.id.hco3);
-        edtCl = (EditText)view.findViewById(R.id.Cl);
-        calcular = (Button)view.findViewById(R.id.calcular);
+        View view = getView();
+        edtCea = (EditText) view.findViewById(R.id.cea);
+        edtCa = (EditText) view.findViewById(R.id.Ca);
+        edtMg = (EditText) view.findViewById(R.id.Mg);
+        edtK = (EditText) view.findViewById(R.id.K);
+        edtNa = (EditText) view.findViewById(R.id.Na);
+        edtCo3 = (EditText) view.findViewById(R.id.co3);
+        edtHco3 = (EditText) view.findViewById(R.id.hco3);
+        edtCl = (EditText) view.findViewById(R.id.Cl);
+        calcular = (Button) view.findViewById(R.id.calcular);
 
         spinnerMolecules = (Spinner) view.findViewById(R.id.spinnerMolecules);
         spinnerMolecules.setOnItemSelectedListener(this);

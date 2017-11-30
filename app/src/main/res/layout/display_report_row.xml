@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="75dp">
+
+
+    <TextView
+        android:id="@+id/id"
+        android:layout_width="35dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:fontFamily="monospace"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/normalSAR"
+        android:layout_width="150dp"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@+id/id"
+        android:fontFamily="monospace"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/correctedSAR"
+        android:layout_width="70dp"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@+id/normalSAR"
+        android:fontFamily="monospace"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/cea"
+        android:layout_width="70dp"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@+id/correctedSAR"
+        android:fontFamily="monospace"
+        android:gravity="center" />
+
+
+
+</RelativeLayout>

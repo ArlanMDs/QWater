@@ -5,10 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import br.com.ufersa.qwater.R;
-import br.com.ufersa.qwater.database.MainDB;
+import br.com.ufersa.qwater.database.Create;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -18,6 +17,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         findViewsIds();
+        new Create().createTable();
+
     }
 
     private void findViewsIds() {

@@ -14,12 +14,9 @@ import br.com.ufersa.qwater.MyApp;
 
 public class MainDB extends SQLiteOpenHelper {
 
-    private static final String DB_NAME = "QWater.db";
+    private static final String DB_NAME = "QWater";
     private static int DB_VERSION = 1;
     public static final String REPORT_TABLE = "report";
-    private Context mContext;
-    private SQLiteDatabase db;
-
 
     private static MainDB instance;
 
@@ -27,7 +24,6 @@ public class MainDB extends SQLiteOpenHelper {
         if(instance==null) instance = new MainDB();
         return instance;
     }
-
 
     private MainDB() {
         super(MyApp.getContext(), DB_NAME, null, DB_VERSION);

@@ -23,15 +23,19 @@ import com.jjoe64.graphview.series.OnDataPointTapListener;
 import com.jjoe64.graphview.series.PointsGraphSeries;
 import com.jjoe64.graphview.series.Series;
 
+import br.com.ufersa.qwater.MyApp;
 import br.com.ufersa.qwater.R;
+import br.com.ufersa.qwater.database.Create;
+import br.com.ufersa.qwater.database.Update;
 import br.com.ufersa.qwater.models.Report;
 
 public class Tab2 extends Fragment implements View.OnClickListener {
 
-    private Button btnSARDetails, btnSalinityDetails;
+    private Button btnSARDetails, btnSalinityDetails, btnSaveReport;
     private TextView txtviewCorrectedSARResult, txtviewNormalSARResult, salinityResult, txtviewSARClassification, txtviewCEaValue;
     private int currentSARClassification, currentSalinityClassification;
     private GraphView graph;
+    private Report report;
 
     @Nullable
     @Override
@@ -52,20 +56,20 @@ public class Tab2 extends Fragment implements View.OnClickListener {
     }
 
     private void adjustGraph() {
-        graph.setTitle("Classificação de água para irrigação");
-
-        // set manual X bounds
-        graph.getViewport().setXAxisBoundsManual(true);
-        graph.getViewport().setMinX(0);
-        graph.getViewport().setMaxX(5500);
-
-        // set manual Y bounds
-        graph.getViewport().setYAxisBoundsManual(true);
-        graph.getViewport().setMinY(0);
-        graph.getViewport().setMaxY(40);
+        graph.setTitle("problemas de Infiltração por Sodicidade");
+        graph.getGridLabelRenderer().setVerticalAxisTitle("Relação de RASº");
+        graph.getGridLabelRenderer().setHorizontalAxisTitle("Condutividade Elétrica (dS/m) a 25ºC");
 
         addScrolling();
 
+    }
+
+    private void addScrolling() {
+
+        //graph.getViewport().setScrollable(true); // enables horizontal scrolling
+        //graph.getViewport().setScrollableY(true); // enables vertical scrolling
+        graph.getViewport().setScalable(true); // enables horizontal zooming and scrolling
+        graph.getViewport().setScalableY(true); // enables vertical zooming and scrolling
     }
 
     private void addPointIntoGraph(double x, double y){
@@ -74,7 +78,7 @@ public class Tab2 extends Fragment implements View.OnClickListener {
         para o gráfico da figura 1, página 55 do livro "Manejo de salinidade na agricultura: estudos básicos e aplicados,
          a CEa é expressa em micro mhos/cm, a conversão é feita multiplicando o valor da CEa, expressa em dS/m, por 1000
          */
-        x *= 1000;
+        //x *= 1000;
 
         PointsGraphSeries<DataPoint> series = new PointsGraphSeries<>(new DataPoint[] {
                 new DataPoint(x, y)
@@ -108,21 +112,14 @@ public class Tab2 extends Fragment implements View.OnClickListener {
 
     }
 
-    private void addScrolling(){
-        // enable scaling and scrolling
-        graph.getViewport().setScalable(true);
-        graph.getViewport().setScalableY(true);
-        graph.getViewport().setScrollable(true); // enables horizontal scrolling
-        graph.getViewport().setScrollableY(true); // enables vertical scrolling
-        graph.getViewport().setScalable(true); // enables horizontal zooming and scrolling
-        graph.getViewport().setScalableY(true); // enables vertical zooming and scrolling
-    }
 
     /**
      * método que faz a comunicação da RAS entre a tab1 e tab2
      * @param report relatório recebido da tab1
      */
     public void updateData(Report report){
+
+        this.report = report;
 
         categorizeSAR(report.getCorrectedSAR());
         categorizeSalinity(report.getCea());
@@ -215,21 +212,23 @@ public class Tab2 extends Fragment implements View.OnClickListener {
     }
 
     private void findViewsIds() {
+        View view = getView();
 
-        txtviewCorrectedSARResult = (TextView)getView().findViewById(R.id.txtviewCorrectedSARResult);
-        txtviewNormalSARResult = (TextView)getView().findViewById(R.id.txtviewNormalSARResult);
-        txtviewSARClassification = (TextView)getView().findViewById(R.id.txtviewSARClassification);
-        txtviewCEaValue = (TextView)getView().findViewById(R.id.txtviewCEaValue);
-        salinityResult = (TextView)getView().findViewById(R.id.txtviewSalinityResults);
+        txtviewCorrectedSARResult = (TextView) view.findViewById(R.id.txtviewCorrectedSARResult);
+        txtviewNormalSARResult = (TextView) view.findViewById(R.id.txtviewNormalSARResult);
+        txtviewSARClassification = (TextView) view.findViewById(R.id.txtviewSARClassification);
+        txtviewCEaValue = (TextView) view.findViewById(R.id.txtviewCEaValue);
+        salinityResult = (TextView) view.findViewById(R.id.txtviewSalinityResults);
+        graph = (GraphView) view.findViewById(R.id.dotgraph);
 
-        btnSARDetails = (Button)getView().findViewById(R.id.btnSARDetails);
+        btnSARDetails = (Button) view.findViewById(R.id.buttonSARDetails);
         btnSARDetails.setOnClickListener(this);
 
-        btnSalinityDetails = (Button)getView().findViewById(R.id.btnSalinityDetails);
+        btnSalinityDetails = (Button) view.findViewById(R.id.buttonSalinityDetails);
         btnSalinityDetails.setOnClickListener(this);
 
-        graph = (GraphView) getView().findViewById(R.id.dotgraph);
-
+        btnSaveReport = (Button) view.findViewById(R.id.buttonSaveReport);
+        btnSaveReport.setOnClickListener(this);
 
     }
 
@@ -246,13 +245,20 @@ public class Tab2 extends Fragment implements View.OnClickListener {
             buscar o valor em strings.xml e montar a tela de dialog.
              */
 
-            case R.id.btnSARDetails:
+            case R.id.buttonSARDetails:
                 showInfoDialogue("S" + currentSARClassification);
 
                 break;
-
-            case R.id.btnSalinityDetails:
+            case R.id.buttonSalinityDetails:
                 showInfoDialogue("C" + currentSalinityClassification);
+
+                break;
+            case R.id.buttonSaveReport:
+
+                if (new Update().addReport(report))
+                    Toast.makeText(MyApp.getContext(), "Relatório salvo com sucesso!", Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(MyApp.getContext(), "Erro ao inserir relatório", Toast.LENGTH_SHORT).show();
 
                 break;
         }
