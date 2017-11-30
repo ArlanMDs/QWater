@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
-
+/*
     @Override
     protected void onStop() {
         Toast.makeText(this, "fechando DB...", Toast.LENGTH_SHORT).show();
@@ -55,5 +55,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         super.onStop();
     }
-
+test
+*/
 }
