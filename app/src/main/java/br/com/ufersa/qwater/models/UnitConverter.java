@@ -37,144 +37,148 @@ public class UnitConverter {
             case "cl":
                 return mEqL * cl;
 
+            default:
+                return -1;
         }
-
-        return 0.0;
     }
 
     /**
      * Converte valores de mg/L para meq/L
      * @param element elemento  a ser transformado
-     * @param mgL valor em mg/L
+     * @param mg_L valor em mg/L
      * @return valor e meq/L
      */
-    public double mg_LToMeq_L(String element, double mgL){
+    public double mg_LToMeq_L(String element, double mg_L){
 
         switch (element){
             case "ca":
-                return mgL / (ca /2);
+                return mg_L / (ca /2);
 
             case "mg":
-                return mgL / (mg /2);
+                return mg_L / (mg /2);
 
             case "k":
-                return mgL / k;
+                return mg_L / k;
 
             case "na":
-                return mgL / na;
+                return mg_L / na;
 
             case "co3":
-                return mgL / (co3 /2);
+                return mg_L / (co3 /2);
 
             case "hco3":
-                return mgL / hco3;
+                return mg_L / hco3;
 
             case "cl":
-                return mgL / cl;
+                return mg_L / cl;
 
+            default:
+                return -1;
         }
-        return 0.0;
     }
 
     /**
      * Converte unidades de mmol/L para meq/L
      * @param element elemento a ser transformado
-     * @param mmolL valor em mmol/L
+     * @param mmol_L valor em mmol/L
      * @return valor em meq/L
      */
-    public double mmol_LToMeq_L(String element, double mmolL){
+    public double mmol_LToMeq_L(String element, double mmol_L){
 
         switch (element){
             case "ca":
-                return mmolL * 2;
+                return mmol_L * 2;
 
             case "mg":
-                return mmolL * 2;
+                return mmol_L * 2;
 
             case "k":
-                return mmolL;
+                return mmol_L;
 
             case "na":
-                return mmolL;
+                return mmol_L;
 
             case "co3":
-                return mmolL * 2;
+                return mmol_L * 2;
 
             case "hco3":
-                return mmolL;
+                return mmol_L;
 
             case "cl":
-                return mmolL;
+                return mmol_L;
 
+            default:
+                return -1;
         }
-        return 0.0;
     }
 
     /**
      * Converte unidades de meq/L para mmol/L
      * @param element elemento a ser transformado
-     * @param meqL valor em meq/L
+     * @param meq_L valor em meq/L
      * @return valor em mmol/L
      */
-    public double meq_LToMmol_L(String element, double meqL){
+    public double meq_LToMmol_L(String element, double meq_L){
 
         switch (element){
             case "ca":
-                return meqL / 2;
+                return meq_L / 2;
 
             case "mg":
-                return meqL / 2;
+                return meq_L / 2;
 
             case "k":
-                return meqL;
+                return meq_L;
 
             case "na":
-                return meqL;
+                return meq_L;
 
             case "co3":
-                return meqL / 2;
+                return meq_L / 2;
 
             case "hco3":
-                return meqL;
+                return meq_L;
 
             case "cl":
-                return meqL;
+                return meq_L;
 
+            default:
+                return -1;
         }
-        return 0.0;
     }
 
     /**
      * Converte unidades de mg/L para mmol/L
      * @param element elemento a ser transformado
-     * @param mgL valor em mg/L
+     * @param mg_L valor em mg/L
      * @return valor em mmol/L
      */
-    public double mg_LToMmol_L(String element, double mgL){
+    public double mg_LToMmol_L(String element, double mg_L){
 
         switch (element){
             case "ca":
-                return (mgL / 2) / ca;
+                return (mg_L / 2) / ca;
 
             case "mg":
-                return (mgL / 2) / mg;
+                return (mg_L / 2) / mg;
 
             case "k":
-                return mgL / k;
+                return mg_L / k;
 
             case "na":
-                return mgL / na;
+                return mg_L / na;
 
             case "co3":
-                return (mgL / 2) / co3;
+                return (mg_L / 2) / co3;
 
             case "hco3":
-                return mgL / hco3;
+                return mg_L / hco3;
 
             case "cl":
-                return mgL / cl;
+                return mg_L / cl;
 
+            default:
+                return -1;
         }
-        return 0.0;
     }
 }

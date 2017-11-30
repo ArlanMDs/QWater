@@ -72,6 +72,7 @@ public class SARCalculator {
         double ca = calculateCorrectedCalcium();
         return na / sqrt( (ca / 2 + mg) / 2 );
     }
+    //TODO Tratar -1 da conversão de unidades, se necessário
 
     /**
      * formata os dados para mEq/L, que são as unidades usadas nas fórmulas de cálculo do cálcio corrigido
