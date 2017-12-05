@@ -4,89 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="1dp"
-    tools:layout_editor_absoluteX="0dp"
-    tools:layout_editor_absoluteY="81dp">
+    tools:context=".activities.ReportDetailsActivity">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/layoutCEa"
-            android:layout_width="0dp"
+        <Button
+            android:id="@+id/DETAILS_DELETE_BUTTON"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:background="?attr/colorControlHighlight"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layoutValores">
-
-            <EditText
-                android:id="@+id/cea"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginStart="8dp"
-                android:ems="4"
-                android:gravity="center"
-                android:hint="@string/CEa2"
-                android:inputType="numberDecimal"
-                android:textColor="@android:color/black"
-                android:textColorHint="@android:color/darker_gray"
-                android:textSize="14sp"
-                app:layout_constraintStart_toEndOf="@+id/ras"
-                app:layout_constraintTop_toBottomOf="@+id/spinnerCEa" />
-
-            <Spinner
-                android:id="@+id/spinnerCEa"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:drawSelectorOnTop="true"
-                android:entries="@array/condutividade"
-                android:padding="1dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/ras"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:text="@string/CEa2"
-                android:textColor="@android:color/black"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinnerCEa" />
-        </android.support.constraint.ConstraintLayout>
-
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/constraintLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@android:drawable/ic_menu_delete"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layoutCEa">
-
-            <Button
-                android:id="@+id/calcular"
-                android:layout_width="97dp"
-                android:layout_height="50dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="Calcular"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0" />
-        </android.support.constraint.ConstraintLayout>
+            app:layout_constraintTop_toBottomOf="@+id/layoutRAS" />
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/layoutValores"
@@ -100,7 +34,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <EditText
+            <TextView
                 android:id="@+id/DETAILS_MG"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -109,14 +43,14 @@
                 android:ems="4"
                 android:gravity="center"
                 android:hint="Mg"
-                android:inputType="numberDecimal"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="14sp"
                 app:layout_constraintStart_toEndOf="@+id/textView9"
-                app:layout_constraintTop_toBottomOf="@+id/spinnerMolecules" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="8dp" />
 
-            <EditText
+            <TextView
                 android:id="@+id/DETAILS_CA"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -125,14 +59,14 @@
                 android:ems="4"
                 android:gravity="center"
                 android:hint="Ca"
-                android:inputType="numberDecimal"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="14sp"
                 app:layout_constraintStart_toEndOf="@+id/textView10"
-                app:layout_constraintTop_toBottomOf="@+id/DETAILS_MG" />
+                app:layout_constraintTop_toBottomOf="@+id/DETAILS_MG"
+                android:layout_marginLeft="11dp" />
 
-            <EditText
+            <TextView
                 android:id="@+id/DETAILS_NA"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -141,14 +75,14 @@
                 android:ems="4"
                 android:gravity="center"
                 android:hint="Na"
-                android:inputType="numberDecimal"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="14sp"
                 app:layout_constraintStart_toEndOf="@+id/textView5"
-                app:layout_constraintTop_toBottomOf="@+id/DETAILS_K" />
+                app:layout_constraintTop_toBottomOf="@+id/DETAILS_K"
+                android:layout_marginLeft="8dp" />
 
-            <EditText
+            <TextView
                 android:id="@+id/DETAILS_K"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -157,15 +91,15 @@
                 android:ems="4"
                 android:gravity="center"
                 android:hint="K"
-                android:inputType="numberDecimal"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="14sp"
                 app:layout_constraintStart_toEndOf="@+id/textView7"
-                app:layout_constraintTop_toBottomOf="@+id/spinnerMolecules" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="8dp" />
 
-            <EditText
-                android:id="@+id/Cl"
+            <TextView
+                android:id="@+id/DETAILS_CL"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -173,15 +107,15 @@
                 android:ems="4"
                 android:gravity="center"
                 android:hint="Cl"
-                android:inputType="numberDecimal"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="14sp"
                 app:layout_constraintStart_toEndOf="@+id/textView8"
-                app:layout_constraintTop_toBottomOf="@+id/DETAILS_CO3" />
+                app:layout_constraintTop_toBottomOf="@+id/DETAILS_CO3"
+                android:layout_marginLeft="8dp" />
 
-            <EditText
-                android:id="@+id/hco3"
+            <TextView
+                android:id="@+id/DETAILS_HCO3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
@@ -190,14 +124,14 @@
                 android:ems="4"
                 android:gravity="center"
                 android:hint="@string/hco3"
-                android:inputType="numberDecimal"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="14sp"
                 app:layout_constraintStart_toEndOf="@+id/textView11"
-                app:layout_constraintTop_toBottomOf="@+id/DETAILS_CA" />
+                app:layout_constraintTop_toBottomOf="@+id/DETAILS_CA"
+                android:layout_marginLeft="8dp" />
 
-            <EditText
+            <TextView
                 android:id="@+id/DETAILS_CO3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -206,104 +140,205 @@
                 android:ems="4"
                 android:gravity="center"
                 android:hint="@string/co3"
-                android:inputType="numberDecimal"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="14sp"
                 app:layout_constraintStart_toEndOf="@+id/textView12"
-                app:layout_constraintTop_toBottomOf="@+id/spinnerMolecules" />
-
-            <Spinner
-                android:id="@+id/spinnerMolecules"
-                android:layout_width="145dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_marginTop="8dp"
-                android:drawSelectorOnTop="true"
-                android:entries="@array/molecules"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="8dp" />
 
             <TextView
                 android:id="@+id/textView10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:text="Ca"
                 android:textColor="@android:color/black"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/DETAILS_MG" />
+                app:layout_constraintTop_toBottomOf="@+id/DETAILS_MG"
+                android:layout_marginLeft="8dp" />
 
             <TextView
                 android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:text="Na"
                 android:textColor="@android:color/black"
                 app:layout_constraintStart_toEndOf="@+id/DETAILS_CA"
-                app:layout_constraintTop_toBottomOf="@+id/DETAILS_K" />
+                app:layout_constraintTop_toBottomOf="@+id/DETAILS_K"
+                android:layout_marginLeft="8dp" />
 
             <TextView
                 android:id="@+id/textView9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:text="Mg"
                 android:textColor="@android:color/black"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinnerMolecules" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="8dp" />
 
             <TextView
                 android:id="@+id/textView7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:text="K"
                 android:textColor="@android:color/black"
                 app:layout_constraintStart_toEndOf="@+id/DETAILS_MG"
-                app:layout_constraintTop_toBottomOf="@+id/spinnerMolecules" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="8dp" />
 
             <TextView
                 android:id="@+id/textView8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:text="Cl"
                 android:textColor="@android:color/black"
                 app:layout_constraintStart_toEndOf="@+id/DETAILS_NA"
-                app:layout_constraintTop_toBottomOf="@+id/DETAILS_CO3" />
+                app:layout_constraintTop_toBottomOf="@+id/DETAILS_CO3"
+                android:layout_marginLeft="8dp" />
 
             <TextView
                 android:id="@+id/textView11"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/hco3"
                 android:textColor="@android:color/black"
                 android:textSize="10sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/DETAILS_CA" />
+                app:layout_constraintTop_toBottomOf="@+id/DETAILS_CA"
+                android:layout_marginLeft="8dp" />
 
             <TextView
                 android:id="@+id/textView12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/co3"
                 android:textColor="@android:color/black"
                 android:textSize="12sp"
                 app:layout_constraintStart_toEndOf="@+id/DETAILS_K"
-                app:layout_constraintTop_toBottomOf="@+id/spinnerMolecules" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="8dp" />
 
         </android.support.constraint.ConstraintLayout>
-    </android.support.constraint.ConstraintLayout>
 
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/layoutCEa"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:background="?attr/colorControlHighlight"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layoutValores">
+
+            <TextView
+                android:id="@+id/DETAILS_CEA"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:ems="4"
+                android:gravity="center"
+                android:hint="@string/CEa2"
+                android:textColor="@android:color/black"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/ras"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="8dp" />
+
+            <TextView
+                android:id="@+id/ras"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/CEa2"
+                android:textColor="@android:color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="8dp" />
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/layoutRAS"
+            android:layout_width="0dp"
+            android:layout_height="17dp"
+            android:layout_margin="3dp"
+            android:layout_marginTop="8dp"
+            android:background="?attr/colorControlHighlight"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layoutCEa">
+
+            <TextView
+                android:id="@+id/DETAILS_RAS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:ems="4"
+                android:gravity="center"
+                android:hint="@string/RAS"
+                android:textColor="@android:color/black"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/textView13"
+                />
+
+
+            <TextView
+                android:id="@+id/DETAILS_RAS_CORRIGIDO"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_marginStart="8dp"
+                android:ems="4"
+                android:gravity="center"
+                android:hint="@string/RAS"
+                android:textColor="@android:color/black"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/ras2" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/RAS"
+                android:textColor="@android:color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginLeft="8dp" />
+
+            <TextView
+                android:id="@+id/ras2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/correctedSAR"
+                android:textColor="@android:color/black"
+                app:layout_constraintStart_toEndOf="@+id/DETAILS_RAS"
+                android:layout_marginLeft="8dp" />
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.constraint.ConstraintLayout>
 </ScrollView>

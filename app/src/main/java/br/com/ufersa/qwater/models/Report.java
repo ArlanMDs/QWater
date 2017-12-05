@@ -1,7 +1,10 @@
 package br.com.ufersa.qwater.models;
 
 
-public class Report {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Report implements Parcelable {
 
     private int id;
     private double ca;
@@ -14,6 +17,37 @@ public class Report {
     private double cea;
     private double normalSAR;
     private double correctedSAR;
+
+    public Report(){
+
+    }
+
+    protected Report(Parcel in) {
+        id = in.readInt();
+        ca = in.readDouble();
+        mg = in.readDouble();
+        k = in.readDouble();
+        na = in.readDouble();
+        co3 = in.readDouble();
+        hco3 = in.readDouble();
+        cl = in.readDouble();
+        cea = in.readDouble();
+        normalSAR = in.readDouble();
+        correctedSAR = in.readDouble();
+    }
+
+    public static final Creator<Report> CREATOR = new Creator<Report>() {
+        @Override
+        public Report createFromParcel(Parcel in) {
+            return new Report(in);
+        }
+
+        @Override
+        public Report[] newArray(int size) {
+            return new Report[size];
+        }
+    };
+
     //TODO data do relatório
     public void setId(int id){
         this.id = id;
@@ -104,4 +138,23 @@ public class Report {
         this.normalSAR = normalSAR;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeDouble(ca);
+        dest.writeDouble(mg);
+        dest.writeDouble(k);
+        dest.writeDouble(na);
+        dest.writeDouble(co3);
+        dest.writeDouble(hco3);
+        dest.writeDouble(cl);
+        dest.writeDouble(cea);
+        dest.writeDouble(normalSAR);
+        dest.writeDouble(correctedSAR);
+    }
 }

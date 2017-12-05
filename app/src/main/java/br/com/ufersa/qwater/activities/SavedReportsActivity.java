@@ -1,15 +1,19 @@
 package br.com.ufersa.qwater.activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import br.com.ufersa.qwater.R;
+import br.com.ufersa.qwater.database.Delete;
+import br.com.ufersa.qwater.database.MainDB;
 import br.com.ufersa.qwater.database.Read;
 import br.com.ufersa.qwater.models.CustomReportAdapter;
 import br.com.ufersa.qwater.models.Report;
@@ -47,8 +51,13 @@ public class SavedReportsActivity extends AppCompatActivity {
             // argument position gives the index of item which is clicked
             public void onItemClick(AdapterView<?> arg0, View v, int position, long arg3)
             {
-                Report selectedReport = reports.get(position);
-                Toast.makeText(getApplicationContext(), "Report Selected : " + selectedReport,   Toast.LENGTH_LONG).show();
+                Report selectedReport = reports.get(position);//TODO remover apos teste
+                Intent intent = new Intent(SavedReportsActivity.this, ReportDetailsActivity.class);
+                intent.putExtra("report", selectedReport);
+                startActivity(intent);
+                //Toast.makeText(getApplicationContext(), "Report Selected : " + selectedReport,   Toast.LENGTH_LONG).show();
+
+
             }
         });
     }

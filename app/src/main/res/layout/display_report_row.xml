@@ -13,7 +13,7 @@
 
     <TextView
         android:id="@+id/normalSAR"
-        android:layout_width="150dp"
+        android:layout_width="70dp"
         android:layout_height="match_parent"
         android:layout_toRightOf="@+id/id"
         android:fontFamily="monospace"
@@ -34,7 +34,6 @@
         android:layout_toRightOf="@+id/correctedSAR"
         android:fontFamily="monospace"
         android:gravity="center" />
-
 
 
 </RelativeLayout>

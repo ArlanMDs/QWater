@@ -46,7 +46,7 @@ public class SARCalculator {
      * @return valor do RAS normal
      */
     public Double calculateNormalSAR(int moleculesSpinnerPosition){
-        formatNaMgCaToMeq_L(moleculesSpinnerPosition);
+        //formatNaMgCaToMeq_L(moleculesSpinnerPosition);
         return na / sqrt((ca + mg)/2);
     }
 
@@ -60,9 +60,9 @@ public class SARCalculator {
      */
     public Double calculateCorrectedSAR(int moleculesSpinnerPosition, int ceaSpinnerPosition){
 
-        formatCaHco3ToMeq_L(moleculesSpinnerPosition);
-        formatNaMgToMmol_L(moleculesSpinnerPosition);
-        formatCeaToDs_m(ceaSpinnerPosition);
+        //formatCaHco3ToMeq_L(moleculesSpinnerPosition);
+        //formatNaMgToMmol_L(moleculesSpinnerPosition);
+        //formatCeaToDs_m(ceaSpinnerPosition);
         /*
             IMPORTANTE:
             o valor do cálcio corrigido está em mEq/L, dividí-lo por 2 é
@@ -70,9 +70,8 @@ public class SARCalculator {
             fórmula.
          */
         double ca = calculateCorrectedCalcium();
-        return na / sqrt( (ca / 2 + mg) / 2 );
+        return na / sqrt( (ca + mg) / 2 );
     }
-    //TODO Tratar -1 da conversão de unidades, se necessário
 
     /**
      * formata os dados para mEq/L, que são as unidades usadas nas fórmulas de cálculo do cálcio corrigido

@@ -69,7 +69,6 @@ public class Tab1 extends Fragment implements AdapterView.OnItemSelectedListener
 
             //TODO mudar para que seja possível fazer os cálculos separadamente
             if (cea != 0.0 && correctedSAR != 0.0 && normalSAR != 0.0) {
-
                 //se os dados estiverem ok, é gerado um novo relatório e enviado para a outra tab
                 Report report = generateReport(normalSAR, correctedSAR, cea);
                 mCallback.sendData(report);
@@ -105,6 +104,7 @@ public class Tab1 extends Fragment implements AdapterView.OnItemSelectedListener
         SARCalculator sarCalculator;
         //Double ca, mg, na;
         try {
+            //TODO CASO QUERIA COLOCAR OS OUTROS VALORES NO RELATÓRIO, pode ser feito assim:
             ca = Double.parseDouble(this.edtCa.getText().toString());
             mg = Double.parseDouble(this.edtMg.getText().toString());
             na = Double.parseDouble(this.edtNa.getText().toString());
@@ -124,7 +124,6 @@ public class Tab1 extends Fragment implements AdapterView.OnItemSelectedListener
      */
     private double calculateCorrectedSAR() {
         SARCalculator sarCalculator;
-        //Double ca, mg, na, cea, hco3;
         try {
             ca = Double.parseDouble(this.edtCa.getText().toString());
             mg = Double.parseDouble(this.edtMg.getText().toString());
@@ -167,11 +166,11 @@ public class Tab1 extends Fragment implements AdapterView.OnItemSelectedListener
     private void findViewsIDs() {
         View view = getView();
         edtCea = (EditText) view.findViewById(R.id.cea);
-        edtCa = (EditText) view.findViewById(R.id.Ca);
-        edtMg = (EditText) view.findViewById(R.id.Mg);
-        edtK = (EditText) view.findViewById(R.id.K);
-        edtNa = (EditText) view.findViewById(R.id.Na);
-        edtCo3 = (EditText) view.findViewById(R.id.co3);
+        edtCa = (EditText) view.findViewById(R.id.DETAILS_CA);
+        edtMg = (EditText) view.findViewById(R.id.DETAILS_MG);
+        edtK = (EditText) view.findViewById(R.id.DETAILS_K);
+        edtNa = (EditText) view.findViewById(R.id.DETAILS_NA);
+        edtCo3 = (EditText) view.findViewById(R.id.DETAILS_CO3);
         edtHco3 = (EditText) view.findViewById(R.id.hco3);
         edtCl = (EditText) view.findViewById(R.id.Cl);
         calcular = (Button) view.findViewById(R.id.calcular);
