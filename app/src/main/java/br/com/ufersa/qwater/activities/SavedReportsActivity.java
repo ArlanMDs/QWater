@@ -5,37 +5,28 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import br.com.ufersa.qwater.R;
-import br.com.ufersa.qwater.database.Delete;
-import br.com.ufersa.qwater.database.MainDB;
 import br.com.ufersa.qwater.database.Read;
 import br.com.ufersa.qwater.models.CustomReportAdapter;
 import br.com.ufersa.qwater.models.Report;
-
+//TODO sempre que a lista é exibida está sendo feito um acesso ao banco,
+// o delete poderia ser feito sem precisar acessar novamente o banco, bastaria apenas remover a coluna da lista após o delete, sem usar o refresh na activity
 public class SavedReportsActivity extends AppCompatActivity {
 
-    private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_saved_reports);
-        findViewsIds();
         listReports();
     }
 
-    private void findViewsIds() {
-        listView = (ListView)findViewById(R.id.displayListView);
-
-    }
-
     private void listReports() {
+        ListView listView = (ListView)findViewById(R.id.displayListView);
 
         final ArrayList<Report> reports = new Read().getReports();
 
@@ -51,13 +42,9 @@ public class SavedReportsActivity extends AppCompatActivity {
             // argument position gives the index of item which is clicked
             public void onItemClick(AdapterView<?> arg0, View v, int position, long arg3)
             {
-                Report selectedReport = reports.get(position);//TODO remover apos teste
                 Intent intent = new Intent(SavedReportsActivity.this, ReportDetailsActivity.class);
-                intent.putExtra("report", selectedReport);
+                intent.putExtra("report", reports.get(position));
                 startActivity(intent);
-                //Toast.makeText(getApplicationContext(), "Report Selected : " + selectedReport,   Toast.LENGTH_LONG).show();
-
-
             }
         });
     }

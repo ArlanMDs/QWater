@@ -28,10 +28,11 @@ public class Update {
         cv.put("cea", report.getCea());
         cv.put("normalSAR", report.getNormalSAR());
         cv.put("correctedSAR", report.getCorrectedSAR());
+        cv.put("createdAt", System.currentTimeMillis());
 
         return  db.insert(MainDB.REPORT_TABLE, null, cv) != -1;
     }
-
+/*
     public boolean updateReport(Report report){
 
         SQLiteDatabase db = MainDB.getInstance().getWritableDatabase();
@@ -54,5 +55,5 @@ public class Update {
 
         return  db.update(MainDB.REPORT_TABLE, cv, where, null) > 0;
     }
-
+*/
 }

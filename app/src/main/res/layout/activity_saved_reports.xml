@@ -6,11 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".activities.SavedReportsActivity">
 
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/relatoriosArmazenados" />
+
     <ListView
+        android:id="@+id/displayListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/displayListView"
 
-        />
+        android:layout_marginTop="8dp" />
 
 </RelativeLayout>

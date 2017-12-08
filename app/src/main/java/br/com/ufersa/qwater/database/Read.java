@@ -34,7 +34,7 @@ public class Read {
                 report.setCea(c.getDouble(8));
                 report.setNormalSAR(c.getDouble(9));
                 report.setCorrectedSAR(c.getDouble(10));
-
+                report.setCreatedAt(c.getLong(11));
                 reports.add(report);
             }while (c.moveToNext());
         }

@@ -21,7 +21,8 @@ public class Create {
                 "[cl] REAL,\n" +
                 "[cea] REAL,\n" +
                 "[normalSAR] REAL,\n" +
-                "[correctedSAR] REAL\n" +
+                "[correctedSAR] REAL,\n" +
+                "[createdAt] INTEGER\n" +
                 ")";
 
         db.execSQL(query);

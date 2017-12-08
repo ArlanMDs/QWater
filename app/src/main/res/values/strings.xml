@@ -57,5 +57,6 @@
 
     <string name="valorIncorreto">Algum valor digitado está com formato incorreto</string>
     <string name="erroNaLeituraDeDados">Ocorreu algum erro na leitura dos dados</string>
+    <string name="relatoriosArmazenados">Relatórios Armazenados:</string>
 
 </resources>

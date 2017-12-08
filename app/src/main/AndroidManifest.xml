@@ -10,12 +10,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".activities.TabHostActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".activities.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -25,16 +23,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".activities.SavedReportsActivity"
             android:noHistory="true"
             android:theme="@style/AppTheme.NoActionBar" />
-
-        <activity android:name=".activities.ReportDetailsActivity"
+        <activity
+            android:name=".activities.ReportDetailsActivity"
             android:noHistory="true"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activities.TestActivity"></activity>
     </application>
 
 </manifest>

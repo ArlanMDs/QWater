@@ -17,6 +17,7 @@ public class Report implements Parcelable {
     private double cea;
     private double normalSAR;
     private double correctedSAR;
+    private long createdAt; //A hora é criada na hora de colocar no banco, em Update.java
 
     public Report(){
 
@@ -34,6 +35,7 @@ public class Report implements Parcelable {
         cea = in.readDouble();
         normalSAR = in.readDouble();
         correctedSAR = in.readDouble();
+        createdAt = in.readLong();
     }
 
     public static final Creator<Report> CREATOR = new Creator<Report>() {
@@ -156,5 +158,13 @@ public class Report implements Parcelable {
         dest.writeDouble(cea);
         dest.writeDouble(normalSAR);
         dest.writeDouble(correctedSAR);
+    }
+
+    public long getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(long createdAt) {
+        this.createdAt = createdAt;
     }
 }

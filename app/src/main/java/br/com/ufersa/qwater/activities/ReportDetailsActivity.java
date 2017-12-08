@@ -60,4 +60,11 @@ public class ReportDetailsActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(ReportDetailsActivity.this, SavedReportsActivity.class);
+        startActivity(intent);
+        super.onBackPressed();
+    }
+
 }
