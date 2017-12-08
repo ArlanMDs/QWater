@@ -4,52 +4,56 @@
     <string name="newTest">Calcular RAS</string>
     <string name="savedReports">Relatórios armazenados</string>
 
-    <string name="S1">Água com baixo teor de sódio: pode ser usada para irrigação em quase todos os solos, com pouco perigo de desenvolvimento
+    <string name="S1" translatable="false">Água com baixo teor de sódio: pode ser usada para irrigação em quase todos os solos, com pouco perigo de desenvolvimento
         de problemas de sodificação.</string>
 
-    <string name="S2">Água com teor médio de sódio: estas águas só devem ser usadas em solos de textura arenosa ou em solos orgânicos de boa permeabilidade, uma vez que em solos de textura fina (argilosos) o
+    <string name="S2" translatable="false">Água com teor médio de sódio: estas águas só devem ser usadas em solos de textura arenosa ou em solos orgânicos de boa permeabilidade, uma vez que em solos de textura fina (argilosos) o
         sódio representa perigo.</string>
 
-    <string name="S3">Água com alto teor de sódio. Pode produzir níveis tóxicos de sódio trocável na maior parte dos solos, necessitando assim de práticas especiais de manejo tais como: drenagem, fácil lavagem,
+    <string name="S3" translatable="false">Água com alto teor de sódio. Pode produzir níveis tóxicos de sódio trocável na maior parte dos solos, necessitando assim de práticas especiais de manejo tais como: drenagem, fácil lavagem,
         aplicação de matéria orgânica.</string>
 
-    <string name="S4">Água com teor muito alto de sódio. É geralmente inadequada para irrigação exceto quando a salinidade for baixa ou média ou o uso de gesso ou outro
+    <string name="S4" translatable="false">Água com teor muito alto de sódio. É geralmente inadequada para irrigação exceto quando a salinidade for baixa ou média ou o uso de gesso ou outro
         corretivo torne possível o uso dessa água.</string>
 
-    <string name="C1">Água de baixa salinidade. Pode ser usada para irrigação da maioria das culturas, em quase todos os tipos de solos, com muito pouca probabilidade de que se desenvolvam problemas de salinidade.
+    <string name="C1" translatable="false">Água de baixa salinidade. Pode ser usada para irrigação da maioria das culturas, em quase todos os tipos de solos, com muito pouca probabilidade de que se desenvolvam problemas de salinidade.
         Se necessária alguma lixiviação de sais, esta é conseguida em condições normais de irrigação, exceto em solos de muito baixa permeabilidade.</string>
 
-    <string name="C2">Água de média salinidade. Pode ser usada sempre e quando houver uma lixiviação moderada de sais. Em quase todos os casos se adequa ao cultivo de plantas moderadamente tolerantes aos sais,
+    <string name="C2" translatable="false">Água de média salinidade. Pode ser usada sempre e quando houver uma lixiviação moderada de sais. Em quase todos os casos se adequa ao cultivo de plantas moderadamente tolerantes aos sais,
         sem necessidade de práticas especiais de controle de salinidade.</string>
 
-    <string name="C3">Água de alta salinidade. Pode ser usada em solos com drenagem deficiente. Mesmo com drenagem adequada pode ser necessário práticas especiais de controlada salinidade, devendo, portanto,
+    <string name="C3" translatable="false">Água de alta salinidade. Pode ser usada em solos com drenagem deficiente. Mesmo com drenagem adequada pode ser necessário práticas especiais de controlada salinidade, devendo, portanto,
         ser utilizada na irrigação de espécies vegetais de alta tolerância aos sais. Os riscos apresentados por esta classe de água podem ser amenizados quando do emprego do método de irrigação localizada mantendo
         o solo continuamente úmido.</string>
 
-    <string name="C4"> Água de muito alta salinidade. Não é apropriada para irrigação sob condições normais, porém pode ser usada ocasionalmente, em circunstâncias especiais. Os solos devem ser permeáveis,
+    <string name="C4" translatable="false"> Água de muito alta salinidade. Não é apropriada para irrigação sob condições normais, porém pode ser usada ocasionalmente, em circunstâncias especiais. Os solos devem ser permeáveis,
         a drenagem adequada, devendo ser aplicada água em excesso para se obter uma boa lixiviação dos sais e, mesmo assim devem ser explorados com culturas altamente tolerantes aos sais.</string>
 
     <string name="relacaoTabela">Relação de adsorção de sódio corrigida</string>
-    <string name="detalhes" translatable="false">Ver detalhes</string>
+    <string name="verDetalhesCea">Classificação da CE<small>a</small></string>
+    <string name="verDetalhesRASCorrigido">Classificação do RAS corrigido</string>
     <string name="correctedSAR">RAS corrigido: </string>
     <string name="classeSalinidade">Classe de Salinidade: </string>
     <string name="classificacao">Classificação: </string>
     <string name="salvarRelatorio">Salvar Relatório</string>
+    <string name="resultado">Resultado</string>
+    <string name="mostrarOcultarGrafico">mostrar/ocultar gráfico</string>
 
-    <string name="cea">CE<small>a</small>:</string>
-    <string name="CEa2">CE<small>a</small></string>
-    <string name="hco3">HCO<sub><small>3</small></sub></string>
-    <string name="co3">CO<sub><small>3</small></sub></string>
+    <string name="cea" translatable="false">CE<small>a</small>:</string>
+    <string name="CEa2" translatable="false">CE<small>a</small></string>
+    <string name="hco3" translatable="false">HCO<sub><small>3</small></sub></string>
+    <string name="co3" translatable="false">CO<sub><small>3</small></sub></string>
     <string name="RAS">RAS:</string>
 
     <!-- a ordem dos itens afeta o método formatUnits, em SARCalculator -->
-    <string-array name="molecules">
+    <string-array name="molecules" translatable="false">
         <item>mmol<small>c</small> L<sup><small>-1</small></sup></item>
         <item>mg L<sup><small>-1</small></sup></item>
         <item>mEq L<sup><small>-1</small></sup></item>
     </string-array>
 
-    <string-array name="condutividade">
+    <!-- a ordem dos itens afeta o método formatUnits, em SARCalculator -->
+    <string-array name="condutividade" translatable="false">
         <item>dS m<sup><small>-1</small></sup></item>
         <item>mS cm<sup><small>-1</small></sup></item>
         <item>μS cm<sup><small>-1</small></sup></item>

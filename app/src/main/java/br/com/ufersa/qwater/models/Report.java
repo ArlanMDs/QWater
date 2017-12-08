@@ -38,6 +38,27 @@ public class Report implements Parcelable {
         createdAt = in.readLong();
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeDouble(ca);
+        dest.writeDouble(mg);
+        dest.writeDouble(k);
+        dest.writeDouble(na);
+        dest.writeDouble(co3);
+        dest.writeDouble(hco3);
+        dest.writeDouble(cl);
+        dest.writeDouble(cea);
+        dest.writeDouble(normalSAR);
+        dest.writeDouble(correctedSAR);
+        dest.writeLong(createdAt);
+    }
+
     public static final Creator<Report> CREATOR = new Creator<Report>() {
         @Override
         public Report createFromParcel(Parcel in) {
@@ -50,7 +71,6 @@ public class Report implements Parcelable {
         }
     };
 
-    //TODO data do relatório
     public void setId(int id){
         this.id = id;
     }
@@ -115,7 +135,6 @@ public class Report implements Parcelable {
         this.cl = cl;
     }
 
-
     public double getCorrectedSAR() {
         return correctedSAR;
     }
@@ -148,24 +167,4 @@ public class Report implements Parcelable {
         this.createdAt = createdAt;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(id);
-        dest.writeDouble(ca);
-        dest.writeDouble(mg);
-        dest.writeDouble(k);
-        dest.writeDouble(na);
-        dest.writeDouble(co3);
-        dest.writeDouble(hco3);
-        dest.writeDouble(cl);
-        dest.writeDouble(cea);
-        dest.writeDouble(normalSAR);
-        dest.writeDouble(correctedSAR);
-        dest.writeLong(createdAt);
-    }
 }
