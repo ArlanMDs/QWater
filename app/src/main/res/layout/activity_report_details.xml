@@ -14,13 +14,11 @@
             android:id="@+id/DETAILS_DELETE_BUTTON"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:background="@android:drawable/ic_menu_delete"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.551"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layoutRAS" />
+            app:layout_constraintTop_toBottomOf="@+id/layoutData" />
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/layoutValores"
@@ -42,13 +40,11 @@
                 android:layout_marginTop="8dp"
                 android:ems="4"
                 android:gravity="center"
-                android:hint="Mg"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="14sp"
                 app:layout_constraintStart_toEndOf="@+id/textView9"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginLeft="8dp" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/DETAILS_CA"
@@ -58,13 +54,11 @@
                 android:layout_marginTop="8dp"
                 android:ems="4"
                 android:gravity="center"
-                android:hint="Ca"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="14sp"
                 app:layout_constraintStart_toEndOf="@+id/textView10"
-                app:layout_constraintTop_toBottomOf="@+id/DETAILS_MG"
-                android:layout_marginLeft="11dp" />
+                app:layout_constraintTop_toBottomOf="@+id/DETAILS_MG" />
 
             <TextView
                 android:id="@+id/DETAILS_NA"
@@ -74,13 +68,11 @@
                 android:layout_marginTop="8dp"
                 android:ems="4"
                 android:gravity="center"
-                android:hint="Na"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="14sp"
                 app:layout_constraintStart_toEndOf="@+id/textView5"
-                app:layout_constraintTop_toBottomOf="@+id/DETAILS_K"
-                android:layout_marginLeft="8dp" />
+                app:layout_constraintTop_toBottomOf="@+id/DETAILS_K" />
 
             <TextView
                 android:id="@+id/DETAILS_K"
@@ -90,13 +82,11 @@
                 android:layout_marginTop="8dp"
                 android:ems="4"
                 android:gravity="center"
-                android:hint="K"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="14sp"
                 app:layout_constraintStart_toEndOf="@+id/textView7"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginLeft="8dp" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/DETAILS_CL"
@@ -106,13 +96,11 @@
                 android:layout_marginTop="8dp"
                 android:ems="4"
                 android:gravity="center"
-                android:hint="Cl"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="14sp"
                 app:layout_constraintStart_toEndOf="@+id/textView8"
-                app:layout_constraintTop_toBottomOf="@+id/DETAILS_CO3"
-                android:layout_marginLeft="8dp" />
+                app:layout_constraintTop_toBottomOf="@+id/DETAILS_CO3" />
 
             <TextView
                 android:id="@+id/DETAILS_HCO3"
@@ -123,13 +111,11 @@
                 android:layout_marginTop="8dp"
                 android:ems="4"
                 android:gravity="center"
-                android:hint="@string/hco3"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="14sp"
                 app:layout_constraintStart_toEndOf="@+id/textView11"
-                app:layout_constraintTop_toBottomOf="@+id/DETAILS_CA"
-                android:layout_marginLeft="8dp" />
+                app:layout_constraintTop_toBottomOf="@+id/DETAILS_CA" />
 
             <TextView
                 android:id="@+id/DETAILS_CO3"
@@ -139,13 +125,11 @@
                 android:layout_marginTop="8dp"
                 android:ems="4"
                 android:gravity="center"
-                android:hint="@string/co3"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="14sp"
                 app:layout_constraintStart_toEndOf="@+id/textView12"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginLeft="8dp" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/textView10"
@@ -156,8 +140,7 @@
                 android:text="Ca"
                 android:textColor="@android:color/black"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/DETAILS_MG"
-                android:layout_marginLeft="8dp" />
+                app:layout_constraintTop_toBottomOf="@+id/DETAILS_MG" />
 
             <TextView
                 android:id="@+id/textView5"
@@ -168,8 +151,7 @@
                 android:text="Na"
                 android:textColor="@android:color/black"
                 app:layout_constraintStart_toEndOf="@+id/DETAILS_CA"
-                app:layout_constraintTop_toBottomOf="@+id/DETAILS_K"
-                android:layout_marginLeft="8dp" />
+                app:layout_constraintTop_toBottomOf="@+id/DETAILS_K" />
 
             <TextView
                 android:id="@+id/textView9"
@@ -180,8 +162,7 @@
                 android:text="Mg"
                 android:textColor="@android:color/black"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginLeft="8dp" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/textView7"
@@ -192,8 +173,7 @@
                 android:text="K"
                 android:textColor="@android:color/black"
                 app:layout_constraintStart_toEndOf="@+id/DETAILS_MG"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginLeft="8dp" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/textView8"
@@ -204,8 +184,7 @@
                 android:text="Cl"
                 android:textColor="@android:color/black"
                 app:layout_constraintStart_toEndOf="@+id/DETAILS_NA"
-                app:layout_constraintTop_toBottomOf="@+id/DETAILS_CO3"
-                android:layout_marginLeft="8dp" />
+                app:layout_constraintTop_toBottomOf="@+id/DETAILS_CO3" />
 
             <TextView
                 android:id="@+id/textView11"
@@ -217,8 +196,7 @@
                 android:textColor="@android:color/black"
                 android:textSize="10sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/DETAILS_CA"
-                android:layout_marginLeft="8dp" />
+                app:layout_constraintTop_toBottomOf="@+id/DETAILS_CA" />
 
             <TextView
                 android:id="@+id/textView12"
@@ -255,13 +233,11 @@
                 android:layout_marginTop="8dp"
                 android:ems="4"
                 android:gravity="center"
-                android:hint="@string/CEa2"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="14sp"
                 app:layout_constraintStart_toEndOf="@+id/ras"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginLeft="8dp" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/ras"
@@ -272,14 +248,13 @@
                 android:text="@string/CEa2"
                 android:textColor="@android:color/black"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginLeft="8dp" />
+                app:layout_constraintTop_toTopOf="parent" />
         </android.support.constraint.ConstraintLayout>
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/layoutRAS"
             android:layout_width="0dp"
-            android:layout_height="17dp"
+            android:layout_height="wrap_content"
             android:layout_margin="3dp"
             android:layout_marginTop="8dp"
             android:background="?attr/colorControlHighlight"
@@ -295,12 +270,10 @@
                 android:layout_margin="8dp"
                 android:ems="4"
                 android:gravity="center"
-                android:hint="@string/RAS"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="14sp"
-                app:layout_constraintStart_toEndOf="@+id/textView13"
-                />
+                app:layout_constraintStart_toEndOf="@+id/textView13" />
 
 
             <TextView
@@ -311,7 +284,6 @@
                 android:layout_marginStart="8dp"
                 android:ems="4"
                 android:gravity="center"
-                android:hint="@string/RAS"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="14sp"
@@ -322,22 +294,61 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
                 android:text="@string/RAS"
                 android:textColor="@android:color/black"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginLeft="8dp" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/ras2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
                 android:text="@string/correctedSAR"
                 android:textColor="@android:color/black"
-                app:layout_constraintStart_toEndOf="@+id/DETAILS_RAS"
-                android:layout_marginLeft="8dp" />
+                app:layout_constraintStart_toEndOf="@+id/DETAILS_RAS" />
+
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/layoutData"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:layout_marginTop="8dp"
+            android:background="?attr/colorControlHighlight"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layoutRAS">
+
+            <TextView
+                android:id="@+id/DETAILS_CREATEDAT"
+                android:layout_width="87dp"
+                android:layout_height="19dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:ems="4"
+                android:gravity="center"
+                android:maxLines="1"
+                android:minLines="1"
+                android:textColor="@android:color/black"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/textView13"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="Data: "
+                android:textColor="@android:color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
         </android.support.constraint.ConstraintLayout>
 
     </android.support.constraint.ConstraintLayout>

@@ -8,6 +8,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
+import java.util.Calendar;
+
 import br.com.ufersa.qwater.R;
 import br.com.ufersa.qwater.database.Delete;
 import br.com.ufersa.qwater.models.Report;
@@ -33,6 +37,7 @@ public class ReportDetailsActivity extends AppCompatActivity {
         TextView cl = (TextView)findViewById(R.id.DETAILS_CL);
         TextView rasNormal = (TextView)findViewById(R.id.DETAILS_RAS);
         TextView rasCorrigido = (TextView)findViewById(R.id.DETAILS_RAS_CORRIGIDO);
+        TextView createdAt = (TextView)findViewById(R.id.DETAILS_CREATEDAT);
 
         cea.setText(String.valueOf(report.getCea()));
         ca.setText(String.valueOf(report.getCa()));
@@ -44,6 +49,7 @@ public class ReportDetailsActivity extends AppCompatActivity {
         cl.setText(String.valueOf(report.getCl()));
         rasNormal.setText(String.valueOf(report.getNormalSAR()));
         rasCorrigido.setText(String.valueOf(report.getCorrectedSAR()));
+        createdAt.setText(formatDate(report.getCreatedAt()));
 
         Button delete = (Button)findViewById(R.id.DETAILS_DELETE_BUTTON);
 
@@ -58,6 +64,18 @@ public class ReportDetailsActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private String formatDate(long timeInMillis){
+        String date;
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(timeInMillis);
+
+        date =  String.valueOf(cal.get(Calendar.DAY_OF_MONTH)) + "/" +
+                String.valueOf(cal.get(Calendar.MONTH)) + "/" +
+                String.valueOf(cal.get(Calendar.YEAR));
+
+        return date;
     }
 
     @Override

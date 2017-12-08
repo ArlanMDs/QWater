@@ -140,6 +140,14 @@ public class Report implements Parcelable {
         this.normalSAR = normalSAR;
     }
 
+    public long getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(long createdAt) {
+        this.createdAt = createdAt;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -158,13 +166,6 @@ public class Report implements Parcelable {
         dest.writeDouble(cea);
         dest.writeDouble(normalSAR);
         dest.writeDouble(correctedSAR);
-    }
-
-    public long getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(long createdAt) {
-        this.createdAt = createdAt;
+        dest.writeLong(createdAt);
     }
 }
