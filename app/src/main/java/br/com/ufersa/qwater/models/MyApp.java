@@ -1,4 +1,4 @@
-package br.com.ufersa.qwater;
+package br.com.ufersa.qwater.models;
 
 import android.app.Application;
 import android.content.Context;

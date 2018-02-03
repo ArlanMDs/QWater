@@ -1,15 +1,13 @@
 package br.com.ufersa.qwater.activities;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import br.com.ufersa.qwater.R;
 import br.com.ufersa.qwater.database.Create;
-import br.com.ufersa.qwater.database.MainDB;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -22,10 +20,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         new Create().createTable();
 
     }
-
+    //TESTING PUSH
     private void findViewsIds() {
         Button newTest = (Button)findViewById(R.id.newTest);
         newTest.setOnClickListener(this);
+        //TESTING PUSH
+
         Button savedReports = (Button)findViewById(R.id.savedReports);
         savedReports.setOnClickListener(this);
     }

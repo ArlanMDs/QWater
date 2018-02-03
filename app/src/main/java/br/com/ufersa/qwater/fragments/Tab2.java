@@ -23,10 +23,9 @@ import com.jjoe64.graphview.series.OnDataPointTapListener;
 import com.jjoe64.graphview.series.PointsGraphSeries;
 import com.jjoe64.graphview.series.Series;
 
-
-import br.com.ufersa.qwater.MyApp;
 import br.com.ufersa.qwater.R;
 import br.com.ufersa.qwater.database.Update;
+import br.com.ufersa.qwater.models.MyApp;
 import br.com.ufersa.qwater.models.Report;
 
 public class Tab2 extends Fragment implements View.OnClickListener {

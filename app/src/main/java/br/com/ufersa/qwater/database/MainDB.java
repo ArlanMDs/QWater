@@ -3,7 +3,7 @@ package br.com.ufersa.qwater.database;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import br.com.ufersa.qwater.MyApp;
+import br.com.ufersa.qwater.models.MyApp;
 
 /**
  * Created by Arlan on 23-Nov-17.

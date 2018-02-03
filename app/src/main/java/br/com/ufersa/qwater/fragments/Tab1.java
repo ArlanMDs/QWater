@@ -16,8 +16,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import br.com.ufersa.qwater.R;
-import br.com.ufersa.qwater.models.SARCalculator;
 import br.com.ufersa.qwater.models.Report;
+import br.com.ufersa.qwater.models.SARCalculator;
 
 public class Tab1 extends Fragment implements AdapterView.OnItemSelectedListener{
 

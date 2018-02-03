@@ -1,15 +1,14 @@
 package br.com.ufersa.qwater.models;
 
-
-import static java.lang.Math.sqrt;
+import android.widget.Toast;
 
 public class SARCalculator {
-    private Double ca;
-    private Double mg;
-    private Double na;
-    private Double co3;
-    private Double hco3;
-    private Double cea;
+    private double ca;
+    private double mg;
+    private double na;
+    private double co3;
+    private double hco3;
+    private double cea;
 
     /**
      * Construtor para calcular o RAS corrigido
@@ -19,7 +18,7 @@ public class SARCalculator {
      * @param cea valor da condutividade elétrica
      * @param hco3 valor do bicarbonato
      */
-    public SARCalculator(Double ca, Double mg, Double na, Double cea, Double hco3){
+    public SARCalculator(double ca, double mg, double na, double cea, double hco3){
         this.ca = ca;
         this.mg = mg;
         this.na = na;
@@ -33,7 +32,7 @@ public class SARCalculator {
      * @param mg valor do magnésio
      * @param na valor do sódio
      */
-    public SARCalculator(Double ca, Double mg, Double na){
+    public SARCalculator(double ca, double mg, double na){
         this.ca = ca;
         this.mg = mg;
         this.na = na;
@@ -45,9 +44,13 @@ public class SARCalculator {
      * @param moleculesSpinnerPosition  posição do spinner de escolha do formato dos elementos
      * @return valor do RAS normal
      */
-    public Double calculateNormalSAR(int moleculesSpinnerPosition){
+    public double calculateNormalSAR(int moleculesSpinnerPosition){
         //formatNaMgCaToMeq_L(moleculesSpinnerPosition);
-        return na / sqrt((ca + mg)/2);
+        double ca = this.ca, mg = this.mg, na = this.na;
+        double caMg = (ca + mg) / 2;
+        double normalSAR = na / Math.pow(caMg,0.5);
+        return normalSAR;
+        //return na / Math.sqrt((ca + mg)/2);
     }
 
     /**
@@ -58,19 +61,31 @@ public class SARCalculator {
      * @param moleculesSpinnerPosition unidade dos elementos
      * @return valor do RAS corrigido
      */
-    public Double calculateCorrectedSAR(int moleculesSpinnerPosition, int ceaSpinnerPosition){
+    public double calculateCorrectedSAR(int moleculesSpinnerPosition, int ceaSpinnerPosition){
 
         //formatCaHco3ToMeq_L(moleculesSpinnerPosition);
         //formatNaMgToMmol_L(moleculesSpinnerPosition);
         //formatCeaToDs_m(ceaSpinnerPosition);
-        /*
-            IMPORTANTE:
-            o valor do cálcio corrigido está em mEq/L, dividí-lo por 2 é
-            a forma de transformá-lo para mmol/L, que é a unidade usada nessa
-            fórmula.
-         */
+        double mg = this.mg, na = this.na;
         double ca = calculateCorrectedCalcium();
-        return na / sqrt( (ca + mg) / 2 );
+        double caMg = (ca + mg) / 2;
+        double correctedSAR = na / Math.pow(caMg,0.5);
+        return correctedSAR;
+        // return na / Math.sqrt( (ca + mg) / 2 );
+    }
+
+    /**
+     * usa a fórmula para cálculo do RAS corrigido dada no apêndice 2, do livro "A qualidade da água para irrigação", autor: José Franscismar de Medeiros
+     * @return valor do RAS corrigido
+     */
+    private double calculateCorrectedCalcium(){
+        double cea = this.cea, hco3 = this.hco3, ca = this.ca;
+        double powCea = Math.pow(cea, 0.09565);
+        double powHco3 = Math.pow((hco3 / ca), -0.667);
+        double result = 0.956 + 0.0564 * cea + 1.0645 * powCea * powHco3;
+        Toast.makeText(MyApp.getContext(), String.valueOf(result), Toast.LENGTH_LONG).show();
+        return result;
+        //return 0.956 + 0.0564 * cea + 1.0645 * Math.pow(cea, 0.09565) * Math.pow((hco3 / ca), -0.667);
     }
 
     /**
@@ -205,15 +220,6 @@ public class SARCalculator {
         if(spinnerCeaUnit == 2)
             cea = cea / 1000;
 
-    }
-
-    /**
-     * usa a fórmula para cálculo do RAS corrigido dada no apêndice 2, do livro "A qualidade da água para irrigação", autor: José Franscismar de Medeiros
-     * @return valor do RAS corrigido
-     */
-    private Double calculateCorrectedCalcium(){
-
-        return 0.956 + 0.0564 * cea + 1.0645 * Math.pow(cea, 0.09565) * Math.pow((hco3 / ca), -0.667);
     }
 
 }
