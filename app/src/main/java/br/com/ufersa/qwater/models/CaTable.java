@@ -78,6 +78,7 @@ public class CaTable {
         }
 
         c_val = (((b2 - ce) / (b2 - b1)) * table[a1_pos][b1_pos] + ((ce - b1) / b2_pos - b1) * table[a1_pos][b2_pos] ) * ((a2 - hco3) / a2 - a1) +
+
                 (((b2 - ce) / (b2 - b1)) * table[a2_pos][b2_pos] + ((ce - b1) / b2_pos - b1) * table[a2_pos][b2_pos] ) * ((hco3 - a1) / a2 - a1) ;
 
         return c_val;
