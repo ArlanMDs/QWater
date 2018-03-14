@@ -20,11 +20,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         new Create().createTable();
 
     }
-    //TESTING PUSH
     private void findViewsIds() {
         Button newTest = (Button)findViewById(R.id.newTest);
         newTest.setOnClickListener(this);
-        //TESTING PUSH
 
         Button savedReports = (Button)findViewById(R.id.savedReports);
         savedReports.setOnClickListener(this);

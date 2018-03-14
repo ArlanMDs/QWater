@@ -31,7 +31,6 @@
             android:name=".activities.ReportDetailsActivity"
             android:noHistory="true"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activities.TestActivity"></activity>
     </application>
 
 </manifest>
