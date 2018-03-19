@@ -12,7 +12,6 @@ public class CaTable {
     //A primeira coluna representa os valores da HCO3
     //A primeira linha representa os valores da CE
 
-
     double[][] table = new double[][]{
             {0,      0.1,   0.2,   0.3,   0.5,   0.7,   1.0,   1.5,   2.0,   3.0,   4.0,   6.0,   8.0},
             {0.05, 13.20, 13.61, 13.92, 14.40, 14.79, 15.26, 15.91, 16.43, 17.28, 17.97, 19.07, 19.94},
@@ -51,7 +50,7 @@ public class CaTable {
 
     public double interpolate(double hco3, double ce){
 
-        //encontrar valores da linha
+        //encontrar valores das linhas
         for(int i=0; i<27; i++){
 
             if(table[i+1][0] >= hco3 ){
@@ -76,28 +75,18 @@ public class CaTable {
                 break;
             }
         }
-//        c_val = (((b2 - ce) / (b2 - b1)) * table[a1_pos][b1_pos] + ((ce - b1) / b2_pos - b1) * table[a1_pos][b2_pos] ) * ((a2 - hco3) / a2 - a1) +
-//
-//                (((b2 - ce) / (b2 - b1)) * table[a2_pos][b2_pos] + ((ce - b1) / b2_pos - b1) * table[a2_pos][b2_pos] ) * ((hco3 - a1) / a2 - a1) ;
 
         double c11 = table[a1_pos][b1_pos];
         double c12 = table[a1_pos][b2_pos];
         double c21 = table[a2_pos][b1_pos];
         double c22 = table[a2_pos][b2_pos];
 
-        double a = hco3;
-        double b = ce;
+        double c11_c12 = ((b2-ce)/(b2-b1))*c11 + ((ce-b1)/(b2-b1))*c12;
+        double c21_c22 = ((b2-ce)/(b2-b1))*c21 + ((ce-b1)/(b2-b1))*c22;
 
-        double c11_c12 = ((b2-b)/(b2-b1))*c11 + ((b-b1)/(b2-b1))*c12;
-        double c21_c22 = ((b2-b)/(b2-b1))*c21 + ((b-b1)/(b2-b1))*c22;
+        double part1 = c11_c12*((a2-hco3) / (a2-a1));
+        double part2 = c21_c22*((hco3-a1) / (a2-a1));
 
-        double part1 = c11_c12*((a2-a) / (a2-a1));
-        double part2 = c21_c22*((a-a1) / (a2-a1));
-
-        c_val = part1 + part2;
-
-        return c_val;
+        return  part1 + part2;
     }
-
-
 }

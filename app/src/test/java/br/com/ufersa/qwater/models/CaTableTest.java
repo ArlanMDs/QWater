@@ -12,7 +12,7 @@ public class CaTableTest {
     public void interpolate() throws Exception {
         CaTable table = new CaTable();
 
-        assertEquals(3, table.interpolate(25, 7), 0.00001);
+        assertEquals(0.3175, table.interpolate(25, 7), 0.00001);
     }
 
 }

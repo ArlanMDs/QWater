@@ -163,7 +163,7 @@ public class Tab1 extends Fragment implements AdapterView.OnItemSelectedListener
         return 0.0;
     }
 
-    private void findViewsIDs() {
+     private void findViewsIDs() {
         View view = getView();
         edtCea = (EditText) view.findViewById(R.id.cea);
         edtCa = (EditText) view.findViewById(R.id.DETAILS_CA);
@@ -184,6 +184,7 @@ public class Tab1 extends Fragment implements AdapterView.OnItemSelectedListener
     }
 
     /**
+     * é obrigatório sobscrever o método...
      * manipula escolha nos spinners
      * @param parent parent
      * @param arg1 argumento

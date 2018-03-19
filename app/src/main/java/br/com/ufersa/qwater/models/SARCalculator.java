@@ -1,7 +1,5 @@
 package br.com.ufersa.qwater.models;
 
-import android.widget.Toast;
-
 public class SARCalculator {
     private double ca;
     private double mg;
@@ -79,13 +77,11 @@ public class SARCalculator {
      * @return valor do RAS corrigido
      */
     private double calculateCorrectedCalcium(){
-        double cea = this.cea, hco3 = this.hco3, ca = this.ca;
-        double powCea = Math.pow(cea, 0.09565);
-        double powHco3 = Math.pow((hco3 / ca), -0.667);
-        double result = 0.956 + 0.0564 * cea + 1.0645 * powCea * powHco3;
-        Toast.makeText(MyApp.getContext(), String.valueOf(result), Toast.LENGTH_LONG).show();
-        return result;
-        //return 0.956 + 0.0564 * cea + 1.0645 * Math.pow(cea, 0.09565) * Math.pow((hco3 / ca), -0.667);
+          double cea = this.cea, hco3 = this.hco3, ca = this.ca;
+          CaTable table = new CaTable();
+          //TODO nesse momento, caso ultrapasse o valor limite de 30 hco3/ca ou de 8 ce, é impossível calcular
+          return table.interpolate(hco3 / ca, cea);
+
     }
 
     /**
