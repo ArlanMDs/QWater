@@ -38,7 +38,7 @@
     <string name="classificacao">Classificação: </string>
     <string name="salvarRelatorio">Salvar Relatório</string>
     <string name="resultado">Resultado</string>
-    <string name="mostrarOcultarGrafico">mostrar/ocultar gráfico</string>
+    <string name="mostrarGrafico">mostrar gráfico</string>
 
     <string name="cea" translatable="false">CE<small>a</small>:</string>
     <string name="CEa2" translatable="false">CE<small>a</small></string>

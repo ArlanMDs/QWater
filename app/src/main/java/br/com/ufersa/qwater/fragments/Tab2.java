@@ -2,7 +2,7 @@ package br.com.ufersa.qwater.fragments;
 
 
 import android.content.DialogInterface;
-import android.graphics.Color;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,15 +15,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.series.DataPoint;
-import com.jjoe64.graphview.series.DataPointInterface;
-import com.jjoe64.graphview.series.LineGraphSeries;
-import com.jjoe64.graphview.series.OnDataPointTapListener;
-import com.jjoe64.graphview.series.PointsGraphSeries;
-import com.jjoe64.graphview.series.Series;
-
 import br.com.ufersa.qwater.R;
+import br.com.ufersa.qwater.activities.PopupGraphActivity;
 import br.com.ufersa.qwater.database.Update;
 import br.com.ufersa.qwater.models.MyApp;
 import br.com.ufersa.qwater.models.Report;
@@ -33,7 +26,6 @@ public class Tab2 extends Fragment implements View.OnClickListener {
     private Button btnSARDetails, btnSalinityDetails, btnSaveReport;
     private TextView txtviewCorrectedSARResult, txtviewNormalSARResult, salinityResult, txtviewSARClassification, txtviewCEaValue;
     private int currentSARClassification, currentSalinityClassification;
-    private GraphView graph;
     private Report report;
     private double x, y;
 
@@ -53,22 +45,7 @@ public class Tab2 extends Fragment implements View.OnClickListener {
 
     }
 
-    private void addLine(){
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[] {
 
-                new DataPoint(0.15, 0),
-                new DataPoint(3, 25)
-
-        });
-        graph.addSeries(series);// styling series
-
-        series.setTitle("Random Curve 1");
-        series.setColor(Color.RED);
-        series.setDrawDataPoints(true);
-        series.setDataPointsRadius(4);
-        series.setThickness(2);
-
-    }
 
     /**
      * método que faz a comunicação da RAS entre a tab1 e tab2
@@ -85,44 +62,11 @@ public class Tab2 extends Fragment implements View.OnClickListener {
         showCorrectedSARClassification(report.getCorrectedSAR());
         showSalinityClassification(report.getCea());
 
-        addPointIntoGraph(report.getCea(), report.getCorrectedSAR());
 
     }
 
-    private void addPointIntoGraph(double x, double y){
-        adjustGraph();
 
-        PointsGraphSeries<DataPoint> series = new PointsGraphSeries<>(new DataPoint[] {
-                new DataPoint(x, y)
-        });
-        graph.addSeries(series);
-        series.setShape(PointsGraphSeries.Shape.POINT);
-        series.setSize(7);
 
-        series.setOnDataPointTapListener(new OnDataPointTapListener() {
-            @Override
-            public void onTap(Series series, DataPointInterface dataPoint) {
-                Toast.makeText(getActivity(), "apertou no ponto: "+dataPoint, Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    private void adjustGraph() {
-        graph.setTitle("problemas de Infiltração por Sodicidade");
-        graph.getGridLabelRenderer().setVerticalAxisTitle("Relação de RASº");
-        graph.getGridLabelRenderer().setHorizontalAxisTitle("Condutividade Elétrica (dS/m) a 25ºC");
-       // graph.getViewport().setScalable(true); // enables horizontal scrolling
-        graph.getViewport().setScalableY(true); // enables vertical scrolling
-        // set manual X bounds
-        graph.getViewport().setYAxisBoundsManual(true);
-        graph.getViewport().setMinY(0);
-        graph.getViewport().setMaxY(30);
-
-        graph.getViewport().setXAxisBoundsManual(true);
-        graph.getViewport().setMinX(0);
-        graph.getViewport().setMaxX(10);
-
-    }
 
     private void categorizeSalinity(double CEa) {
 
@@ -209,7 +153,6 @@ public class Tab2 extends Fragment implements View.OnClickListener {
         txtviewSARClassification = (TextView) view.findViewById(R.id.txtviewSARClassification);
         txtviewCEaValue = (TextView) view.findViewById(R.id.txtviewCEaValue);
         salinityResult = (TextView) view.findViewById(R.id.txtviewSalinityResults);
-        graph = (GraphView) view.findViewById(R.id.GRAPH1);
 
         btnSARDetails = (Button) view.findViewById(R.id.buttonSARDetails);
         btnSARDetails.setOnClickListener(this);
@@ -256,11 +199,13 @@ public class Tab2 extends Fragment implements View.OnClickListener {
                 break;
             case R.id.SHOW_HIDE_GRAPH1:
 
-                if(graph.getVisibility() == View.GONE)
+                /*if(graph.getVisibility() == View.GONE)
                     graph.setVisibility(View.VISIBLE);
                 else
                     graph.setVisibility(View.GONE);
-
+                */
+                Intent intent = new Intent(getContext(), PopupGraphActivity.class);
+                startActivity(intent);
                 break;
 
         }
