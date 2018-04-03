@@ -15,6 +15,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.math.RoundingMode;
+import java.text.NumberFormat;
+
 import br.com.ufersa.qwater.R;
 import br.com.ufersa.qwater.activities.PopupGraphActivity;
 import br.com.ufersa.qwater.database.Update;
@@ -58,8 +61,19 @@ public class Tab2 extends Fragment implements View.OnClickListener {
         categorizeSAR(report.getCorrectedSAR());
         categorizeSalinity(report.getCea());
 
+        //arredenda os valores para 3 casas decimais
+        NumberFormat format = NumberFormat.getInstance();
+        format.setMaximumFractionDigits(4);
+        format.setMinimumFractionDigits(2);
+        format.setMaximumIntegerDigits(2);
+        format.setRoundingMode(RoundingMode.HALF_UP);
+        report.setNormalSAR(Double.valueOf(format.format(report.getNormalSAR())));
+        report.setCorrectedSAR(Double.valueOf(format.format(report.getCorrectedSAR())));
+
+        //insere os valores nos campos de texto
         showNormalSAR(report.getNormalSAR());
-        showCorrectedSARClassification(report.getCorrectedSAR());
+        showCorrectedSAR(report.getCorrectedSAR());
+
         showSalinityClassification(report.getCea());
 
 
@@ -95,9 +109,9 @@ public class Tab2 extends Fragment implements View.OnClickListener {
 
     /**
      * mostra uma janela contendo informações em texto sobre a classificação do RAS ou salinidade
-     * @param string RAS ou salinidade a ser classificada
+     * @param classificacao RAS ou salinidade a ser classificada
      */
-    public void showInfoDialogue(String string){
+    public void showInfoDialogue(String classificacao){
 
         AlertDialog.Builder builder;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -105,8 +119,8 @@ public class Tab2 extends Fragment implements View.OnClickListener {
         } else {
             builder = new AlertDialog.Builder(getContext());
         }
-        int resourceId = getContext().getResources().getIdentifier(string, "string", getContext().getPackageName());
-        builder.setTitle(getString(R.string.classificacao))
+        int resourceId = getContext().getResources().getIdentifier(classificacao, "string", getContext().getPackageName());
+        builder.setTitle(getString(R.string.classificacao)+ " "+ classificacao)
                 .setMessage(getString(resourceId))
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
@@ -137,7 +151,7 @@ public class Tab2 extends Fragment implements View.OnClickListener {
      * classifica o valor do RAS entre intervalos
      * @param correctedSAR valor do RAS
      */
-    private void showCorrectedSARClassification(Double correctedSAR) {
+    private void showCorrectedSAR(Double correctedSAR) {
 
         btnSARDetails.setVisibility(View.VISIBLE);
 

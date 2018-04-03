@@ -249,7 +249,8 @@
                 android:text="Cl"
                 android:textColor="@android:color/black"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="HardcodedText" />
 
             <EditText
                 android:id="@+id/Cl"
@@ -266,7 +267,8 @@
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="14sp"
                 app:layout_constraintStart_toEndOf="@+id/textView8"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="HardcodedText" />
         </android.support.constraint.ConstraintLayout>
 
         <android.support.constraint.ConstraintLayout
