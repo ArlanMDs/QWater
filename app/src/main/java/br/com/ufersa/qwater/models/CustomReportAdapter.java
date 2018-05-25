@@ -47,10 +47,10 @@ public class CustomReportAdapter extends BaseAdapter {
         Report report = reports.get(position);
         //TODO implementar view holder pattern
         //pegando as referências das Views
-        TextView id = (TextView) view.findViewById(R.id.id);
-        TextView normalSAR = (TextView) view.findViewById(R.id.normalSAR);
-        TextView correctedSAR = (TextView) view.findViewById(R.id.correctedSAR);
-        TextView createdAt = (TextView) view.findViewById(R.id.createdAt);
+        TextView id = view.findViewById(R.id.id);
+        TextView normalSAR = view.findViewById(R.id.normalSAR);
+        TextView correctedSAR = view.findViewById(R.id.correctedSAR);
+        TextView createdAt = view.findViewById(R.id.createdAt);
 
         //populando as Views
         id.setText(String.valueOf(report.getId()));

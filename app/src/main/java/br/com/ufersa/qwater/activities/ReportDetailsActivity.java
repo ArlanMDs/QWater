@@ -25,17 +25,17 @@ public class ReportDetailsActivity extends AppCompatActivity {
         Intent i = getIntent();
         final Report report = i.getParcelableExtra("report");
 
-        TextView cea = (TextView) findViewById(R.id.DETAILS_CEA);
-        TextView ca = (TextView)findViewById(R.id.DETAILS_CA);
-        TextView mg = (TextView)findViewById(R.id.DETAILS_MG);
-        TextView k = (TextView)findViewById(R.id.DETAILS_K);
-        TextView na = (TextView)findViewById(R.id.DETAILS_NA);
-        TextView co3 = (TextView)findViewById(R.id.DETAILS_CO3);
-        TextView hco3 = (TextView)findViewById(R.id.DETAILS_HCO3);
-        TextView cl = (TextView)findViewById(R.id.DETAILS_CL);
-        TextView rasNormal = (TextView)findViewById(R.id.DETAILS_RAS);
-        TextView rasCorrigido = (TextView)findViewById(R.id.DETAILS_RAS_CORRIGIDO);
-        TextView createdAt = (TextView)findViewById(R.id.DETAILS_CREATEDAT);
+        TextView cea = findViewById(R.id.DETAILS_CEA);
+        TextView ca = findViewById(R.id.DETAILS_CA);
+        TextView mg = findViewById(R.id.DETAILS_MG);
+        TextView k = findViewById(R.id.DETAILS_K);
+        TextView na = findViewById(R.id.DETAILS_NA);
+        TextView co3 = findViewById(R.id.DETAILS_CO3);
+        TextView hco3 = findViewById(R.id.DETAILS_HCO3);
+        TextView cl = findViewById(R.id.DETAILS_CL);
+        TextView rasNormal = findViewById(R.id.DETAILS_RAS);
+        TextView rasCorrigido = findViewById(R.id.DETAILS_RAS_CORRIGIDO);
+        TextView createdAt = findViewById(R.id.DETAILS_CREATEDAT);
 
         cea.setText(String.valueOf(report.getCea()));
         ca.setText(String.valueOf(report.getCa()));
@@ -49,7 +49,7 @@ public class ReportDetailsActivity extends AppCompatActivity {
         rasCorrigido.setText(String.valueOf(report.getCorrectedSAR()));
         createdAt.setText(formatDate(report.getCreatedAt()));
 
-        Button delete = (Button)findViewById(R.id.DETAILS_DELETE_BUTTON);
+        Button delete = findViewById(R.id.DETAILS_DELETE_BUTTON);
 
         delete.setOnClickListener(new View.OnClickListener() {
             @Override

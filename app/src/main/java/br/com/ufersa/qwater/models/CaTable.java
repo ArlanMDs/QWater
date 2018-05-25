@@ -45,7 +45,7 @@ public class CaTable {
     };
 
     //value and position
-    private double a1, a2, b1, b2, c_val;
+    private double a1, a2, b1, b2;
     private int a1_pos, a2_pos, b1_pos, b2_pos;
 
     public double interpolate(double hco3, double ce){

@@ -46,8 +46,7 @@ public class SARCalculator {
         //formatNaMgCaToMeq_L(moleculesSpinnerPosition);
         double ca = this.ca, mg = this.mg, na = this.na;
         double caMg = (ca + mg) / 2;
-        double normalSAR = na / Math.pow(caMg,0.5);
-        return normalSAR;
+        return na / Math.pow(caMg,0.5);
         //return na / Math.sqrt((ca + mg)/2);
     }
 
@@ -67,8 +66,7 @@ public class SARCalculator {
         double mg = this.mg, na = this.na;
         double ca = calculateCorrectedCalcium();
         double caMg = (ca + mg) / 2;
-        double correctedSAR = na / Math.pow(caMg,0.5);
-        return correctedSAR;
+        return na / Math.pow(caMg,0.5);
         // return na / Math.sqrt( (ca + mg) / 2 );
     }
 

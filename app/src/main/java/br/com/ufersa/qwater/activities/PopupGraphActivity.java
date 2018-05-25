@@ -34,7 +34,7 @@ public class PopupGraphActivity extends AppCompatActivity {
 
 
 
-        graph = (GraphView) findViewById(R.id.GRAPH);
+        graph = findViewById(R.id.GRAPH);
         addPointIntoGraph(2, 5);
         addPointIntoGraph(5, 10);
         addLines();
@@ -81,7 +81,7 @@ public class PopupGraphActivity extends AppCompatActivity {
     }
 
     private void addLines(){
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[] {
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[]{
 
                 new DataPoint(0, 26),
                 new DataPoint(26, 0)
@@ -94,7 +94,7 @@ public class PopupGraphActivity extends AppCompatActivity {
         series.setThickness(1);
 
 
-        LineGraphSeries<DataPoint> series2 = new LineGraphSeries<DataPoint>(new DataPoint[] {
+        LineGraphSeries<DataPoint> series2 = new LineGraphSeries<>(new DataPoint[]{
 
                 new DataPoint(0, 18),
                 new DataPoint(22, 0)
@@ -106,7 +106,7 @@ public class PopupGraphActivity extends AppCompatActivity {
         series2.setDrawDataPoints(false);
         series2.setThickness(1);
 
-        LineGraphSeries<DataPoint> series3 = new LineGraphSeries<DataPoint>(new DataPoint[] {
+        LineGraphSeries<DataPoint> series3 = new LineGraphSeries<>(new DataPoint[]{
 
                 new DataPoint(0, 10),
                 new DataPoint(18, 0)
@@ -118,7 +118,7 @@ public class PopupGraphActivity extends AppCompatActivity {
         series3.setDrawDataPoints(false);
         series3.setThickness(1);
 
-        LineGraphSeries<DataPoint> series4 = new LineGraphSeries<DataPoint>(new DataPoint[] {
+        LineGraphSeries<DataPoint> series4 = new LineGraphSeries<>(new DataPoint[]{
 
                 new DataPoint(5, 40),
                 new DataPoint(5, 0)
@@ -130,7 +130,7 @@ public class PopupGraphActivity extends AppCompatActivity {
         series4.setDrawDataPoints(false);
         series4.setThickness(1);
 
-        LineGraphSeries<DataPoint> series5 = new LineGraphSeries<DataPoint>(new DataPoint[] {
+        LineGraphSeries<DataPoint> series5 = new LineGraphSeries<>(new DataPoint[]{
 
                 new DataPoint(10, 40),
                 new DataPoint(10, 0)
@@ -142,7 +142,7 @@ public class PopupGraphActivity extends AppCompatActivity {
         series5.setDrawDataPoints(false);
         series5.setThickness(1);
 
-        LineGraphSeries<DataPoint> series6 = new LineGraphSeries<DataPoint>(new DataPoint[] {
+        LineGraphSeries<DataPoint> series6 = new LineGraphSeries<>(new DataPoint[]{
 
                 new DataPoint(15, 40),
                 new DataPoint(15, 0)

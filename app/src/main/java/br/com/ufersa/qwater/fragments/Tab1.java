@@ -27,9 +27,6 @@ public class Tab1 extends Fragment implements AdapterView.OnItemSelectedListener
     private Spinner spinnerCEa, spinnerMolecules;
     private Double ca, mg, na, cea, hco3, k=0.0, co3=0.0, cl=0.0;
 
-    //TODO o cea está sendo convertido tanto aqui quanto no SARCalculator
-    //TODO alguns valores do relatório não estão sendo usados
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -73,7 +70,7 @@ public class Tab1 extends Fragment implements AdapterView.OnItemSelectedListener
                 Report report = generateReport(normalSAR, correctedSAR, cea);
                 mCallback.sendData(report);
 
-                ViewPager viewPager = (ViewPager) getActivity().findViewById(R.id.container);
+                ViewPager viewPager = getActivity().findViewById(R.id.container);
                 viewPager.setCurrentItem(1);
 
             }else
@@ -165,20 +162,20 @@ public class Tab1 extends Fragment implements AdapterView.OnItemSelectedListener
 
      private void findViewsIDs() {
         View view = getView();
-        edtCea = (EditText) view.findViewById(R.id.cea);
-        edtCa = (EditText) view.findViewById(R.id.DETAILS_CA);
-        edtMg = (EditText) view.findViewById(R.id.DETAILS_MG);
-        edtK = (EditText) view.findViewById(R.id.DETAILS_K);
-        edtNa = (EditText) view.findViewById(R.id.DETAILS_NA);
-        edtCo3 = (EditText) view.findViewById(R.id.DETAILS_CO3);
-        edtHco3 = (EditText) view.findViewById(R.id.hco3);
-        edtCl = (EditText) view.findViewById(R.id.Cl);
-        calcular = (Button) view.findViewById(R.id.calcular);
+        edtCea = view.findViewById(R.id.cea);
+        edtCa = view.findViewById(R.id.DETAILS_CA);
+        edtMg = view.findViewById(R.id.DETAILS_MG);
+        edtK = view.findViewById(R.id.DETAILS_K);
+        edtNa = view.findViewById(R.id.DETAILS_NA);
+        edtCo3 = view.findViewById(R.id.DETAILS_CO3);
+        edtHco3 = view.findViewById(R.id.hco3);
+        edtCl = view.findViewById(R.id.Cl);
+        calcular = view.findViewById(R.id.calcular);
 
-        spinnerMolecules = (Spinner) view.findViewById(R.id.spinnerMolecules);
+        spinnerMolecules = view.findViewById(R.id.spinnerMolecules);
         spinnerMolecules.setOnItemSelectedListener(this);
 
-        spinnerCEa = (Spinner) view.findViewById(R.id.spinnerCEa);
+        spinnerCEa = view.findViewById(R.id.spinnerCEa);
         spinnerCEa.setOnItemSelectedListener(this);
 
     }

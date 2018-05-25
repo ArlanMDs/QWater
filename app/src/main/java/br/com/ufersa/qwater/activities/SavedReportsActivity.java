@@ -26,7 +26,7 @@ public class SavedReportsActivity extends AppCompatActivity {
     }
 
     private void listReports() {
-        ListView listView = (ListView)findViewById(R.id.displayListView);
+        ListView listView = findViewById(R.id.displayListView);
 
         final ArrayList<Report> reports = new Read().getReports();
 

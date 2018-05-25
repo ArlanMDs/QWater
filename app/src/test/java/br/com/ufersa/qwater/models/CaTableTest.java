@@ -9,7 +9,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class CaTableTest {
     @Test
-    public void interpolate() throws Exception {
+    public void interpolate() {
         CaTable table = new CaTable();
 
         assertEquals(0.3175, table.interpolate(25, 7), 0.00001);

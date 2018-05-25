@@ -21,10 +21,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
     private void findViewsIds() {
-        Button newTest = (Button)findViewById(R.id.newTest);
+        Button newTest = findViewById(R.id.newTest);
         newTest.setOnClickListener(this);
 
-        Button savedReports = (Button)findViewById(R.id.savedReports);
+        Button savedReports = findViewById(R.id.savedReports);
         savedReports.setOnClickListener(this);
     }
 

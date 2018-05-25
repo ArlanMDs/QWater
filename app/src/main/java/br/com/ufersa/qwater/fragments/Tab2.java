@@ -38,17 +38,13 @@ public class Tab2 extends Fragment implements View.OnClickListener {
         return inflater.inflate(R.layout.tab2, container, false);
     }
 
-
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         findViewsIds();
-        //addLine();
 
     }
-
-
 
     /**
      * método que faz a comunicação da RAS entre a tab1 e tab2
@@ -78,9 +74,6 @@ public class Tab2 extends Fragment implements View.OnClickListener {
 
 
     }
-
-
-
 
     private void categorizeSalinity(double CEa) {
 
@@ -120,7 +113,7 @@ public class Tab2 extends Fragment implements View.OnClickListener {
             builder = new AlertDialog.Builder(getContext());
         }
         int resourceId = getContext().getResources().getIdentifier(classificacao, "string", getContext().getPackageName());
-        builder.setTitle(getString(R.string.classificacao)+ " "+ classificacao)
+        builder.setTitle(getString(R.string.classificacao)+ " " + classificacao)
                 .setMessage(getString(resourceId))
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
@@ -162,22 +155,22 @@ public class Tab2 extends Fragment implements View.OnClickListener {
     private void findViewsIds() {
         View view = getView();
 
-        txtviewCorrectedSARResult = (TextView) view.findViewById(R.id.txtviewCorrectedSARResult);
-        txtviewNormalSARResult = (TextView) view.findViewById(R.id.txtviewNormalSARResult);
-        txtviewSARClassification = (TextView) view.findViewById(R.id.txtviewSARClassification);
-        txtviewCEaValue = (TextView) view.findViewById(R.id.txtviewCEaValue);
-        salinityResult = (TextView) view.findViewById(R.id.txtviewSalinityResults);
+        txtviewCorrectedSARResult = view.findViewById(R.id.txtviewCorrectedSARResult);
+        txtviewNormalSARResult = view.findViewById(R.id.txtviewNormalSARResult);
+        txtviewSARClassification = view.findViewById(R.id.txtviewSARClassification);
+        txtviewCEaValue = view.findViewById(R.id.txtviewCEaValue);
+        salinityResult = view.findViewById(R.id.txtviewSalinityResults);
 
-        btnSARDetails = (Button) view.findViewById(R.id.buttonSARDetails);
+        btnSARDetails = view.findViewById(R.id.buttonSARDetails);
         btnSARDetails.setOnClickListener(this);
 
-        btnSalinityDetails = (Button) view.findViewById(R.id.buttonSalinityDetails);
+        btnSalinityDetails = view.findViewById(R.id.buttonSalinityDetails);
         btnSalinityDetails.setOnClickListener(this);
 
-        btnSaveReport = (Button) view.findViewById(R.id.buttonSaveReport);
+        btnSaveReport = view.findViewById(R.id.buttonSaveReport);
         btnSaveReport.setOnClickListener(this);
 
-        Button showHideGraph1 = (Button) view.findViewById(R.id.SHOW_HIDE_GRAPH1);
+        Button showHideGraph1 = view.findViewById(R.id.SHOW_HIDE_GRAPH1);
         showHideGraph1.setOnClickListener(this);
 
     }
