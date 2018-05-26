@@ -2,8 +2,9 @@
     <string name="app_name">QWater</string>
     <string name="action_configuracoes">Configurações</string>
     <string name="action_sobre">Sobre</string>
-    <string name="newTest">Calcular RAS</string>
-    <string name="savedReports">Relatórios armazenados</string>
+    <string name="storeSample">Nova Amostra de Água</string>
+    <string name="savedWaterSamples">Amostras armazenadas</string>
+    <string name="registrarFonte">Registrar Fonte de Água</string>
 
     <string name="S1" translatable="false">Água com baixo teor de sódio: pode ser usada para irrigação em quase todos os solos, com pouco perigo de desenvolvimento
         de problemas de sodificação.</string>

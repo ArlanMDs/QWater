@@ -4,7 +4,7 @@ package br.com.ufersa.qwater.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Report implements Parcelable {
+public class WaterSample implements Parcelable {
 
     private int id;
     private double ca;
@@ -19,11 +19,11 @@ public class Report implements Parcelable {
     private double correctedSAR;
     private long createdAt; //A hora é criada na hora de colocar no banco, em Update.java
 
-    public Report(){
+    public WaterSample(){
 
     }
 
-    protected Report(Parcel in) {
+    protected WaterSample(Parcel in) {
         id = in.readInt();
         ca = in.readDouble();
         mg = in.readDouble();
@@ -59,15 +59,15 @@ public class Report implements Parcelable {
         dest.writeLong(createdAt);
     }
 
-    public static final Creator<Report> CREATOR = new Creator<Report>() {
+    public static final Creator<WaterSample> CREATOR = new Creator<WaterSample>() {
         @Override
-        public Report createFromParcel(Parcel in) {
-            return new Report(in);
+        public WaterSample createFromParcel(Parcel in) {
+            return new WaterSample(in);
         }
 
         @Override
-        public Report[] newArray(int size) {
-            return new Report[size];
+        public WaterSample[] newArray(int size) {
+            return new WaterSample[size];
         }
     };
 

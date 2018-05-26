@@ -16,8 +16,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import br.com.ufersa.qwater.R;
-import br.com.ufersa.qwater.models.Report;
 import br.com.ufersa.qwater.models.SARCalculator;
+import br.com.ufersa.qwater.models.WaterSample;
 
 public class Tab1 extends Fragment implements AdapterView.OnItemSelectedListener{
 
@@ -32,12 +32,12 @@ public class Tab1 extends Fragment implements AdapterView.OnItemSelectedListener
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.tab1, container, false);
     }
-
+        //TODO incluir k, cl e co3 na amostra do bd
     /**
      * Interface de comunicação do RAS
      */
     public interface interfaceDataCommunicator {
-        void sendData(Report report);
+        void sendData(WaterSample waterSample);
     }
 
     @Override
@@ -67,8 +67,8 @@ public class Tab1 extends Fragment implements AdapterView.OnItemSelectedListener
             //TODO mudar para que seja possível fazer os cálculos separadamente
             if (cea != 0.0 && correctedSAR != 0.0 && normalSAR != 0.0) {
                 //se os dados estiverem ok, é gerado um novo relatório e enviado para a outra tab
-                Report report = generateReport(normalSAR, correctedSAR, cea);
-                mCallback.sendData(report);
+                WaterSample waterSample = generateReport(normalSAR, correctedSAR, cea);
+                mCallback.sendData(waterSample);
 
                 ViewPager viewPager = getActivity().findViewById(R.id.container);
                 viewPager.setCurrentItem(1);
@@ -80,21 +80,21 @@ public class Tab1 extends Fragment implements AdapterView.OnItemSelectedListener
 
     }
 
-    private Report generateReport(double normalSAR, double correctedSAR, double CEa) {
-        Report report = new Report();
+    private WaterSample generateReport(double normalSAR, double correctedSAR, double CEa) {
+        WaterSample waterSample = new WaterSample();
 
-        report.setCa(ca);
-        report.setMg(mg);
-        report.setK(k);
-        report.setNa(na);
-        report.setCo3(co3);
-        report.setHco3(hco3);
-        report.setCl(cl);
-        report.setCea(CEa);
-        report.setNormalSAR(normalSAR);
-        report.setCorrectedSAR(correctedSAR);
+        waterSample.setCa(ca);
+        waterSample.setMg(mg);
+        waterSample.setK(k);
+        waterSample.setNa(na);
+        waterSample.setCo3(co3);
+        waterSample.setHco3(hco3);
+        waterSample.setCl(cl);
+        waterSample.setCea(CEa);
+        waterSample.setNormalSAR(normalSAR);
+        waterSample.setCorrectedSAR(correctedSAR);
 
-        return report;
+        return waterSample;
     }
 
     private double calculateNormalSAR(){

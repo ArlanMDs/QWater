@@ -22,14 +22,14 @@ import br.com.ufersa.qwater.R;
 import br.com.ufersa.qwater.activities.PopupGraphActivity;
 import br.com.ufersa.qwater.database.Update;
 import br.com.ufersa.qwater.models.MyApp;
-import br.com.ufersa.qwater.models.Report;
+import br.com.ufersa.qwater.models.WaterSample;
 
 public class Tab2 extends Fragment implements View.OnClickListener {
 
     private Button btnSARDetails, btnSalinityDetails, btnSaveReport;
     private TextView txtviewCorrectedSARResult, txtviewNormalSARResult, salinityResult, txtviewSARClassification, txtviewCEaValue;
     private int currentSARClassification, currentSalinityClassification;
-    private Report report;
+    private WaterSample waterSample;
     private double x, y;
 
     @Nullable
@@ -48,14 +48,14 @@ public class Tab2 extends Fragment implements View.OnClickListener {
 
     /**
      * método que faz a comunicação da RAS entre a tab1 e tab2
-     * @param report relatório recebido da tab1
+     * @param waterSample relatório recebido da tab1
      */
-    public void updateData(Report report){
+    public void updateData(WaterSample waterSample){
 
-        this.report = report;
+        this.waterSample = waterSample;
 
-        categorizeSAR(report.getCorrectedSAR());
-        categorizeSalinity(report.getCea());
+        categorizeSAR(waterSample.getCorrectedSAR());
+        categorizeSalinity(waterSample.getCea());
 
         //arredenda os valores para 3 casas decimais
         NumberFormat format = NumberFormat.getInstance();
@@ -63,14 +63,14 @@ public class Tab2 extends Fragment implements View.OnClickListener {
         format.setMinimumFractionDigits(2);
         format.setMaximumIntegerDigits(2);
         format.setRoundingMode(RoundingMode.HALF_UP);
-        report.setNormalSAR(Double.valueOf(format.format(report.getNormalSAR())));
-        report.setCorrectedSAR(Double.valueOf(format.format(report.getCorrectedSAR())));
+        waterSample.setNormalSAR(Double.valueOf(format.format(waterSample.getNormalSAR())));
+        waterSample.setCorrectedSAR(Double.valueOf(format.format(waterSample.getCorrectedSAR())));
 
         //insere os valores nos campos de texto
-        showNormalSAR(report.getNormalSAR());
-        showCorrectedSAR(report.getCorrectedSAR());
+        showNormalSAR(waterSample.getNormalSAR());
+        showCorrectedSAR(waterSample.getCorrectedSAR());
 
-        showSalinityClassification(report.getCea());
+        showSalinityClassification(waterSample.getCea());
 
 
     }
@@ -198,7 +198,7 @@ public class Tab2 extends Fragment implements View.OnClickListener {
                 break;
             case R.id.buttonSaveReport:
 
-                if (new Update().addReport(report))
+                if (new Update().addReport(waterSample))
                     Toast.makeText(MyApp.getContext(), "Relatório salvo com sucesso!", Toast.LENGTH_SHORT).show();
                 else
                     Toast.makeText(MyApp.getContext(), "Erro ao inserir relatório", Toast.LENGTH_SHORT).show();

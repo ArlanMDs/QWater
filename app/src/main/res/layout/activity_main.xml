@@ -7,26 +7,40 @@
     tools:context=".activities.MainActivity">
 
     <Button
-        android:id="@+id/newTest"
+        android:id="@+id/BUTTON_WATER_SOURCE_ACTIVITY"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="@string/newTest"
+        android:text="@string/registrarFonte"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/savedReports"
+        android:id="@+id/BUTTON_TABHOST_ACTIVITY"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="@string/savedReports"
+        android:text="@string/storeSample"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newTest" />
+        app:layout_constraintTop_toBottomOf="@+id/BUTTON_WATER_SOURCE_ACTIVITY" />
+
+    <Button
+        android:id="@+id/BUTTON_REPORT_DETAILS_ACTIVITY"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/savedWaterSamples"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BUTTON_TABHOST_ACTIVITY" />
 </android.support.constraint.ConstraintLayout>

@@ -16,35 +16,35 @@ import br.com.ufersa.qwater.R;
  * http://blog.alura.com.br/personalizando-uma-listview-no-android/
  */
 
-public class CustomReportAdapter extends BaseAdapter {
+public class CustomWaterSampleAdapter extends BaseAdapter {
 
-    private final List<Report> reports;
+    private final List<WaterSample> waterSamples;
     private final Activity activity;
 
-    public CustomReportAdapter(List<Report> reports, Activity activity) {
-        this.reports = reports;
+    public CustomWaterSampleAdapter(List<WaterSample> waterSamples, Activity activity) {
+        this.waterSamples = waterSamples;
         this.activity = activity;
     }
 
     @Override
     public int getCount() {
-        return reports.size();
+        return waterSamples.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return reports.get(position);
+        return waterSamples.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return reports.get(position).getId();
+        return waterSamples.get(position).getId();
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view = activity.getLayoutInflater().inflate(R.layout.display_report_row, parent, false);
-        Report report = reports.get(position);
+        View view = activity.getLayoutInflater().inflate(R.layout.display_water_sample_row, parent, false);
+        WaterSample waterSample = waterSamples.get(position);
         //TODO implementar view holder pattern
         //pegando as referências das Views
         TextView id = view.findViewById(R.id.id);
@@ -53,12 +53,12 @@ public class CustomReportAdapter extends BaseAdapter {
         TextView createdAt = view.findViewById(R.id.createdAt);
 
         //populando as Views
-        id.setText(String.valueOf(report.getId()));
-        normalSAR.setText(String.valueOf(report.getNormalSAR()));
-        correctedSAR.setText(String.valueOf(report.getCorrectedSAR()));
+        id.setText(String.valueOf(waterSample.getId()));
+        normalSAR.setText(String.valueOf(waterSample.getNormalSAR()));
+        correctedSAR.setText(String.valueOf(waterSample.getCorrectedSAR()));
 
          try {
-             createdAt.setText(formatDate(report.getCreatedAt()));
+             createdAt.setText(formatDate(waterSample.getCreatedAt()));
          }catch (Exception e){
              e.printStackTrace();
              createdAt.setText("-1");

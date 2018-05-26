@@ -21,23 +21,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
     private void findViewsIds() {
-        Button newTest = findViewById(R.id.newTest);
+        Button newTest = findViewById(R.id.BUTTON_TABHOST_ACTIVITY);
         newTest.setOnClickListener(this);
 
-        Button savedReports = findViewById(R.id.savedReports);
+        Button savedReports = findViewById(R.id.BUTTON_REPORT_DETAILS_ACTIVITY);
         savedReports.setOnClickListener(this);
+
+        Button waterSource = findViewById(R.id.BUTTON_WATER_SOURCE_ACTIVITY);
+        waterSource.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         Intent intent;
         switch (v.getId()){
-            case R.id.newTest:
+            case R.id.BUTTON_TABHOST_ACTIVITY:
                 intent = new Intent(MainActivity.this, TabHostActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.savedReports:
-                intent = new Intent(MainActivity.this, SavedReportsActivity.class);
+            case R.id.BUTTON_REPORT_DETAILS_ACTIVITY:
+                intent = new Intent(MainActivity.this, StoredWaterSamplesActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.BUTTON_WATER_SOURCE_ACTIVITY:
+                intent = new Intent(MainActivity.this, WaterSourceActivity.class);
                 startActivity(intent);
                 break;
         }

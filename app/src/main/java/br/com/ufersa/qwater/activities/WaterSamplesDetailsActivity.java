@@ -12,18 +12,18 @@ import java.util.Calendar;
 
 import br.com.ufersa.qwater.R;
 import br.com.ufersa.qwater.database.Delete;
-import br.com.ufersa.qwater.models.Report;
+import br.com.ufersa.qwater.models.WaterSample;
 
-public class ReportDetailsActivity extends AppCompatActivity {
+public class WaterSamplesDetailsActivity extends AppCompatActivity {
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_report_details);
+        setContentView(R.layout.activity_water_sample_details);
 
         Intent i = getIntent();
-        final Report report = i.getParcelableExtra("report");
+        final WaterSample waterSample = i.getParcelableExtra("waterSample");
 
         TextView cea = findViewById(R.id.DETAILS_CEA);
         TextView ca = findViewById(R.id.DETAILS_CA);
@@ -37,26 +37,26 @@ public class ReportDetailsActivity extends AppCompatActivity {
         TextView rasCorrigido = findViewById(R.id.DETAILS_RAS_CORRIGIDO);
         TextView createdAt = findViewById(R.id.DETAILS_CREATEDAT);
 
-        cea.setText(String.valueOf(report.getCea()));
-        ca.setText(String.valueOf(report.getCa()));
-        mg.setText(String.valueOf(report.getMg()));
-        k.setText(String.valueOf(report.getK()));
-        na.setText(String.valueOf(report.getNa()));
-        co3.setText(String.valueOf(report.getCo3()));
-        hco3.setText(String.valueOf(report.getHco3()));
-        cl.setText(String.valueOf(report.getCl()));
-        rasNormal.setText(String.valueOf(report.getNormalSAR()));
-        rasCorrigido.setText(String.valueOf(report.getCorrectedSAR()));
-        createdAt.setText(formatDate(report.getCreatedAt()));
+        cea.setText(String.valueOf(waterSample.getCea()));
+        ca.setText(String.valueOf(waterSample.getCa()));
+        mg.setText(String.valueOf(waterSample.getMg()));
+        k.setText(String.valueOf(waterSample.getK()));
+        na.setText(String.valueOf(waterSample.getNa()));
+        co3.setText(String.valueOf(waterSample.getCo3()));
+        hco3.setText(String.valueOf(waterSample.getHco3()));
+        cl.setText(String.valueOf(waterSample.getCl()));
+        rasNormal.setText(String.valueOf(waterSample.getNormalSAR()));
+        rasCorrigido.setText(String.valueOf(waterSample.getCorrectedSAR()));
+        createdAt.setText(formatDate(waterSample.getCreatedAt()));
 
         Button delete = findViewById(R.id.DETAILS_DELETE_BUTTON);
 
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new Delete().removeReport(report);
-                Toast.makeText(ReportDetailsActivity.this, "Relatório deletado.", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(ReportDetailsActivity.this, SavedReportsActivity.class);
+                new Delete().removeReport(waterSample);
+                Toast.makeText(WaterSamplesDetailsActivity.this, "Relatório deletado.", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(WaterSamplesDetailsActivity.this, StoredWaterSamplesActivity.class);
                 startActivity(intent);
 
             }
@@ -78,7 +78,7 @@ public class ReportDetailsActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(ReportDetailsActivity.this, SavedReportsActivity.class);
+        Intent intent = new Intent(WaterSamplesDetailsActivity.this, StoredWaterSamplesActivity.class);
         startActivity(intent);
         super.onBackPressed();
     }
