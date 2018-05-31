@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 
 import br.com.ufersa.qwater.R;
-import br.com.ufersa.qwater.database.Create;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -17,7 +16,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         findViewsIds();
-        new Create().createTable();
 
     }
     private void findViewsIds() {
@@ -40,26 +38,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
                 break;
             case R.id.BUTTON_REPORT_DETAILS_ACTIVITY:
-                intent = new Intent(MainActivity.this, StoredWaterSamplesActivity.class);
-                startActivity(intent);
+
                 break;
             case R.id.BUTTON_WATER_SOURCE_ACTIVITY:
-                intent = new Intent(MainActivity.this, WaterSourceActivity.class);
+                intent = new Intent(MainActivity.this, ListWaterSourceActivity.class);
                 startActivity(intent);
                 break;
         }
     }
-/*
-    @Override
-    protected void onStop() {
-        Toast.makeText(this, "fechando DB...", Toast.LENGTH_SHORT).show();
 
-        //Lembre-se de fechar o DB quando fechar o app, e certifique-se de que o mesmo
-        // não está em uso antes de chamar  MainDB.getInstancia().close();
-        MainDB.getInstance().close();
-
-        super.onStop();
-    }
-test
-*/
 }

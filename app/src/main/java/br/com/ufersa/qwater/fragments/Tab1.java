@@ -16,8 +16,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import br.com.ufersa.qwater.R;
+import br.com.ufersa.qwater.beans.WaterSample;
 import br.com.ufersa.qwater.models.SARCalculator;
-import br.com.ufersa.qwater.models.WaterSample;
 
 public class Tab1 extends Fragment implements AdapterView.OnItemSelectedListener{
 
@@ -83,16 +83,16 @@ public class Tab1 extends Fragment implements AdapterView.OnItemSelectedListener
     private WaterSample generateReport(double normalSAR, double correctedSAR, double CEa) {
         WaterSample waterSample = new WaterSample();
 
-        waterSample.setCa(ca);
-        waterSample.setMg(mg);
-        waterSample.setK(k);
-        waterSample.setNa(na);
-        waterSample.setCo3(co3);
-        waterSample.setHco3(hco3);
-        waterSample.setCl(cl);
-        waterSample.setCea(CEa);
-        waterSample.setNormalSAR(normalSAR);
-        waterSample.setCorrectedSAR(correctedSAR);
+        waterSample.setWatCa(ca);
+        waterSample.setWatMg(mg);
+        waterSample.setWatK(k);
+        waterSample.setWatNa(na);
+        waterSample.setWatCo3(co3);
+        waterSample.setWatHco3(hco3);
+        waterSample.setWatCl(cl);
+        waterSample.setWatCea(CEa);
+        waterSample.setWatNormalSar(normalSAR);
+        waterSample.setWatCorrectedSar(correctedSAR);
 
         return waterSample;
     }
@@ -162,15 +162,15 @@ public class Tab1 extends Fragment implements AdapterView.OnItemSelectedListener
 
      private void findViewsIDs() {
         View view = getView();
-        edtCea = view.findViewById(R.id.cea);
-        edtCa = view.findViewById(R.id.DETAILS_CA);
-        edtMg = view.findViewById(R.id.DETAILS_MG);
-        edtK = view.findViewById(R.id.DETAILS_K);
-        edtNa = view.findViewById(R.id.DETAILS_NA);
-        edtCo3 = view.findViewById(R.id.DETAILS_CO3);
-        edtHco3 = view.findViewById(R.id.hco3);
-        edtCl = view.findViewById(R.id.Cl);
-        calcular = view.findViewById(R.id.calcular);
+        edtCea = view.findViewById(R.id.EDIT_CEA);
+        edtCa = view.findViewById(R.id.EDIT_CA);
+        edtMg = view.findViewById(R.id.EDIT_MG);
+        edtK = view.findViewById(R.id.EDIT_K);
+        edtNa = view.findViewById(R.id.EDIT_NA);
+        edtCo3 = view.findViewById(R.id.EDIT_CO3);
+        edtHco3 = view.findViewById(R.id.EDIT_HCO3);
+        edtCl = view.findViewById(R.id.EDIT_CL);
+        calcular = view.findViewById(R.id.BUTTON_CALCULATE);
 
         spinnerMolecules = view.findViewById(R.id.spinnerMolecules);
         spinnerMolecules.setOnItemSelectedListener(this);

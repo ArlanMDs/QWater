@@ -1,6 +1,7 @@
 package br.com.ufersa.qwater.fragments;
 
 
+import android.arch.persistence.room.Room;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
@@ -13,16 +14,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.math.RoundingMode;
 import java.text.NumberFormat;
 
 import br.com.ufersa.qwater.R;
 import br.com.ufersa.qwater.activities.PopupGraphActivity;
-import br.com.ufersa.qwater.database.Update;
-import br.com.ufersa.qwater.models.MyApp;
-import br.com.ufersa.qwater.models.WaterSample;
+import br.com.ufersa.qwater.beans.WaterSample;
+import br.com.ufersa.qwater.database.AppDatabase;
 
 public class Tab2 extends Fragment implements View.OnClickListener {
 
@@ -54,8 +53,8 @@ public class Tab2 extends Fragment implements View.OnClickListener {
 
         this.waterSample = waterSample;
 
-        categorizeSAR(waterSample.getCorrectedSAR());
-        categorizeSalinity(waterSample.getCea());
+        categorizeSAR(waterSample.getWatCorrectedSar());
+        categorizeSalinity(waterSample.getWatCea());
 
         //arredenda os valores para 3 casas decimais
         NumberFormat format = NumberFormat.getInstance();
@@ -63,14 +62,14 @@ public class Tab2 extends Fragment implements View.OnClickListener {
         format.setMinimumFractionDigits(2);
         format.setMaximumIntegerDigits(2);
         format.setRoundingMode(RoundingMode.HALF_UP);
-        waterSample.setNormalSAR(Double.valueOf(format.format(waterSample.getNormalSAR())));
-        waterSample.setCorrectedSAR(Double.valueOf(format.format(waterSample.getCorrectedSAR())));
+        waterSample.setWatNormalSar(Double.valueOf(format.format(waterSample.getWatNormalSar())));
+        waterSample.setWatCorrectedSar(Double.valueOf(format.format(waterSample.getWatCorrectedSar())));
 
         //insere os valores nos campos de texto
-        showNormalSAR(waterSample.getNormalSAR());
-        showCorrectedSAR(waterSample.getCorrectedSAR());
+        showNormalSAR(waterSample.getWatNormalSar());
+        showCorrectedSAR(waterSample.getWatCorrectedSar());
 
-        showSalinityClassification(waterSample.getCea());
+        showSalinityClassification(waterSample.getWatCea());
 
 
     }
@@ -198,19 +197,19 @@ public class Tab2 extends Fragment implements View.OnClickListener {
                 break;
             case R.id.buttonSaveReport:
 
-                if (new Update().addReport(waterSample))
-                    Toast.makeText(MyApp.getContext(), "Relatório salvo com sucesso!", Toast.LENGTH_SHORT).show();
-                else
-                    Toast.makeText(MyApp.getContext(), "Erro ao inserir relatório", Toast.LENGTH_SHORT).show();
+                new Thread(new Runnable() {
+                    View view = getView();
+                    AppDatabase db = Room.databaseBuilder(view.getContext(), AppDatabase.class, "watersample").build();
+
+                    @Override
+                    public void run() {
+                        db.waterSampleDao().insert(waterSample);
+                    }
+                }) .start();
 
                 break;
             case R.id.SHOW_HIDE_GRAPH1:
 
-                /*if(graph.getVisibility() == View.GONE)
-                    graph.setVisibility(View.VISIBLE);
-                else
-                    graph.setVisibility(View.GONE);
-                */
                 Intent intent = new Intent(getContext(), PopupGraphActivity.class);
                 startActivity(intent);
                 break;

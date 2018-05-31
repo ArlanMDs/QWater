@@ -12,7 +12,7 @@
         android:gravity="center" />
 
     <TextView
-        android:id="@+id/normalSAR"
+        android:id="@+id/watNormalSar"
         android:layout_width="70dp"
         android:layout_height="match_parent"
         android:layout_toRightOf="@+id/id"
@@ -20,18 +20,18 @@
         android:gravity="center" />
 
     <TextView
-        android:id="@+id/correctedSAR"
+        android:id="@+id/watCorrectedSar"
         android:layout_width="106dp"
         android:layout_height="match_parent"
-        android:layout_toRightOf="@+id/normalSAR"
+        android:layout_toRightOf="@+id/watNormalSar"
         android:fontFamily="monospace"
         android:gravity="center" />
 
     <TextView
-        android:id="@+id/createdAt"
+        android:id="@+id/watCreatedAt"
         android:layout_width="110dp"
         android:layout_height="match_parent"
-        android:layout_toRightOf="@+id/correctedSAR"
+        android:layout_toRightOf="@+id/watCorrectedSar"
         android:fontFamily="monospace"
         android:gravity="center" />
 

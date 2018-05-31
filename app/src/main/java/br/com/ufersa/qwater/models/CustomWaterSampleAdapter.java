@@ -10,6 +10,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import br.com.ufersa.qwater.R;
+import br.com.ufersa.qwater.beans.WaterSample;
 
 /**
  * Created by Arlan on 27-Nov-17.
@@ -38,30 +39,30 @@ public class CustomWaterSampleAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return waterSamples.get(position).getId();
+        return waterSamples.get(position).getWatID();
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view = activity.getLayoutInflater().inflate(R.layout.display_water_sample_row, parent, false);
+        View view = activity.getLayoutInflater().inflate(R.layout.water_sample_row, parent, false);
         WaterSample waterSample = waterSamples.get(position);
         //TODO implementar view holder pattern
         //pegando as referências das Views
         TextView id = view.findViewById(R.id.id);
-        TextView normalSAR = view.findViewById(R.id.normalSAR);
-        TextView correctedSAR = view.findViewById(R.id.correctedSAR);
-        TextView createdAt = view.findViewById(R.id.createdAt);
+       // TextView normalSAR = view.findViewById(R.id.normalSAR);
+       // TextView correctedSAR = view.findViewById(R.id.correctedSAR);
+       // TextView createdAt = view.findViewById(R.id.createdAt);
 
         //populando as Views
-        id.setText(String.valueOf(waterSample.getId()));
-        normalSAR.setText(String.valueOf(waterSample.getNormalSAR()));
-        correctedSAR.setText(String.valueOf(waterSample.getCorrectedSAR()));
+        id.setText(String.valueOf(waterSample.getWatID()));
+       // normalSAR.setText(String.valueOf(waterSample.getWatNormalSar()));
+       // correctedSAR.setText(String.valueOf(waterSample.getWatCorrectedSar()));
 
          try {
-             createdAt.setText(formatDate(waterSample.getCreatedAt()));
+        //     createdAt.setText(formatDate(waterSample.getWatCreatedAt()));
          }catch (Exception e){
              e.printStackTrace();
-             createdAt.setText("-1");
+        //     createdAt.setText("-1");
          }
         return view;
     }

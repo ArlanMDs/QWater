@@ -12,7 +12,7 @@
     <string name="S2" translatable="false">Água com teor médio de sódio: estas águas só devem ser usadas em solos de textura arenosa ou em solos orgânicos de boa permeabilidade, uma vez que em solos de textura fina (argilosos) o
         sódio representa perigo.</string>
 
-    <string name="S3" translatable="false">Água com alto teor de sódio. Pode produzir níveis tóxicos de sódio trocável na maior parte dos solos, necessitando assim de práticas especiais de manejo tais como: drenagem, fácil lavagem,
+    <string name="S3" translatable="false">Água com alto teor de sódio. Pode produzir níveis tóxicos de sódio trocável watNa maior parte dos solos, necessitando assim de práticas especiais de manejo tais como: drenagem, fácil lavagem,
         aplicação de matéria orgânica.</string>
 
     <string name="S4" translatable="false">Água com teor muito alto de sódio. É geralmente inadequada para irrigação exceto quando a salinidade for baixa ou média ou o uso de gesso ou outro
@@ -25,7 +25,7 @@
         sem necessidade de práticas especiais de controle de salinidade.</string>
 
     <string name="C3" translatable="false">Água de alta salinidade. Pode ser usada em solos com drenagem deficiente. Mesmo com drenagem adequada pode ser necessário práticas especiais de controlada salinidade, devendo, portanto,
-        ser utilizada na irrigação de espécies vegetais de alta tolerância aos sais. Os riscos apresentados por esta classe de água podem ser amenizados quando do emprego do método de irrigação localizada mantendo
+        ser utilizada watNa irrigação de espécies vegetais de alta tolerância aos sais. Os riscos apresentados por esta classe de água podem ser amenizados quando do emprego do método de irrigação localizada mantendo
         o solo continuamente úmido.</string>
 
     <string name="C4" translatable="false"> Água de muito alta salinidade. Não é apropriada para irrigação sob condições normais, porém pode ser usada ocasionalmente, em circunstâncias especiais. Os solos devem ser permeáveis,
@@ -34,23 +34,23 @@
     <string name="relacaoTabela">Relação de adsorção de sódio corrigida</string>
     <string name="verDetalhesCea">Classificação da CE<small>a</small></string>
     <string name="verDetalhesRASCorrigido">Classificação do RAS corrigido</string>
-    <string name="correctedSAR">RAS corrigido: </string>
+    <string name="watCorrectedSar">RAS corrigido: </string>
     <string name="classeSalinidade">Classe de Salinidade: </string>
     <string name="classificacao">Classificação: </string>
     <string name="salvarRelatorio">Salvar Relatório</string>
     <string name="resultado">Resultado</string>
     <string name="mostrarGrafico">mostrar gráfico</string>
 
-    <string name="cea" translatable="false">CE<small>a</small>:</string>
+    <string name="watCea" translatable="false">CE<small>a</small>:</string>
     <string name="CEa2" translatable="false">CE<small>a</small></string>
-    <string name="hco3" translatable="false">HCO<sub><small>3</small></sub></string>
-    <string name="co3" translatable="false">CO<sub><small>3</small></sub></string>
+    <string name="watHco3" translatable="false">HCO<sub><small>3</small></sub></string>
+    <string name="watCo3" translatable="false">CO<sub><small>3</small></sub></string>
     <string name="RAS">RAS:</string>
 
     <!-- a ordem dos itens afeta o método formatUnits, em SARCalculator -->
     <string-array name="molecules" translatable="false">
         <item>mmol<small>c</small> L<sup><small>-1</small></sup></item>
-        <item>mg L<sup><small>-1</small></sup></item>
+        <item>watMg L<sup><small>-1</small></sup></item>
         <item>mEq L<sup><small>-1</small></sup></item>
     </string-array>
 
@@ -62,7 +62,11 @@
     </string-array>
 
     <string name="valorIncorreto">Algum valor digitado está com formato incorreto</string>
-    <string name="erroNaLeituraDeDados">Ocorreu algum erro na leitura dos dados</string>
-    <string name="relatoriosArmazenados">Relatórios Armazenados:</string>
+    <string name="erroNaLeituraDeDados">Ocorreu algum erro watNa leitura dos dados</string>
+    <string name="amostrasArmazenadas">Amostras de água armazenadas:</string>
+    <string name="title_activity_water_source">WaterSourceActivity</string>
+
+
+    <string name="obterLocalizacao">Obter Localização</string>
 
 </resources>

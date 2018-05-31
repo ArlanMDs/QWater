@@ -52,7 +52,7 @@
             android:layout_marginRight="8dp">
 
             <EditText
-                android:id="@+id/DETAILS_MG"
+                android:id="@+id/EDIT_MG"
                 android:layout_width="69dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="12dp"
@@ -70,7 +70,7 @@
                 android:layout_marginLeft="12dp" />
 
             <EditText
-                android:id="@+id/DETAILS_CA"
+                android:id="@+id/EDIT_CA"
                 android:layout_width="68dp"
                 android:layout_height="39dp"
                 android:layout_marginStart="16dp"
@@ -84,11 +84,11 @@
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="14sp"
                 app:layout_constraintStart_toEndOf="@+id/textView10"
-                app:layout_constraintTop_toBottomOf="@+id/DETAILS_MG"
+                app:layout_constraintTop_toBottomOf="@+id/EDIT_MG"
                 android:layout_marginLeft="16dp" />
 
             <EditText
-                android:id="@+id/DETAILS_NA"
+                android:id="@+id/EDIT_NA"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -104,12 +104,12 @@
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView5"
-                app:layout_constraintTop_toBottomOf="@+id/DETAILS_MG"
+                app:layout_constraintTop_toBottomOf="@+id/EDIT_MG"
                 android:layout_marginRight="8dp"
                 android:layout_marginLeft="21dp" />
 
             <EditText
-                android:id="@+id/DETAILS_K"
+                android:id="@+id/EDIT_K"
                 android:layout_width="wrap_content"
                 android:layout_height="42dp"
                 android:layout_marginEnd="8dp"
@@ -138,7 +138,7 @@
                 android:text="Ca"
                 android:textColor="@android:color/black"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/DETAILS_MG"
+                app:layout_constraintTop_toBottomOf="@+id/EDIT_MG"
                 android:layout_marginLeft="16dp" />
 
             <TextView
@@ -149,8 +149,8 @@
                 android:layout_marginTop="12dp"
                 android:text="Na"
                 android:textColor="@android:color/black"
-                app:layout_constraintStart_toEndOf="@+id/DETAILS_CA"
-                app:layout_constraintTop_toBottomOf="@+id/DETAILS_MG"
+                app:layout_constraintStart_toEndOf="@+id/EDIT_CA"
+                app:layout_constraintTop_toBottomOf="@+id/EDIT_MG"
                 android:layout_marginLeft="12dp" />
 
             <TextView
@@ -173,7 +173,7 @@
                 android:layout_marginTop="16dp"
                 android:text="K"
                 android:textColor="@android:color/black"
-                app:layout_constraintStart_toEndOf="@+id/DETAILS_MG"
+                app:layout_constraintStart_toEndOf="@+id/EDIT_MG"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginLeft="12dp" />
 
@@ -198,31 +198,31 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:text="@string/hco3"
+                android:text="@string/watHco3"
                 android:textColor="@android:color/black"
                 android:textSize="10sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/Cl"
+                app:layout_constraintTop_toBottomOf="@+id/EDIT_CL"
                 android:layout_marginLeft="16dp" />
 
             <EditText
-                android:id="@+id/hco3"
+                android:id="@+id/EDIT_HCO3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
+                android:layout_marginLeft="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:ems="4"
                 android:freezesText="true"
                 android:gravity="center"
-                android:hint="@string/hco3"
+                android:hint="@string/watHco3"
                 android:inputType="numberDecimal"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="14sp"
                 app:layout_constraintStart_toEndOf="@+id/textView11"
-                app:layout_constraintTop_toBottomOf="@+id/Cl"
-                android:layout_marginLeft="16dp" />
+                app:layout_constraintTop_toBottomOf="@+id/EDIT_CL" />
 
             <TextView
                 android:id="@+id/textView12"
@@ -230,33 +230,33 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="16dp"
-                android:text="@string/co3"
+                android:text="@string/watCo3"
                 android:textColor="@android:color/black"
                 android:textSize="12sp"
-                app:layout_constraintStart_toEndOf="@+id/Cl"
+                app:layout_constraintStart_toEndOf="@+id/EDIT_CL"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginLeft="12dp" />
 
             <EditText
-                android:id="@+id/DETAILS_CO3"
+                android:id="@+id/EDIT_CO3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="8dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:ems="4"
                 android:freezesText="true"
                 android:gravity="center"
-                android:hint="@string/co3"
+                android:hint="@string/watCo3"
                 android:inputType="numberDecimal"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView12"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginRight="8dp"
-                android:layout_marginLeft="16dp" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/textView8"
@@ -272,7 +272,7 @@
                 android:layout_marginLeft="16dp" />
 
             <EditText
-                android:id="@+id/Cl"
+                android:id="@+id/EDIT_CL"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -306,7 +306,7 @@
             app:layout_constraintTop_toBottomOf="@+id/spinnerCEa">
 
             <EditText
-                android:id="@+id/cea"
+                android:id="@+id/EDIT_CEA"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
@@ -339,7 +339,7 @@
         </android.support.constraint.ConstraintLayout>
 
         <Button
-            android:id="@+id/calcular"
+            android:id="@+id/BUTTON_CALCULATE"
             android:layout_width="97dp"
             android:layout_height="44dp"
             android:layout_marginEnd="8dp"

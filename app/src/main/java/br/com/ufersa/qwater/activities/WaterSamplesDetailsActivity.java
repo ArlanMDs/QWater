@@ -3,16 +3,13 @@ package br.com.ufersa.qwater.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.Calendar;
 
 import br.com.ufersa.qwater.R;
-import br.com.ufersa.qwater.database.Delete;
-import br.com.ufersa.qwater.models.WaterSample;
+import br.com.ufersa.qwater.beans.WaterSample;
 
 public class WaterSamplesDetailsActivity extends AppCompatActivity {
 
@@ -37,30 +34,21 @@ public class WaterSamplesDetailsActivity extends AppCompatActivity {
         TextView rasCorrigido = findViewById(R.id.DETAILS_RAS_CORRIGIDO);
         TextView createdAt = findViewById(R.id.DETAILS_CREATEDAT);
 
-        cea.setText(String.valueOf(waterSample.getCea()));
-        ca.setText(String.valueOf(waterSample.getCa()));
-        mg.setText(String.valueOf(waterSample.getMg()));
-        k.setText(String.valueOf(waterSample.getK()));
-        na.setText(String.valueOf(waterSample.getNa()));
-        co3.setText(String.valueOf(waterSample.getCo3()));
-        hco3.setText(String.valueOf(waterSample.getHco3()));
-        cl.setText(String.valueOf(waterSample.getCl()));
-        rasNormal.setText(String.valueOf(waterSample.getNormalSAR()));
-        rasCorrigido.setText(String.valueOf(waterSample.getCorrectedSAR()));
-        createdAt.setText(formatDate(waterSample.getCreatedAt()));
+        cea.setText(String.valueOf(waterSample.getWatCea()));
+        ca.setText(String.valueOf(waterSample.getWatCa()));
+        mg.setText(String.valueOf(waterSample.getWatMg()));
+        k.setText(String.valueOf(waterSample.getWatK()));
+        na.setText(String.valueOf(waterSample.getWatNa()));
+        co3.setText(String.valueOf(waterSample.getWatCo3()));
+        hco3.setText(String.valueOf(waterSample.getWatHco3()));
+        cl.setText(String.valueOf(waterSample.getWatCl()));
+        rasNormal.setText(String.valueOf(waterSample.getWatNormalSar()));
+        rasCorrigido.setText(String.valueOf(waterSample.getWatCorrectedSar()));
+        createdAt.setText(formatDate(waterSample.getWatCreatedAt()));
 
         Button delete = findViewById(R.id.DETAILS_DELETE_BUTTON);
 
-        delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new Delete().removeReport(waterSample);
-                Toast.makeText(WaterSamplesDetailsActivity.this, "Relatório deletado.", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(WaterSamplesDetailsActivity.this, StoredWaterSamplesActivity.class);
-                startActivity(intent);
 
-            }
-        });
 
     }
 
@@ -78,8 +66,7 @@ public class WaterSamplesDetailsActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(WaterSamplesDetailsActivity.this, StoredWaterSamplesActivity.class);
-        startActivity(intent);
+
         super.onBackPressed();
     }
 
