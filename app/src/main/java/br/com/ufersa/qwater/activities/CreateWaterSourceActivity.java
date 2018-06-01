@@ -152,25 +152,33 @@ public class CreateWaterSourceActivity extends AppCompatActivity implements View
 
     private class AsyncInsert extends AsyncTask<Void, Void, Void>  {
 
+        private String name;
+        private String type;
+        private double latitude;
+        private double longitude;
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
 
-            //Perform pre-adding operation here.
+            //TODO pedir número mínimo de caracteres para o nome?
+            // se não houver campo nulo, cria o objeto e adiciona-o no bd
+            if (nameTextView.getText().length() > 0 && typeTextView.getText().length() > 0 && latitudeTextView.getText().length() > 0 && longitudeTextView.getText().length() > 0) {
+
+                name = String.valueOf(nameTextView.getText());
+                type = String.valueOf(typeTextView.getText());
+                latitude = Double.valueOf(String.valueOf(latitudeTextView.getText()));
+                longitude = Double.valueOf(String.valueOf(longitudeTextView.getText()));
+            }else {
+                Toast.makeText(CreateWaterSourceActivity.this, "Erro: algum campo está vazio", Toast.LENGTH_SHORT).show(); //TODO editar string
+                this.cancel(true);
+            }
         }
 
         @Override
         protected Void doInBackground(Void... voids) {
 
-            // se não houver campo nulo, cria o objeto e adiciona-o no bd
-            if(nameTextView.getText() != null && typeTextView.getText() != null && latitudeTextView.getText() != null) {
-                String name = String.valueOf(nameTextView.getText());
-                String type = String.valueOf(typeTextView.getText());
-                double latitude = Double.valueOf(String.valueOf(latitudeTextView.getText()));
-                double longitude = Double.valueOf(String.valueOf(longitudeTextView.getText()));
-
-                appDatabase.waterSourceDao().insert(new WaterSource(name, type, latitude, longitude));
-            }
+            appDatabase.waterSourceDao().insert(new WaterSource(name, type, latitude, longitude));
             return null;
         }
 
