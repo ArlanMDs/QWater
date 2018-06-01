@@ -11,11 +11,14 @@ public class WaterSource {
     @NonNull
     private String souName;
     private String souType;
-    private long souLatitude;
-    private long souLongitude;
+    private double souLatitude;
+    private double souLongitude;
 
-    public WaterSource(){
-
+    public WaterSource(@NonNull String souName, String souType, double souLatitude, double souLongitude) {
+        this.souName = souName;
+        this.souType = souType;
+        this.souLatitude = souLatitude;
+        this.souLongitude = souLongitude;
     }
 
     public String getSouType() {
@@ -34,19 +37,19 @@ public class WaterSource {
         this.souName = souName;
     }
 
-    public long getSouLatitude() {
+    public double getSouLatitude() {
         return souLatitude;
     }
 
-    public void setSouLatitude(long souLatitude) {
+    public void setSouLatitude(double souLatitude) {
         this.souLatitude = souLatitude;
     }
 
-    public long getSouLongitude() {
+    public double getSouLongitude() {
         return souLongitude;
     }
 
-    public void setSouLongitude(long souLongitude) {
+    public void setSouLongitude(double souLongitude) {
         this.souLongitude = souLongitude;
     }
 

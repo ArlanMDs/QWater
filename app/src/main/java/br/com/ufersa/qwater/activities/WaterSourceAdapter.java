@@ -8,16 +8,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import br.com.ufersa.qwater.R;
 import br.com.ufersa.qwater.beans.WaterSource;
 
 class WaterSourceAdapter extends RecyclerView.Adapter<WaterSourceAdapter.ViewHolder> {
 
-    ArrayList<WaterSource> waterSources;
+    List<WaterSource> waterSources;
 
-    public WaterSourceAdapter(ArrayList<WaterSource> waterSources) {
+    public WaterSourceAdapter(List<WaterSource> waterSources) {
         this.waterSources = waterSources;
     }
 

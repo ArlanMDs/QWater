@@ -3,6 +3,7 @@ package br.com.ufersa.qwater.activities;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
@@ -10,6 +11,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Looper;
 import android.provider.Settings;
@@ -53,11 +55,14 @@ import java.util.Locale;
 
 import br.com.ufersa.qwater.BuildConfig;
 import br.com.ufersa.qwater.R;
+import br.com.ufersa.qwater.beans.WaterSource;
+import br.com.ufersa.qwater.database.AppDatabase;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-// referência: https://www.androidhive.info/2012/07/android-gps-location-manager-tutorial/
+// referências: https://www.androidhive.info/2012/07/android-gps-location-manager-tutorial/
+// https://android.jlelse.eu/room-store-your-data-c6d49b4d53a3
 
 public class CreateWaterSourceActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -73,7 +78,6 @@ public class CreateWaterSourceActivity extends AppCompatActivity implements View
 
     @BindView(R.id.btn_start_location_updates)
     Button btnStartUpdates;
-
 
     // location updates interval - 10sec
     private static final long UPDATE_INTERVAL_IN_MILLISECONDS = 10000;
@@ -95,6 +99,7 @@ public class CreateWaterSourceActivity extends AppCompatActivity implements View
     // boolean flag to toggle the ui
     private Boolean mRequestingLocationUpdates;
 
+    private AppDatabase appDatabase;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -109,6 +114,10 @@ public class CreateWaterSourceActivity extends AppCompatActivity implements View
 
         // restore the values from saved instance state
         restoreValuesFromBundle(savedInstanceState);
+
+        appDatabase = Room.databaseBuilder(getApplicationContext(),
+                AppDatabase.class, "appDatabase.db").build();
+
     }
 
     private void findViewsIDs(){
@@ -128,16 +137,49 @@ public class CreateWaterSourceActivity extends AppCompatActivity implements View
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.SOURCE_OK_BUTTON:
-                //TODO editar string
-                //TODO checar se as coordenadas não estão null
-                Toast.makeText(this, "Local Adicionado", Toast.LENGTH_SHORT).show();
 
                 mRequestingLocationUpdates = false;
                 stopLocationUpdates();
 
+                AsyncInsert asyncInsert = new AsyncInsert();
+                asyncInsert.execute();
+
                 break;
         }
 
+    }
+
+    private class AsyncInsert extends AsyncTask<Void, Void, Void>  {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            //Perform pre-adding operation here.
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+
+            // se não houver campo nulo, cria o objeto e adiciona-o no bd
+            if(nameTextView.getText() != null && typeTextView.getText() != null && latitudeTextView.getText() != null) {
+                String name = String.valueOf(nameTextView.getText());
+                String type = String.valueOf(typeTextView.getText());
+                double latitude = Double.valueOf(String.valueOf(latitudeTextView.getText()));
+                double longitude = Double.valueOf(String.valueOf(longitudeTextView.getText()));
+
+                appDatabase.waterSourceDao().insert(new WaterSource(name, type, latitude, longitude));
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+            Toast.makeText(getApplicationContext(), "Local Adicionado", Toast.LENGTH_SHORT).show(); //TODO editar string
+            startActivity(new Intent(CreateWaterSourceActivity.this, ListWaterSourceActivity.class));
+        }
     }
 
     private void init() {
@@ -185,7 +227,6 @@ public class CreateWaterSourceActivity extends AppCompatActivity implements View
 
         updateLocationUI();
     }
-
 
     /**
      * Update the UI displaying the location data
@@ -339,12 +380,6 @@ public class CreateWaterSourceActivity extends AppCompatActivity implements View
                     }
                 }).check();
     }
-
-    //    @OnClick(R.id.btn_stop_location_updates)
-    //    // public void stopLocationButtonClick() {
-    //    //    mRequestingLocationUpdates = false;
-    //    //  stopLocationUpdates();
-    //    //}
 
     public void stopLocationUpdates() {
         // Removing location updates
