@@ -1,6 +1,5 @@
 package br.com.ufersa.qwater.activities;
 
-import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -37,29 +36,10 @@ public class ListWaterSourceActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         //prepara o bd
-        appDatabase = Room.databaseBuilder(getApplicationContext(),AppDatabase.class, "appDatabase.db").build();
+        appDatabase = AppDatabase.getInstance(ListWaterSourceActivity.this);
 
-        //busca a lista de fontes de água
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-
-                final List<WaterSource> waterSources = appDatabase.waterSourceDao().getAll();
-
-                // tive que criar essa outra thread pois aparecia o seguinte erro:
-                // “Only the original thread that created a view hierarchy can touch its views.”
-                // https://stackoverflow.com/questions/5161951/android-only-the-original-thread-that-created-a-view-hierarchy-can-touch-its-vi
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        //insere a lista no recyclerview
-                        adapter = new WaterSourceAdapter(waterSources);
-                        recyclerView.setAdapter(adapter);
-                    }
-                });
-
-            }
-        });
+        AsyncRead asyncRead = new AsyncRead();
+        asyncRead.execute();
 
         fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -70,6 +50,29 @@ public class ListWaterSourceActivity extends AppCompatActivity {
             }
         });
     }
+
+    private class AsyncRead extends AsyncTask<Void, Void, List<WaterSource>>  {
+        //https://stackoverflow.com/questions/11833978/asynctask-pass-two-or-more-values-from-doinbackground-to-onpostexecute
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+
+        @Override
+        protected List<WaterSource> doInBackground(Void... voids) {
+
+            return appDatabase.waterSourceDao().getAll();
+        }
+
+        @Override
+        protected void onPostExecute(List<WaterSource> waterSources) {
+            adapter = new WaterSourceAdapter(waterSources);
+            recyclerView.setAdapter(adapter);
+
+        }
+    }
+
 
     @Override
     public void onBackPressed() {

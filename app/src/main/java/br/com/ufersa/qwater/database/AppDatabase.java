@@ -20,7 +20,7 @@ public abstract class AppDatabase extends RoomDatabase {
         }
         return appDatabase;
     }
-
+    //The build just creates the configuration for the database so you can call this from the main thread.
     private static AppDatabase create(final Context context) {
         return Room.databaseBuilder(
                 context,

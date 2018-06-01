@@ -3,7 +3,6 @@ package br.com.ufersa.qwater.activities;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
@@ -116,8 +115,7 @@ public class CreateWaterSourceActivity extends AppCompatActivity implements View
         restoreValuesFromBundle(savedInstanceState);
 
         //prepara o bd
-        appDatabase = Room.databaseBuilder(getApplicationContext(),
-                AppDatabase.class, "appDatabase.db").build();
+        appDatabase = AppDatabase.getInstance(CreateWaterSourceActivity.this);
 
     }
 
@@ -149,7 +147,7 @@ public class CreateWaterSourceActivity extends AppCompatActivity implements View
         }
 
     }
-
+    //TODO resolver o problema do leak https://stackoverflow.com/questions/44309241/warning-this-asynctask-class-should-be-static-or-leaks-might-occur
     private class AsyncInsert extends AsyncTask<Void, Void, Void>  {
 
         private String name;

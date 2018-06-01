@@ -1,9 +1,9 @@
 package br.com.ufersa.qwater.fragments;
 
 
-import android.arch.persistence.room.Room;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.math.RoundingMode;
 import java.text.NumberFormat;
@@ -29,7 +30,7 @@ public class Tab2 extends Fragment implements View.OnClickListener {
     private TextView txtviewCorrectedSARResult, txtviewNormalSARResult, salinityResult, txtviewSARClassification, txtviewCEaValue;
     private int currentSARClassification, currentSalinityClassification;
     private WaterSample waterSample;
-    private double x, y;
+    private AppDatabase appDatabase;
 
     @Nullable
     @Override
@@ -41,6 +42,7 @@ public class Tab2 extends Fragment implements View.OnClickListener {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        appDatabase = AppDatabase.getInstance(getContext());
         findViewsIds();
 
     }
@@ -51,26 +53,31 @@ public class Tab2 extends Fragment implements View.OnClickListener {
      */
     public void updateData(WaterSample waterSample){
 
+        waterSample.setWatNormalSar(formatFractionDigits(waterSample.getWatNormalSar()));
+        waterSample.setWatCorrectedSar(formatFractionDigits(waterSample.getWatCorrectedSar()));
+        // A classificação e armazenamento está sendo feito após o arredondamento das casas decimais!
         this.waterSample = waterSample;
-
         categorizeSAR(waterSample.getWatCorrectedSar());
         categorizeSalinity(waterSample.getWatCea());
+        updateTextViews();
 
-        //arredenda os valores para 3 casas decimais
-        NumberFormat format = NumberFormat.getInstance();
-        format.setMaximumFractionDigits(4);
-        format.setMinimumFractionDigits(2);
-        format.setMaximumIntegerDigits(2);
-        format.setRoundingMode(RoundingMode.HALF_UP);
-        waterSample.setWatNormalSar(Double.valueOf(format.format(waterSample.getWatNormalSar())));
-        waterSample.setWatCorrectedSar(Double.valueOf(format.format(waterSample.getWatCorrectedSar())));
+    }
 
+    private void updateTextViews(){
         //insere os valores nos campos de texto
         showNormalSAR(waterSample.getWatNormalSar());
         showCorrectedSAR(waterSample.getWatCorrectedSar());
 
         showSalinityClassification(waterSample.getWatCea());
+    }
 
+    private double formatFractionDigits(double value){
+        //arredenda os valores para 4 casas decimais
+        NumberFormat format = NumberFormat.getInstance();
+        format.setMaximumFractionDigits(4);
+        format.setMinimumFractionDigits(2);
+        format.setRoundingMode(RoundingMode.HALF_UP);
+        return Double.valueOf(format.format(value));
 
     }
 
@@ -166,7 +173,7 @@ public class Tab2 extends Fragment implements View.OnClickListener {
         btnSalinityDetails = view.findViewById(R.id.buttonSalinityDetails);
         btnSalinityDetails.setOnClickListener(this);
 
-        btnSaveReport = view.findViewById(R.id.buttonSaveReport);
+        btnSaveReport = view.findViewById(R.id.BUTTON_SAVE_WATERSAMPLE);
         btnSaveReport.setOnClickListener(this);
 
         Button showHideGraph1 = view.findViewById(R.id.SHOW_HIDE_GRAPH1);
@@ -195,17 +202,9 @@ public class Tab2 extends Fragment implements View.OnClickListener {
                 showInfoDialogue("C" + currentSalinityClassification);
 
                 break;
-            case R.id.buttonSaveReport:
-
-                new Thread(new Runnable() {
-                    View view = getView();
-                    AppDatabase db = Room.databaseBuilder(view.getContext(), AppDatabase.class, "watersample").build();
-
-                    @Override
-                    public void run() {
-                        db.waterSampleDao().insert(waterSample);
-                    }
-                }) .start();
+            case R.id.BUTTON_SAVE_WATERSAMPLE:
+                //Abrir uma nova activity, igual a about, perguntar em qual
+                new AsyncInsert().execute();
 
                 break;
             case R.id.SHOW_HIDE_GRAPH1:
@@ -216,4 +215,30 @@ public class Tab2 extends Fragment implements View.OnClickListener {
 
         }
     }
+
+    private class AsyncInsert extends AsyncTask<Void, Void, Void>  {
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            waterSample.setWat_souName("aaaaa");
+
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            appDatabase.waterSampleDao().insert(waterSample);
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            Toast.makeText(getContext(), "Amostra inserida", Toast.LENGTH_SHORT).show();
+
+        }
+    }
+
 }
