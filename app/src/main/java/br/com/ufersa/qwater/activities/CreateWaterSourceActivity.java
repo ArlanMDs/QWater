@@ -115,6 +115,7 @@ public class CreateWaterSourceActivity extends AppCompatActivity implements View
         // restore the values from saved instance state
         restoreValuesFromBundle(savedInstanceState);
 
+        //prepara o bd
         appDatabase = Room.databaseBuilder(getApplicationContext(),
                 AppDatabase.class, "appDatabase.db").build();
 

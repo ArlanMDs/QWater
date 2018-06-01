@@ -24,6 +24,7 @@ public class ListWaterSourceActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private FloatingActionButton fab;
+    private AppDatabase appDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,24 +36,30 @@ public class ListWaterSourceActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        //cria a instancia do bd
-        AppDatabase db = Room.databaseBuilder(getApplicationContext(),AppDatabase.class, "production")
-                .allowMainThreadQueries()
-                .build();
+        //prepara o bd
+        appDatabase = Room.databaseBuilder(getApplicationContext(),AppDatabase.class, "appDatabase.db").build();
 
         //busca a lista de fontes de água
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
-                //Insert Data
-                List<WaterSource> waterSources = AppDatabase.getInstance(getApplicationContext()).waterSourceDao().getAll();
 
-                //insere a lista no recyclerview
-                adapter = new WaterSourceAdapter(waterSources);
-                recyclerView.setAdapter(adapter);
+                final List<WaterSource> waterSources = appDatabase.waterSourceDao().getAll();
+
+                // tive que criar essa outra thread pois aparecia o seguinte erro:
+                // “Only the original thread that created a view hierarchy can touch its views.”
+                // https://stackoverflow.com/questions/5161951/android-only-the-original-thread-that-created-a-view-hierarchy-can-touch-its-vi
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        //insere a lista no recyclerview
+                        adapter = new WaterSourceAdapter(waterSources);
+                        recyclerView.setAdapter(adapter);
+                    }
+                });
+
             }
         });
-
 
         fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -67,7 +74,6 @@ public class ListWaterSourceActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         startActivity(new Intent(ListWaterSourceActivity.this, MainActivity.class));
-
     }
 
 }
