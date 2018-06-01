@@ -62,7 +62,7 @@ public class TabHostActivity extends AppCompatActivity implements Tab1.interface
         mViewPager.addOnPageChangeListener(this);
         tabLayout.addOnTabSelectedListener(this);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.FAB_LIST_WATERSOURCES);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -65,6 +65,7 @@
     <string name="erroNaLeituraDeDados">Ocorreu algum erro watNa leitura dos dados</string>
     <string name="amostrasArmazenadas">Amostras de água armazenadas:</string>
     <string name="title_activity_water_source">WaterSourceActivity</string>
+    <string name="title_activity_water_sample">WaterSampleActivity</string>
 
 
     <string name="obterLocalizacao">Obter Localização</string>

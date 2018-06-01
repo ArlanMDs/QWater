@@ -1,6 +1,5 @@
 package br.com.ufersa.qwater.activities;
 
-
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -43,7 +42,7 @@ class WaterSourceAdapter extends RecyclerView.Adapter<WaterSourceAdapter.ViewHol
 
          ViewHolder(View itemView){
             super(itemView);
-            sourceName = itemView.findViewById(R.id.TEXTVIEW_SOURCE_NAME);
+            sourceName = itemView.findViewById(R.id.TEXTVIEW_WATERSOURCE_NAME);
         }
     }
 }

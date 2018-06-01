@@ -185,7 +185,7 @@ public class CreateWaterSourceActivity extends AppCompatActivity implements View
             super.onPostExecute(aVoid);
 
             Toast.makeText(getApplicationContext(), "Local Adicionado", Toast.LENGTH_SHORT).show(); //TODO editar string
-            startActivity(new Intent(CreateWaterSourceActivity.this, ListWaterSourceActivity.class));
+            startActivity(new Intent(CreateWaterSourceActivity.this, ListWaterSourcesActivity.class));
         }
     }
 

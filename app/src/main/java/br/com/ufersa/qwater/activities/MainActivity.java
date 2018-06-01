@@ -22,10 +22,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button newTest = findViewById(R.id.BUTTON_TABHOST_ACTIVITY);
         newTest.setOnClickListener(this);
 
-        Button savedReports = findViewById(R.id.BUTTON_REPORT_DETAILS_ACTIVITY);
+        Button savedReports = findViewById(R.id.BUTTON_LIST_WATERSAMPLES_ACTIVITY);
         savedReports.setOnClickListener(this);
 
-        Button waterSource = findViewById(R.id.BUTTON_WATER_SOURCE_ACTIVITY);
+        Button waterSource = findViewById(R.id.BUTTON_WATERSOURCE_ACTIVITY);
         waterSource.setOnClickListener(this);
     }
 
@@ -37,11 +37,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent = new Intent(MainActivity.this, TabHostActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.BUTTON_REPORT_DETAILS_ACTIVITY:
+            case R.id.BUTTON_LIST_WATERSAMPLES_ACTIVITY:
+                startActivity(new Intent(MainActivity.this, ListWaterSamplesActivity.class));
 
                 break;
-            case R.id.BUTTON_WATER_SOURCE_ACTIVITY:
-                intent = new Intent(MainActivity.this, ListWaterSourceActivity.class);
+            case R.id.BUTTON_WATERSOURCE_ACTIVITY:
+                intent = new Intent(MainActivity.this, ListWaterSourcesActivity.class);
                 startActivity(intent);
                 break;
         }

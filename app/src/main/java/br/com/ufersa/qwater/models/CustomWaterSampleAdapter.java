@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.TextView;
 
 import java.util.Calendar;
 import java.util.List;
@@ -48,13 +47,13 @@ public class CustomWaterSampleAdapter extends BaseAdapter {
         WaterSample waterSample = waterSamples.get(position);
         //TODO implementar view holder pattern
         //pegando as referências das Views
-        TextView id = view.findViewById(R.id.id);
+       // TextView id = view.findViewById(R.id.id);
        // TextView normalSAR = view.findViewById(R.id.normalSAR);
        // TextView correctedSAR = view.findViewById(R.id.correctedSAR);
        // TextView createdAt = view.findViewById(R.id.createdAt);
 
         //populando as Views
-        id.setText(String.valueOf(waterSample.getWatID()));
+       //id.setText(String.valueOf(waterSample.getWatID()));
        // normalSAR.setText(String.valueOf(waterSample.getWatNormalSar()));
        // correctedSAR.setText(String.valueOf(waterSample.getWatCorrectedSar()));
 

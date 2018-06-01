@@ -13,12 +13,12 @@ import android.view.View;
 import java.util.List;
 
 import br.com.ufersa.qwater.R;
-import br.com.ufersa.qwater.beans.WaterSource;
+import br.com.ufersa.qwater.beans.WaterSample;
 import br.com.ufersa.qwater.database.AppDatabase;
 
 //referência recyclerView https://www.youtube.com/watch?v=CTBiwKlO5IU&t=2762s
 
-public class ListWaterSourceActivity extends AppCompatActivity {
+public class ListWaterSamplesActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
@@ -28,31 +28,31 @@ public class ListWaterSourceActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_water_source);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        setContentView(R.layout.activity_list_water_samples);
+        Toolbar toolbar = findViewById(R.id.LIST_WATERSAMPLES_TOOLBAR);//o toolbar está desabilitado no manifest
         setSupportActionBar(toolbar);
 
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         //prepara o bd
-        appDatabase = AppDatabase.getInstance(ListWaterSourceActivity.this);
+        appDatabase = AppDatabase.getInstance(ListWaterSamplesActivity.this);
 
-        AsyncRead asyncRead = new AsyncRead();
+        ListWaterSamplesActivity.AsyncRead asyncRead = new ListWaterSamplesActivity.AsyncRead();
         asyncRead.execute();
 
-        fab = findViewById(R.id.fab);
+        fab = findViewById(R.id.FAB_LIST_WATERSAMPLES);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ListWaterSourceActivity.this, CreateWaterSourceActivity.class));
+                startActivity(new Intent(ListWaterSamplesActivity.this, TabHostActivity.class));
 
             }
         });
     }
 
-    private class AsyncRead extends AsyncTask<Void, Void, List<WaterSource>>  {
-        //https://stackoverflow.com/questions/11833978/asynctask-pass-two-or-more-values-from-doinbackground-to-onpostexecute
+    private class AsyncRead extends AsyncTask<Void, Void, List<WaterSample>> {
+        // referência https://stackoverflow.com/questions/11833978/asynctask-pass-two-or-more-values-from-doinbackground-to-onpostexecute
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -60,23 +60,18 @@ public class ListWaterSourceActivity extends AppCompatActivity {
         }
 
         @Override
-        protected List<WaterSource> doInBackground(Void... voids) {
+        protected List<WaterSample> doInBackground(Void... voids) {
 
-            return appDatabase.waterSourceDao().getAll();
+            return appDatabase.waterSampleDao().getAll();
         }
 
         @Override
-        protected void onPostExecute(List<WaterSource> waterSources) {
-            adapter = new WaterSourceAdapter(waterSources);
+        protected void onPostExecute(List<WaterSample> waterSamples) {
+            adapter = new WaterSampleAdapter(waterSamples);
             recyclerView.setAdapter(adapter);
 
         }
     }
 
-
-    @Override
-    public void onBackPressed() {
-        startActivity(new Intent(ListWaterSourceActivity.this, MainActivity.class));
-    }
 
 }

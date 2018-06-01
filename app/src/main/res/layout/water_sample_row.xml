@@ -4,36 +4,10 @@
 
 
     <TextView
-        android:id="@+id/id"
-        android:layout_width="35dp"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:fontFamily="monospace"
-        android:gravity="center" />
-
-    <TextView
-        android:id="@+id/watNormalSar"
-        android:layout_width="70dp"
-        android:layout_height="match_parent"
-        android:layout_toRightOf="@+id/id"
-        android:fontFamily="monospace"
-        android:gravity="center" />
-
-    <TextView
-        android:id="@+id/watCorrectedSar"
-        android:layout_width="106dp"
-        android:layout_height="match_parent"
-        android:layout_toRightOf="@+id/watNormalSar"
-        android:fontFamily="monospace"
-        android:gravity="center" />
-
-    <TextView
-        android:id="@+id/watCreatedAt"
-        android:layout_width="110dp"
-        android:layout_height="match_parent"
-        android:layout_toRightOf="@+id/watCorrectedSar"
-        android:fontFamily="monospace"
-        android:gravity="center" />
+        android:id="@+id/TEXTVIEW_WATERSAMPLE_CORRECTEDSAR"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"/>
 
 
 </RelativeLayout>
