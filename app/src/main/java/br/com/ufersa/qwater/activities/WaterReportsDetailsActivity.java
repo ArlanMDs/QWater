@@ -9,18 +9,18 @@ import android.widget.TextView;
 import java.util.Calendar;
 
 import br.com.ufersa.qwater.R;
-import br.com.ufersa.qwater.beans.WaterSample;
+import br.com.ufersa.qwater.beans.WaterReport;
 
-public class WaterSamplesDetailsActivity extends AppCompatActivity {
+public class WaterReportsDetailsActivity extends AppCompatActivity {
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_water_sample_details);
+        setContentView(R.layout.activity_water_report_details);
 
         Intent i = getIntent();
-        final WaterSample waterSample = i.getParcelableExtra("waterSample");
+        final WaterReport waterReport = i.getParcelableExtra("waterReport");
 
         TextView cea = findViewById(R.id.DETAILS_CEA);
         TextView ca = findViewById(R.id.DETAILS_CA);
@@ -34,17 +34,17 @@ public class WaterSamplesDetailsActivity extends AppCompatActivity {
         TextView rasCorrigido = findViewById(R.id.DETAILS_RAS_CORRIGIDO);
         TextView createdAt = findViewById(R.id.DETAILS_CREATEDAT);
 
-        cea.setText(String.valueOf(waterSample.getWatCea()));
-        ca.setText(String.valueOf(waterSample.getWatCa()));
-        mg.setText(String.valueOf(waterSample.getWatMg()));
-        k.setText(String.valueOf(waterSample.getWatK()));
-        na.setText(String.valueOf(waterSample.getWatNa()));
-        co3.setText(String.valueOf(waterSample.getWatCo3()));
-        hco3.setText(String.valueOf(waterSample.getWatHco3()));
-        cl.setText(String.valueOf(waterSample.getWatCl()));
-        rasNormal.setText(String.valueOf(waterSample.getWatNormalSar()));
-        rasCorrigido.setText(String.valueOf(waterSample.getWatCorrectedSar()));
-        createdAt.setText(formatDate(waterSample.getWatCreatedAt()));
+        cea.setText(String.valueOf(waterReport.getWatCea()));
+        ca.setText(String.valueOf(waterReport.getWatCa()));
+        mg.setText(String.valueOf(waterReport.getWatMg()));
+        k.setText(String.valueOf(waterReport.getWatK()));
+        na.setText(String.valueOf(waterReport.getWatNa()));
+        co3.setText(String.valueOf(waterReport.getWatCo3()));
+        hco3.setText(String.valueOf(waterReport.getWatHco3()));
+        cl.setText(String.valueOf(waterReport.getWatCl()));
+        rasNormal.setText(String.valueOf(waterReport.getWatNormalSar()));
+        rasCorrigido.setText(String.valueOf(waterReport.getWatCorrectedSar()));
+        createdAt.setText(formatDate(waterReport.getWatCreatedAt()));
 
         Button delete = findViewById(R.id.DETAILS_DELETE_BUTTON);
 

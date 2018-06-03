@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.ListWaterSamplesActivity">
+    tools:context=".activities.ListWaterReportsActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -12,7 +12,7 @@
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/LIST_WATERSAMPLES_TOOLBAR"
+            android:id="@+id/LIST_WATER_REPORTS_TOOLBAR"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
@@ -20,15 +20,17 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_water_sample" />
+    <include layout="@layout/content_water_report" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/FAB_LIST_WATERSAMPLES"
+        android:id="@+id/FAB_LIST_WATER_REPORTS"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:backgroundTint="@android:color/holo_blue_light"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        android:background="@drawable/tubo_de_ensaio"
+        android:src="@android:drawable/ic_input_add"
+        android:tint="?attr/colorPrimaryDark"
+        app:backgroundTint="@color/accent_material_light_1" />
 
 </android.support.design.widget.CoordinatorLayout>

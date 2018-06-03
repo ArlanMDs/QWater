@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
                 break;
             case R.id.BUTTON_LIST_WATERSAMPLES_ACTIVITY:
-                startActivity(new Intent(MainActivity.this, ListWaterSamplesActivity.class));
+                startActivity(new Intent(MainActivity.this, ListWaterReportsActivity.class));
 
                 break;
             case R.id.BUTTON_WATERSOURCE_ACTIVITY:

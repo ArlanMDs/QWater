@@ -17,7 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import br.com.ufersa.qwater.R;
-import br.com.ufersa.qwater.beans.WaterSample;
+import br.com.ufersa.qwater.beans.WaterReport;
 import br.com.ufersa.qwater.fragments.Tab1;
 import br.com.ufersa.qwater.fragments.Tab2;
 
@@ -103,10 +103,10 @@ public class TabHostActivity extends AppCompatActivity implements Tab1.interface
     }
 
     @Override
-    public void sendData(WaterSample waterSample) {
+    public void sendData(WaterReport waterReport) {
         try {
             Tab2 frag = (Tab2) getSupportFragmentManager().findFragmentById(R.id.container);
-            frag.updateData(waterSample);
+            frag.updateData(waterReport);
         }catch (Exception e){
             e.printStackTrace();
         }

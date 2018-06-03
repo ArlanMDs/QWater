@@ -12,7 +12,7 @@ import android.arch.persistence.room.PrimaryKey;
         entity = WaterSource.class,
         parentColumns = "souName",
         childColumns = "wat_souName"))
-public class WaterSample {//TODO resolver o que fazer quando deletar um parent
+public class WaterReport {//TODO resolver o que fazer quando deletar um parent
 
     @PrimaryKey(autoGenerate = true)
     private int watID;
@@ -29,7 +29,7 @@ public class WaterSample {//TODO resolver o que fazer quando deletar um parent
     private long watCreatedAt; //A hora é criada no momento de inserir no banco
     private String wat_souName;
 
-    public WaterSample(){
+    public WaterReport(){
 
     }
 

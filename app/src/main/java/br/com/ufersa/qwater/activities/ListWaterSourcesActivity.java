@@ -29,7 +29,7 @@ public class ListWaterSourcesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_water_sources);
-        Toolbar toolbar = findViewById(R.id.LIST_WATERSOURCES_TOOLBAR);
+        Toolbar toolbar = findViewById(R.id.LIST_WATERSOURCES_TOOLBAR);//o toolbar está desabilitado no manifest
         setSupportActionBar(toolbar);
 
         recyclerView = findViewById(R.id.recycler_view);
