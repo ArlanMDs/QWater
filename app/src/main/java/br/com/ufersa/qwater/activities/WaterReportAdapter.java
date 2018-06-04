@@ -1,6 +1,9 @@
 package br.com.ufersa.qwater.activities;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,9 +18,11 @@ import br.com.ufersa.qwater.beans.WaterReport;
 class WaterReportAdapter extends RecyclerView.Adapter<WaterReportAdapter.ViewHolder>{
 
     List<WaterReport> waterReports;
+    private Context context;
 
-    public WaterReportAdapter(List<WaterReport> waterReports) {
+    public WaterReportAdapter(Context context, List<WaterReport> waterReports) {
         this.waterReports = waterReports;
+        this.context = context;
     }
 
     @NonNull
@@ -28,8 +33,20 @@ class WaterReportAdapter extends RecyclerView.Adapter<WaterReportAdapter.ViewHol
     }
 
     @Override
-    public void onBindViewHolder(@NonNull WaterReportAdapter.ViewHolder holder, int position) {
-        holder.correctedSAR.setText(String.valueOf(waterReports.get(position).getWatCorrectedSar()));
+    public void onBindViewHolder(@NonNull WaterReportAdapter.ViewHolder holder, final int position) {
+        //holder.reportSourceName.setText(String.valueOf(waterReports.get(position).getWatCorrectedSar()));
+        holder.reportSourceName.setText("Açude do caz");
+        // o listener passa o ID da amostra selecionada para a activity de detalhes
+        holder.parentLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               // Toast.makeText(context, String.valueOf(waterReports.get(position).getWatCa()), Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(context, WaterReportDetailsActivity.class);
+                intent.putExtra("waterReport",waterReports.get(position));
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -38,11 +55,14 @@ class WaterReportAdapter extends RecyclerView.Adapter<WaterReportAdapter.ViewHol
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
-        private TextView correctedSAR;
+        private TextView reportSourceName;
+        ConstraintLayout parentLayout;
 
         ViewHolder(View itemView){
             super(itemView);
-            correctedSAR = itemView.findViewById(R.id.TEXTVIEW_WATER_REPORT_CORRECTED_SAR);
+            reportSourceName = itemView.findViewById(R.id.TEXTVIEW_REPORT_SOURCE_NAME);
+            parentLayout = itemView.findViewById(R.id.LAYOUT_WATER_REPORT_ROW);
+
         }
     }
 }

@@ -42,6 +42,7 @@
             android:layout_width="270dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
+            android:layout_marginLeft="8dp"
             android:layout_marginRight="24dp"
             android:animateLayoutChanges="true"
             android:background="@drawable/customborder"
@@ -104,6 +105,7 @@
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.333"
                 app:layout_constraintStart_toEndOf="@+id/textView5"
                 app:layout_constraintTop_toBottomOf="@+id/EDIT_MG" />
 
@@ -183,11 +185,12 @@
             android:layout_width="270dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="4dp"
             android:background="@drawable/customborder"
             android:padding="2dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.589"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/layoutCations">
 
@@ -198,6 +201,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
+                android:padding="2dp"
                 android:text="@string/watHco3"
                 android:textColor="@android:color/black"
                 android:textSize="10sp"
@@ -230,6 +234,7 @@
                 android:layout_marginLeft="12dp"
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="16dp"
+                android:padding="2dp"
                 android:text="@string/watCo3"
                 android:textColor="@android:color/black"
                 android:textSize="12sp"
@@ -339,12 +344,12 @@
 
         <Button
             android:id="@+id/BUTTON_CALCULATE"
-            android:layout_width="97dp"
-            android:layout_height="44dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="Calcular"
+            android:text="analisar amostra"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/layoutCEa" />

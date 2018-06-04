@@ -3,16 +3,20 @@ package br.com.ufersa.qwater.beans;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.PrimaryKey;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-//Tutorial da relação one-to-many no Romm:
+// Tutorial da relação one-to-many no Romm:
 // https://www.bignerdranch.com/blog/room-data-storage-for-everyone/
-//https://medium.com/@tonyowen/room-entity-annotations-379150e1ca82
+// https://medium.com/@tonyowen/room-entity-annotations-379150e1ca82
+
+// O parcelable é usado para passar um objeto (waterReport) da activity que faz a listagem via RecyclerView para a activity de detalhes
 
 @Entity(foreignKeys = @ForeignKey(
         entity = WaterSource.class,
         parentColumns = "souName",
         childColumns = "wat_souName"))
-public class WaterReport {//TODO resolver o que fazer quando deletar um parent
+public class WaterReport implements Parcelable{//TODO resolver o que fazer quando deletar um parent
 
     @PrimaryKey(autoGenerate = true)
     private int watID;
@@ -26,12 +30,60 @@ public class WaterReport {//TODO resolver o que fazer quando deletar um parent
     private double watCea;
     private double watNormalSar;
     private double watCorrectedSar;
-    private long watCreatedAt; //A hora é criada no momento de inserir no banco
+    private long watDate; //A hora é criada no momento de inserir no banco
     private String wat_souName;
 
     public WaterReport(){
 
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(watID);
+        dest.writeDouble(watCa);
+        dest.writeDouble(watMg);
+        dest.writeDouble(watK);
+        dest.writeDouble(watNa);
+        dest.writeDouble(watCo3);
+        dest.writeDouble(watHco3);
+        dest.writeDouble(watCl);
+        dest.writeDouble(watCea);
+        dest.writeDouble(watNormalSar);
+        dest.writeDouble(watCorrectedSar);
+        dest.writeLong(watDate);
+    }
+
+    protected WaterReport(Parcel in) {
+        watID = in.readInt();
+        watCa = in.readDouble();
+        watMg = in.readDouble();
+        watK = in.readDouble();
+        watNa = in.readDouble();
+        watCo3 = in.readDouble();
+        watHco3 = in.readDouble();
+        watCl = in.readDouble();
+        watCea = in.readDouble();
+        watNormalSar = in.readDouble();
+        watCorrectedSar = in.readDouble();
+        watDate = in.readLong();
+    }
+
+    public static final Creator<WaterReport> CREATOR = new Creator<WaterReport>() {
+        @Override
+        public WaterReport createFromParcel(Parcel in) {
+            return new WaterReport(in);
+        }
+
+        @Override
+        public WaterReport[] newArray(int size) {
+            return new WaterReport[size];
+        }
+    };
 
     public void setWatID(int watID){
         this.watID = watID;
@@ -121,12 +173,12 @@ public class WaterReport {//TODO resolver o que fazer quando deletar um parent
         this.watNormalSar = watNormalSar;
     }
 
-    public long getWatCreatedAt() {
-        return watCreatedAt;
+    public long getWatDate() {
+        return watDate;
     }
 
-    public void setWatCreatedAt(long watCreatedAt) {
-        this.watCreatedAt = watCreatedAt;
+    public void setWatDate(long watDate) {
+        this.watDate = watDate;
     }
 
     public String getWat_souName() {

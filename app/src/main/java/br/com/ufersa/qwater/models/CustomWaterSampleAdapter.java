@@ -58,7 +58,7 @@ public class CustomWaterSampleAdapter extends BaseAdapter {
        // correctedSAR.setText(String.valueOf(waterReport.getWatCorrectedSar()));
 
          try {
-        //     createdAt.setText(formatDate(waterReport.getWatCreatedAt()));
+        //     createdAt.setText(formatDate(waterReport.getWatDate()));
          }catch (Exception e){
              e.printStackTrace();
         //     createdAt.setText("-1");

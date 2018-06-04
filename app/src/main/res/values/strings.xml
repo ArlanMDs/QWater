@@ -34,7 +34,7 @@
     <string name="relacaoTabela">Relação de adsorção de sódio corrigida</string>
     <string name="verDetalhesCea">Classificação da CE<small>a</small></string>
     <string name="verDetalhesRASCorrigido">Classificação do RAS corrigido</string>
-    <string name="watCorrectedSar">RAS corrigido: </string>
+    <string name="watCorrectedSar">RAS corrigida</string>
     <string name="classeSalinidade">Classe de Salinidade: </string>
     <string name="classificacao">Classificação: </string>
     <string name="salvarRelatorio">Salvar Relatório</string>
@@ -45,7 +45,7 @@
     <string name="CEa2" translatable="false">CE<small>a</small></string>
     <string name="watHco3" translatable="false">HCO<sub><small>3</small></sub></string>
     <string name="watCo3" translatable="false">CO<sub><small>3</small></sub></string>
-    <string name="RAS">RAS:</string>
+    <string name="RAS">RAS</string>
 
     <!-- a ordem dos itens afeta o método formatUnits, em SARCalculator -->
     <string-array name="molecules" translatable="false">

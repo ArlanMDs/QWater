@@ -19,7 +19,7 @@
         <activity android:name=".activities.MainActivity" />
 
         <activity
-            android:name=".activities.WaterReportsDetailsActivity"
+            android:name=".activities.WaterReportDetailsActivity"
             android:noHistory="true" />
         <activity
             android:name=".activities.SplashActivity"

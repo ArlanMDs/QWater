@@ -67,7 +67,7 @@ public class ListWaterReportsActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(List<WaterReport> waterReports) {
-            adapter = new WaterReportAdapter(waterReports);
+            adapter = new WaterReportAdapter(getApplicationContext(),waterReports);
             recyclerView.setAdapter(adapter);
 
         }
