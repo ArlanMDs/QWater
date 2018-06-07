@@ -34,31 +34,35 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/DETAILS_MG"
+                android:id="@+id/MG_DETAILS"
                 android:layout_width="wrap_content"
                 android:layout_height="22dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
                 android:ems="4"
                 android:gravity="center"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="@+id/DETAILS_NA"
+                app:layout_constraintStart_toEndOf="@+id/textView9"
                 app:layout_constraintTop_toTopOf="@+id/textView9" />
 
             <TextView
-                android:id="@+id/DETAILS_CA"
+                android:id="@+id/CA_DETAILS"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
                 android:ems="4"
                 android:gravity="center"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="@+id/DETAILS_CL"
+                app:layout_constraintStart_toEndOf="@+id/textView10"
                 app:layout_constraintTop_toTopOf="@+id/textView10" />
 
             <TextView
-                android:id="@+id/DETAILS_NA"
+                android:id="@+id/NA_DETAILS"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="4"
@@ -66,11 +70,11 @@
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="@+id/DETAILS_HCO3"
+                app:layout_constraintStart_toStartOf="@+id/MG_DETAILS"
                 app:layout_constraintTop_toTopOf="@+id/textView5" />
 
             <TextView
-                android:id="@+id/DETAILS_K"
+                android:id="@+id/PH_DETAILS"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="4"
@@ -78,11 +82,23 @@
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="@+id/DETAILS_CO3"
+                app:layout_constraintStart_toStartOf="@+id/NA_DETAILS"
+                app:layout_constraintTop_toTopOf="@+id/textView15" />
+
+            <TextView
+                android:id="@+id/K_DETAILS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="4"
+                android:gravity="center"
+                android:textColor="@android:color/black"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@+id/CL_DETAILS"
                 app:layout_constraintTop_toTopOf="@+id/textView7" />
 
             <TextView
-                android:id="@+id/DETAILS_CL"
+                android:id="@+id/CL_DETAILS"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="4"
@@ -90,11 +106,11 @@
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="@+id/DETAILS_K"
+                app:layout_constraintStart_toStartOf="@+id/CA_DETAILS"
                 app:layout_constraintTop_toTopOf="@+id/textView8" />
 
             <TextView
-                android:id="@+id/DETAILS_HCO3"
+                android:id="@+id/HCO3_DETAILS"
                 android:layout_width="67dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
@@ -108,17 +124,15 @@
                 app:layout_constraintTop_toTopOf="@+id/textView11" />
 
             <TextView
-                android:id="@+id/DETAILS_CO3"
+                android:id="@+id/CO3_DETAILS"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginStart="8dp"
                 android:ems="4"
                 android:gravity="center"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="14sp"
-                app:layout_constraintStart_toEndOf="@+id/textView12"
+                app:layout_constraintStart_toStartOf="@+id/K_DETAILS"
                 app:layout_constraintTop_toTopOf="@+id/textView12" />
 
             <TextView
@@ -144,15 +158,25 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
             <TextView
+                android:id="@+id/textView15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="pH"
+                android:textColor="@android:color/black"
+                app:layout_constraintStart_toStartOf="@+id/textView9"
+                app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+            <TextView
                 android:id="@+id/textView9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="32dp"
-                android:layout_marginStart="32dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
                 android:text="Mg"
                 android:textColor="@android:color/black"
-                app:layout_constraintStart_toEndOf="@+id/DETAILS_CA"
-                app:layout_constraintTop_toTopOf="@+id/DETAILS_CA" />
+                app:layout_constraintStart_toEndOf="@+id/CA_DETAILS"
+                app:layout_constraintTop_toTopOf="@+id/CA_DETAILS" />
 
             <TextView
                 android:id="@+id/textView7"
@@ -178,12 +202,13 @@
                 android:id="@+id/textView11"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:padding="2dp"
                 android:text="@string/watHco3"
                 android:textColor="@android:color/black"
                 android:textSize="10sp"
                 app:layout_constraintStart_toStartOf="@+id/textView5"
-                app:layout_constraintTop_toTopOf="@+id/DETAILS_CO3" />
+                app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
             <TextView
                 android:id="@+id/textView12"
@@ -212,7 +237,7 @@
             app:layout_constraintTop_toBottomOf="@+id/layoutCations">
 
             <TextView
-                android:id="@+id/DETAILS_CEA"
+                android:id="@+id/CEA_DETAILS"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="4"
@@ -220,24 +245,21 @@
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="@+id/DETAILS_RAS"
+                app:layout_constraintStart_toStartOf="@+id/RAS_DETAILS"
                 app:layout_constraintTop_toTopOf="@+id/ras" />
 
             <TextView
                 android:id="@+id/ras"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
                 android:layout_marginTop="16dp"
                 android:text="@string/CEa2"
                 android:textColor="@android:color/black"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textView13"
-                app:layout_constraintTop_toBottomOf="@+id/textView13"
-                app:layout_constraintVertical_bias="0.561" />
+                app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
             <TextView
-                android:id="@+id/DETAILS_RAS"
+                android:id="@+id/RAS_DETAILS"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
@@ -252,7 +274,7 @@
 
 
             <TextView
-                android:id="@+id/DETAILS_RAS_CORRIGIDO"
+                android:id="@+id/CORRECTED_SAR_DETAILS"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
@@ -285,8 +307,8 @@
                 android:layout_marginStart="16dp"
                 android:text="@string/watCorrectedSar"
                 android:textColor="@android:color/black"
-                app:layout_constraintStart_toEndOf="@+id/DETAILS_RAS"
-                app:layout_constraintTop_toTopOf="@+id/DETAILS_RAS" />
+                app:layout_constraintStart_toEndOf="@+id/RAS_DETAILS"
+                tools:layout_editor_absoluteY="4dp" />
 
             <TextView
                 android:id="@+id/textView14"
@@ -295,10 +317,10 @@
                 android:text="Data"
                 android:textColor="@android:color/black"
                 app:layout_constraintStart_toStartOf="@+id/ras2"
-                app:layout_constraintTop_toTopOf="@+id/DETAILS_CEA" />
+                app:layout_constraintTop_toTopOf="@+id/CEA_DETAILS" />
 
             <TextView
-                android:id="@+id/DETAILS_CREATEDAT"
+                android:id="@+id/CREATED_AT_DETAILS"
                 android:layout_width="87dp"
                 android:layout_height="19dp"
                 android:layout_marginLeft="8dp"

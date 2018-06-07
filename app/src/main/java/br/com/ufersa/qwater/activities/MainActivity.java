@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        //TODO caso o app não tenha locais registrados, mudar o nome do botão que leva para a lista de locais. "Registrar fonte de água" caso não tenha, e "listar fontes", caso possua.
         findViewsIds();
 
     }

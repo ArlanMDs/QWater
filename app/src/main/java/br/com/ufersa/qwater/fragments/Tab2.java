@@ -20,17 +20,20 @@ import java.math.RoundingMode;
 import java.text.NumberFormat;
 
 import br.com.ufersa.qwater.R;
+import br.com.ufersa.qwater.activities.CreateWaterReportActivity;
 import br.com.ufersa.qwater.activities.PopupGraphActivity;
 import br.com.ufersa.qwater.beans.WaterReport;
 import br.com.ufersa.qwater.database.AppDatabase;
+import br.com.ufersa.qwater.models.SARCalculator;
 
 public class Tab2 extends Fragment implements View.OnClickListener {
 
-    private Button btnSARDetails, btnSalinityDetails, btnSaveReport;
-    private TextView txtviewCorrectedSARResult, txtviewNormalSARResult, salinityResult, txtviewSARClassification, txtviewCEaValue;
+    private Button SARButton, salinityButton, saveReportButton;
+    private TextView correctedSARResultTextview, normalSARResultTextview, salinityTextview, SARClassificationTextview, ceaTextview;
     private int currentSARClassification, currentSalinityClassification;
     private WaterReport waterReport;
     private AppDatabase appDatabase;
+    private final static int REQUEST_CODE_CREATE_REPORT = 1;
 
     @Nullable
     @Override
@@ -43,7 +46,7 @@ public class Tab2 extends Fragment implements View.OnClickListener {
         super.onViewCreated(view, savedInstanceState);
 
         appDatabase = AppDatabase.getInstance(getContext());
-        findViewsIds();
+        initiate();
 
     }
 
@@ -53,8 +56,9 @@ public class Tab2 extends Fragment implements View.OnClickListener {
      */
     public void updateData(WaterReport waterReport){
 
-        waterReport.setWatNormalSar(formatFractionDigits(waterReport.getWatNormalSar()));
-        waterReport.setWatCorrectedSar(formatFractionDigits(waterReport.getWatCorrectedSar()));
+        waterReport.setWatNormalSar(calculateNormalSAR(waterReport.getWatCa(), waterReport.getWatMg(), waterReport.getWatNa()));
+        waterReport.setWatCorrectedSar(calculateCorrectedSAR(waterReport.getWatCa(),waterReport.getWatMg(),waterReport.getWatNa(),waterReport.getWatHco3(),waterReport.getWatCea()));
+
         // A classificação e armazenamento está sendo feito após o arredondamento das casas decimais!
         this.waterReport = waterReport;
         categorizeSAR(waterReport.getWatCorrectedSar());
@@ -63,12 +67,76 @@ public class Tab2 extends Fragment implements View.OnClickListener {
 
     }
 
+    /**
+     * Calcula a RAS normal
+     * @param ca cálcio
+     * @param mg magnésio
+     * @param na sódio
+     * @return valor da RAS normal ou zero em caso de erro
+     */
+    private double calculateNormalSAR(double ca, double mg, double na){
+        SARCalculator sarCalculator;
+
+        try {
+
+            sarCalculator = new SARCalculator(ca, mg, na);
+        }catch(Exception e){
+            Toast.makeText(getContext(), getString(R.string.valorIncorreto), Toast.LENGTH_LONG).show();
+            sarCalculator = null;
+        }
+        if(sarCalculator != null)
+            return formatFractionDigits(sarCalculator.calculateNormalSAR(1));//TODO implementar as conversões do spinner
+
+        return 0.0;
+    }
+
+    /**
+     * Calcula a RAS corrigida
+     * @param ca cálcio
+     * @param mg magnésio
+     * @param na sódio
+     * @param hco3 bicarbonato
+     * @param cea condutividade elétrica
+     * @return valor da RAS corrigida, zero em caso de erro.
+     */
+    private double calculateCorrectedSAR(double ca, double mg, double na, double hco3, double cea) {
+        SARCalculator sarCalculator;
+        try {
+            sarCalculator = new SARCalculator(ca, mg, na, cea, hco3);
+        }catch(Exception e){
+            Toast.makeText(getContext(), getString(R.string.valorIncorreto), Toast.LENGTH_LONG).show();
+            sarCalculator = null;
+        }
+        if(sarCalculator != null)
+            return formatFractionDigits(sarCalculator.calculateCorrectedSAR(1, 1));//TODO implementar as conversões dos spinners
+
+        return 0.0;
+    }
+
+
     private void updateTextViews(){
         //insere os valores nos campos de texto
-        showNormalSAR(waterReport.getWatNormalSar());
-        showCorrectedSAR(waterReport.getWatCorrectedSar());
+        if(waterReport.getWatNormalSar() != 0)
+            normalSARResultTextview.setText(String.valueOf(waterReport.getWatNormalSar()));
+        else
+            normalSARResultTextview.setText("Não foi possível calcular a RAS normal");
 
-        showSalinityClassification(waterReport.getWatCea());
+        if(waterReport.getWatCorrectedSar() != 0) {
+            SARButton.setVisibility(View.VISIBLE);
+
+            correctedSARResultTextview.setText(String.valueOf(waterReport.getWatCorrectedSar()));
+            SARClassificationTextview.setText("S" + String.valueOf(currentSARClassification));
+
+        }else{
+            correctedSARResultTextview.setText("Não foi possível calcular a RAS corrigida");
+        }
+
+        if(waterReport.getWatCea() != 0) {
+            salinityButton.setVisibility(View.VISIBLE);
+
+            ceaTextview.setText(String.valueOf(waterReport.getWatCea()));
+            salinityTextview.setText("C" + String.valueOf(currentSalinityClassification));
+        }
     }
 
     private double formatFractionDigits(double value){
@@ -130,51 +198,23 @@ public class Tab2 extends Fragment implements View.OnClickListener {
                 .show();
     }
 
-    /**
-     * classifica a salinidade de acordo com os intervalos dados
-     * @param CEa parametro de classificação
-     */
-    private void showSalinityClassification(double CEa) {
-
-        btnSalinityDetails.setVisibility(View.VISIBLE);
-
-        txtviewCEaValue.setText(String.valueOf(CEa));
-        salinityResult.setText("C" + String.valueOf(currentSalinityClassification));
-    }
-
-    private void showNormalSAR(double nomalSAR){
-        txtviewNormalSARResult.setText(String.valueOf(nomalSAR));
-    }
-
-    /**
-     * classifica o valor do RAS entre intervalos
-     * @param correctedSAR valor do RAS
-     */
-    private void showCorrectedSAR(Double correctedSAR) {
-
-        btnSARDetails.setVisibility(View.VISIBLE);
-
-        txtviewCorrectedSARResult.setText(String.valueOf(correctedSAR));
-        txtviewSARClassification.setText("S" + String.valueOf(currentSARClassification));
-    }
-
-    private void findViewsIds() {
+    private void initiate() {
         View view = getView();
 
-        txtviewCorrectedSARResult = view.findViewById(R.id.TEXTVIEW_CORRECTED_SAR_RESULT);
-        txtviewNormalSARResult = view.findViewById(R.id.txtviewNormalSARResult);
-        txtviewSARClassification = view.findViewById(R.id.TEXTVIEW_SAR_CLASSIFICATION);
-        txtviewCEaValue = view.findViewById(R.id.txtviewCEaValue);
-        salinityResult = view.findViewById(R.id.txtviewSalinityResults);
+        correctedSARResultTextview = view.findViewById(R.id.CORRECTED_SAR_RESULT_TEXTVIEW);
+        normalSARResultTextview = view.findViewById(R.id.NORMAL_SAR_RESULT_TEXTVIEW);
+        SARClassificationTextview = view.findViewById(R.id.SAR_CLASSIFICATION_TEXTVIEW);
+        ceaTextview = view.findViewById(R.id.CEA_TEXTVIEW);
+        salinityTextview = view.findViewById(R.id.SALINITY_TEXTVIEW);
 
-        btnSARDetails = view.findViewById(R.id.BUTTON_SAR_DETAILS);
-        btnSARDetails.setOnClickListener(this);
+        SARButton = view.findViewById(R.id.SAR_DETAILS_BUTTON);
+        SARButton.setOnClickListener(this);
 
-        btnSalinityDetails = view.findViewById(R.id.buttonSalinityDetails);
-        btnSalinityDetails.setOnClickListener(this);
+        salinityButton = view.findViewById(R.id.SALINITY_BUTTON);
+        salinityButton.setOnClickListener(this);
 
-        btnSaveReport = view.findViewById(R.id.BUTTON_SAVE_WATER_REPORT);
-        btnSaveReport.setOnClickListener(this);
+        saveReportButton = view.findViewById(R.id.SAVE_WATER_REPORT_BUTTON);
+        saveReportButton.setOnClickListener(this);
 
         Button showHideGraph1 = view.findViewById(R.id.SHOW_HIDE_GRAPH1);
         showHideGraph1.setOnClickListener(this);
@@ -194,28 +234,42 @@ public class Tab2 extends Fragment implements View.OnClickListener {
             buscar o valor em strings.xml e montar a tela de dialog.
              */
 
-            case R.id.BUTTON_SAR_DETAILS:
+            case R.id.SAR_DETAILS_BUTTON:
                 showInfoDialogue("S" + currentSARClassification);
 
                 break;
-            case R.id.buttonSalinityDetails:
+            case R.id.SALINITY_BUTTON:
                 showInfoDialogue("C" + currentSalinityClassification);
 
                 break;
-            case R.id.BUTTON_SAVE_WATER_REPORT:
-                //Abrir uma nova activity, igual a about, perguntar em qual
-                new AsyncInsert().execute();
+            case R.id.SAVE_WATER_REPORT_BUTTON:
+
+                //abre uma nova activity e passa o relatório, lá, será inserida a data da amostra e o nome da fonte
+                Intent intent = new Intent(getContext(), CreateWaterReportActivity.class);
+                intent.putExtra("waterReport", waterReport);
+                startActivityForResult(intent, REQUEST_CODE_CREATE_REPORT);
+
+                //new AsyncInsert().execute();
 
                 break;
             case R.id.SHOW_HIDE_GRAPH1:
 
-                Intent intent = new Intent(getContext(), PopupGraphActivity.class);
-                startActivity(intent);
+                Intent intent2 = new Intent(getContext(), PopupGraphActivity.class);
+                startActivity(intent2);
                 break;
 
         }
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch(requestCode) {
+            case REQUEST_CODE_CREATE_REPORT:
+                Toast.makeText(getContext(), "Relatório de análise salvo com sucesso", Toast.LENGTH_SHORT).show();
+                break; 
+        }
+    }
+    
     private class AsyncInsert extends AsyncTask<Void, Void, Void>  {
 
 

@@ -36,14 +36,15 @@ class WaterReportAdapter extends RecyclerView.Adapter<WaterReportAdapter.ViewHol
     public void onBindViewHolder(@NonNull WaterReportAdapter.ViewHolder holder, final int position) {
         //holder.reportSourceName.setText(String.valueOf(waterReports.get(position).getWatCorrectedSar()));
         holder.reportSourceName.setText("Açude do caz");
+
         // o listener passa o ID da amostra selecionada para a activity de detalhes
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // Toast.makeText(context, String.valueOf(waterReports.get(position).getWatCa()), Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(context, WaterReportDetailsActivity.class);
                 intent.putExtra("waterReport",waterReports.get(position));
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);//app deu crash, o log do erro pediu essa flag.
                 context.startActivity(intent);
             }
         });

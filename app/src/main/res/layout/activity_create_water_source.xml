@@ -145,7 +145,7 @@
 
 
         <Button
-            android:id="@+id/btn_start_location_updates"
+            android:id="@+id/BUTTON_START_LOCATION_UPDATES"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/obterLocalizacao"

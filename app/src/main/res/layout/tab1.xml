@@ -13,7 +13,7 @@
         android:layout_height="wrap_content">
 
         <Spinner
-            android:id="@+id/spinnerCEa"
+            android:id="@+id/CEA_SPINNER"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
@@ -27,7 +27,7 @@
             android:layout_marginLeft="8dp" />
 
         <Spinner
-            android:id="@+id/spinnerMolecules"
+            android:id="@+id/MOLECULES_SPINNER"
             android:layout_width="145dp"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
@@ -41,15 +41,12 @@
             android:id="@+id/layoutCations"
             android:layout_width="270dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="24dp"
+            android:layout_marginLeft="24dp"
             android:animateLayoutChanges="true"
             android:background="@drawable/customborder"
             android:padding="2dp"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinnerMolecules">
+            app:layout_constraintTop_toBottomOf="@+id/MOLECULES_SPINNER">
 
             <EditText
                 android:id="@+id/EDIT_MG"
@@ -73,8 +70,6 @@
                 android:id="@+id/EDIT_CA"
                 android:layout_width="68dp"
                 android:layout_height="39dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:ems="4"
                 android:freezesText="true"
@@ -84,18 +79,13 @@
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="14sp"
-                app:layout_constraintStart_toEndOf="@+id/textView10"
+                app:layout_constraintStart_toStartOf="@+id/EDIT_MG"
                 app:layout_constraintTop_toBottomOf="@+id/EDIT_MG" />
 
             <EditText
                 android:id="@+id/EDIT_NA"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginLeft="21dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginStart="21dp"
-                android:layout_marginTop="8dp"
                 android:ems="4"
                 android:freezesText="true"
                 android:gravity="center"
@@ -104,20 +94,15 @@
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.333"
-                app:layout_constraintStart_toEndOf="@+id/textView5"
-                app:layout_constraintTop_toBottomOf="@+id/EDIT_MG" />
+                app:layout_constraintStart_toStartOf="@+id/EDIT_K"
+                app:layout_constraintTop_toTopOf="@+id/EDIT_CA" />
 
             <EditText
                 android:id="@+id/EDIT_K"
                 android:layout_width="wrap_content"
                 android:layout_height="42dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginLeft="24dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginStart="32dp"
                 android:ems="4"
                 android:freezesText="true"
                 android:gravity="center"
@@ -126,9 +111,8 @@
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView7"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@+id/EDIT_MG" />
 
             <TextView
                 android:id="@+id/textView10"
@@ -146,13 +130,10 @@
                 android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="12dp"
                 android:text="Na"
                 android:textColor="@android:color/black"
-                app:layout_constraintStart_toEndOf="@+id/EDIT_CA"
-                app:layout_constraintTop_toBottomOf="@+id/EDIT_MG" />
+                app:layout_constraintStart_toStartOf="@+id/textView7"
+                app:layout_constraintTop_toTopOf="@+id/textView10" />
 
             <TextView
                 android:id="@+id/textView9"
@@ -172,11 +153,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
                 android:layout_marginStart="12dp"
-                android:layout_marginTop="16dp"
                 android:text="K"
                 android:textColor="@android:color/black"
                 app:layout_constraintStart_toEndOf="@+id/EDIT_MG"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@+id/textView9" />
 
         </android.support.constraint.ConstraintLayout>
 
@@ -184,28 +164,22 @@
             android:id="@+id/layoutAnions"
             android:layout_width="270dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="4dp"
             android:background="@drawable/customborder"
             android:padding="2dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/layoutCations"
             app:layout_constraintTop_toBottomOf="@+id/layoutCations">
 
             <TextView
                 android:id="@+id/textView11"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:padding="2dp"
                 android:text="@string/watHco3"
                 android:textColor="@android:color/black"
                 android:textSize="10sp"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textView8"
                 app:layout_constraintTop_toBottomOf="@+id/EDIT_CL" />
 
             <EditText
@@ -213,8 +187,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:ems="4"
                 android:freezesText="true"
@@ -224,32 +196,39 @@
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="14sp"
-                app:layout_constraintStart_toEndOf="@+id/textView11"
+                app:layout_constraintStart_toStartOf="@+id/EDIT_CL"
                 app:layout_constraintTop_toBottomOf="@+id/EDIT_CL" />
 
             <TextView
                 android:id="@+id/textView12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="2dp"
+                android:text="pH"
+                android:textColor="@android:color/black"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@+id/textView21"
+                app:layout_constraintTop_toTopOf="@+id/textView11" />
+
+            <TextView
+                android:id="@+id/textView21"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
                 android:layout_marginStart="12dp"
-                android:layout_marginTop="16dp"
                 android:padding="2dp"
                 android:text="@string/watCo3"
                 android:textColor="@android:color/black"
                 android:textSize="12sp"
                 app:layout_constraintStart_toEndOf="@+id/EDIT_CL"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@+id/textView8" />
 
             <EditText
                 android:id="@+id/EDIT_CO3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
                 android:layout_marginLeft="16dp"
-                android:layout_marginRight="8dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
                 android:ems="4"
                 android:freezesText="true"
                 android:gravity="center"
@@ -258,9 +237,23 @@
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView12"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@+id/EDIT_CL" />
+
+            <EditText
+                android:id="@+id/EDIT_PH"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="4"
+                android:freezesText="true"
+                android:gravity="center"
+                android:hint="pH"
+                android:inputType="numberDecimal"
+                android:textColor="@android:color/black"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@+id/EDIT_CO3"
+                app:layout_constraintTop_toTopOf="@+id/EDIT_HCO3" />
 
             <TextView
                 android:id="@+id/textView8"
@@ -293,6 +286,7 @@
                 app:layout_constraintStart_toEndOf="@+id/textView8"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="HardcodedText" />
+
         </android.support.constraint.ConstraintLayout>
 
         <android.support.constraint.ConstraintLayout
@@ -307,7 +301,7 @@
             android:padding="2dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinnerCEa">
+            app:layout_constraintTop_toBottomOf="@+id/CEA_SPINNER">
 
             <EditText
                 android:id="@+id/EDIT_CEA"
@@ -343,7 +337,7 @@
         </android.support.constraint.ConstraintLayout>
 
         <Button
-            android:id="@+id/BUTTON_CALCULATE"
+            android:id="@+id/ANALYZE_BUTTON"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"

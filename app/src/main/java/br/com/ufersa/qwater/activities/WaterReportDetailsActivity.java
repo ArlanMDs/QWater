@@ -12,31 +12,16 @@ import br.com.ufersa.qwater.beans.WaterReport;
 
 public class WaterReportDetailsActivity extends AppCompatActivity {
 
-    TextView cea ;
-    TextView ca ;
-    TextView mg;
-    TextView k ;
-    TextView na ;
-    TextView co3 ;
-    TextView hco3 ;
-    TextView cl ;
-    TextView rasNormal;
-    TextView rasCorrigido ;
-    TextView date;
+    private TextView cea, ca, mg, k, na, co3, hco3, cl, pH, normalSAR, correctedSAR, date;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_water_report_details);
 
-        findViewsIDs();
+        initiate();
 
         getIncomingIntent();
-
-
-
-
-
-
 
     }
 
@@ -45,33 +30,35 @@ public class WaterReportDetailsActivity extends AppCompatActivity {
 
             WaterReport waterReport = getIntent().getParcelableExtra("waterReport");
 
-                cea.setText(String.valueOf(waterReport.getWatCea()));
-                ca.setText(String.valueOf(waterReport.getWatCa()));
-                mg.setText(String.valueOf(waterReport.getWatMg()));
-                k.setText(String.valueOf(waterReport.getWatK()));
-                na.setText(String.valueOf(waterReport.getWatNa()));
-                co3.setText(String.valueOf(waterReport.getWatCo3()));
-                hco3.setText(String.valueOf(waterReport.getWatHco3()));
-                cl.setText(String.valueOf(waterReport.getWatCl()));
-                rasNormal.setText(String.valueOf(waterReport.getWatNormalSar()));
-                rasCorrigido.setText(String.valueOf(waterReport.getWatCorrectedSar()));
-                date.setText(formatDate(waterReport.getWatDate()));
+            cea.setText(String.valueOf(waterReport.getWatCea()));
+            ca.setText(String.valueOf(waterReport.getWatCa()));
+            mg.setText(String.valueOf(waterReport.getWatMg()));
+            k.setText(String.valueOf(waterReport.getWatK()));
+            na.setText(String.valueOf(waterReport.getWatNa()));
+            co3.setText(String.valueOf(waterReport.getWatCo3()));
+            hco3.setText(String.valueOf(waterReport.getWatHco3()));
+            cl.setText(String.valueOf(waterReport.getWatCl()));
+            pH.setText(String.valueOf(waterReport.getWatPH()));
+            normalSAR.setText(String.valueOf(waterReport.getWatNormalSar()));
+            correctedSAR.setText(String.valueOf(waterReport.getWatCorrectedSar()));
+            date.setText(formatDate(waterReport.getWatDate()));
         }
     }
 
-    private void findViewsIDs(){
-        cea = findViewById(R.id.DETAILS_CEA);
-        ca = findViewById(R.id.DETAILS_CA);
-        mg = findViewById(R.id.DETAILS_MG);
-        k = findViewById(R.id.DETAILS_K);
-        na = findViewById(R.id.DETAILS_NA);
-        co3 = findViewById(R.id.DETAILS_CO3);
-        hco3 = findViewById(R.id.DETAILS_HCO3);
-        cl = findViewById(R.id.DETAILS_CL);
-        rasNormal = findViewById(R.id.DETAILS_RAS);
-        rasCorrigido = findViewById(R.id.DETAILS_RAS_CORRIGIDO);
-        date = findViewById(R.id.DETAILS_CREATEDAT);
-        Button delete = findViewById(R.id.DETAILS_DELETE_BUTTON);
+    private void initiate(){
+        cea = findViewById(R.id.CEA_DETAILS);
+        ca = findViewById(R.id.CA_DETAILS);
+        mg = findViewById(R.id.MG_DETAILS);
+        k = findViewById(R.id.K_DETAILS);
+        na = findViewById(R.id.NA_DETAILS);
+        co3 = findViewById(R.id.CO3_DETAILS);
+        hco3 = findViewById(R.id.HCO3_DETAILS);
+        cl = findViewById(R.id.CL_DETAILS);
+        pH = findViewById(R.id.PH_DETAILS);
+        normalSAR = findViewById(R.id.RAS_DETAILS);
+        correctedSAR = findViewById(R.id.CORRECTED_SAR_DETAILS);
+        date = findViewById(R.id.CREATED_AT_DETAILS);
+        Button delete = findViewById(R.id.DETAILS_DELETE_BUTTON);//TODO implementar delete
 
     }
 

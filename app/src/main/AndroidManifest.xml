@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="br.com.ufersa.qwater">
 
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:name=".models.MyApp"
@@ -17,7 +17,6 @@
             android:label="@string/app_name"
             android:theme="@style/AppTheme" />
         <activity android:name=".activities.MainActivity" />
-
         <activity
             android:name=".activities.WaterReportDetailsActivity"
             android:noHistory="true" />
@@ -30,28 +29,27 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".activities.AboutActivity"
             android:theme="@style/AppTheme.PopupTheme" />
-
         <activity
             android:name=".activities.PopupGraphActivity"
             android:theme="@style/AppTheme.PopupTheme" />
-
         <activity
             android:name=".activities.ListWaterSourcesActivity"
             android:label="@string/title_activity_water_source"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".activities.ListWaterReportsActivity"
             android:label="@string/title_activity_water_sample"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:noHistory="true" />
+            android:noHistory="true"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activities.CreateWaterSourceActivity" />
 
-        <activity android:name=".activities.CreateWaterSourceActivity"/>
-
+        <activity
+            android:name=".activities.CreateWaterReportActivity"
+            android:theme="@style/AppTheme.PopupTheme"
+            />
     </application>
 
 </manifest>

@@ -56,9 +56,6 @@ import br.com.ufersa.qwater.BuildConfig;
 import br.com.ufersa.qwater.R;
 import br.com.ufersa.qwater.beans.WaterSource;
 import br.com.ufersa.qwater.database.AppDatabase;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 // referências: https://www.androidhive.info/2012/07/android-gps-location-manager-tutorial/
 // https://android.jlelse.eu/room-store-your-data-c6d49b4d53a3
@@ -71,12 +68,10 @@ public class CreateWaterSourceActivity extends AppCompatActivity implements View
     private TextView longitudeTextView;
     private TextView addressTextView;
     private Button sourceOKButton;
+    private Button startUpdatesButton;
     private ConstraintLayout layoutAddress;
 
     private static final String TAG = MainActivity.class.getSimpleName();
-
-    @BindView(R.id.btn_start_location_updates)
-    Button btnStartUpdates;
 
     // location updates interval - 10sec
     private static final long UPDATE_INTERVAL_IN_MILLISECONDS = 10000;
@@ -104,12 +99,8 @@ public class CreateWaterSourceActivity extends AppCompatActivity implements View
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_water_source);
-        findViewsIDs();
 
-        ButterKnife.bind(this);
-        //TODO se livrar desse butterknife ou usar no projeto todo
-        // initialize the necessary libraries
-        init();
+        initiate();
 
         // restore the values from saved instance state
         restoreValuesFromBundle(savedInstanceState);
@@ -119,7 +110,7 @@ public class CreateWaterSourceActivity extends AppCompatActivity implements View
 
     }
 
-    private void findViewsIDs(){
+    private void initiate(){
 
         nameTextView = findViewById(R.id.EDIT_SOURCE_NAME);
         typeTextView = findViewById(R.id.EDIT_SOURCE_TYPE);
@@ -128,8 +119,36 @@ public class CreateWaterSourceActivity extends AppCompatActivity implements View
         addressTextView = findViewById(R.id.EDIT_SOURCE_ADDRESS);
         layoutAddress = findViewById(R.id.LAYOUT_SOURCE_ADDRESS);
 
+        startUpdatesButton = findViewById(R.id.BUTTON_START_LOCATION_UPDATES);
+        startUpdatesButton.setOnClickListener(this);
+
         sourceOKButton = findViewById(R.id.SOURCE_OK_BUTTON);
         sourceOKButton.setOnClickListener(this);
+
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        mSettingsClient = LocationServices.getSettingsClient(this);
+
+        mLocationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                super.onLocationResult(locationResult);
+                // location is received
+                mCurrentLocation = locationResult.getLastLocation();
+
+                updateLocationUI();
+            }
+        };
+
+        mRequestingLocationUpdates = false;
+
+        mLocationRequest = new LocationRequest();
+        mLocationRequest.setInterval(UPDATE_INTERVAL_IN_MILLISECONDS);
+        mLocationRequest.setFastestInterval(FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+
+        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder();
+        builder.addLocationRequest(mLocationRequest);
+        mLocationSettingsRequest = builder.build();
     }
 
     @Override
@@ -142,6 +161,34 @@ public class CreateWaterSourceActivity extends AppCompatActivity implements View
 
                 AsyncInsert asyncInsert = new AsyncInsert();
                 asyncInsert.execute();
+                break;
+
+            case R.id.BUTTON_START_LOCATION_UPDATES:
+
+                // Requesting ACCESS_FINE_LOCATION using Dexter library
+                Dexter.withActivity(this)
+                        .withPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+                        .withListener(new PermissionListener() {
+                            @Override
+                            public void onPermissionGranted(PermissionGrantedResponse response) {
+                                mRequestingLocationUpdates = true;
+                                startLocationUpdates();
+                            }
+
+                            @Override
+                            public void onPermissionDenied(PermissionDeniedResponse response) {
+                                if (response.isPermanentlyDenied()) {
+                                    // open device settings when the permission is
+                                    // denied permanently
+                                    openSettings();
+                                }
+                            }
+
+                            @Override
+                            public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
+                                token.continuePermissionRequest();
+                            }
+                        }).check();
 
                 break;
         }
@@ -189,32 +236,6 @@ public class CreateWaterSourceActivity extends AppCompatActivity implements View
         }
     }
 
-    private void init() {
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-        mSettingsClient = LocationServices.getSettingsClient(this);
-
-        mLocationCallback = new LocationCallback() {
-            @Override
-            public void onLocationResult(LocationResult locationResult) {
-                super.onLocationResult(locationResult);
-                // location is received
-                mCurrentLocation = locationResult.getLastLocation();
-
-                updateLocationUI();
-            }
-        };
-
-        mRequestingLocationUpdates = false;
-
-        mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(UPDATE_INTERVAL_IN_MILLISECONDS);
-        mLocationRequest.setFastestInterval(FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS);
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-
-        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder();
-        builder.addLocationRequest(mLocationRequest);
-        mLocationSettingsRequest = builder.build();
-    }
 
     /**
      * Restoring values from saved instance state
@@ -293,16 +314,15 @@ public class CreateWaterSourceActivity extends AppCompatActivity implements View
         super.onSaveInstanceState(outState);
         outState.putBoolean("is_requesting_updates", mRequestingLocationUpdates);
         outState.putParcelable("last_known_location", mCurrentLocation);
-        //outState.putString("last_updated_on", mLastUpdateTime);
 
     }
 
     private void toggleButtons() {
         if (mRequestingLocationUpdates) {
-            btnStartUpdates.setEnabled(false);
+            startUpdatesButton.setEnabled(false);
 
         } else {
-            btnStartUpdates.setEnabled(true);
+            startUpdatesButton.setEnabled(true);
             sourceOKButton.setEnabled(false);
 
         }
@@ -358,34 +378,6 @@ public class CreateWaterSourceActivity extends AppCompatActivity implements View
                         updateLocationUI();
                     }
                 });
-    }
-
-    @OnClick(R.id.btn_start_location_updates)
-    public void startLocationButtonClick() {
-        // Requesting ACCESS_FINE_LOCATION using Dexter library
-        Dexter.withActivity(this)
-                .withPermission(Manifest.permission.ACCESS_FINE_LOCATION)
-                .withListener(new PermissionListener() {
-                    @Override
-                    public void onPermissionGranted(PermissionGrantedResponse response) {
-                        mRequestingLocationUpdates = true;
-                        startLocationUpdates();
-                    }
-
-                    @Override
-                    public void onPermissionDenied(PermissionDeniedResponse response) {
-                        if (response.isPermanentlyDenied()) {
-                            // open device settings when the permission is
-                            // denied permanently
-                            openSettings();
-                        }
-                    }
-
-                    @Override
-                    public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
-                        token.continuePermissionRequest();
-                    }
-                }).check();
     }
 
     public void stopLocationUpdates() {

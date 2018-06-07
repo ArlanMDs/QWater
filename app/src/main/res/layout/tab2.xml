@@ -38,7 +38,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
             <Button
-                android:id="@+id/BUTTON_SAVE_WATER_REPORT"
+                android:id="@+id/SAVE_WATER_REPORT_BUTTON"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_gravity="end"
@@ -60,7 +60,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/resultado"
                 android:textColor="@android:color/black"
-                app:layout_constraintEnd_toStartOf="@+id/BUTTON_SAVE_WATER_REPORT"
+                app:layout_constraintEnd_toStartOf="@+id/SAVE_WATER_REPORT_BUTTON"
                 app:layout_constraintHorizontal_bias="0.611"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -87,7 +87,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/TEXTVIEW_CORRECTED_SAR_RESULT"
+                android:id="@+id/CORRECTED_SAR_RESULT_TEXTVIEW"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
@@ -108,7 +108,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
 
             <TextView
-                android:id="@+id/TEXTVIEW_SAR_CLASSIFICATION"
+                android:id="@+id/SAR_CLASSIFICATION_TEXTVIEW"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
@@ -118,7 +118,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
 
             <Button
-                android:id="@+id/BUTTON_SAR_DETAILS"
+                android:id="@+id/SAR_DETAILS_BUTTON"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
@@ -147,7 +147,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
             <TextView
-                android:id="@+id/txtviewNormalSARResult"
+                android:id="@+id/NORMAL_SAR_RESULT_TEXTVIEW"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
@@ -156,7 +156,7 @@
                 android:freezesText="true"
                 android:textColor="@android:color/black"
                 app:layout_constraintStart_toEndOf="@+id/textView6"
-                app:layout_constraintTop_toBottomOf="@+id/TEXTVIEW_SAR_CLASSIFICATION" />
+                app:layout_constraintTop_toBottomOf="@+id/SAR_CLASSIFICATION_TEXTVIEW" />
 
         </android.support.constraint.ConstraintLayout>
 
@@ -184,7 +184,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/txtviewCEaValue"
+                android:id="@+id/CEA_TEXTVIEW"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
@@ -209,7 +209,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
             <TextView
-                android:id="@+id/txtviewSalinityResults"
+                android:id="@+id/SALINITY_TEXTVIEW"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
@@ -218,10 +218,10 @@
                 android:textColor="@android:color/black"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView2"
-                app:layout_constraintTop_toBottomOf="@+id/txtviewCEaValue" />
+                app:layout_constraintTop_toBottomOf="@+id/CEA_TEXTVIEW" />
 
             <Button
-                android:id="@+id/buttonSalinityDetails"
+                android:id="@+id/SALINITY_BUTTON"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"

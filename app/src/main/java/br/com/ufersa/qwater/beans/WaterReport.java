@@ -28,13 +28,26 @@ public class WaterReport implements Parcelable{//TODO resolver o que fazer quand
     private double watHco3;
     private double watCl;
     private double watCea;
+    private double watPH;
     private double watNormalSar;
     private double watCorrectedSar;
-    private long watDate; //A hora é criada no momento de inserir no banco
+    private long watDate; //A data é criada no momento de inserir no banco
     private String wat_souName;
 
     public WaterReport(){
 
+    }
+
+    public WaterReport(double watCa, double watMg, double watK, double watNa, double watCo3, double watHco3, double watCl, double watCea, double watPH) {
+        this.watCa = watCa;
+        this.watMg = watMg;
+        this.watK = watK;
+        this.watNa = watNa;
+        this.watCo3 = watCo3;
+        this.watHco3 = watHco3;
+        this.watCl = watCl;
+        this.watCea = watCea;
+        this.watPH = watPH;
     }
 
     @Override
@@ -53,6 +66,7 @@ public class WaterReport implements Parcelable{//TODO resolver o que fazer quand
         dest.writeDouble(watHco3);
         dest.writeDouble(watCl);
         dest.writeDouble(watCea);
+        dest.writeDouble(watPH);
         dest.writeDouble(watNormalSar);
         dest.writeDouble(watCorrectedSar);
         dest.writeLong(watDate);
@@ -68,6 +82,7 @@ public class WaterReport implements Parcelable{//TODO resolver o que fazer quand
         watHco3 = in.readDouble();
         watCl = in.readDouble();
         watCea = in.readDouble();
+        watPH = in.readDouble();
         watNormalSar = in.readDouble();
         watCorrectedSar = in.readDouble();
         watDate = in.readLong();
@@ -147,6 +162,14 @@ public class WaterReport implements Parcelable{//TODO resolver o que fazer quand
 
     public void setWatCl(double watCl) {
         this.watCl = watCl;
+    }
+
+    public double getWatPH() {
+        return watPH;
+    }
+
+    public void setWatPH(double watPH) {
+        this.watPH = watPH;
     }
 
     public double getWatCorrectedSar() {
