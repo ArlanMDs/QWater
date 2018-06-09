@@ -45,7 +45,7 @@ public class ListWaterReportsActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ListWaterReportsActivity.this, TabHostActivity.class));
+                startActivity(new Intent(ListWaterReportsActivity.this, CreateWaterReportActivity.class));
 
             }
         });

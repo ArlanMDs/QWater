@@ -1,17 +1,12 @@
-package br.com.ufersa.qwater.fragments;
-
+package br.com.ufersa.qwater.activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.view.LayoutInflater;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,13 +15,13 @@ import java.math.RoundingMode;
 import java.text.NumberFormat;
 
 import br.com.ufersa.qwater.R;
-import br.com.ufersa.qwater.activities.CreateWaterReportActivity;
-import br.com.ufersa.qwater.activities.PopupGraphActivity;
 import br.com.ufersa.qwater.beans.WaterReport;
 import br.com.ufersa.qwater.database.AppDatabase;
 import br.com.ufersa.qwater.models.SARCalculator;
 
-public class Tab2 extends Fragment implements View.OnClickListener {
+import static br.com.ufersa.qwater.models.MyApp.getContext;
+
+public class AnalizeWaterReportActivity extends AppCompatActivity implements View.OnClickListener{
 
     private Button SARButton, salinityButton, saveReportButton;
     private TextView correctedSARResultTextview, normalSARResultTextview, salinityTextview, SARClassificationTextview, ceaTextview;
@@ -34,20 +29,14 @@ public class Tab2 extends Fragment implements View.OnClickListener {
     private WaterReport waterReport;
     private AppDatabase appDatabase;
     private final static int REQUEST_CODE_CREATE_REPORT = 1;
-
-    @Nullable
+    
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.tab2, container, false);
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        appDatabase = AppDatabase.getInstance(getContext());
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_analize_water_report);
+        
         initiate();
-
+        getIncomingIntent();
     }
 
     /**
@@ -65,6 +54,13 @@ public class Tab2 extends Fragment implements View.OnClickListener {
         categorizeSalinity(waterReport.getWatCea());
         updateTextViews();
 
+    }
+
+    private void getIncomingIntent(){
+        if(getIntent().hasExtra("waterReport")) {
+
+            updateData((WaterReport) getIntent().getParcelableExtra("waterReport"));
+        }
     }
 
     /**
@@ -182,11 +178,11 @@ public class Tab2 extends Fragment implements View.OnClickListener {
 
         AlertDialog.Builder builder;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            builder = new AlertDialog.Builder(getContext(), android.R.style.Theme_Material_Dialog_Alert);
+            builder = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
         } else {
-            builder = new AlertDialog.Builder(getContext());
+            builder = new AlertDialog.Builder(this);
         }
-        int resourceId = getContext().getResources().getIdentifier(classificacao, "string", getContext().getPackageName());
+        int resourceId = this.getResources().getIdentifier(classificacao, "string", this.getPackageName());
         builder.setTitle(getString(R.string.classificacao)+ " " + classificacao)
                 .setMessage(getString(resourceId))
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
@@ -199,24 +195,24 @@ public class Tab2 extends Fragment implements View.OnClickListener {
     }
 
     private void initiate() {
-        View view = getView();
+        appDatabase = AppDatabase.getInstance(getContext());
 
-        correctedSARResultTextview = view.findViewById(R.id.CORRECTED_SAR_RESULT_TEXTVIEW);
-        normalSARResultTextview = view.findViewById(R.id.NORMAL_SAR_RESULT_TEXTVIEW);
-        SARClassificationTextview = view.findViewById(R.id.SAR_CLASSIFICATION_TEXTVIEW);
-        ceaTextview = view.findViewById(R.id.CEA_TEXTVIEW);
-        salinityTextview = view.findViewById(R.id.SALINITY_TEXTVIEW);
+        correctedSARResultTextview = findViewById(R.id.CORRECTED_SAR_RESULT_TEXTVIEW);
+        normalSARResultTextview = findViewById(R.id.NORMAL_SAR_RESULT_TEXTVIEW);
+        SARClassificationTextview = findViewById(R.id.SAR_CLASSIFICATION_TEXTVIEW);
+        ceaTextview = findViewById(R.id.CEA_TEXTVIEW);
+        salinityTextview = findViewById(R.id.SALINITY_TEXTVIEW);
 
-        SARButton = view.findViewById(R.id.SAR_DETAILS_BUTTON);
+        SARButton = findViewById(R.id.SAR_DETAILS_BUTTON);
         SARButton.setOnClickListener(this);
 
-        salinityButton = view.findViewById(R.id.SALINITY_BUTTON);
+        salinityButton = findViewById(R.id.SALINITY_BUTTON);
         salinityButton.setOnClickListener(this);
 
-        saveReportButton = view.findViewById(R.id.SAVE_WATER_REPORT_BUTTON);
+        saveReportButton = findViewById(R.id.SAVE_WATER_REPORT_BUTTON);
         saveReportButton.setOnClickListener(this);
 
-        Button showHideGraph1 = view.findViewById(R.id.SHOW_HIDE_GRAPH1);
+        Button showHideGraph1 = findViewById(R.id.SHOW_HIDE_GRAPH1);
         showHideGraph1.setOnClickListener(this);
 
     }
@@ -245,7 +241,7 @@ public class Tab2 extends Fragment implements View.OnClickListener {
             case R.id.SAVE_WATER_REPORT_BUTTON:
 
                 //abre uma nova activity e passa o relatório, lá, será inserida a data da amostra e o nome da fonte
-                Intent intent = new Intent(getContext(), CreateWaterReportActivity.class);
+                Intent intent = new Intent(AnalizeWaterReportActivity.this, StoreWaterReportActivity.class);
                 intent.putExtra("waterReport", waterReport);
                 startActivityForResult(intent, REQUEST_CODE_CREATE_REPORT);
 
@@ -254,7 +250,7 @@ public class Tab2 extends Fragment implements View.OnClickListener {
                 break;
             case R.id.SHOW_HIDE_GRAPH1:
 
-                Intent intent2 = new Intent(getContext(), PopupGraphActivity.class);
+                Intent intent2 = new Intent(AnalizeWaterReportActivity.this, PopupGraphActivity.class);
                 startActivity(intent2);
                 break;
 
@@ -266,32 +262,7 @@ public class Tab2 extends Fragment implements View.OnClickListener {
         switch(requestCode) {
             case REQUEST_CODE_CREATE_REPORT:
                 Toast.makeText(getContext(), "Relatório de análise salvo com sucesso", Toast.LENGTH_SHORT).show();
-                break; 
-        }
-    }
-    
-    private class AsyncInsert extends AsyncTask<Void, Void, Void>  {
-
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            waterReport.setWat_souName("aaaaa");
-
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-            appDatabase.waterReportDao().insert(waterReport);
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            Toast.makeText(getContext(), "Amostra inserida", Toast.LENGTH_SHORT).show();
-
+                break;
         }
     }
 

@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent;
         switch (v.getId()){
             case R.id.BUTTON_TABHOST_ACTIVITY:
-                intent = new Intent(MainActivity.this, TabHostActivity.class);
+                intent = new Intent(MainActivity.this, CreateWaterReportActivity.class);
                 startActivity(intent);
                 break;
             case R.id.BUTTON_LIST_WATERSAMPLES_ACTIVITY:
