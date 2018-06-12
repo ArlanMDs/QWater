@@ -1,4 +1,4 @@
-package br.com.ufersa.qwater.models;
+package br.com.ufersa.qwater.util;
 
 public class SARCalculator {
     private double ca;

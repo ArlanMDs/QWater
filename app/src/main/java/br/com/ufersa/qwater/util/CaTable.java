@@ -1,4 +1,4 @@
-package br.com.ufersa.qwater.models;
+package br.com.ufersa.qwater.util;
 
 /**
  * Created by Arlan on 28-Feb-18.

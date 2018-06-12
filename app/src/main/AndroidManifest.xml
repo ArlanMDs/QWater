@@ -5,14 +5,13 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
-        android:name=".models.MyApp"
+        android:name=".util.MyApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity android:name=".activities.MainActivity" />
         <activity
             android:name=".activities.WaterReportDetailsActivity"
@@ -46,10 +45,13 @@
             android:name=".activities.StoreWaterReportActivity"
             android:theme="@style/AppTheme.PopupTheme" />
         <activity android:name=".activities.CreateWaterReportActivity" />
-
         <activity
             android:name=".activities.AnalizeWaterReportActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.SelectDateActivity"
+            android:theme="@style/AppTheme.PopupTheme"
+            />
     </application>
 
 </manifest>

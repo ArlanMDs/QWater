@@ -82,8 +82,6 @@ public class CreateWaterReportActivity extends AppCompatActivity implements Adap
             waterReport.setWatPH(0);
 
         waterReport.setWatCea(getCeaInDs_m());
-        //waterReport.setWatNormalSar(normalSAR);
-        //waterReport.setWatCorrectedSar(correctedSAR);
 
         return waterReport;
     }

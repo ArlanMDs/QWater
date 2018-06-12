@@ -24,6 +24,7 @@ public class ListWaterSourcesActivity extends AppCompatActivity {
     private RecyclerView.Adapter adapter;
     private FloatingActionButton fab;
     private AppDatabase appDatabase;
+    private final static int REQUEST_CODE_ANALISE_ACTIVITY = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +33,7 @@ public class ListWaterSourcesActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.LIST_WATERSOURCES_TOOLBAR);//o toolbar está desabilitado no manifest
         setSupportActionBar(toolbar);
 
-        recyclerView = findViewById(R.id.recycler_view);
+        recyclerView = findViewById(R.id.WATER_SOURCE_RECYCLER_VIEW);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         //prepara o bd
@@ -67,13 +68,30 @@ public class ListWaterSourcesActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(List<WaterSource> waterSources) {
-            adapter = new WaterSourceAdapter(waterSources);
+            Intent intent = getIntent();
+
+            adapter = new WaterSourceAdapter(getCodeOfIncomingIntent(), ListWaterSourcesActivity.this, waterSources);
             recyclerView.setAdapter(adapter);
 
         }
     }
+    private int getCodeOfIncomingIntent(){
+        if(getIntent().hasExtra("callingActivity")) {
 
+            int code = getIntent().getIntExtra("callingActivity",0);
 
+            // Caso a activity que chamou é a de analize, escondo o fab para que não vá para a activity de criar
+            if(code == REQUEST_CODE_ANALISE_ACTIVITY )
+                fab.setVisibility(View.GONE);
+
+            return code;
+        }
+        else{
+            return 0;//TODO aqui é se quem chama é a mainactivity
+        }
+    }
+
+    //para nao voltar para a activity de coordenadas
     @Override
     public void onBackPressed() {
         startActivity(new Intent(ListWaterSourcesActivity.this, MainActivity.class));

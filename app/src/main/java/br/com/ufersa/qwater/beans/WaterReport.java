@@ -14,8 +14,8 @@ import android.os.Parcelable;
 
 @Entity(foreignKeys = @ForeignKey(
         entity = WaterSource.class,
-        parentColumns = "souName",
-        childColumns = "wat_souName"))
+        parentColumns = "souID",
+        childColumns = "wat_souID"))
 public class WaterReport implements Parcelable{//TODO resolver o que fazer quando deletar um parent
 
     @PrimaryKey(autoGenerate = true)
@@ -32,7 +32,9 @@ public class WaterReport implements Parcelable{//TODO resolver o que fazer quand
     private double watNormalSar;
     private double watCorrectedSar;
     private long watDate; //A data é criada no momento de inserir no banco
-    private String wat_souName;
+    private int wat_souID;
+    private String wat_souName;// Esse atributo poderia fazer parte da chave. No momento ele está aqui apenas para facilitar e eu não precisar fazer outra
+                            // consulta no banco na hora de exibir o nome da source durante a listagem dos reports
 
     public WaterReport(){
 
@@ -70,6 +72,8 @@ public class WaterReport implements Parcelable{//TODO resolver o que fazer quand
         dest.writeDouble(watNormalSar);
         dest.writeDouble(watCorrectedSar);
         dest.writeLong(watDate);
+        dest.writeInt(wat_souID);
+        dest.writeString(wat_souName);
     }
 
     protected WaterReport(Parcel in) {
@@ -86,6 +90,8 @@ public class WaterReport implements Parcelable{//TODO resolver o que fazer quand
         watNormalSar = in.readDouble();
         watCorrectedSar = in.readDouble();
         watDate = in.readLong();
+        wat_souID = in.readInt();
+        wat_souName = in.readString();
     }
 
     public static final Creator<WaterReport> CREATOR = new Creator<WaterReport>() {
@@ -202,6 +208,14 @@ public class WaterReport implements Parcelable{//TODO resolver o que fazer quand
 
     public void setWatDate(long watDate) {
         this.watDate = watDate;
+    }
+
+    public int getWat_souID() {
+        return wat_souID;
+    }
+
+    public void setWat_souID(int wat_souID) {
+        this.wat_souID = wat_souID;
     }
 
     public String getWat_souName() {

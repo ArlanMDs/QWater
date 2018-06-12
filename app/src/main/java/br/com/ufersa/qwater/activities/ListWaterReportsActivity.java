@@ -29,14 +29,8 @@ public class ListWaterReportsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_water_reports);
-        Toolbar toolbar = findViewById(R.id.LIST_WATER_REPORTS_TOOLBAR);//o toolbar está desabilitado no manifest
-        setSupportActionBar(toolbar);
 
-        recyclerView = findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        //prepara o bd
-        appDatabase = AppDatabase.getInstance(ListWaterReportsActivity.this);
+        initiate();
 
         ListWaterReportsActivity.AsyncRead asyncRead = new ListWaterReportsActivity.AsyncRead();
         asyncRead.execute();
@@ -49,6 +43,19 @@ public class ListWaterReportsActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void initiate(){
+        Toolbar toolbar = findViewById(R.id.LIST_WATER_REPORTS_TOOLBAR);//o toolbar está desabilitado no manifest
+        setSupportActionBar(toolbar);
+
+        recyclerView = findViewById(R.id.WATER_REPORT_RECYCLER_VIEW);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        //prepara o bd
+        appDatabase = AppDatabase.getInstance(ListWaterReportsActivity.this);
+
+
     }
 
     private class AsyncRead extends AsyncTask<Void, Void, List<WaterReport>> {

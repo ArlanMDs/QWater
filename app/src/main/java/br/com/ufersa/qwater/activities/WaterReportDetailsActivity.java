@@ -74,10 +74,4 @@ public class WaterReportDetailsActivity extends AppCompatActivity {
         return date;
     }
 
-    @Override
-    public void onBackPressed() {
-
-        super.onBackPressed();
-    }
-
 }

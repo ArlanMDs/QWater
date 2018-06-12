@@ -31,6 +31,6 @@ public interface WaterReportDao {
     @Delete
     void delete(WaterReport waterReport);
 
-    @Query("SELECT * FROM WaterReport WHERE wat_souName IS :wat_souName")
-    List<WaterReport> getWaterSampleForSite(int wat_souName);
+    @Query("SELECT * FROM WaterReport WHERE wat_souID IS :wat_souID")
+    List<WaterReport> getWaterSampleForSite(int wat_souID);
 }

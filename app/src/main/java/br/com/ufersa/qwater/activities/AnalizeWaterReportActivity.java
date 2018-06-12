@@ -2,6 +2,7 @@ package br.com.ufersa.qwater.activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -17,24 +18,29 @@ import java.text.NumberFormat;
 import br.com.ufersa.qwater.R;
 import br.com.ufersa.qwater.beans.WaterReport;
 import br.com.ufersa.qwater.database.AppDatabase;
-import br.com.ufersa.qwater.models.SARCalculator;
+import br.com.ufersa.qwater.util.SARCalculator;
 
-import static br.com.ufersa.qwater.models.MyApp.getContext;
+import static br.com.ufersa.qwater.util.MyApp.getContext;
 
 public class AnalizeWaterReportActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private Button SARButton, salinityButton, saveReportButton;
+    private Button SARButton;
+    private Button salinityButton;
     private TextView correctedSARResultTextview, normalSARResultTextview, salinityTextview, SARClassificationTextview, ceaTextview;
     private int currentSARClassification, currentSalinityClassification;
     private WaterReport waterReport;
     private AppDatabase appDatabase;
-    private final static int REQUEST_CODE_CREATE_REPORT = 1;
-    
+    private final static int REQUEST_CODE_SELECT_DATE = 1, REQUEST_CODE_SELECT_SOURCE = 2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_analize_water_report);
-        
+
+//        if (savedInstanceState != null) {
+//            isFragmentDisplayed = savedInstanceState.getBoolean(STATE_FRAGMENT);
+//
+//        }
         initiate();
         getIncomingIntent();
     }
@@ -209,12 +215,14 @@ public class AnalizeWaterReportActivity extends AppCompatActivity implements Vie
         salinityButton = findViewById(R.id.SALINITY_BUTTON);
         salinityButton.setOnClickListener(this);
 
-        saveReportButton = findViewById(R.id.SAVE_WATER_REPORT_BUTTON);
+        Button saveReportButton = findViewById(R.id.SAVE_WATER_REPORT_BUTTON);
         saveReportButton.setOnClickListener(this);
 
         Button showHideGraph1 = findViewById(R.id.SHOW_HIDE_GRAPH1);
         showHideGraph1.setOnClickListener(this);
 
+        //prepara o bd
+        appDatabase = AppDatabase.getInstance(AnalizeWaterReportActivity.this);
     }
 
     /**
@@ -240,12 +248,9 @@ public class AnalizeWaterReportActivity extends AppCompatActivity implements Vie
                 break;
             case R.id.SAVE_WATER_REPORT_BUTTON:
 
-                //abre uma nova activity e passa o relatório, lá, será inserida a data da amostra e o nome da fonte
-                Intent intent = new Intent(AnalizeWaterReportActivity.this, StoreWaterReportActivity.class);
-                intent.putExtra("waterReport", waterReport);
-                startActivityForResult(intent, REQUEST_CODE_CREATE_REPORT);
-
-                //new AsyncInsert().execute();
+                // abre uma nova activity e passa o relatório, lá, será inserida a data da amostra e o nome da fonte
+                Intent intent = new Intent(AnalizeWaterReportActivity.this, SelectDateActivity.class);
+                startActivityForResult(intent, REQUEST_CODE_SELECT_DATE);
 
                 break;
             case R.id.SHOW_HIDE_GRAPH1:
@@ -257,13 +262,65 @@ public class AnalizeWaterReportActivity extends AppCompatActivity implements Vie
         }
     }
 
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        // Save the state of the fragment (true=open, false=closed).
+        //savedInstanceState.putBoolean(STATE_FRAGMENT, isFragmentDisplayed);
+        super.onSaveInstanceState(savedInstanceState);
+    }
+
+
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch(requestCode) {
-            case REQUEST_CODE_CREATE_REPORT:
-                Toast.makeText(getContext(), "Relatório de análise salvo com sucesso", Toast.LENGTH_SHORT).show();
-                break;
+            case REQUEST_CODE_SELECT_DATE:
+
+                if(resultCode == RESULT_OK) {
+                    waterReport.setWatDate(data.getLongExtra("date", 0));
+
+                    Intent intent = new Intent(AnalizeWaterReportActivity.this, ListWaterSourcesActivity.class);
+                    intent.putExtra("callingActivity", 1);
+                    startActivityForResult(intent, REQUEST_CODE_SELECT_SOURCE);
+
+                }
+            break;
+
+            case REQUEST_CODE_SELECT_SOURCE:
+
+                if(resultCode == RESULT_OK) {
+                    waterReport.setWat_souID(data.getIntExtra("sourceID", 0));
+                    waterReport.setWat_souName(data.getStringExtra("sourceName"));
+
+                    // Pronto para armazenar no BD
+                    new AsyncInsert().execute();
+                }
+            break;
         }
     }
+
+    //TODO resolver o problema do leak https://stackoverflow.com/questions/44309241/warning-this-asynctask-class-should-be-static-or-leaks-might-occur
+    private class AsyncInsert extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+
+            appDatabase.waterReportDao().insert(waterReport);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+            Toast.makeText(AnalizeWaterReportActivity.this, "Relatório armazenado com sucesso.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 
 }

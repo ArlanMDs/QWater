@@ -7,8 +7,8 @@ import android.support.annotation.NonNull;
 @Entity
 public class WaterSource {
 
-    @PrimaryKey
-    @NonNull
+    @PrimaryKey(autoGenerate = true)
+    private int souID;
     private String souName;
     private String souType;
     private double souLatitude;
@@ -19,6 +19,14 @@ public class WaterSource {
         this.souType = souType;
         this.souLatitude = souLatitude;
         this.souLongitude = souLongitude;
+    }
+
+    public int getSouID() {
+        return souID;
+    }
+
+    public void setSouID(int souID) {
+        this.souID = souID;
     }
 
     public String getSouType() {

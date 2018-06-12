@@ -9,7 +9,7 @@
     tools:showIn="@layout/activity_list_water_reports">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
+        android:id="@+id/WATER_REPORT_RECYCLER_VIEW"
         android:layout_width="299dp"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"

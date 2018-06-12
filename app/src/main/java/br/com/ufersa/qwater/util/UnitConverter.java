@@ -1,4 +1,4 @@
-package br.com.ufersa.qwater.models;
+package br.com.ufersa.qwater.util;
 
 /**
  * Classe responsável por converter unidades de concentração

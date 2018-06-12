@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import br.com.ufersa.qwater.R;
@@ -34,9 +36,9 @@ class WaterReportAdapter extends RecyclerView.Adapter<WaterReportAdapter.ViewHol
 
     @Override
     public void onBindViewHolder(@NonNull WaterReportAdapter.ViewHolder holder, final int position) {
-        //holder.reportSourceName.setText(String.valueOf(waterReports.get(position).getWatCorrectedSar()));
-        holder.reportSourceName.setText("Açude do caz");
 
+        holder.reportSourceName.setText(waterReports.get(position).getWat_souName());
+        holder.reportDate.setText(longToDateFormat(waterReports.get(position).getWatDate()));
         // o listener passa o ID da amostra selecionada para a activity de detalhes
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,19 +52,26 @@ class WaterReportAdapter extends RecyclerView.Adapter<WaterReportAdapter.ViewHol
         });
     }
 
+    private String longToDateFormat(long longValue){
+
+        return new SimpleDateFormat("dd/MM/yyyy").format(new Date(longValue));
+
+    }
+
     @Override
     public int getItemCount() {
         return waterReports.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
-        private TextView reportSourceName;
+        private TextView reportSourceName, reportDate;
         ConstraintLayout parentLayout;
 
         ViewHolder(View itemView){
             super(itemView);
             reportSourceName = itemView.findViewById(R.id.TEXTVIEW_REPORT_SOURCE_NAME);
             parentLayout = itemView.findViewById(R.id.LAYOUT_WATER_REPORT_ROW);
+            reportDate = itemView.findViewById(R.id.TEXTVIEW_REPORT_DATE);
 
         }
     }
