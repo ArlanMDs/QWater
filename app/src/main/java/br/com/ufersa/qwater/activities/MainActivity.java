@@ -16,8 +16,7 @@ import android.view.View;
 
 import br.com.ufersa.qwater.R;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +35,7 @@ public class MainActivity extends AppCompatActivity
         });
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -84,13 +82,13 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.CREATE_SOURCE) {
-            startActivity(new Intent(MainActivity.this, CreateWaterSourceActivity.class));
+            startActivity(new Intent(getApplicationContext(), CreateWaterSourceActivity.class));
 
         } else if (id == R.id.CREATE_REPORT) {
-            startActivity(new Intent(MainActivity.this, CreateWaterReportActivity.class));
+            startActivity(new Intent(getApplicationContext(), CreateWaterReportActivity.class));
 
         } else if (id == R.id.LIST_REPORTS) {
-            startActivity(new Intent(MainActivity.this, ListWaterReportsActivity.class));
+            startActivity(new Intent(getApplicationContext(), ListWaterReportsActivity.class));
 
         } else if (id == R.id.nav_manage) {
 

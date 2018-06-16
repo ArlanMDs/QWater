@@ -51,7 +51,10 @@
         <activity
             android:name=".activities.StoreWaterReportActivity"
             android:theme="@style/AppTheme.PopupTheme" />
-        <activity android:name=".activities.CreateWaterReportActivity" />
+        <activity
+            android:name=".activities.CreateWaterReportActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity
             android:name=".activities.AnalizeWaterReportActivity"
             android:theme="@style/AppTheme.NoActionBar" />
