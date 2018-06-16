@@ -2,9 +2,9 @@
     <string name="app_name">QWater</string>
     <string name="action_configuracoes">Configurações</string>
     <string name="action_sobre">Sobre</string>
-    <string name="storeSample">Nova Amostra de Água</string>
-    <string name="savedWaterSamples">Amostras armazenadas</string>
-    <string name="registrarFonte">Registrar Fonte de Água</string>
+    <string name="novo_relatorio">Novo Relatório</string>
+    <string name="listar_relatorios">Listar Relatórios</string>
+    <string name="registrar_fonte">Registrar Fonte</string>
 
     <string name="S1" translatable="false">Água com baixo teor de sódio: pode ser usada para irrigação em quase todos os solos, com pouco perigo de desenvolvimento
         de problemas de sodificação.</string>
@@ -64,13 +64,24 @@
     <string name="valorIncorreto">Algum valor digitado está com formato incorreto</string>
     <string name="erroNaLeituraDeDados">Ocorreu algum erro watNa leitura dos dados</string>
     <string name="amostrasArmazenadas">Amostras de água armazenadas:</string>
-    <string name="title_activity_water_source">WaterSourceActivity</string>
+    <string name="title_activity_water_source">Fontes de água</string>
     <string name="title_activity_water_sample">WaterSampleActivity</string>
 
 
     <string name="obterLocalizacao">Obter Localização</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="escolher_a_data">Toque para escolher a data...</string>
+    <string name="informacao_da_data">Por favor, insira a data em que a análise de água foi feita</string>
+    <string name="escolher_fonte">Escolha a fonte da amostra</string>
+    <string name="Open">abrir</string>
+    <string name="Close">fechar</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_main">MainActivity</string>
 
 </resources>

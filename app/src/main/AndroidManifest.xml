@@ -12,7 +12,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.MainActivity" />
+
+        <activity
+            android:name=".activities.MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity
             android:name=".activities.WaterReportDetailsActivity"
             android:noHistory="true" />
@@ -40,7 +45,9 @@
             android:label="@string/title_activity_water_sample"
             android:noHistory="true"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activities.CreateWaterSourceActivity" />
+        <activity
+            android:name=".activities.CreateWaterSourceActivity"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".activities.StoreWaterReportActivity"
             android:theme="@style/AppTheme.PopupTheme" />
@@ -50,8 +57,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.SelectDateActivity"
-            android:theme="@style/AppTheme.PopupTheme"
-            />
+            android:theme="@style/AppTheme.PopupTheme" />
     </application>
 
 </manifest>

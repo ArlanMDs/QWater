@@ -24,14 +24,17 @@ public class ListWaterSourcesActivity extends AppCompatActivity {
     private RecyclerView.Adapter adapter;
     private FloatingActionButton fab;
     private AppDatabase appDatabase;
+    private Toolbar toolbar;
     private final static int REQUEST_CODE_ANALISE_ACTIVITY = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_water_sources);
-        Toolbar toolbar = findViewById(R.id.LIST_WATERSOURCES_TOOLBAR);//o toolbar está desabilitado no manifest
+        toolbar = findViewById(R.id.LIST_WATERSOURCES_TOOLBAR);//o toolbar está desabilitado no manifest
         setSupportActionBar(toolbar);
+
+
 
         recyclerView = findViewById(R.id.WATER_SOURCE_RECYCLER_VIEW);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -80,10 +83,12 @@ public class ListWaterSourcesActivity extends AppCompatActivity {
 
             int code = getIntent().getIntExtra("callingActivity",0);
 
-            // Caso a activity que chamou é a de analize, escondo o fab para que não vá para a activity de criar
-            if(code == REQUEST_CODE_ANALISE_ACTIVITY )
+            // Caso a activity que chamou seja a analize, esconde o fab para que não vá para a activity de criar
+            // E troca o título da activity
+            if(code == REQUEST_CODE_ANALISE_ACTIVITY ) {
                 fab.setVisibility(View.GONE);
-
+                toolbar.setTitle(R.string.escolher_fonte);
+            }
             return code;
         }
         else{

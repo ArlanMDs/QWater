@@ -22,7 +22,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="Adicionar local da fonte de água"
-            android:textSize="18sp"
+            android:textSize="16sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -31,9 +32,10 @@
         <TextView
             android:id="@+id/textView20"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_height="16dp"
+            android:layout_margin="16dp"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:text="Tipo da fonte:"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView23" />
@@ -42,7 +44,7 @@
             android:id="@+id/textView23"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_margin="16dp"
             android:layout_marginStart="8dp"
             android:text="Nome da fonte:"
             app:layout_constraintStart_toStartOf="parent"
@@ -51,26 +53,31 @@
         <EditText
             android:id="@+id/EDIT_SOURCE_NAME"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginStart="16dp"
+            android:layout_height="15dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp"
             android:background="@null"
-            android:hint="nome"
+            android:gravity="center"
+            android:hint="Toque para escrever"
+            android:padding="0dp"
             android:textSize="12sp"
-            app:layout_constraintStart_toEndOf="@+id/textView23"
-            app:layout_constraintTop_toTopOf="@+id/textView23" />
+            app:layout_constraintBottom_toBottomOf="@+id/textView23"
+            app:layout_constraintStart_toEndOf="@+id/textView23" />
 
 
         <EditText
             android:id="@+id/EDIT_SOURCE_TYPE"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="28dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp"
             android:background="@null"
+            android:gravity="center"
             android:hint="tipo"
+            android:padding="0dp"
             android:textSize="12sp"
-            app:layout_constraintStart_toEndOf="@+id/textView20"
-            app:layout_constraintTop_toTopOf="@+id/textView20" />
+            app:layout_constraintBottom_toBottomOf="@+id/textView20"
+            app:layout_constraintStart_toEndOf="@+id/textView20" />
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/LAYOUT_SOURCE_ADDRESS"
@@ -148,9 +155,12 @@
             android:id="@+id/BUTTON_START_LOCATION_UPDATES"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/rounded_button"
             android:text="@string/obterLocalizacao"
+            android:textColor="@color/common_google_signin_btn_text_dark_default"
             app:layout_constraintBottom_toTopOf="@+id/SOURCE_OK_BUTTON"
-            app:layout_constraintTop_toBottomOf="@+id/LAYOUT_SOURCE_ADDRESS"
+            app:layout_constraintTop_toBottomOf="@+id/EDIT_SOURCE_TYPE"
             app:layout_constraintVertical_bias="1.0"
             tools:layout_editor_absoluteX="0dp" />
 

@@ -247,7 +247,7 @@ public class AnalizeWaterReportActivity extends AppCompatActivity implements Vie
 
                 break;
             case R.id.SAVE_WATER_REPORT_BUTTON:
-
+                //TODO ainda tenho que checar se a amostra pode ser salva. A ras pode estar com valor null, o que causa erro
                 // abre uma nova activity e passa o relatório, lá, será inserida a data da amostra e o nome da fonte
                 Intent intent = new Intent(AnalizeWaterReportActivity.this, SelectDateActivity.class);
                 startActivityForResult(intent, REQUEST_CODE_SELECT_DATE);
