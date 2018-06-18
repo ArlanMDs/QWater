@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
+        //TODO transformar as activities em fragmentos para popular um framelayout na main activity
         if (id == R.id.CREATE_SOURCE) {
             startActivity(new Intent(getApplicationContext(), CreateWaterSourceActivity.class));
 
@@ -90,7 +90,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.LIST_REPORTS) {
             startActivity(new Intent(getApplicationContext(), ListWaterReportsActivity.class));
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.LIST_SOURCES) {
+            startActivity(new Intent(getApplicationContext(), ListWaterSourcesActivity.class));
 
         } else if (id == R.id.nav_share) {
 

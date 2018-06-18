@@ -39,7 +39,8 @@
         <activity
             android:name=".activities.ListWaterSourcesActivity"
             android:label="@string/title_activity_water_source"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:noHistory="true"/>
         <activity
             android:name=".activities.ListWaterReportsActivity"
             android:label="@string/title_activity_water_sample"
@@ -47,7 +48,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.CreateWaterSourceActivity"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:noHistory="true"/>
         <activity
             android:name=".activities.StoreWaterReportActivity"
             android:theme="@style/AppTheme.PopupTheme" />

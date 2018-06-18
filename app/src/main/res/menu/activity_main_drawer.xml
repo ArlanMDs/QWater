@@ -15,13 +15,17 @@
                     android:icon="@drawable/baseline_note_add_black_18dp"
                     android:title="@string/novo_relatorio" />
                 <item
-                    android:id="@+id/LIST_REPORTS"
-                    android:icon="@drawable/baseline_list_black_18dp"
-                    android:title="@string/listar_relatorios" />
-                <item
                     android:id="@+id/nav_manage"
                     android:icon="@drawable/baseline_bar_chart_black_18dp"
                     android:title="Estatísticas" />
+                <item
+                    android:id="@+id/LIST_SOURCES"
+                    android:icon="@drawable/baseline_list_black_18dp"
+                    android:title="@string/listar_fontes" />
+                <item
+                    android:id="@+id/LIST_REPORTS"
+                    android:title="@string/listar_relatorios" />
+
             </group>
         </menu>
     </item>

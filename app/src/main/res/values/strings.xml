@@ -4,6 +4,7 @@
     <string name="action_sobre">Sobre</string>
     <string name="novo_relatorio">Novo Relatório</string>
     <string name="listar_relatorios">Listar Relatórios</string>
+    <string name="listar_fontes">Listar Fontes</string>
     <string name="registrar_fonte">Registrar Fonte</string>
 
     <string name="S1" translatable="false">Água com baixo teor de sódio: pode ser usada para irrigação em quase todos os solos, com pouco perigo de desenvolvimento
