@@ -29,6 +29,7 @@ public class AnalyzeWaterReportActivity extends AppCompatActivity implements Vie
     private WaterReport waterReport;
     private AppDatabase appDatabase;
     private final static int REQUEST_CODE_SELECT_DATE = 1, REQUEST_CODE_SELECT_SOURCE = 2;
+    private boolean ableToClassifySAR = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,9 +55,11 @@ public class AnalyzeWaterReportActivity extends AppCompatActivity implements Vie
 
         // A classificação e armazenamento está sendo feito após o arredondamento das casas decimais!
         this.waterReport = waterReport;
-        categorizeSAR(waterReport.getWatCorrectedSar());
+
+        // Primeiro é categorizado a RAS, nesse método, a booleana ableToClassifySAR por ser colocada em false, então, algumas alterações são feitas no método UpdateUI()
+        categorizeSAR();
         categorizeSalinity(waterReport.getWatCea());
-        updateTextViews();
+        updateUI();
 
     }
 
@@ -75,19 +78,12 @@ public class AnalyzeWaterReportActivity extends AppCompatActivity implements Vie
      * @return valor da RAS normal ou zero em caso de erro
      */
     private double calculateNormalSAR(double ca, double mg, double na){
-        SARCalculator sarCalculator;
 
-        try {
-
-            sarCalculator = new SARCalculator(ca, mg, na);
-        }catch(Exception e){
-            Toast.makeText(AnalyzeWaterReportActivity.this, getString(R.string.valorIncorreto), Toast.LENGTH_LONG).show();
-            sarCalculator = null;
-        }
-        if(sarCalculator != null)
-            return formatFractionDigits(sarCalculator.calculateNormalSAR(1));//TODO implementar as conversões do spinner
-
-        return 0.0;
+        if(ca != 0 && mg != 0 && na != 0) { // Calcula a RAS e arredonda o resultado
+            SARCalculator sarCalculator = new SARCalculator();
+            return formatFractionDigits(sarCalculator.calculateNormalSAR(1, ca, mg, na));//TODO SPINNNNER
+        }else
+            return Double.NaN;
     }
 
     /**
@@ -100,47 +96,50 @@ public class AnalyzeWaterReportActivity extends AppCompatActivity implements Vie
      * @return valor da RAS corrigida, zero em caso de erro.
      */
     private double calculateCorrectedSAR(double ca, double mg, double na, double hco3, double cea) {
-        SARCalculator sarCalculator;
-        try {
-            sarCalculator = new SARCalculator(ca, mg, na, cea, hco3);
-        }catch(Exception e){
-            Toast.makeText(AnalyzeWaterReportActivity.this, getString(R.string.valorIncorreto), Toast.LENGTH_LONG).show();
-            sarCalculator = null;
-        }
-        if(sarCalculator != null)
-            return formatFractionDigits(sarCalculator.calculateCorrectedSAR(1, 1));//TODO implementar as conversões dos spinners
 
-        return 0.0;
+        if(ca != 0 && mg != 0 && na != 0 && hco3 != 0 && cea != 0) {
+            SARCalculator sarCalculator = new SARCalculator();
+            return formatFractionDigits(sarCalculator.calculateCorrectedSAR(1, 1, ca, mg, na, cea, hco3));//TODO implementar as conversões dos spinners
+        }else
+            return Double.NaN;
+
     }
 
+    private void updateUI(){
 
-    private void updateTextViews(){
-        //insere os valores nos campos de texto
-        if(waterReport.getWatNormalSar() != 0)
+        //RAS
+        if(ableToClassifySAR) {
+
+            // Ras normal
             normalSARResultTextview.setText(String.valueOf(waterReport.getWatNormalSar()));
-        else
-            normalSARResultTextview.setText("Não foi possível calcular a RAS normal");
-
-        if(waterReport.getWatCorrectedSar() != 0) {
             SARButton.setVisibility(View.VISIBLE);
 
+            // Ras corrigida
             correctedSARResultTextview.setText(String.valueOf(waterReport.getWatCorrectedSar()));
             SARClassificationTextview.setText("S" + String.valueOf(currentSARClassification));
 
-        }else{
-            correctedSARResultTextview.setText("Não foi possível calcular a RAS corrigida");
+        } else {
+            normalSARResultTextview.setText(R.string.erro_calculo);
+            correctedSARResultTextview.setText(R.string.erro_calculo);
         }
 
-        if(waterReport.getWatCea() != 0) {
+        // CEa
+        if (waterReport.getWatCea() != 0) {
             salinityButton.setVisibility(View.VISIBLE);
-
             ceaTextview.setText(String.valueOf(waterReport.getWatCea()));
             salinityTextview.setText("C" + String.valueOf(currentSalinityClassification));
+        }else{
+            ceaTextview.setText("CEa não Informada");
+            salinityTextview.setVisibility(View.GONE);
         }
     }
 
+    /**
+     * Arredenda o valor de um double para 4 casas decimais
+     * @param value valor a ser arredondado
+     * @return valor arredondado
+     */
     private double formatFractionDigits(double value){
-        //arredenda os valores para 4 casas decimais
         NumberFormat format = NumberFormat.getInstance();
         format.setMaximumFractionDigits(4);
         format.setMinimumFractionDigits(2);
@@ -162,23 +161,30 @@ public class AnalyzeWaterReportActivity extends AppCompatActivity implements Vie
 
     }
 
-    private void categorizeSAR(double correctedSAR) {
+    private void categorizeSAR() {
 
-        if(correctedSAR < 10.0)
-            currentSARClassification = 1;
-        else if(correctedSAR >= 10.0 && correctedSAR < 18.0)
-            currentSARClassification = 2;
-        else if(correctedSAR >=18.0 && correctedSAR < 26.0)
-            currentSARClassification = 3;
+        double correctedSAR = waterReport.getWatCorrectedSar();
+
+        if(!Double.isNaN(correctedSAR)) {
+            if (correctedSAR < 10.0)
+                currentSARClassification = 1;
+            else if (correctedSAR >= 10.0 && correctedSAR < 18.0)
+                currentSARClassification = 2;
+            else if (correctedSAR >= 18.0 && correctedSAR < 26.0)
+                currentSARClassification = 3;
+            else
+                currentSARClassification = 4;
+        }
+        // Não é possível calcular a RAS, Mudanças serão feitas na UI
         else
-            currentSARClassification = 4;
+            ableToClassifySAR = false;
     }
 
     /**
      * mostra uma janela contendo informações em texto sobre a classificação do RAS ou salinidade
-     * @param classificacao RAS ou salinidade a ser classificada
+     * @param classification RAS ou salinidade a ser classificada
      */
-    private void showInfoDialogue(String classificacao){
+    private void showInfoDialogue(String classification){
 
         AlertDialog.Builder builder;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -186,8 +192,8 @@ public class AnalyzeWaterReportActivity extends AppCompatActivity implements Vie
         } else {
             builder = new AlertDialog.Builder(this);
         }
-        int resourceId = this.getResources().getIdentifier(classificacao, "string", this.getPackageName());
-        builder.setTitle(getString(R.string.classificacao)+ " " + classificacao)
+        int resourceId = this.getResources().getIdentifier(classification, "string", this.getPackageName());
+        builder.setTitle(getString(R.string.classificacao)+ " " + classification)
                 .setMessage(getString(resourceId))
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
@@ -245,7 +251,6 @@ public class AnalyzeWaterReportActivity extends AppCompatActivity implements Vie
 
                 break;
             case R.id.SAVE_WATER_REPORT_BUTTON:
-                //TODO ainda tenho que checar se a amostra pode ser salva. A ras pode estar com valor null, o que causa erro
                 // abre uma nova activity e passa o relatório, lá, será inserida a data da amostra e o nome da fonte
                 Intent intent = new Intent(AnalyzeWaterReportActivity.this, SelectDateActivity.class);
                 startActivityForResult(intent, REQUEST_CODE_SELECT_DATE);
@@ -261,8 +266,6 @@ public class AnalyzeWaterReportActivity extends AppCompatActivity implements Vie
     }
 
     public void onSaveInstanceState(Bundle savedInstanceState) {
-        // Save the state of the fragment (true=open, false=closed).
-        //savedInstanceState.putBoolean(STATE_FRAGMENT, isFragmentDisplayed);
         super.onSaveInstanceState(savedInstanceState);
     }
 
@@ -274,7 +277,7 @@ public class AnalyzeWaterReportActivity extends AppCompatActivity implements Vie
                 if(resultCode == RESULT_OK) {
                     waterReport.setWatDate(data.getLongExtra("date", 0));
 
-                    Intent intent = new Intent(AnalyzeWaterReportActivity.this, ListWaterSourcesActivity.class); //TODO mydar pra frag
+                    Intent intent = new Intent(AnalyzeWaterReportActivity.this, ListWaterSourcesActivity.class);
                     intent.putExtra("callingActivity", 1);
                     startActivityForResult(intent, REQUEST_CODE_SELECT_SOURCE);
 

@@ -11,16 +11,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".activities.MainActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.WaterReportDetailsActivity"
             android:noHistory="true" />
-
         <activity
             android:name=".activities.SplashActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -30,27 +27,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".activities.AboutActivity"
-            android:theme="@style/AppTheme.PopupTheme" />
         <activity
             android:name=".activities.PopupGraphActivity"
             android:theme="@style/AppTheme.PopupTheme" />
-
         <activity
             android:name=".activities.StoreWaterReportActivity"
             android:theme="@style/AppTheme.PopupTheme" />
-
         <activity
             android:name=".activities.AnalyzeWaterReportActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.SelectDateActivity"
             android:theme="@style/AppTheme.PopupTheme" />
-
-        <activity android:name=".activities.ListWaterSourcesActivity"
+        <activity
+            android:name=".activities.ListWaterSourcesActivity"
             android:theme="@style/AppTheme.PopupTheme" />
+
+        <activity
+            android:name=".activities.ClassificationDialogueActivity"
+            android:theme="@style/AppTheme.PopupTheme"  />
     </application>
 
 </manifest>
