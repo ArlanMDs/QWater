@@ -1,4 +1,4 @@
-package br.com.ufersa.qwater.activities;
+package br.com.ufersa.qwater.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,12 +15,13 @@ import java.util.Date;
 import java.util.List;
 
 import br.com.ufersa.qwater.R;
+import br.com.ufersa.qwater.activities.WaterReportDetailsActivity;
 import br.com.ufersa.qwater.beans.WaterReport;
 
-class WaterReportAdapter extends RecyclerView.Adapter<WaterReportAdapter.ViewHolder>{
+public class WaterReportAdapter extends RecyclerView.Adapter<WaterReportAdapter.ViewHolder>{
 
-    List<WaterReport> waterReports;
-    private Context context;
+    private final List<WaterReport> waterReports;
+    private final Context context;
 
     public WaterReportAdapter(Context context, List<WaterReport> waterReports) {
         this.waterReports = waterReports;
@@ -64,8 +65,9 @@ class WaterReportAdapter extends RecyclerView.Adapter<WaterReportAdapter.ViewHol
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
-        private TextView reportSourceName, reportDate;
-        ConstraintLayout parentLayout;
+        private final TextView reportSourceName;
+        private final TextView reportDate;
+        final ConstraintLayout parentLayout;
 
         ViewHolder(View itemView){
             super(itemView);

@@ -5,7 +5,6 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
-        android:name=".util.MyApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -21,6 +20,7 @@
         <activity
             android:name=".activities.WaterReportDetailsActivity"
             android:noHistory="true" />
+
         <activity
             android:name=".activities.SplashActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -30,38 +30,26 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".activities.AboutActivity"
             android:theme="@style/AppTheme.PopupTheme" />
         <activity
             android:name=".activities.PopupGraphActivity"
             android:theme="@style/AppTheme.PopupTheme" />
-        <activity
-            android:name=".activities.ListWaterSourcesActivity"
-            android:label="@string/title_activity_water_source"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:noHistory="true"/>
-        <activity
-            android:name=".activities.ListWaterReportsActivity"
-            android:label="@string/title_activity_water_sample"
-            android:noHistory="true"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".activities.CreateWaterSourceActivity"
-            android:theme="@style/AppTheme"
-            android:noHistory="true"/>
+
         <activity
             android:name=".activities.StoreWaterReportActivity"
             android:theme="@style/AppTheme.PopupTheme" />
-        <activity
-            android:name=".activities.CreateWaterReportActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
 
         <activity
-            android:name=".activities.AnalizeWaterReportActivity"
+            android:name=".activities.AnalyzeWaterReportActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.SelectDateActivity"
+            android:theme="@style/AppTheme.PopupTheme" />
+
+        <activity android:name=".activities.ListWaterSourcesActivity"
             android:theme="@style/AppTheme.PopupTheme" />
     </application>
 

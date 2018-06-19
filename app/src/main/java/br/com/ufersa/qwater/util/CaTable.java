@@ -7,12 +7,12 @@ package br.com.ufersa.qwater.util;
  * https://pt.wikihow.com/Fazer-uma-Interpola%C3%A7%C3%A3o-Linear-Dupla
  */
 //TODO limitar as entradas para os valores máximos da tabela
-public class CaTable {
+class CaTable {
 
     //A primeira coluna representa os valores da HCO3
     //A primeira linha representa os valores da CE
 
-    double[][] table = new double[][]{
+    private final double[][] table = new double[][]{
             {0,      0.1,   0.2,   0.3,   0.5,   0.7,   1.0,   1.5,   2.0,   3.0,   4.0,   6.0,   8.0},
             {0.05, 13.20, 13.61, 13.92, 14.40, 14.79, 15.26, 15.91, 16.43, 17.28, 17.97, 19.07, 19.94},
             {0.10,  8.31,  8.57,  8.77,  9.07,  9.31,  9.62, 10.02, 10.35, 10.89, 11.32, 12.01, 12.56},

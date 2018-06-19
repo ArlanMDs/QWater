@@ -26,7 +26,6 @@
             android:layout_height="wrap_content"
             android:layout_margin="3dp"
             android:animateLayoutChanges="true"
-            android:background="?attr/colorControlHighlight"
             android:padding="2dp"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -229,7 +228,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="3dp"
-            android:background="?attr/colorControlHighlight"
             android:padding="2dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.571"
@@ -338,11 +336,9 @@
         </android.support.constraint.ConstraintLayout>
 
         <android.support.constraint.ConstraintLayout
-            android:id="@+id/layoutData"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="3dp"
-            android:background="?attr/colorControlHighlight"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.571"
             app:layout_constraintStart_toStartOf="parent"

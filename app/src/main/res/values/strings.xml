@@ -1,44 +1,15 @@
 <resources>
-    <string name="app_name">QWater</string>
-    <string name="action_configuracoes">Configurações</string>
-    <string name="action_sobre">Sobre</string>
+    <string name="app_name">Avaliador AQUA</string>
     <string name="novo_relatorio">Novo Relatório</string>
     <string name="listar_relatorios">Listar Relatórios</string>
     <string name="listar_fontes">Listar Fontes</string>
     <string name="registrar_fonte">Registrar Fonte</string>
 
-    <string name="S1" translatable="false">Água com baixo teor de sódio: pode ser usada para irrigação em quase todos os solos, com pouco perigo de desenvolvimento
-        de problemas de sodificação.</string>
-
-    <string name="S2" translatable="false">Água com teor médio de sódio: estas águas só devem ser usadas em solos de textura arenosa ou em solos orgânicos de boa permeabilidade, uma vez que em solos de textura fina (argilosos) o
-        sódio representa perigo.</string>
-
-    <string name="S3" translatable="false">Água com alto teor de sódio. Pode produzir níveis tóxicos de sódio trocável watNa maior parte dos solos, necessitando assim de práticas especiais de manejo tais como: drenagem, fácil lavagem,
-        aplicação de matéria orgânica.</string>
-
-    <string name="S4" translatable="false">Água com teor muito alto de sódio. É geralmente inadequada para irrigação exceto quando a salinidade for baixa ou média ou o uso de gesso ou outro
-        corretivo torne possível o uso dessa água.</string>
-
-    <string name="C1" translatable="false">Água de baixa salinidade. Pode ser usada para irrigação da maioria das culturas, em quase todos os tipos de solos, com muito pouca probabilidade de que se desenvolvam problemas de salinidade.
-        Se necessária alguma lixiviação de sais, esta é conseguida em condições normais de irrigação, exceto em solos de muito baixa permeabilidade.</string>
-
-    <string name="C2" translatable="false">Água de média salinidade. Pode ser usada sempre e quando houver uma lixiviação moderada de sais. Em quase todos os casos se adequa ao cultivo de plantas moderadamente tolerantes aos sais,
-        sem necessidade de práticas especiais de controle de salinidade.</string>
-
-    <string name="C3" translatable="false">Água de alta salinidade. Pode ser usada em solos com drenagem deficiente. Mesmo com drenagem adequada pode ser necessário práticas especiais de controlada salinidade, devendo, portanto,
-        ser utilizada watNa irrigação de espécies vegetais de alta tolerância aos sais. Os riscos apresentados por esta classe de água podem ser amenizados quando do emprego do método de irrigação localizada mantendo
-        o solo continuamente úmido.</string>
-
-    <string name="C4" translatable="false"> Água de muito alta salinidade. Não é apropriada para irrigação sob condições normais, porém pode ser usada ocasionalmente, em circunstâncias especiais. Os solos devem ser permeáveis,
-        a drenagem adequada, devendo ser aplicada água em excesso para se obter uma boa lixiviação dos sais e, mesmo assim devem ser explorados com culturas altamente tolerantes aos sais.</string>
-
-    <string name="relacaoTabela">Relação de adsorção de sódio corrigida</string>
     <string name="verDetalhesCea">Classificação da CE<small>a</small></string>
     <string name="verDetalhesRASCorrigido">Classificação do RAS corrigido</string>
     <string name="watCorrectedSar">RAS corrigida</string>
     <string name="classeSalinidade">Classe de Salinidade: </string>
     <string name="classificacao">Classificação: </string>
-    <string name="salvarRelatorio">Salvar Relatório</string>
     <string name="resultado">Resultado</string>
     <string name="mostrarGrafico">mostrar gráfico</string>
 
@@ -63,10 +34,6 @@
     </string-array>
 
     <string name="valorIncorreto">Algum valor digitado está com formato incorreto</string>
-    <string name="erroNaLeituraDeDados">Ocorreu algum erro watNa leitura dos dados</string>
-    <string name="amostrasArmazenadas">Amostras de água armazenadas:</string>
-    <string name="title_activity_water_source">Fontes de água</string>
-    <string name="title_activity_water_sample">WaterSampleActivity</string>
 
 
     <string name="obterLocalizacao">Obter Localização</string>
@@ -74,8 +41,6 @@
     <string name="escolher_a_data">Toque para escolher a data...</string>
     <string name="informacao_da_data">Por favor, insira a data em que a análise de água foi feita</string>
     <string name="escolher_fonte">Escolha a fonte da amostra</string>
-    <string name="Open">abrir</string>
-    <string name="Close">fechar</string>
 
     <string name="title_activity_main">MainActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>

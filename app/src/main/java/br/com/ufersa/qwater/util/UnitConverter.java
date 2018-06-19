@@ -3,7 +3,7 @@ package br.com.ufersa.qwater.util;
 /**
  * Classe responsável por converter unidades de concentração
  */
-public class UnitConverter {
+class UnitConverter {
     //Valor das massas atômicas
     private final double ca = 40.08, mg = 24.31, k = 39.10, na = 29.99, co3 = 60.0089, hco3 = 61.0168, cl = 35.453;
 

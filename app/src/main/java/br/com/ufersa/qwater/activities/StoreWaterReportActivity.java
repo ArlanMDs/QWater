@@ -20,11 +20,10 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import br.com.ufersa.qwater.R;
+import br.com.ufersa.qwater.adapters.WaterSourceAdapter;
 import br.com.ufersa.qwater.beans.WaterReport;
 import br.com.ufersa.qwater.beans.WaterSource;
 import br.com.ufersa.qwater.database.AppDatabase;
-
-import static br.com.ufersa.qwater.util.MyApp.getContext;
 
 public class StoreWaterReportActivity extends AppCompatActivity {
 
@@ -32,7 +31,6 @@ public class StoreWaterReportActivity extends AppCompatActivity {
     private DatePickerDialog datePickerDialog;
     private AppDatabase appDatabase;
     private RecyclerView recyclerView;
-    private RecyclerView.Adapter adapter;
     private ConstraintLayout dateLayout;
     private CoordinatorLayout listLayout;
     private WaterReport waterReport;
@@ -40,13 +38,11 @@ public class StoreWaterReportActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_store_water_report);
+        setContentView(R.layout.activity_water_report_date);
 
         initiate();
 
         getIncomingIntent();
-
-
 
         // initiate the date picker and a button
         // perform click event on edit text
@@ -102,7 +98,7 @@ public class StoreWaterReportActivity extends AppCompatActivity {
         dateLayout = findViewById(R.id.DATE_LAYOUT);
         listLayout = findViewById(R.id.WATER_SAMPLES_LAYOUT);
 
-        appDatabase = AppDatabase.getInstance(getContext());
+        appDatabase = AppDatabase.getInstance(StoreWaterReportActivity.this);
 
         date = findViewById(R.id.DATE_EDIT);
 
@@ -140,7 +136,7 @@ public class StoreWaterReportActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            Toast.makeText(getContext(), "Amostra inserida", Toast.LENGTH_SHORT).show();
+            Toast.makeText(StoreWaterReportActivity.this, "Amostra inserida", Toast.LENGTH_SHORT).show();
 
         }
     }
@@ -162,7 +158,7 @@ public class StoreWaterReportActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(List<WaterSource> waterSources) {
-            adapter = new WaterSourceAdapter(0, getApplicationContext(),waterSources);
+            RecyclerView.Adapter adapter = new WaterSourceAdapter(0, getApplicationContext(), waterSources);
             recyclerView.setAdapter(adapter);
 
         }

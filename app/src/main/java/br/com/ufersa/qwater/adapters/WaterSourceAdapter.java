@@ -1,4 +1,4 @@
-package br.com.ufersa.qwater.activities;
+package br.com.ufersa.qwater.adapters;
 
 import android.app.Activity;
 import android.content.Context;
@@ -18,16 +18,16 @@ import br.com.ufersa.qwater.beans.WaterSource;
 
 import static android.app.Activity.RESULT_OK;
 
-class WaterSourceAdapter extends RecyclerView.Adapter<WaterSourceAdapter.ViewHolder> {
+public class WaterSourceAdapter extends RecyclerView.Adapter<WaterSourceAdapter.ViewHolder> {
 
-    List<WaterSource> waterSources;
-    private Context context;
-    private int callingActivity;
+    private final List<WaterSource> waterSources;
+    private final Context context;
+    private final int callingActivity;
     private final static int REQUEST_CODE_ANALISE_ACTIVITY = 1;
     /*
         precisei criar uma maneira para diferenciar a activity que cria o adapter, para assim poder atribuir diferentes funções ao clicar em uma row
         tentei o context, mas por algum motivo deu errado...
-        AnalizeWaterReportActivity: 1
+        AnalyzeWaterReportActivity: 1
 
      */
     public WaterSourceAdapter(int callingActivity, Context context, List<WaterSource> waterSources) {
@@ -68,8 +68,8 @@ class WaterSourceAdapter extends RecyclerView.Adapter<WaterSourceAdapter.ViewHol
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
-        private TextView sourceName;
-        ConstraintLayout parentLayout;
+        private final TextView sourceName;
+        final ConstraintLayout parentLayout;
 
          ViewHolder(View itemView){
             super(itemView);

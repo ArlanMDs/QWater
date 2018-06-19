@@ -20,9 +20,7 @@ import br.com.ufersa.qwater.beans.WaterReport;
 import br.com.ufersa.qwater.database.AppDatabase;
 import br.com.ufersa.qwater.util.SARCalculator;
 
-import static br.com.ufersa.qwater.util.MyApp.getContext;
-
-public class AnalizeWaterReportActivity extends AppCompatActivity implements View.OnClickListener{
+public class AnalyzeWaterReportActivity extends AppCompatActivity implements View.OnClickListener{
 
     private Button SARButton;
     private Button salinityButton;
@@ -35,7 +33,7 @@ public class AnalizeWaterReportActivity extends AppCompatActivity implements Vie
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_analize_water_report);
+        setContentView(R.layout.activity_analyze_water_report);
 
 //        if (savedInstanceState != null) {
 //            isFragmentDisplayed = savedInstanceState.getBoolean(STATE_FRAGMENT);
@@ -49,7 +47,7 @@ public class AnalizeWaterReportActivity extends AppCompatActivity implements Vie
      * método que faz a comunicação da RAS entre a tab1 e tab2
      * @param waterReport relatório recebido da tab1
      */
-    public void updateData(WaterReport waterReport){
+    private void updateData(WaterReport waterReport){
 
         waterReport.setWatNormalSar(calculateNormalSAR(waterReport.getWatCa(), waterReport.getWatMg(), waterReport.getWatNa()));
         waterReport.setWatCorrectedSar(calculateCorrectedSAR(waterReport.getWatCa(),waterReport.getWatMg(),waterReport.getWatNa(),waterReport.getWatHco3(),waterReport.getWatCea()));
@@ -83,7 +81,7 @@ public class AnalizeWaterReportActivity extends AppCompatActivity implements Vie
 
             sarCalculator = new SARCalculator(ca, mg, na);
         }catch(Exception e){
-            Toast.makeText(getContext(), getString(R.string.valorIncorreto), Toast.LENGTH_LONG).show();
+            Toast.makeText(AnalyzeWaterReportActivity.this, getString(R.string.valorIncorreto), Toast.LENGTH_LONG).show();
             sarCalculator = null;
         }
         if(sarCalculator != null)
@@ -106,7 +104,7 @@ public class AnalizeWaterReportActivity extends AppCompatActivity implements Vie
         try {
             sarCalculator = new SARCalculator(ca, mg, na, cea, hco3);
         }catch(Exception e){
-            Toast.makeText(getContext(), getString(R.string.valorIncorreto), Toast.LENGTH_LONG).show();
+            Toast.makeText(AnalyzeWaterReportActivity.this, getString(R.string.valorIncorreto), Toast.LENGTH_LONG).show();
             sarCalculator = null;
         }
         if(sarCalculator != null)
@@ -180,7 +178,7 @@ public class AnalizeWaterReportActivity extends AppCompatActivity implements Vie
      * mostra uma janela contendo informações em texto sobre a classificação do RAS ou salinidade
      * @param classificacao RAS ou salinidade a ser classificada
      */
-    public void showInfoDialogue(String classificacao){
+    private void showInfoDialogue(String classificacao){
 
         AlertDialog.Builder builder;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -201,7 +199,7 @@ public class AnalizeWaterReportActivity extends AppCompatActivity implements Vie
     }
 
     private void initiate() {
-        appDatabase = AppDatabase.getInstance(getContext());
+        appDatabase = AppDatabase.getInstance(AnalyzeWaterReportActivity.this);
 
         correctedSARResultTextview = findViewById(R.id.CORRECTED_SAR_RESULT_TEXTVIEW);
         normalSARResultTextview = findViewById(R.id.NORMAL_SAR_RESULT_TEXTVIEW);
@@ -222,7 +220,7 @@ public class AnalizeWaterReportActivity extends AppCompatActivity implements Vie
         showHideGraph1.setOnClickListener(this);
 
         //prepara o bd
-        appDatabase = AppDatabase.getInstance(AnalizeWaterReportActivity.this);
+        appDatabase = AppDatabase.getInstance(AnalyzeWaterReportActivity.this);
     }
 
     /**
@@ -249,13 +247,13 @@ public class AnalizeWaterReportActivity extends AppCompatActivity implements Vie
             case R.id.SAVE_WATER_REPORT_BUTTON:
                 //TODO ainda tenho que checar se a amostra pode ser salva. A ras pode estar com valor null, o que causa erro
                 // abre uma nova activity e passa o relatório, lá, será inserida a data da amostra e o nome da fonte
-                Intent intent = new Intent(AnalizeWaterReportActivity.this, SelectDateActivity.class);
+                Intent intent = new Intent(AnalyzeWaterReportActivity.this, SelectDateActivity.class);
                 startActivityForResult(intent, REQUEST_CODE_SELECT_DATE);
 
                 break;
             case R.id.SHOW_HIDE_GRAPH1:
 
-                Intent intent2 = new Intent(AnalizeWaterReportActivity.this, PopupGraphActivity.class);
+                Intent intent2 = new Intent(AnalyzeWaterReportActivity.this, PopupGraphActivity.class);
                 startActivity(intent2);
                 break;
 
@@ -268,8 +266,6 @@ public class AnalizeWaterReportActivity extends AppCompatActivity implements Vie
         super.onSaveInstanceState(savedInstanceState);
     }
 
-
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch(requestCode) {
@@ -278,7 +274,7 @@ public class AnalizeWaterReportActivity extends AppCompatActivity implements Vie
                 if(resultCode == RESULT_OK) {
                     waterReport.setWatDate(data.getLongExtra("date", 0));
 
-                    Intent intent = new Intent(AnalizeWaterReportActivity.this, ListWaterSourcesActivity.class);
+                    Intent intent = new Intent(AnalyzeWaterReportActivity.this, ListWaterSourcesActivity.class); //TODO mydar pra frag
                     intent.putExtra("callingActivity", 1);
                     startActivityForResult(intent, REQUEST_CODE_SELECT_SOURCE);
 
@@ -318,7 +314,7 @@ public class AnalizeWaterReportActivity extends AppCompatActivity implements Vie
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
 
-            Toast.makeText(AnalizeWaterReportActivity.this, "Relatório armazenado com sucesso.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AnalyzeWaterReportActivity.this, "Relatório armazenado com sucesso.", Toast.LENGTH_SHORT).show();
         }
     }
 

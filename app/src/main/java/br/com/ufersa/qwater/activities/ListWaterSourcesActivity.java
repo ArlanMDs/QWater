@@ -3,16 +3,14 @@ package br.com.ufersa.qwater.activities;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
 
 import java.util.List;
 
 import br.com.ufersa.qwater.R;
+import br.com.ufersa.qwater.adapters.WaterSourceAdapter;
 import br.com.ufersa.qwater.beans.WaterSource;
 import br.com.ufersa.qwater.database.AppDatabase;
 
@@ -21,20 +19,12 @@ import br.com.ufersa.qwater.database.AppDatabase;
 public class ListWaterSourcesActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private RecyclerView.Adapter adapter;
-    private FloatingActionButton fab;
     private AppDatabase appDatabase;
-    private Toolbar toolbar;
-    private final static int REQUEST_CODE_ANALISE_ACTIVITY = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_water_sources);
-        toolbar = findViewById(R.id.LIST_WATERSOURCES_TOOLBAR);//o toolbar está desabilitado no manifest
-        setSupportActionBar(toolbar);
-
-
 
         recyclerView = findViewById(R.id.WATER_SOURCE_RECYCLER_VIEW);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -45,14 +35,6 @@ public class ListWaterSourcesActivity extends AppCompatActivity {
         AsyncRead asyncRead = new AsyncRead();
         asyncRead.execute();
 
-        fab = findViewById(R.id.FAB_LIST_WATERSOURCES);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ListWaterSourcesActivity.this, CreateWaterSourceActivity.class));
-
-            }
-        });
     }
 
     private class AsyncRead extends AsyncTask<Void, Void, List<WaterSource>>  {
@@ -71,25 +53,17 @@ public class ListWaterSourcesActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(List<WaterSource> waterSources) {
-            Intent intent = getIntent();
 
-            adapter = new WaterSourceAdapter(getCodeOfIncomingIntent(), ListWaterSourcesActivity.this, waterSources);
+            RecyclerView.Adapter adapter = new WaterSourceAdapter(getCodeOfIncomingIntent(), ListWaterSourcesActivity.this, waterSources);
             recyclerView.setAdapter(adapter);
 
         }
     }
     private int getCodeOfIncomingIntent(){
         if(getIntent().hasExtra("callingActivity")) {
-
-            int code = getIntent().getIntExtra("callingActivity",0);
-
             // Caso a activity que chamou seja a analize, esconde o fab para que não vá para a activity de criar
             // E troca o título da activity
-            if(code == REQUEST_CODE_ANALISE_ACTIVITY ) {
-                fab.setVisibility(View.GONE);
-                toolbar.setTitle(R.string.escolher_fonte);
-            }
-            return code;
+            return getIntent().getIntExtra("callingActivity",0);
         }
         else{
             return 0;//TODO aqui é se quem chama é a mainactivity

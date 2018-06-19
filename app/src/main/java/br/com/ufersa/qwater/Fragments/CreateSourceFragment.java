@@ -1,4 +1,6 @@
-package br.com.ufersa.qwater.activities;
+package br.com.ufersa.qwater.Fragments;
+
+
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -18,9 +20,11 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -54,13 +58,14 @@ import java.util.Locale;
 
 import br.com.ufersa.qwater.BuildConfig;
 import br.com.ufersa.qwater.R;
+import br.com.ufersa.qwater.activities.MainActivity;
 import br.com.ufersa.qwater.beans.WaterSource;
 import br.com.ufersa.qwater.database.AppDatabase;
 
 // referências: https://www.androidhive.info/2012/07/android-gps-location-manager-tutorial/
 // https://android.jlelse.eu/room-store-your-data-c6d49b4d53a3
 
-public class CreateWaterSourceActivity extends AppCompatActivity implements View.OnClickListener{
+public class CreateSourceFragment extends Fragment implements View.OnClickListener{
 
     private EditText nameTextView;
     private TextView typeTextView;
@@ -94,39 +99,48 @@ public class CreateWaterSourceActivity extends AppCompatActivity implements View
     private Boolean mRequestingLocationUpdates;
 
     private AppDatabase appDatabase;
+    private View view;
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_create_water_source, container, false);
+    }
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_water_source);
-
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        this.view = view;
         initiate();
-
         // restore the values from saved instance state
         restoreValuesFromBundle(savedInstanceState);
+        getActivity().setTitle("Adicionar fonte");
 
-        //prepara o bd
-        appDatabase = AppDatabase.getInstance(CreateWaterSourceActivity.this);
+
+
 
     }
 
     private void initiate(){
 
-        nameTextView = findViewById(R.id.EDIT_SOURCE_NAME);
-        typeTextView = findViewById(R.id.EDIT_SOURCE_TYPE);
-        latitudeTextView = findViewById(R.id.EDIT_SOURCE_LATITUDE);
-        longitudeTextView = findViewById(R.id.EDIT_SOURCE_LONGITUDE);
-        addressTextView = findViewById(R.id.EDIT_SOURCE_ADDRESS);
-        layoutAddress = findViewById(R.id.LAYOUT_SOURCE_ADDRESS);
+        //prepara o bd
+        appDatabase = AppDatabase.getInstance(view.getContext());
 
-        startUpdatesButton = findViewById(R.id.BUTTON_START_LOCATION_UPDATES);
+        nameTextView = view.findViewById(R.id.EDIT_SOURCE_NAME);
+        typeTextView = view.findViewById(R.id.EDIT_SOURCE_TYPE);
+        latitudeTextView = view.findViewById(R.id.EDIT_SOURCE_LATITUDE);
+        longitudeTextView = view.findViewById(R.id.EDIT_SOURCE_LONGITUDE);
+        addressTextView = view.findViewById(R.id.EDIT_SOURCE_ADDRESS);
+        layoutAddress = view.findViewById(R.id.LAYOUT_SOURCE_ADDRESS);
+
+        startUpdatesButton = view.findViewById(R.id.BUTTON_START_LOCATION_UPDATES);
         startUpdatesButton.setOnClickListener(this);
 
-        sourceOKButton = findViewById(R.id.SOURCE_OK_BUTTON);
+        sourceOKButton = view.findViewById(R.id.SOURCE_OK_BUTTON);
         sourceOKButton.setOnClickListener(this);
 
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-        mSettingsClient = LocationServices.getSettingsClient(this);
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(view.getContext());
+        mSettingsClient = LocationServices.getSettingsClient(view.getContext());
 
         mLocationCallback = new LocationCallback() {
             @Override
@@ -166,7 +180,7 @@ public class CreateWaterSourceActivity extends AppCompatActivity implements View
             case R.id.BUTTON_START_LOCATION_UPDATES:
 
                 // Requesting ACCESS_FINE_LOCATION using Dexter library
-                Dexter.withActivity(this)
+                Dexter.withActivity(getActivity())
                         .withPermission(Manifest.permission.ACCESS_FINE_LOCATION)
                         .withListener(new PermissionListener() {
                             @Override
@@ -195,7 +209,7 @@ public class CreateWaterSourceActivity extends AppCompatActivity implements View
 
     }
     //TODO resolver o problema do leak https://stackoverflow.com/questions/44309241/warning-this-asynctask-class-should-be-static-or-leaks-might-occur
-    private class AsyncInsert extends AsyncTask<Void, Void, Void>  {
+    private class AsyncInsert extends AsyncTask<Void, Void, Void> {
 
         private String name;
         private String type;
@@ -215,7 +229,7 @@ public class CreateWaterSourceActivity extends AppCompatActivity implements View
                 latitude = Double.valueOf(String.valueOf(latitudeTextView.getText()));
                 longitude = Double.valueOf(String.valueOf(longitudeTextView.getText()));
             }else {
-                Toast.makeText(CreateWaterSourceActivity.this, "Erro: algum campo está vazio", Toast.LENGTH_SHORT).show(); //TODO editar string
+                Toast.makeText(getActivity(), "Erro: algum campo está vazio", Toast.LENGTH_SHORT).show(); //TODO editar string
                 this.cancel(true);
             }
         }
@@ -231,8 +245,8 @@ public class CreateWaterSourceActivity extends AppCompatActivity implements View
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
 
-            Toast.makeText(getApplicationContext(), "Local Adicionado", Toast.LENGTH_SHORT).show(); //TODO editar string
-            startActivity(new Intent(CreateWaterSourceActivity.this, ListWaterSourcesActivity.class));
+            Toast.makeText(getActivity(), "Local Adicionado", Toast.LENGTH_SHORT).show(); //TODO editar string
+           // startActivity(new Intent(getActivity(), ListWaterSourcesActivity.class)); //TODO mudar para fragment
         }
     }
 
@@ -275,7 +289,10 @@ public class CreateWaterSourceActivity extends AppCompatActivity implements View
 
             // atualiza o endereço aproximado
             try {
-                Geocoder geoCoder = new Geocoder(this, Locale.getDefault());
+                Geocoder geoCoder = null;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                    geoCoder = new Geocoder(getContext(), Locale.getDefault());
+                }
                 List<Address> addresses = geoCoder.getFromLocation(latitude, longitude, 1);
 
                 if (addresses != null) {
@@ -336,13 +353,13 @@ public class CreateWaterSourceActivity extends AppCompatActivity implements View
     private void startLocationUpdates() {
         mSettingsClient
                 .checkLocationSettings(mLocationSettingsRequest)
-                .addOnSuccessListener(this, new OnSuccessListener<LocationSettingsResponse>() {
+                .addOnSuccessListener(getActivity(), new OnSuccessListener<LocationSettingsResponse>() {
                     @SuppressLint("MissingPermission")
                     @Override
                     public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
                         Log.i(TAG, "All location settings are satisfied.");
 
-                        Toast.makeText(getApplicationContext(), "Obtendo coordenadas...", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Obtendo coordenadas...", Toast.LENGTH_SHORT).show();
 
                         //noinspection MissingPermission
                         mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
@@ -350,7 +367,7 @@ public class CreateWaterSourceActivity extends AppCompatActivity implements View
                         updateLocationUI();
                     }
                 })
-                .addOnFailureListener(this, new OnFailureListener() {
+                .addOnFailureListener(getActivity(), new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         int statusCode = ((ApiException) e).getStatusCode();
@@ -362,7 +379,7 @@ public class CreateWaterSourceActivity extends AppCompatActivity implements View
                                     // Show the dialog by calling startResolutionForResult(), and check the
                                     // result in onActivityResult().
                                     ResolvableApiException rae = (ResolvableApiException) e;
-                                    rae.startResolutionForResult(CreateWaterSourceActivity.this, REQUEST_CHECK_SETTINGS);
+                                    rae.startResolutionForResult(getActivity(), REQUEST_CHECK_SETTINGS);
                                 } catch (IntentSender.SendIntentException sie) {
                                     Log.i(TAG, "PendingIntent unable to execute request.");
                                 }
@@ -372,7 +389,7 @@ public class CreateWaterSourceActivity extends AppCompatActivity implements View
                                         "fixed here. Fix in Settings.";
                                 Log.e(TAG, errorMessage);
 
-                                Toast.makeText(CreateWaterSourceActivity.this, errorMessage, Toast.LENGTH_LONG).show();
+                                Toast.makeText(getActivity(), errorMessage, Toast.LENGTH_LONG).show();
                         }
 
                         updateLocationUI();
@@ -380,11 +397,11 @@ public class CreateWaterSourceActivity extends AppCompatActivity implements View
                 });
     }
 
-    public void stopLocationUpdates() {
+    private void stopLocationUpdates() {
         // Removing location updates
         mFusedLocationClient
                 .removeLocationUpdates(mLocationCallback)
-                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                .addOnCompleteListener(getActivity(), new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         //Toast.makeText(getApplicationContext(), "Parando de obter coordenadas.", Toast.LENGTH_SHORT).show();
@@ -394,7 +411,7 @@ public class CreateWaterSourceActivity extends AppCompatActivity implements View
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             // Check for the integer request code originally supplied to startResolutionForResult().
             case REQUEST_CHECK_SETTINGS:
@@ -424,7 +441,7 @@ public class CreateWaterSourceActivity extends AppCompatActivity implements View
     }
 
     private boolean checkPermissions() {
-        int permissionState = ActivityCompat.checkSelfPermission(this,
+        int permissionState = ActivityCompat.checkSelfPermission(view.getContext(),
                 Manifest.permission.ACCESS_FINE_LOCATION);
         return permissionState == PackageManager.PERMISSION_GRANTED;
     }
@@ -443,7 +460,7 @@ public class CreateWaterSourceActivity extends AppCompatActivity implements View
     }
 
     @Override
-    protected void onPause() {
+    public void onPause() {
         super.onPause();
 
         if (mRequestingLocationUpdates) {

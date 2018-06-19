@@ -7,7 +7,6 @@
     tools:context="br.com.ufersa.qwater.activities.SplashActivity">
 
     <ImageView
-        android:id="@+id/imageView5"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
