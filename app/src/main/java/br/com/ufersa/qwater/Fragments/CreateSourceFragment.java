@@ -1,7 +1,5 @@
 package br.com.ufersa.qwater.Fragments;
 
-
-
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -25,8 +23,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -65,16 +65,18 @@ import br.com.ufersa.qwater.database.AppDatabase;
 // referências: https://www.androidhive.info/2012/07/android-gps-location-manager-tutorial/
 // https://android.jlelse.eu/room-store-your-data-c6d49b4d53a3
 
-public class CreateSourceFragment extends Fragment implements View.OnClickListener{
+public class CreateSourceFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener{
 
     private EditText nameTextView;
-    private TextView typeTextView;
     private TextView latitudeTextView;
     private TextView longitudeTextView;
     private TextView addressTextView;
     private Button sourceOKButton;
     private Button startUpdatesButton;
     private ConstraintLayout layoutAddress;
+    private Spinner spinner;
+    private AppDatabase appDatabase;
+    private View view;
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -98,23 +100,21 @@ public class CreateSourceFragment extends Fragment implements View.OnClickListen
     // boolean flag to toggle the ui
     private Boolean mRequestingLocationUpdates;
 
-    private AppDatabase appDatabase;
-    private View view;
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_create_water_source, container, false);
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         this.view = view;
         initiate();
         // restore the values from saved instance state
         restoreValuesFromBundle(savedInstanceState);
-        getActivity().setTitle("Adicionar fonte");
+        getActivity().setTitle(getString(R.string.adicionar_fonte));
 
 
 
@@ -123,11 +123,12 @@ public class CreateSourceFragment extends Fragment implements View.OnClickListen
 
     private void initiate(){
 
+        spinner = view.findViewById(R.id.SOURCES_SPINNER);
+
         //prepara o bd
         appDatabase = AppDatabase.getInstance(view.getContext());
 
         nameTextView = view.findViewById(R.id.EDIT_SOURCE_NAME);
-        typeTextView = view.findViewById(R.id.EDIT_SOURCE_TYPE);
         latitudeTextView = view.findViewById(R.id.EDIT_SOURCE_LATITUDE);
         longitudeTextView = view.findViewById(R.id.EDIT_SOURCE_LONGITUDE);
         addressTextView = view.findViewById(R.id.EDIT_SOURCE_ADDRESS);
@@ -208,6 +209,7 @@ public class CreateSourceFragment extends Fragment implements View.OnClickListen
         }
 
     }
+
     //TODO resolver o problema do leak https://stackoverflow.com/questions/44309241/warning-this-asynctask-class-should-be-static-or-leaks-might-occur
     private class AsyncInsert extends AsyncTask<Void, Void, Void> {
 
@@ -222,14 +224,14 @@ public class CreateSourceFragment extends Fragment implements View.OnClickListen
 
             //TODO pedir número mínimo de caracteres para o nome?
             // se não houver campo nulo, cria o objeto e adiciona-o no bd
-            if (nameTextView.getText().length() > 0 && typeTextView.getText().length() > 0 && latitudeTextView.getText().length() > 0 && longitudeTextView.getText().length() > 0) {
+            if (nameTextView.getText().length() > 0 && latitudeTextView.getText().length() > 0 && longitudeTextView.getText().length() > 0) {
 
                 name = String.valueOf(nameTextView.getText());
-                type = String.valueOf(typeTextView.getText());
+                type = String.valueOf(spinner.getSelectedItem().toString());
                 latitude = Double.valueOf(String.valueOf(latitudeTextView.getText()));
                 longitude = Double.valueOf(String.valueOf(longitudeTextView.getText()));
             }else {
-                Toast.makeText(getActivity(), "Erro: algum campo está vazio", Toast.LENGTH_SHORT).show(); //TODO editar string
+                Toast.makeText(getActivity(), R.string.erro_campo_vazio, Toast.LENGTH_SHORT).show();
                 this.cancel(true);
             }
         }
@@ -268,6 +270,36 @@ public class CreateSourceFragment extends Fragment implements View.OnClickListen
         }
 
         updateLocationUI();
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//        Spinner spinner = (Spinner) parent;
+//        if(spinner.getId() == R.id.SOURCES_SPINNER)
+//        {
+//            switch (position) {
+//                case 0:
+//
+//                    break;
+//                case 1:
+//
+//                    break;
+//                case 2:
+//
+//                    break;
+//                case 3:
+//
+//                    break;
+//                case 4:
+//
+//                    break;
+//            }
+//        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 
     /**
