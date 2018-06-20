@@ -33,7 +33,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/MG_DETAILS"
+                android:id="@+id/MG_VALUE"
                 android:layout_width="wrap_content"
                 android:layout_height="22dp"
                 android:layout_marginLeft="16dp"
@@ -47,11 +47,11 @@
                 app:layout_constraintTop_toTopOf="@+id/textView9" />
 
             <TextView
-                android:id="@+id/CA_DETAILS"
+                android:id="@+id/CA_VALUE"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginStart="16dp"
+                android:layout_marginLeft="18dp"
+                android:layout_marginStart="18dp"
                 android:ems="4"
                 android:gravity="center"
                 android:textColor="@android:color/black"
@@ -61,7 +61,7 @@
                 app:layout_constraintTop_toTopOf="@+id/textView10" />
 
             <TextView
-                android:id="@+id/NA_DETAILS"
+                android:id="@+id/NA_VALUE"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="4"
@@ -69,11 +69,23 @@
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="@+id/MG_DETAILS"
+                app:layout_constraintStart_toStartOf="@+id/MG_VALUE"
+                app:layout_constraintTop_toTopOf="@+id/textView30" />
+
+            <TextView
+                android:id="@+id/B_VALUE"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="4"
+                android:gravity="center"
+                android:textColor="@android:color/black"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@+id/MG_VALUE"
                 app:layout_constraintTop_toTopOf="@+id/textView5" />
 
             <TextView
-                android:id="@+id/PH_DETAILS"
+                android:id="@+id/PH_VALUE"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="4"
@@ -81,11 +93,23 @@
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="@+id/NA_DETAILS"
+                app:layout_constraintStart_toStartOf="@+id/MG_VALUE"
+                app:layout_constraintTop_toTopOf="@+id/textView33" />
+
+            <TextView
+                android:id="@+id/SO4_VALUE"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="4"
+                android:gravity="center"
+                android:textColor="@android:color/black"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@+id/MG_VALUE"
                 app:layout_constraintTop_toTopOf="@+id/textView15" />
 
             <TextView
-                android:id="@+id/K_DETAILS"
+                android:id="@+id/K_VALUE"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="4"
@@ -93,11 +117,11 @@
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="@+id/CL_DETAILS"
+                app:layout_constraintStart_toStartOf="@+id/CL_VALUE"
                 app:layout_constraintTop_toTopOf="@+id/textView7" />
 
             <TextView
-                android:id="@+id/CL_DETAILS"
+                android:id="@+id/CL_VALUE"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="4"
@@ -105,25 +129,23 @@
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="@+id/CA_DETAILS"
+                app:layout_constraintStart_toStartOf="@+id/CA_VALUE"
                 app:layout_constraintTop_toTopOf="@+id/textView8" />
 
             <TextView
-                android:id="@+id/HCO3_DETAILS"
+                android:id="@+id/HCO3_VALUE"
                 android:layout_width="67dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginStart="8dp"
                 android:ems="4"
                 android:gravity="center"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="14sp"
-                app:layout_constraintStart_toEndOf="@+id/textView11"
+                app:layout_constraintStart_toStartOf="@+id/CO3_VALUE"
                 app:layout_constraintTop_toTopOf="@+id/textView11" />
 
             <TextView
-                android:id="@+id/CO3_DETAILS"
+                android:id="@+id/CO3_VALUE"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="4"
@@ -131,7 +153,7 @@
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="@+id/K_DETAILS"
+                app:layout_constraintStart_toStartOf="@+id/K_VALUE"
                 app:layout_constraintTop_toTopOf="@+id/textView12" />
 
             <TextView
@@ -151,6 +173,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:text="B"
+                android:textColor="@android:color/black"
+                app:layout_constraintStart_toStartOf="@+id/textView9"
+                app:layout_constraintTop_toBottomOf="@+id/textView30" />
+
+            <TextView
+                android:id="@+id/textView30"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:text="Na"
                 android:textColor="@android:color/black"
                 app:layout_constraintStart_toStartOf="@+id/textView9"
@@ -160,11 +192,20 @@
                 android:id="@+id/textView15"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="pH"
+                android:text="SO4"
                 android:textColor="@android:color/black"
                 app:layout_constraintStart_toStartOf="@+id/textView9"
-                app:layout_constraintTop_toBottomOf="@+id/textView5" />
+                app:layout_constraintTop_toTopOf="@+id/CO3_VALUE" />
+
+            <TextView
+                android:id="@+id/textView33"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="PH"
+                android:textColor="@android:color/black"
+                app:layout_constraintStart_toStartOf="@+id/textView9"
+                app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
             <TextView
                 android:id="@+id/textView9"
@@ -174,8 +215,8 @@
                 android:layout_marginStart="16dp"
                 android:text="Mg"
                 android:textColor="@android:color/black"
-                app:layout_constraintStart_toEndOf="@+id/CA_DETAILS"
-                app:layout_constraintTop_toTopOf="@+id/CA_DETAILS" />
+                app:layout_constraintStart_toEndOf="@+id/CA_VALUE"
+                app:layout_constraintTop_toTopOf="@+id/CA_VALUE" />
 
             <TextView
                 android:id="@+id/textView7"
@@ -206,8 +247,8 @@
                 android:text="@string/watHco3"
                 android:textColor="@android:color/black"
                 android:textSize="10sp"
-                app:layout_constraintStart_toStartOf="@+id/textView5"
-                app:layout_constraintTop_toBottomOf="@+id/textView15" />
+                app:layout_constraintStart_toStartOf="@+id/textView12"
+                app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
             <TextView
                 android:id="@+id/textView12"
@@ -234,20 +275,31 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/layoutCations">
 
+            <View
+                android:id="@+id/view5"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="2dp" />
+
             <TextView
-                android:id="@+id/CEA_DETAILS"
+                android:id="@+id/CEA_VALUE"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
                 android:ems="4"
                 android:gravity="center"
+                android:text="dummy"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="@+id/RAS_DETAILS"
-                app:layout_constraintTop_toTopOf="@+id/ras" />
+                app:layout_constraintStart_toEndOf="@+id/textView34"
+                app:layout_constraintTop_toTopOf="@+id/textView34" />
 
             <TextView
-                android:id="@+id/ras"
+                android:id="@+id/textView34"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -257,13 +309,14 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
             <TextView
-                android:id="@+id/RAS_DETAILS"
+                android:id="@+id/RAS_VALUE"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:layout_marginStart="8dp"
                 android:ems="4"
                 android:gravity="center"
+                android:text="dummy"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="14sp"
@@ -272,13 +325,14 @@
 
 
             <TextView
-                android:id="@+id/CORRECTED_SAR_DETAILS"
+                android:id="@+id/CORRECTED_SAR_VALUE"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:layout_marginStart="8dp"
                 android:ems="4"
                 android:gravity="center"
+                android:text="dummy"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="14sp"
@@ -289,8 +343,8 @@
                 android:id="@+id/textView13"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginStart="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:text="@string/ras"
                 android:textColor="@android:color/black"
@@ -305,20 +359,21 @@
                 android:layout_marginStart="16dp"
                 android:text="@string/watCorrectedSar"
                 android:textColor="@android:color/black"
-                app:layout_constraintStart_toEndOf="@+id/RAS_DETAILS"
-                tools:layout_editor_absoluteY="4dp" />
+                app:layout_constraintStart_toEndOf="@+id/RAS_VALUE"
+                app:layout_constraintTop_toTopOf="@+id/RAS_VALUE" />
 
             <TextView
                 android:id="@+id/textView14"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:text="Data"
                 android:textColor="@android:color/black"
-                app:layout_constraintStart_toStartOf="@+id/ras2"
-                app:layout_constraintTop_toTopOf="@+id/CEA_DETAILS" />
+                app:layout_constraintStart_toStartOf="@+id/textView13"
+                app:layout_constraintTop_toBottomOf="@+id/textView34" />
 
             <TextView
-                android:id="@+id/CREATED_AT_DETAILS"
+                android:id="@+id/CREATED_AT_VALUE"
                 android:layout_width="87dp"
                 android:layout_height="19dp"
                 android:layout_marginLeft="8dp"

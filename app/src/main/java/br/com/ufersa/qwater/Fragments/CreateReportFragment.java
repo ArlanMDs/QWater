@@ -18,7 +18,7 @@ import br.com.ufersa.qwater.beans.WaterReport;
 
 public class CreateReportFragment extends Fragment implements AdapterView.OnItemSelectedListener{
 
-    private EditText edtCea, edtCa, edtMg, edtK, edtNa, edtCo3, edtHco3, edtCl, edtPH;
+    private EditText edtCea, edtCa, edtMg, edtK, edtNa, edtCo3, edtHco3, edtCl, edtPH, edtSO4, edtB;
     private Button analyzeButton;
     private Spinner spinnerCEa;
 
@@ -96,6 +96,16 @@ public class CreateReportFragment extends Fragment implements AdapterView.OnItem
         else
             waterReport.setWatPH(0);
 
+        if(edtSO4.getText().length() > 0)
+            waterReport.setWatSo4(parseToDouble(edtSO4.getText().toString()));
+        else
+            waterReport.setWatSo4(0);
+
+        if(edtB.getText().length() > 0)
+            waterReport.setWatB(parseToDouble(edtB.getText().toString()));
+        else
+            waterReport.setWatB(0);
+
         waterReport.setWatCea(getCeaInDs_m());
 
         return waterReport;
@@ -144,6 +154,8 @@ public class CreateReportFragment extends Fragment implements AdapterView.OnItem
         edtHco3 = view.findViewById(R.id.EDIT_HCO3);
         edtCl = view.findViewById(R.id.EDIT_CL);
         edtPH = view.findViewById(R.id.EDIT_PH);
+        edtB = view.findViewById(R.id.EDIT_B);
+        edtSO4 = view.findViewById(R.id.EDIT_SO4);
 
         analyzeButton = view.findViewById(R.id.ANALYZE_BUTTON);
 

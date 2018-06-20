@@ -27,12 +27,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".activities.PopupGraphActivity"
             android:theme="@style/AppTheme.PopupTheme" />
-        <activity
-            android:name=".activities.StoreWaterReportActivity"
-            android:theme="@style/AppTheme.PopupTheme" />
+
         <activity
             android:name=".activities.AnalyzeWaterReportActivity"
             android:theme="@style/AppTheme.NoActionBar" />

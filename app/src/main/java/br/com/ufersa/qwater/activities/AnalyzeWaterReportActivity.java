@@ -115,9 +115,9 @@ public class AnalyzeWaterReportActivity extends AppCompatActivity implements Vie
 
         // correctedSAR
         if(!Double.isNaN(waterReport.getWatCorrectedSar())) {
+            sarInfoButton.setVisibility(View.VISIBLE);
             correctedSARResultTextview.setText(String.valueOf(waterReport.getWatCorrectedSar()));
             SARClassificationTextview.setText("S" + String.valueOf(currentSARClassification));
-
         } else {
             correctedSARResultTextview.setText(R.string.erro_calculo);
             sarInfoButton.setVisibility(View.GONE);

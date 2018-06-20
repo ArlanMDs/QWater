@@ -27,6 +27,8 @@ public class WaterReport implements Parcelable{//TODO resolver o que fazer quand
     private double watCo3;
     private double watHco3;
     private double watCl;
+    private double watSo4;
+    private double watB;
     private double watCea;
     private double watPH;
     private double watNormalSar;
@@ -40,7 +42,7 @@ public class WaterReport implements Parcelable{//TODO resolver o que fazer quand
 
     }
 
-    public WaterReport(double watCa, double watMg, double watK, double watNa, double watCo3, double watHco3, double watCl, double watCea, double watPH) {
+    public WaterReport(double watCa, double watMg, double watK, double watNa, double watCo3, double watHco3, double watCl, double watSo4, double watB, double watCea, double watPH) {
         this.watCa = watCa;
         this.watMg = watMg;
         this.watK = watK;
@@ -48,6 +50,8 @@ public class WaterReport implements Parcelable{//TODO resolver o que fazer quand
         this.watCo3 = watCo3;
         this.watHco3 = watHco3;
         this.watCl = watCl;
+        this.watSo4 = watSo4;
+        this.watB = watB;
         this.watCea = watCea;
         this.watPH = watPH;
     }
@@ -67,6 +71,8 @@ public class WaterReport implements Parcelable{//TODO resolver o que fazer quand
         dest.writeDouble(watCo3);
         dest.writeDouble(watHco3);
         dest.writeDouble(watCl);
+        dest.writeDouble(watSo4);
+        dest.writeDouble(watB);
         dest.writeDouble(watCea);
         dest.writeDouble(watPH);
         dest.writeDouble(watNormalSar);
@@ -85,6 +91,8 @@ public class WaterReport implements Parcelable{//TODO resolver o que fazer quand
         watCo3 = in.readDouble();
         watHco3 = in.readDouble();
         watCl = in.readDouble();
+        watSo4 = in.readDouble();
+        watB = in.readDouble();
         watCea = in.readDouble();
         watPH = in.readDouble();
         watNormalSar = in.readDouble();
@@ -164,6 +172,22 @@ public class WaterReport implements Parcelable{//TODO resolver o que fazer quand
 
     public double getWatCl() {
         return watCl;
+    }
+
+    public double getWatSo4() {
+        return watSo4;
+    }
+
+    public void setWatSo4(double watSo4) {
+        this.watSo4 = watSo4;
+    }
+
+    public double getWatB() {
+        return watB;
+    }
+
+    public void setWatB(double watB) {
+        this.watB = watB;
     }
 
     public void setWatCl(double watCl) {

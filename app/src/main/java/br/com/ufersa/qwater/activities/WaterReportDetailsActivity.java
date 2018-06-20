@@ -12,7 +12,7 @@ import br.com.ufersa.qwater.beans.WaterReport;
 
 public class WaterReportDetailsActivity extends AppCompatActivity {
 
-    private TextView cea, ca, mg, k, na, co3, hco3, cl, pH, normalSAR, correctedSAR, date;
+    private TextView cea, ca, mg, k, na, co3, hco3, cl, pH, normalSAR, correctedSAR, date, b, so4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,22 +42,27 @@ public class WaterReportDetailsActivity extends AppCompatActivity {
             normalSAR.setText(String.valueOf(waterReport.getWatNormalSar()));
             correctedSAR.setText(String.valueOf(waterReport.getWatCorrectedSar()));
             date.setText(formatDate(waterReport.getWatDate()));
+            b.setText(String.valueOf(waterReport.getWatB()));
+            so4.setText(String.valueOf(waterReport.getWatSo4()));
         }
     }
 
     private void initiate(){
-        cea = findViewById(R.id.CEA_DETAILS);
-        ca = findViewById(R.id.CA_DETAILS);
-        mg = findViewById(R.id.MG_DETAILS);
-        k = findViewById(R.id.K_DETAILS);
-        na = findViewById(R.id.NA_DETAILS);
-        co3 = findViewById(R.id.CO3_DETAILS);
-        hco3 = findViewById(R.id.HCO3_DETAILS);
-        cl = findViewById(R.id.CL_DETAILS);
-        pH = findViewById(R.id.PH_DETAILS);
-        normalSAR = findViewById(R.id.RAS_DETAILS);
-        correctedSAR = findViewById(R.id.CORRECTED_SAR_DETAILS);
-        date = findViewById(R.id.CREATED_AT_DETAILS);
+        cea = findViewById(R.id.CEA_VALUE);
+        ca = findViewById(R.id.CA_VALUE);
+        mg = findViewById(R.id.MG_VALUE);
+        k = findViewById(R.id.K_VALUE);
+        na = findViewById(R.id.NA_VALUE);
+        co3 = findViewById(R.id.CO3_VALUE);
+        hco3 = findViewById(R.id.HCO3_VALUE);
+        cl = findViewById(R.id.CL_VALUE);
+        pH = findViewById(R.id.PH_VALUE);
+        normalSAR = findViewById(R.id.RAS_VALUE);
+        correctedSAR = findViewById(R.id.CORRECTED_SAR_VALUE);
+        date = findViewById(R.id.CREATED_AT_VALUE);
+        b = findViewById(R.id.B_VALUE);
+        so4 = findViewById(R.id.SO4_VALUE);
+
         Button delete = findViewById(R.id.DETAILS_DELETE_BUTTON);//TODO implementar delete
 
     }
