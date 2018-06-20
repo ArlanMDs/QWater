@@ -1,11 +1,9 @@
 package br.com.ufersa.qwater.activities;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -22,14 +20,14 @@ import br.com.ufersa.qwater.util.SARCalculator;
 
 public class AnalyzeWaterReportActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private Button SARButton;
-    private Button salinityButton;
+    private Button sarInfoButton;
+    private Button ceaInfoButton;
     private TextView correctedSARResultTextview, normalSARResultTextview, salinityTextview, SARClassificationTextview, ceaTextview;
+    private ConstraintLayout ceaLayout;
     private int currentSARClassification, currentSalinityClassification;
     private WaterReport waterReport;
     private AppDatabase appDatabase;
     private final static int REQUEST_CODE_SELECT_DATE = 1, REQUEST_CODE_SELECT_SOURCE = 2;
-    private boolean ableToClassifySAR = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +54,10 @@ public class AnalyzeWaterReportActivity extends AppCompatActivity implements Vie
         // A classificação e armazenamento está sendo feito após o arredondamento das casas decimais!
         this.waterReport = waterReport;
 
-        // Primeiro é categorizado a RAS, nesse método, a booleana ableToClassifySAR por ser colocada em false, então, algumas alterações são feitas no método UpdateUI()
-        categorizeSAR();
+        //
+        if(!Double.isNaN(waterReport.getWatCorrectedSar()))
+            categorizeSAR();
+
         categorizeSalinity(waterReport.getWatCea());
         updateUI();
 
@@ -84,6 +84,7 @@ public class AnalyzeWaterReportActivity extends AppCompatActivity implements Vie
             return formatFractionDigits(sarCalculator.calculateNormalSAR(1, ca, mg, na));//TODO SPINNNNER
         }else
             return Double.NaN;
+
     }
 
     /**
@@ -102,35 +103,36 @@ public class AnalyzeWaterReportActivity extends AppCompatActivity implements Vie
             return formatFractionDigits(sarCalculator.calculateCorrectedSAR(1, 1, ca, mg, na, cea, hco3));//TODO implementar as conversões dos spinners
         }else
             return Double.NaN;
-
     }
 
     private void updateUI(){
 
-        //RAS
-        if(ableToClassifySAR) {
-
-            // Ras normal
+        // normalSAR
+        if(!Double.isNaN(waterReport.getWatNormalSar()))
             normalSARResultTextview.setText(String.valueOf(waterReport.getWatNormalSar()));
-            SARButton.setVisibility(View.VISIBLE);
+        else
+            normalSARResultTextview.setText(R.string.erro_calculo);
 
-            // Ras corrigida
+        // correctedSAR
+        if(!Double.isNaN(waterReport.getWatCorrectedSar())) {
             correctedSARResultTextview.setText(String.valueOf(waterReport.getWatCorrectedSar()));
             SARClassificationTextview.setText("S" + String.valueOf(currentSARClassification));
 
         } else {
-            normalSARResultTextview.setText(R.string.erro_calculo);
             correctedSARResultTextview.setText(R.string.erro_calculo);
+            sarInfoButton.setVisibility(View.GONE);
+
         }
 
         // CEa
         if (waterReport.getWatCea() != 0) {
-            salinityButton.setVisibility(View.VISIBLE);
+            ceaInfoButton.setVisibility(View.VISIBLE);
             ceaTextview.setText(String.valueOf(waterReport.getWatCea()));
             salinityTextview.setText("C" + String.valueOf(currentSalinityClassification));
         }else{
-            ceaTextview.setText("CEa não Informada");
-            salinityTextview.setVisibility(View.GONE);
+            ceaLayout.setVisibility(View.GONE);
+//            ceaTextview.setText("CEa não Informada");
+//            salinityTextview.setVisibility(View.GONE);
         }
     }
 
@@ -165,43 +167,26 @@ public class AnalyzeWaterReportActivity extends AppCompatActivity implements Vie
 
         double correctedSAR = waterReport.getWatCorrectedSar();
 
-        if(!Double.isNaN(correctedSAR)) {
-            if (correctedSAR < 10.0)
-                currentSARClassification = 1;
-            else if (correctedSAR >= 10.0 && correctedSAR < 18.0)
-                currentSARClassification = 2;
-            else if (correctedSAR >= 18.0 && correctedSAR < 26.0)
-                currentSARClassification = 3;
-            else
-                currentSARClassification = 4;
-        }
-        // Não é possível calcular a RAS, Mudanças serão feitas na UI
+        if (correctedSAR < 10.0)
+            currentSARClassification = 1;
+        else if (correctedSAR >= 10.0 && correctedSAR < 18.0)
+            currentSARClassification = 2;
+        else if (correctedSAR >= 18.0 && correctedSAR < 26.0)
+            currentSARClassification = 3;
         else
-            ableToClassifySAR = false;
+            currentSARClassification = 4;
+
     }
 
     /**
      * mostra uma janela contendo informações em texto sobre a classificação do RAS ou salinidade
      * @param classification RAS ou salinidade a ser classificada
      */
-    private void showInfoDialogue(String classification){
+    private void showClassificationActivity(String classification){
 
-        AlertDialog.Builder builder;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            builder = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
-        } else {
-            builder = new AlertDialog.Builder(this);
-        }
-        int resourceId = this.getResources().getIdentifier(classification, "string", this.getPackageName());
-        builder.setTitle(getString(R.string.classificacao)+ " " + classification)
-                .setMessage(getString(resourceId))
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        //fecha o alerta
-                    }
-                })
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .show();
+        Intent intent = new Intent(AnalyzeWaterReportActivity.this, ClassificationDialogueActivity.class);
+        intent.putExtra("classification", classification);
+        startActivity(intent);
     }
 
     private void initiate() {
@@ -212,12 +197,13 @@ public class AnalyzeWaterReportActivity extends AppCompatActivity implements Vie
         SARClassificationTextview = findViewById(R.id.SAR_CLASSIFICATION_TEXTVIEW);
         ceaTextview = findViewById(R.id.CEA_TEXTVIEW);
         salinityTextview = findViewById(R.id.SALINITY_TEXTVIEW);
+        ceaLayout = findViewById(R.id.CEA_LAYOUT);
 
-        SARButton = findViewById(R.id.SAR_DETAILS_BUTTON);
-        SARButton.setOnClickListener(this);
+        sarInfoButton = findViewById(R.id.SAR_CLASSIFICATION_BUTTON);
+        sarInfoButton.setOnClickListener(this);
 
-        salinityButton = findViewById(R.id.SALINITY_BUTTON);
-        salinityButton.setOnClickListener(this);
+        ceaInfoButton = findViewById(R.id.CEA_CLASSIFICATION_BUTTON);
+        ceaInfoButton.setOnClickListener(this);
 
         Button saveReportButton = findViewById(R.id.SAVE_WATER_REPORT_BUTTON);
         saveReportButton.setOnClickListener(this);
@@ -242,12 +228,12 @@ public class AnalyzeWaterReportActivity extends AppCompatActivity implements Vie
             buscar o valor em strings.xml e montar a tela de dialog.
              */
 
-            case R.id.SAR_DETAILS_BUTTON:
-                showInfoDialogue("S" + currentSARClassification);
+            case R.id.SAR_CLASSIFICATION_BUTTON:
+                showClassificationActivity("S" + currentSARClassification);
 
                 break;
-            case R.id.SALINITY_BUTTON:
-                showInfoDialogue("C" + currentSalinityClassification);
+            case R.id.CEA_CLASSIFICATION_BUTTON:
+                showClassificationActivity("C" + currentSalinityClassification);
 
                 break;
             case R.id.SAVE_WATER_REPORT_BUTTON:

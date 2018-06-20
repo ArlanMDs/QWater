@@ -1,13 +1,7 @@
 package br.com.ufersa.qwater.util;
 
 public class SARCalculator {
-//    private double ca;
-//    private double mg;
-//    private double na;
-//    private double co3;
-//    private double hco3;
-//    private double cea;
-//
+
     public SARCalculator(){}
 
     /**
@@ -18,7 +12,6 @@ public class SARCalculator {
      */
     public double calculateNormalSAR(int moleculesSpinnerPosition, double ca, double mg, double na){
         //formatNaMgCaToMeq_L(moleculesSpinnerPosition);
-        //double ca = this.ca, mg = this.mg, na = this.na;
         double caMg = (ca + mg) / 2;
         return na / Math.pow(caMg,0.5);
         //return na / Math.sqrt((ca + mg)/2);
