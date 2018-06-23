@@ -2,27 +2,32 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
-<!-- TODO Colocar ícones da maneira correta -->
+
+
     <item android:title="Análise de água">
         <menu>
             <group android:checkableBehavior="single">
                 <item
+                    android:id="@+id/HOME"
+                    android:icon="@drawable/ic_action_home"
+                    android:title="@string/home_title" />
+                <item
                     android:id="@+id/CREATE_SOURCE"
-                    android:icon="@drawable/baseline_add_location_black_18dp"
+                    android:icon="@drawable/ic_action_add_location"
                     android:title="@string/registrar_fonte" />
                 <item
                     android:id="@+id/CREATE_REPORT"
-                    android:icon="@drawable/baseline_note_add_black_18dp"
+                    android:icon="@drawable/ic_action_note_add"
                     android:title="@string/novo_relatorio" />
                 <item
                     android:id="@+id/LIST_SOURCES"
-                    android:icon="@drawable/baseline_list_black_18dp"
+                    android:icon="@drawable/ic_action_view_list"
                     android:title="@string/listar_fontes" />
                 <item
                     android:id="@+id/LIST_REPORTS"
                     android:title="@string/listar_relatorios" />
                 <item
-                    android:icon="@drawable/baseline_bar_chart_black_18dp"
+                    android:icon="@drawable/ic_action_show_chart"
                     android:title="Estatísticas" />
 
             </group>

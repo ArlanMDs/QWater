@@ -31,8 +31,6 @@ public class ListSourcesFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        //returning our layout file
-        //change R.layout.yourlayoutfilename for each of your fragments
         return inflater.inflate(R.layout.fragment_list_sources, container, false);
     }
 
@@ -65,7 +63,7 @@ public class ListSourcesFragment extends Fragment {
             public void onClick(View v) {
                 getFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.content_frame, new CreateSourceFragment())
+                        .replace(R.id.content_frame, new CreateSourceFragment(), "CREATE_SOURCE")
                         .commit();
             }
         });

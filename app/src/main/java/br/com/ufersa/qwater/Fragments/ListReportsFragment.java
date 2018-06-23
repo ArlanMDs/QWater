@@ -27,8 +27,6 @@ public class ListReportsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        //returning our layout file
-        //change R.layout.yourlayoutfilename for each of your fragments
         return inflater.inflate(R.layout.fragment_list_reports, container, false);
     }
 
@@ -60,7 +58,7 @@ public class ListReportsFragment extends Fragment {
             public void onClick(View v) {
                 getFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.content_frame, new CreateReportFragment())
+                        .replace(R.id.content_frame, new CreateReportFragment(), "CREATE_REPORT")
                         .commit();
 
             }

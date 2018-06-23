@@ -66,8 +66,7 @@
     <string name="S2" translatable="true">Água com teor médio de sódio: estas águas só devem ser usadas em solos de textura arenosa ou em solos orgânicos de boa permeabilidade, uma vez que em solos de textura fina (argilosos) o
         sódio representa riscos de degradação.</string>
 
-    <string name="S3" translatable="true">Água com alto teor de sódio: Pode causar toxidez de sódio na maior parte dos solos, necessitando assim de práticas especiais de manejo tais como: drenagem, lavagem,
-        aplicação de matéria orgânica.</string>
+    <string name="S3" translatable="true">Água com alto teor de sódio: Pode causar toxidez de sódio na maior parte dos solos, necessitando assim de práticas especiais de manejo tais como: drenagem,  fração de lixiviação e aplicação de matéria orgânica.</string>
 
     <string name="S4" translatable="true">Água com teor muito alto de sódio. É geralmente inadequada para irrigação exceto quando a salinidade for baixa ou média. Necessita o uso de gesso ou outro
         corretivo torne possível o uso dessa água.</string>
@@ -82,10 +81,11 @@
         ser utilizada watNa irrigação de espécies vegetais de alta tolerância aos sais. Os riscos apresentados por esta classe de água podem ser amenizados quando do emprego do método de irrigação localizada mantendo
         o solo continuamente úmido.</string>
 
-    <string name="C4" translatable="true"> Água de muito alta salinidade. Não é apropriada para irrigação sob condições normais, porém pode ser usada ocasionalmente, em circunstâncias especiais. Os solos devem ser permeáveis,
+    <string name="C4" translatable="true"> Água de muito alta salinidade. Não é apropriada para irrigação sob condições normais, porém pode ser usada ocasionalmente no cultivo de Halófitas. Os solos devem ser permeáveis,
         a drenagem adequada, devendo ser aplicada água em excesso para se obter uma boa lixiviação dos sais e, mesmo assim devem ser explorados com culturas altamente tolerantes aos sais.</string>
 
     <string name="classification_error">Erro na classificação</string>
+    <string name="home_title">Início</string>
 
 
 </resources>

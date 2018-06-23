@@ -1,8 +1,10 @@
 package br.com.ufersa.qwater.activities;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -14,11 +16,14 @@ import android.view.MenuItem;
 
 import br.com.ufersa.qwater.Fragments.CreateReportFragment;
 import br.com.ufersa.qwater.Fragments.CreateSourceFragment;
+import br.com.ufersa.qwater.Fragments.HomeFragment;
 import br.com.ufersa.qwater.Fragments.ListReportsFragment;
 import br.com.ufersa.qwater.Fragments.ListSourcesFragment;
 import br.com.ufersa.qwater.R;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    private NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,22 +37,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //add this line to display menu1 when the activity is loaded
-        //displaySelectedScreen(R.id.CREATE_SOURCE);
-        //TODO fazer fragmento da tela inicial
-    }
+        //add this line to display menu when the activity is loaded
+        displaySelectedScreen(R.id.HOME);
+        navigationView.setCheckedItem(R.id.HOME);
 
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
+
     }
 
     @Override
@@ -76,27 +73,46 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //creating fragment object
         Fragment fragment = null;
+        String tag;
 
-        //initializing the fragment object which is selected
+        // ATENÇÃO: O floating button dentro dos fragmentos de listar também estão usando tag, pois eles fazem commit dentro dos seus click listeners.
+        // Caso mude aqui, também deve ser mudado lá!
         switch (itemId) {
+            case R.id.HOME:
+                fragment = new HomeFragment();
+                tag = "HOME";
+                break;
+
             case R.id.CREATE_SOURCE:
                 fragment = new CreateSourceFragment();
+                tag = "CREATE_SOURCE";
                 break;
+
             case R.id.CREATE_REPORT:
                 fragment = new CreateReportFragment();
+                tag = "CREATE_REPORT";
                 break;
+
             case R.id.LIST_REPORTS:
                 fragment = new ListReportsFragment();
+                tag = "LIST_REPORTS";
                 break;
+
             case R.id.LIST_SOURCES:
                 fragment = new ListSourcesFragment();
+                tag = "LIST_SOURCES";
                 break;
+
+            default:
+                tag = "NULL";
+                break;
+
         }
 
         //replacing the fragment
         if (fragment != null) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.content_frame, fragment);
+            ft.replace(R.id.content_frame, fragment, tag);
             ft.commit();
         }
 
@@ -106,35 +122,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-//        // Handle navigation view item clicks here.
-//        int id = item.getItemId();
-//        //TODO transformar as activities em fragmentos para popular um framelayout na main activity
-//        if (id == R.id.CREATE_SOURCE) {
-//            startActivity(new Intent(getApplicationContext(), CreateWaterSourceFragment.class));
-//
-//        } else if (id == R.id.CREATE_REPORT) {
-//            startActivity(new Intent(getApplicationContext(), CreateWaterReportActivity.class));
-//
-//        } else if (id == R.id.LIST_REPORTS) {
-//            startActivity(new Intent(getApplicationContext(), ListWaterReportsActivity.class));
-//
-//        } else if (id == R.id.LIST_SOURCES) {
-//            startActivity(new Intent(getApplicationContext(), ListWaterSourcesActivity.class));
-//
-//        } else if (id == R.id.nav_share) {
-//
-//        } else if (id == R.id.nav_send) {
-//
-//        }
-//        //calling the method displayselectedscreen and passing the id of selected menu
-//        displaySelectedScreen(item.getItemId());
-//
-//        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-//        drawer.closeDrawer(GravityCompat.START);
-
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         displaySelectedScreen(item.getItemId());
-
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            Fragment currentFragment = fragmentManager.findFragmentById(R.id.content_frame);
+
+            // Se o fragmento atual exibido não for a home, o botão voltar direciona para ela
+            if (!currentFragment.getTag().equals("HOME")) {
+                displaySelectedScreen(R.id.HOME);
+                navigationView.setCheckedItem(R.id.HOME);
+            }
+            else
+                super.onBackPressed();
+        }
     }
 }
