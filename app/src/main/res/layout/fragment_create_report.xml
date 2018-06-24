@@ -201,14 +201,12 @@
                 android:id="@+id/textView11"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:padding="2dp"
-                android:text="@string/watHco3"
+                android:text="@string/hco3"
                 android:textColor="@android:color/black"
                 android:textSize="10sp"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textView21"
                 app:layout_constraintTop_toTopOf="@+id/EDIT_HCO3" />
 
             <EditText
@@ -219,13 +217,13 @@
                 android:ems="4"
                 android:freezesText="true"
                 android:gravity="center"
-                android:hint="@string/watHco3"
+                android:hint="@string/hco3"
                 android:inputType="numberDecimal"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="@+id/EDIT_CL"
-                app:layout_constraintTop_toBottomOf="@+id/EDIT_SO4" />
+                app:layout_constraintStart_toStartOf="@+id/EDIT_CO3"
+                app:layout_constraintTop_toBottomOf="@+id/EDIT_CO3" />
 
             <EditText
                 android:id="@+id/EDIT_SO4"
@@ -247,12 +245,12 @@
                 android:id="@+id/textView12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="8dp"
                 android:padding="2dp"
                 android:text="pH"
                 android:textColor="@android:color/black"
                 android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="@+id/textView21"
+                app:layout_constraintStart_toStartOf="@+id/textView31"
                 app:layout_constraintTop_toTopOf="@+id/EDIT_PH" />
 
             <TextView
@@ -263,7 +261,7 @@
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="8dp"
                 android:padding="2dp"
-                android:text="@string/watCo3"
+                android:text="@string/co3"
                 android:textColor="@android:color/black"
                 android:textSize="12sp"
                 app:layout_constraintStart_toEndOf="@+id/EDIT_CL"
@@ -273,23 +271,25 @@
                 android:id="@+id/EDIT_CO3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginStart="16dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
                 android:ems="4"
                 android:freezesText="true"
                 android:gravity="center"
-                android:hint="@string/watCo3"
+                android:hint="@string/co3"
                 android:inputType="numberDecimal"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="14sp"
-                app:layout_constraintStart_toEndOf="@+id/textView12"
+                app:layout_constraintStart_toEndOf="@+id/textView21"
                 app:layout_constraintTop_toTopOf="@+id/EDIT_CL" />
 
             <EditText
                 android:id="@+id/EDIT_PH"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="48dp"
                 android:ems="4"
                 android:freezesText="true"
                 android:gravity="center"
@@ -298,7 +298,7 @@
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="@+id/EDIT_CO3"
+                app:layout_constraintStart_toStartOf="@+id/EDIT_CL"
                 app:layout_constraintTop_toTopOf="@+id/EDIT_SO4" />
 
             <TextView
@@ -373,7 +373,7 @@
                 android:ems="4"
                 android:freezesText="true"
                 android:gravity="center"
-                android:hint="@string/cea"
+                android:hint="@string/cea_hint"
                 android:inputType="numberDecimal"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray"
@@ -389,7 +389,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:text="@string/cea"
+                android:text="@string/condutividade_eletrica"
                 android:textColor="@android:color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

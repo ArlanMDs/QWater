@@ -1,28 +1,28 @@
 <resources>
-    <string name="app_name">Avaliador AQUA</string>
+    <string name="app_name">Avaliador Aqua</string>
     <string name="novo_relatorio">Novo Relatório</string>
     <string name="listar_relatorios">Listar Relatórios</string>
     <string name="listar_fontes">Listar Fontes</string>
     <string name="registrar_fonte">Registrar Fonte</string>
 
-    <string name="verDetalhesCea">Classificação da CE<small>a</small></string>
-    <string name="verDetalhesRASCorrigido">Classificação do RAS corrigido</string>
-    <string name="watCorrectedSar">RAS corrigida</string>
-    <string name="classeSalinidade">Classe de Salinidade: </string>
+    <string name="classificacao_cea">Classificação da CE<small>a</small></string>
+    <string name="classificacao_ras_corrigida">Classificação do RAS corrigida</string>
+    <string name="classe_salinidade">Classe de Salinidade: </string>
     <string name="classificacao">Classificação: </string>
     <string name="analise_do_relatorio">Análise do relatório</string>
-    <string name="mostrarGrafico">mostrar gráfico</string>
+    <string name="mostrar_grafico">mostrar gráfico</string>
 
-    <string name="watCea" translatable="false">CE<small>a</small>:</string>
-    <string name="cea" translatable="false">Condutividade Elétrica</string>
-    <string name="watHco3" translatable="false">HCO<sub><small>3</small></sub></string>
-    <string name="watCo3" translatable="false">CO<sub><small>3</small></sub></string>
+    <string name="cea" translatable="false">CE<small>a</small>:</string>
+    <string name="cea_hint" translatable="false">CE<small>a</small></string>
+    <string name="condutividade_eletrica" translatable="false">Condutividade Elétrica</string>
+    <string name="hco3" translatable="false">HCO<sub><small>3</small></sub></string>
+    <string name="co3" translatable="false">CO<sub><small>3</small></sub></string>
     <string name="ras">RAS</string>
     <string name="ras_corrigida">RAS corrigida</string>
 
-    <string name="valorIncorreto">Algum valor digitado está com formato incorreto</string>
+    <string name="valor_incorreto">Algum valor digitado está com formato incorreto</string>
 
-    <string name="obterLocalizacao">Obter Localização</string>
+    <string name="obter_localizacao">Obter Localização</string>
 
     <string name="escolher_a_data">Toque para escolher a data…</string>
     <string name="informacao_da_data">Por favor, insira a data em que a análise de água foi feita</string>
