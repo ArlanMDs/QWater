@@ -247,8 +247,11 @@ public class CreateSourceFragment extends Fragment implements View.OnClickListen
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
 
-            Toast.makeText(getActivity(), "Local Adicionado", Toast.LENGTH_SHORT).show(); //TODO editar string
-           // startActivity(new Intent(getActivity(), ListWaterSourcesActivity.class)); //TODO mudar para fragment
+            Toast.makeText(getActivity(), getString(R.string.local_adicionado), Toast.LENGTH_SHORT).show();
+            getFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.content_frame, new CreateReportFragment())
+                    .commit();
         }
     }
 

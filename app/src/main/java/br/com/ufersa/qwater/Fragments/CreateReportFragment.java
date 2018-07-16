@@ -22,7 +22,7 @@ public class CreateReportFragment extends Fragment implements AdapterView.OnItem
     private Button analyzeButton;
     private Spinner spinnerCEa;
 
-
+    //TODO na CaTable, o valor limite para a Cea é 8.0
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

@@ -14,7 +14,6 @@ public class SARCalculator {
         //formatNaMgCaToMeq_L(moleculesSpinnerPosition);
         double caMg = (ca + mg) / 2;
         return na / Math.pow(caMg,0.5);
-        //return na / Math.sqrt((ca + mg)/2);
     }
 
     /**
@@ -35,13 +34,14 @@ public class SARCalculator {
         return na / Math.pow(caMg,0.5);
     }
 
+    //TODO nesse momento,
+    // caso ultrapasse o valor limite de 30 hco3/ca ou de 8 ce, é impossível calcular
     /**
-     * usa a fórmula para cálculo do RAS corrigido dada no apêndice 2, do livro "A qualidade da água para irrigação", autor: José Franscismar de Medeiros
-     * @return valor do RAS corrigido
+     * usa a fórmula para cálculo do cálcio corrigido, dada no apêndice 2, do livro "A qualidade da água para irrigação"
+     * @return valor do cálcio corrigido
      */
     private double calculateCorrectedCalcium(double cea, double hco3, double ca){
           CaTable table = new CaTable();
-          //TODO nesse momento, caso ultrapasse o valor limite de 30 hco3/ca ou de 8 ce, é impossível calcular
           return table.interpolate(hco3 / ca, cea);
     }
 

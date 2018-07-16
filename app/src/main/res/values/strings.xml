@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Avaliador Aqua</string>
+    <string name="app_name">QWater</string>
     <string name="novo_relatorio">Novo Relatório</string>
     <string name="listar_relatorios">Listar Relatórios</string>
     <string name="listar_fontes">Listar Fontes</string>
@@ -8,17 +8,111 @@
     <string name="classificacao_cea">Classificação da CE<small>a</small></string>
     <string name="classificacao_ras_corrigida">Classificação do RAS corrigida</string>
     <string name="classe_salinidade">Classe de Salinidade: </string>
-    <string name="classificacao">Classificação: </string>
     <string name="analise_do_relatorio">Análise do relatório</string>
     <string name="mostrar_grafico">mostrar gráfico</string>
 
     <string name="cea" translatable="false">CE<small>a</small>:</string>
+
+
+    <!-- inicio fragment_create_report -->
+    <string name="cations">Cátions (mmol<small>c</small> L<sup><small>-1</small></sup>)</string>
+    <string name="anions">Ânions (mmol<small>c</small> L<sup><small>-1</small></sup>)</string>
+
+    <string name="mg" translatable="false">Mg<sup><small>2+</small></sup></string>
+    <string name="ca" translatable="false">Ca<sup><small>2+</small></sup></string>
+    <string name="k" translatable="false">K<sup><small>+</small></sup></string>
+    <string name="na" translatable="false">Na<sup><small>+</small></sup></string>
+
+    <string name="cl" translatable="false">Cl<sup><small>-</small></sup></string>
+    <string name="co3" translatable="false">CO<sub><small>3</small></sub><sup><small>2-</small></sup></string>
+    <string name="hco3" translatable="false">HCO<sub><small>3</small></sub><sup><small>-</small></sup></string>
+    <string name="so4" translatable="false">SO4<sup><small>2-</small></sup></string>
+
+    <string name="cea_unit" translatable="false">Unidade da CE<small>a</small></string>
     <string name="cea_hint" translatable="false">CE<small>a</small></string>
-    <string name="condutividade_eletrica" translatable="false">Condutividade Elétrica</string>
-    <string name="hco3" translatable="false">HCO<sub><small>3</small></sub></string>
-    <string name="co3" translatable="false">CO<sub><small>3</small></sub></string>
+    <string name="boro" translatable="false">B<sub><small>(ppm)</small></sub></string>
+    <string name="avaliar_qualidade">Avaliar a qualidade</string>
+
+        <!-- a ordem dos itens afeta o método formatUnits, em SARCalculator -->
+    <string-array name="molecules" translatable="false">
+        <item>mmol<small>c</small> L<sup><small>-1</small></sup></item>
+        <item>mg L<sup><small>-1</small></sup></item>
+        <item>mEq L<sup><small>-1</small></sup></item>
+    </string-array>
+
+        <!-- a ordem dos itens afeta o método formatUnits, em SARCalculator -->
+    <string-array name="condutividade" translatable="false">
+        <item>dS m<sup><small>-1</small></sup></item>
+        <item>mS cm<sup><small>-1</small></sup></item>
+        <item>μS cm<sup><small>-1</small></sup></item>
+    </string-array>
+
+    <!-- fim fragment_create_report -->
+
+    <!-- inicio activity_analyze_water_report -->
+
+    <string name="coerencia">Coerência dos resultados</string>
     <string name="ras">RAS</string>
     <string name="ras_corrigida">RAS corrigida</string>
+    <string name="condutividade_eletrica">Condutividade Elétrica</string>
+    <string name="classificacao">Classificação</string>
+    <string name="riscos_salinidade">Riscos de salinidade</string>
+    <string name="problemas_infiltracao">Problemas de Infiltração</string>
+    <string name="riscos_toxidez">Riscos de toxidez</string>
+    <string name="problemas_ph">Problemas com pH</string>
+    <string name="save">Armazenar</string>
+
+        <!-- Salinidade -->
+    <string name="C1">Classificação C1: Baixa. \n\n\tNenhum efeito prejudicial nas plantas ou no acúmulo em solos.</string>
+    <string name="C2">Classificação C2: Média. \n\n\tEstresse para plantas sensíveis. A lixiviação moderada impede o acúmulo de sais.</string>
+    <string name="C3">Classificação C3: Alta. \n\n\tRequer plantas tolerantes aos sais. Irrigação cuidadosa, boa drenagem e lixiviação.</string>
+    <string name="C4">Classificação C3: Muito alta. \n\n\tRequer manejo intensivo, excelente drenagem e lixiviação frequente.</string>
+        <!-- RAS -->
+    <string name="S1">Classificação S1: Baixa. \n\n\tPode ser usada para qualquer condição de solo sem causar deterioração da estrutura.</string>
+    <string name="S2">Classificação S2: Média. \n\n\tBoa em todos os solos de textura grossa.</string>
+    <string name="S3">Classificação S3: Alta. \n\n\tO acúmulo de sódio exigirá um manejo intensivo: Melhoradoes químicos e lixiviação.</string>
+    <string name="S4">Classificação S4: Muito alta. \n\n\tGeralmente não é adequada para irrigação, exceto em níveis muito baixo de sódio no solo com manejo intensivo.</string>
+        <!-- cloro -->
+    <string name="CL1"><b>Cloreto:</b> Risco baixo. Geralmente seguro para todas as plantas.</string>
+    <string name="CL2"><b>Cloreto:</b> Risco médio. Plantas sensíveis geralmente apresentam injúrias leves a moderadas.</string>
+    <string name="CL3"><b>Cloreto:</b> Risco alto. Plantas moderadamente tolerantes apresentam injúrias leves à substanciais.</string>
+    <string name="CL4"><b>Cloreto:</b> Risco muito alto. Problemas severos</string>
+        <!-- boro -->
+    <string name="B1"><b>Boro:</b> Risco baixo. Satisfatório para todas as culturas.</string>
+    <string name="B2"><b>Boro:</b> Risco médio. Satisfatório para a maioria das culturas. Culturas sensíveis podem apresentar danos.</string>
+    <string name="B3"><b>Boro:</b> Risco alto. Satisfatório para culturas semi-tolerantes. Em culturas sensíveis há redução do vigor e do crescimento.</string>
+    <string name="B4"><b>Boro:</b> Risco muito alto. Adequado apenas para plantas tolerantes.</string>
+        <!-- PH -->
+    <string name="PH1">Nenhuma restrição de uso.</string>
+    <string name="PH2">Restrição leve à moderada.</string>
+    <string name="PH3">Restrição severa.</string>
+        <!-- Sódio
+            SS = Irrigação por superfície
+            SA = Irrigação por aspersão
+        -->
+    <string name="SS1"><b>Sódio, irrigação por superfície:</b> Nenhum risco.</string>
+    <string name="SS2"><b>Sódio, irrigação por superfície:</b> Risco moderado.</string>
+    <string name="SS3"><b>Sódio, irrigação por superfície:</b> Risco severo.</string>
+    <string name="SA1"><b>Sódio, irrigação por aspersão:</b> Nenhum risco.</string>
+    <string name="SA2"><b>Sódio, irrigação por aspersão:</b> Risco moderado.</string>
+        <!-- Coerência -->
+    <string name="CO1">Resultado excelente.</string>
+    <string name="CO2">Resultado aceitável.</string>
+    <string name="CO3">Resultado duvidoso. É indicado rever os dados do relatório.</string>
+
+    <string name="coerencia_nao_informado">Não é possível calcular a coerência dos dados, pois nem todos os cátions e ânions foram informados.</string>
+    <string name="ph_nao_informado">Não foi possível estimar os problemas com pH. Valor não informado.</string>
+    <string name="na1_nao_informado"><b>Sódio, irrigação por superfície:</b> Não foi possível estimar. Verifique os dados de entrada.</string>
+    <string name="na2_nao_informado"><b>Sódio, irrigação por aspersão:</b> Não foi possível estimar. Verifique os dados de entrada.</string>
+    <string name="cea_nao_informado">Condutividade Elétrica não informada.</string>
+    <string name="ras_nao_informado">Não foi possível estimar os problemas de infiltração. Verifique os dados de entrada.</string>
+    <string name="boro_nao_informado"><b>Boro: </b>Valor não informado.</string>
+    <string name="cl_nao_informado"><b>Cloreto: </b>Valor não informado.</string>
+    <string name="na_nao_informado"><b>Sódio: </b>Valor não informado.</string>
+
+    <string name="classification_error">Erro na classificação</string>
+
+    <!-- fim activity_analyze_water_report -->
 
     <string name="valor_incorreto">Algum valor digitado está com formato incorreto</string>
 
@@ -28,10 +122,10 @@
     <string name="informacao_da_data">Por favor, insira a data em que a análise de água foi feita</string>
     <string name="escolher_fonte">Escolha a fonte da amostra</string>
 
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main">Início</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Avaliador AQUA</string>
+    <string name="nav_header_title">QWater</string>
     <string name="nav_header_subtitle">Closed beta</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
@@ -39,19 +133,7 @@
     <string name="adicionar_fonte">Adicionar fonte</string>
     <string name="erro_calculo">Não foi possível calcular</string>
 
-    <!-- a ordem dos itens afeta o método formatUnits, em SARCalculator -->
-    <string-array name="molecules" translatable="false">
-        <item>mmol<small>c</small> L<sup><small>-1</small></sup></item>
-        <item>watMg L<sup><small>-1</small></sup></item>
-        <item>mEq L<sup><small>-1</small></sup></item>
-    </string-array>
 
-    <!-- a ordem dos itens afeta o método formatUnits, em SARCalculator -->
-    <string-array name="condutividade" translatable="false">
-        <item>dS m<sup><small>-1</small></sup></item>
-        <item>mS cm<sup><small>-1</small></sup></item>
-        <item>μS cm<sup><small>-1</small></sup></item>
-    </string-array>
 
     <string-array name="fontes" translatable="true">
         <item>Açude</item>
@@ -61,31 +143,9 @@
         <item>Lagoa</item>
     </string-array>
 
-    <string name="S1" translatable="true">Água com baixo teor de sódio: pode ser utilizada para irrigação em quase todos os tipos de solo, com baixo risco de desenvolvimento de problemas relacionados à infiltração de água.</string>
 
-    <string name="S2" translatable="true">Água com teor médio de sódio: estas águas só devem ser usadas em solos de textura arenosa ou em solos orgânicos de boa permeabilidade, uma vez que em solos de textura fina (argilosos) o
-        sódio representa riscos de degradação.</string>
-
-    <string name="S3" translatable="true">Água com alto teor de sódio: Pode causar toxidez de sódio na maior parte dos solos, necessitando assim de práticas especiais de manejo tais como: drenagem,  fração de lixiviação e aplicação de matéria orgânica.</string>
-
-    <string name="S4" translatable="true">Água com teor muito alto de sódio. É geralmente inadequada para irrigação exceto quando a salinidade for baixa ou média. Necessita o uso de gesso ou outro
-        corretivo torne possível o uso dessa água.</string>
-
-    <string name="C1" translatable="true">Água de baixa salinidade. Pode ser usada para irrigação da maioria das culturas, em quase todos os tipos de solos, com muito pouca probabilidade de que se desenvolvam problemas de salinidade.
-        Se necessária alguma lixiviação de sais, esta é conseguida em condições normais de irrigação, exceto em solos de muito baixa permeabilidade.</string>
-
-    <string name="C2" translatable="true">Água de média salinidade. Pode ser usada sempre e quando houver uma lixiviação moderada de sais (10 - 15%). Em quase todos os casos se adequa ao cultivo de plantas moderadamente tolerantes aos sais,
-        sem necessidade de práticas especiais de controle de salinidade.</string>
-
-    <string name="C3" translatable="true">Água de alta salinidade. Pode ser usada em solos com drenagem deficiente. Mesmo com drenagem adequada pode ser necessário práticas especiais de controle da salinidade, devendo, portanto,
-        ser utilizada watNa irrigação de espécies vegetais de alta tolerância aos sais. Os riscos apresentados por esta classe de água podem ser amenizados quando do emprego do método de irrigação localizada mantendo
-        o solo continuamente úmido.</string>
-
-    <string name="C4" translatable="true"> Água de muito alta salinidade. Não é apropriada para irrigação sob condições normais, porém pode ser usada ocasionalmente no cultivo de Halófitas. Os solos devem ser permeáveis,
-        a drenagem adequada, devendo ser aplicada água em excesso para se obter uma boa lixiviação dos sais e, mesmo assim devem ser explorados com culturas altamente tolerantes aos sais.</string>
-
-    <string name="classification_error">Erro na classificação</string>
     <string name="home_title">Início</string>
+    <string name="local_adicionado">Local Adicionado</string>
 
 
 </resources>

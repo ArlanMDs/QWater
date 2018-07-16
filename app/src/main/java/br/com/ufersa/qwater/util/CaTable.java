@@ -9,7 +9,7 @@ package br.com.ufersa.qwater.util;
 //TODO limitar as entradas para os valores máximos da tabela
 class CaTable {
 
-    //A primeira coluna representa os valores da HCO3
+    //A primeira coluna representa os valores da HCO3 / Ca
     //A primeira linha representa os valores da CE
 
     private final double[][] table = new double[][]{

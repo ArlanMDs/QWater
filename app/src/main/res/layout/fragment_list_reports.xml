@@ -13,7 +13,6 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         android:tint="?attr/colorPrimaryDark"
-        android:background="@drawable/tubo_de_ensaio"
         android:src="@android:drawable/ic_input_add"
         app:backgroundTint="@color/accent_material_light_1" />
 

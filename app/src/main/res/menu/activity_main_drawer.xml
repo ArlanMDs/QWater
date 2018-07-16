@@ -26,23 +26,7 @@
                 <item
                     android:id="@+id/LIST_REPORTS"
                     android:title="@string/listar_relatorios" />
-                <item
-                    android:icon="@drawable/ic_action_show_chart"
-                    android:title="Estatísticas" />
-
             </group>
         </menu>
     </item>
-
-    <item android:title="Análise de solo">
-        <menu>
-            <item
-                android:icon="@drawable/ic_menu_manage"
-                android:title="em breve..." />
-            <item
-                android:icon="@drawable/ic_menu_manage"
-                android:title="em breve..." />
-        </menu>
-    </item>
-
 </menu>
