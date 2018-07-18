@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import br.com.ufersa.qwater.R;
 import br.com.ufersa.qwater.activities.AnalyzeWaterReportActivity;
@@ -29,26 +30,49 @@ public class CreateReportFragment extends Fragment implements AdapterView.OnItem
         return inflater.inflate(R.layout.fragment_create_report, container, false);
     }
 
-
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //you can set the title for your toolbar here for different fragments different titles
-        getActivity().setTitle("Criar relatório");
+        getActivity().setTitle(getString(R.string.criar_relatorio));
 
         initiate(view);
 
         analyzeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                WaterReport waterReport;
 
-                Intent intent = new Intent(getActivity(), AnalyzeWaterReportActivity.class);
-                intent.putExtra("waterReport", generateReport());
-                startActivity(intent);
+                try {
+                    waterReport = generateReport();
+                    // Se nenhum parametro for NaN, procede.
+                    if(!checkInput(waterReport)) {
+                        Intent intent = new Intent(getActivity(), AnalyzeWaterReportActivity.class);
+                        intent.putExtra("waterReport", waterReport);
+                        startActivity(intent);
+                    }else
+                        Toast.makeText(getContext(), getString(R.string.erro_verifique_dados), Toast.LENGTH_LONG).show();
 
-
+                }catch (Exception e){
+                    e.printStackTrace();
+                    Toast.makeText(getContext(), getString(R.string.erro_verifique_dados), Toast.LENGTH_LONG).show();
+                }
             }
         });
+    }
+
+    /**
+     * Verifica se algum dos parametros vindos dos textviews é NaN
+     * @param waterReport relatório
+     * @return true caso algum parametro seja NaN
+     */
+    private boolean checkInput(WaterReport waterReport) {
+        return ( Double.isNaN(waterReport.getWatCea()) && Double.isNaN(waterReport.getWatCa())
+                && Double.isNaN(waterReport.getWatMg()) &&  Double.isNaN(waterReport.getWatK())
+                && Double.isNaN(waterReport.getWatNa()) &&  Double.isNaN(waterReport.getWatCo3())
+                && Double.isNaN(waterReport.getWatCl()) &&  Double.isNaN(waterReport.getWatHco3())
+                && Double.isNaN(waterReport.getWatPH()) &&  Double.isNaN(waterReport.getWatSo4())
+                && Double.isNaN(waterReport.getWatB()));
     }
 
     private WaterReport generateReport() {

@@ -15,6 +15,8 @@
 
 
     <!-- inicio fragment_create_report -->
+    <string name="criar_relatorio">Criar relatório</string>
+    <string name="erro_verifique_dados">Algum erro nos dados de entrada. Dica: use ponto ao invés de vírgula.</string>
     <string name="cations">Cátions (mmol<small>c</small> L<sup><small>-1</small></sup>)</string>
     <string name="anions">Ânions (mmol<small>c</small> L<sup><small>-1</small></sup>)</string>
 
@@ -54,6 +56,7 @@
     <string name="coerencia">Coerência dos resultados</string>
     <string name="ras">RAS</string>
     <string name="ras_corrigida">RAS corrigida</string>
+    <string name="ras_asterisco">RAS* :</string>
     <string name="condutividade_eletrica">Condutividade Elétrica</string>
     <string name="classificacao">Classificação</string>
     <string name="riscos_salinidade">Riscos de salinidade</string>
@@ -61,6 +64,7 @@
     <string name="riscos_toxidez">Riscos de toxidez</string>
     <string name="problemas_ph">Problemas com pH</string>
     <string name="save">Armazenar</string>
+    <string name="relatorio_salvo">Relatório armazenado com sucesso.</string>
 
         <!-- Salinidade -->
     <string name="C1">Classificação C1: Baixa. \n\n\tNenhum efeito prejudicial nas plantas ou no acúmulo em solos.</string>
@@ -106,10 +110,12 @@
     <string name="na2_nao_informado"><b>Sódio, irrigação por aspersão:</b> Não foi possível estimar. Verifique os dados de entrada.</string>
     <string name="cea_nao_informado">Condutividade Elétrica não informada.</string>
     <string name="ras_nao_informado">Não foi possível estimar os problemas de infiltração. Verifique os dados de entrada.</string>
+    <string name="ras_nao_calculado">Não foi possível calcular a RAS*. Verifique os dados de entrada.</string>
     <string name="boro_nao_informado"><b>Boro: </b>Valor não informado.</string>
     <string name="cl_nao_informado"><b>Cloreto: </b>Valor não informado.</string>
     <string name="na_nao_informado"><b>Sódio: </b>Valor não informado.</string>
 
+    <string name="erro_salvar">Erro ao armazenar o relatório.</string>
     <string name="classification_error">Erro na classificação</string>
 
     <!-- fim activity_analyze_water_report -->

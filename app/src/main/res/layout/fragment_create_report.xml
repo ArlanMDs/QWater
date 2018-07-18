@@ -39,7 +39,7 @@
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/layoutCations"
-            android:layout_width="270dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
             android:layout_marginLeft="24dp"
@@ -167,11 +167,12 @@
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/layoutAnions"
-            android:layout_width="270dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:background="@drawable/customborder"
             android:padding="2dp"
+            app:layout_constraintEnd_toEndOf="@+id/layoutCations"
             app:layout_constraintStart_toStartOf="@+id/layoutCations"
             app:layout_constraintTop_toBottomOf="@+id/textView38">
 
@@ -298,12 +299,12 @@
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/layoutCEa"
-            android:layout_width="262dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="3dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/customborder"
             android:padding="2dp"
+            app:layout_constraintEnd_toEndOf="@+id/layoutCations"
             app:layout_constraintStart_toStartOf="@+id/layoutCations"
             app:layout_constraintTop_toBottomOf="@+id/CEA_SPINNER">
 
