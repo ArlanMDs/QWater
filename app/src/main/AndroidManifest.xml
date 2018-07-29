@@ -14,8 +14,8 @@
         <activity
             android:name=".activities.MainActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.WaterReportDetailsActivity"
             android:noHistory="true" />
@@ -28,11 +28,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".activities.PopupGraphActivity"
             android:theme="@style/AppTheme.PopupTheme" />
-
         <activity
             android:name=".activities.AnalyzeWaterReportActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -42,10 +40,29 @@
         <activity
             android:name=".activities.ListWaterSourcesActivity"
             android:theme="@style/AppTheme.PopupTheme" />
-
         <activity
             android:name=".activities.ClassificationDialogueActivity"
-            android:theme="@style/AppTheme.PopupTheme"  />
+            android:theme="@style/AppTheme.PopupTheme" />
+
+        <activity
+            android:name=".info_activities.CoherenceActivity"
+            android:theme="@style/AppTheme.PopupTheme" />
+
+        <activity
+            android:name=".info_activities.SalinityActivity"
+            android:theme="@style/AppTheme.PopupTheme" />
+
+        <activity
+            android:name=".info_activities.SarActivity"
+            android:theme="@style/AppTheme.PopupTheme" />
+        <activity
+            android:name=".info_activities.ToxityActivity"
+            android:theme="@style/AppTheme.PopupTheme" />
+
+        <activity
+            android:name=".info_activities.PhActivity"
+            android:theme="@style/AppTheme.PopupTheme" />
+
     </application>
 
 </manifest>

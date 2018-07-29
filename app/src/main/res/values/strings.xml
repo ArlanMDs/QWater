@@ -24,25 +24,28 @@
     <string name="ca" translatable="false">Ca<sup><small>2+</small></sup></string>
     <string name="k" translatable="false">K<sup><small>+</small></sup></string>
     <string name="na" translatable="false">Na<sup><small>+</small></sup></string>
+    <string name="sodio">Sódio - Na<sup><small>+</small></sup></string>
 
     <string name="cl" translatable="false">Cl<sup><small>-</small></sup></string>
+    <string name="cloreto">Cloreto - Cl<sup><small>-</small></sup></string>
     <string name="co3" translatable="false">CO<sub><small>3</small></sub><sup><small>2-</small></sup></string>
     <string name="hco3" translatable="false">HCO<sub><small>3</small></sub><sup><small>-</small></sup></string>
     <string name="so4" translatable="false">SO4<sup><small>2-</small></sup></string>
 
     <string name="cea_unit" translatable="false">Unidade da CE<small>a</small></string>
     <string name="cea_hint" translatable="false">CE<small>a</small></string>
+    <string name="cea_unidade" translatable="false">Unidade da CE<small>a</small>: dS m<sup><small>-1</small></sup></string>
     <string name="boro" translatable="false">B<sub><small>(ppm)</small></sub></string>
     <string name="avaliar_qualidade">Avaliar a qualidade</string>
 
-        <!-- a ordem dos itens afeta o método formatUnits, em SARCalculator -->
+    <!-- a ordem dos itens afeta o método formatUnits, em SARCalculator -->
     <string-array name="molecules" translatable="false">
         <item>mmol<small>c</small> L<sup><small>-1</small></sup></item>
         <item>mg L<sup><small>-1</small></sup></item>
         <item>mEq L<sup><small>-1</small></sup></item>
     </string-array>
 
-        <!-- a ordem dos itens afeta o método formatUnits, em SARCalculator -->
+    <!-- a ordem dos itens afeta o método formatUnits, em SARCalculator -->
     <string-array name="condutividade" translatable="false">
         <item>dS m<sup><small>-1</small></sup></item>
         <item>mS cm<sup><small>-1</small></sup></item>
@@ -56,41 +59,53 @@
     <string name="coerencia">Coerência dos resultados</string>
     <string name="ras">RAS</string>
     <string name="ras_corrigida">RAS corrigida</string>
+    <string name="ras_unidade">Unidade da RAS*: mmol<small>c</small> L<sup><small>-1</small></sup></string>
     <string name="ras_asterisco">RAS* :</string>
     <string name="condutividade_eletrica">Condutividade Elétrica</string>
     <string name="classificacao">Classificação</string>
     <string name="riscos_salinidade">Riscos de salinidade</string>
     <string name="problemas_infiltracao">Problemas de Infiltração</string>
     <string name="riscos_toxidez">Riscos de toxidez</string>
+    <string name="riscos_toxidez_titulo">Riscos de toxidez: Impacto do contato com raiz e folha</string>
     <string name="problemas_ph">Problemas com pH</string>
     <string name="save">Armazenar</string>
     <string name="relatorio_salvo">Relatório armazenado com sucesso.</string>
 
-        <!-- Salinidade -->
+    <!-- Salinidade -->
     <string name="C1">Classificação C1: Baixa. \n\n\tNenhum efeito prejudicial nas plantas ou no acúmulo em solos.</string>
     <string name="C2">Classificação C2: Média. \n\n\tEstresse para plantas sensíveis. A lixiviação moderada impede o acúmulo de sais.</string>
     <string name="C3">Classificação C3: Alta. \n\n\tRequer plantas tolerantes aos sais. Irrigação cuidadosa, boa drenagem e lixiviação.</string>
     <string name="C4">Classificação C3: Muito alta. \n\n\tRequer manejo intensivo, excelente drenagem e lixiviação frequente.</string>
-        <!-- RAS -->
+    <!-- RAS -->
     <string name="S1">Classificação S1: Baixa. \n\n\tPode ser usada para qualquer condição de solo sem causar deterioração da estrutura.</string>
     <string name="S2">Classificação S2: Média. \n\n\tBoa em todos os solos de textura grossa.</string>
     <string name="S3">Classificação S3: Alta. \n\n\tO acúmulo de sódio exigirá um manejo intensivo: Melhoradoes químicos e lixiviação.</string>
     <string name="S4">Classificação S4: Muito alta. \n\n\tGeralmente não é adequada para irrigação, exceto em níveis muito baixo de sódio no solo com manejo intensivo.</string>
-        <!-- cloro -->
+    <!-- cloro -->
     <string name="CL1"><b>Cloreto:</b> Risco baixo. Geralmente seguro para todas as plantas.</string>
     <string name="CL2"><b>Cloreto:</b> Risco médio. Plantas sensíveis geralmente apresentam injúrias leves a moderadas.</string>
     <string name="CL3"><b>Cloreto:</b> Risco alto. Plantas moderadamente tolerantes apresentam injúrias leves à substanciais.</string>
     <string name="CL4"><b>Cloreto:</b> Risco muito alto. Problemas severos</string>
-        <!-- boro -->
+
+    <string name="CL1_info">Risco baixo. Geralmente seguro para todas as plantas.</string>
+    <string name="CL2_info">Risco médio. Plantas sensíveis geralmente apresentam injúrias leves a moderadas.</string>
+    <string name="CL3_info">Risco alto. Plantas moderadamente tolerantes apresentam injúrias leves à substanciais.</string>
+    <string name="CL4_info">Risco muito alto. Problemas severos</string>
+    <!-- boro -->
     <string name="B1"><b>Boro:</b> Risco baixo. Satisfatório para todas as culturas.</string>
     <string name="B2"><b>Boro:</b> Risco médio. Satisfatório para a maioria das culturas. Culturas sensíveis podem apresentar danos.</string>
     <string name="B3"><b>Boro:</b> Risco alto. Satisfatório para culturas semi-tolerantes. Em culturas sensíveis há redução do vigor e do crescimento.</string>
     <string name="B4"><b>Boro:</b> Risco muito alto. Adequado apenas para plantas tolerantes.</string>
-        <!-- PH -->
+
+    <string name="B1_info">Risco baixo. Satisfatório para todas as culturas.</string>
+    <string name="B2_info">Risco médio. Satisfatório para a maioria das culturas. Culturas sensíveis podem apresentar danos.</string>
+    <string name="B3_info">Risco alto. Satisfatório para culturas semi-tolerantes. Em culturas sensíveis há redução do vigor e do crescimento.</string>
+    <string name="B4_info">Risco muito alto. Adequado apenas para plantas tolerantes.</string>
+    <!-- PH -->
     <string name="PH1">Nenhuma restrição de uso.</string>
     <string name="PH2">Restrição leve à moderada.</string>
     <string name="PH3">Restrição severa.</string>
-        <!-- Sódio
+    <!-- Sódio
             SS = Irrigação por superfície
             SA = Irrigação por aspersão
         -->
@@ -99,7 +114,14 @@
     <string name="SS3"><b>Sódio, irrigação por superfície:</b> Risco severo.</string>
     <string name="SA1"><b>Sódio, irrigação por aspersão:</b> Nenhum risco.</string>
     <string name="SA2"><b>Sódio, irrigação por aspersão:</b> Risco moderado.</string>
-        <!-- Coerência -->
+
+    <string name="SS1_info">Nenhum risco.</string>
+    <string name="SS2_info">Risco moderado.</string>
+    <string name="SS3_info">Risco severo.</string>
+    <string name="SA1_info">Nenhum risco.</string>
+    <string name="SA2_info">Risco moderado.</string>
+
+    <!-- Coerência -->
     <string name="CO1">Resultado excelente.</string>
     <string name="CO2">Resultado aceitável.</string>
     <string name="CO3">Resultado duvidoso. É indicado rever os dados do relatório.</string>
@@ -140,7 +162,6 @@
     <string name="erro_calculo">Não foi possível calcular</string>
 
 
-
     <string-array name="fontes" translatable="true">
         <item>Açude</item>
         <item>Poço</item>
@@ -152,6 +173,48 @@
 
     <string name="home_title">Início</string>
     <string name="local_adicionado">Local Adicionado</string>
-
+    <string name="coerencia_titulo">Coerência dos resultados de análise química de água</string>
+    <string name="concentracao_cation_anions">Concentração de Cátions e  Ânions</string>
+    <string name="r_formula_top"> | Σ Cátions - Σ Ânions |</string>
+    <string name="r_formula_bot"> | Σ Cátions + Σ  Ânions |</string>
+    <string name="resultado_excelente">Resultado excelente</string>
+    <string name="resultado_aceitavel">Resultado aceitável</string>
+    <string name="resultado_duvidoso">Resultado duvidoso</string>
+    <string name="r_5"><![CDATA[R < 5%]]></string>
+    <string name="_5_r_10"><![CDATA[5% <= R <= 10%]]></string>
+    <string name="r_10"><![CDATA[R > 10%]]></string>
+    <string name="r_igual">R =</string>
+    <string name="x_100">x 100</string>
+    <string name="problemas_com_ph">Problemas com pH</string>
+    <string name="ph_7_0"><![CDATA[pH < 7.0]]></string>
+    <string name="_7_0_ph_8_0"><![CDATA[7.0 <= pH <= 8.0]]></string>
+    <string name="ph_8_0"><![CDATA[pH > 8.0]]></string>
+    <string name="salinidade_titulo">Diretrizes para interpretar a qualidade da água de irrigação: Salinidade</string>
+    <string name="ce_0_75"><![CDATA[CE < 0.75]]></string>
+    <string name="_0_75_ce_1_5">0.75 <![CDATA[<]]>= CE<small>a</small> <![CDATA[<]]> 1.5</string>
+    <string name="_1_5_ce_3_00">1.5 <![CDATA[<]]>= CE<small>a</small> <![CDATA[<]]>= 3.00</string>
+    <string name="ce_3_0">CE<small>a</small> <![CDATA[>]]> 3.0</string>
+    <string name="voltar">Voltar</string>
+    <string name="ras_titulo">Problemas de Infiltração: Impacto sob a estrutura do solo</string>
+    <string name="ras_10_0"><![CDATA[RAS* < 10.0]]></string>
+    <string name="_10_0_ras_18_0"><![CDATA[10.0 <= RAS* < 18.0]]></string>
+    <string name="_18_0_ras_26_0"><![CDATA[18.0 <= RAS* <= 26.0]]></string>
+    <string name="ras_26_0"><![CDATA[RAS* > 26.0]]></string>
+    <string name="na_3_0">Na<sup><small>+</small></sup> > 3.0</string>
+    <string name="na_3_0_">Na<sup><small>+</small></sup> <![CDATA[<]]>= 3.0</string>
+    <string name="irrigacao_por_aspersao">Irrigação por aspersão</string>
+    <string name="ras_9_0"><![CDATA[RAS* > 9.0]]></string>
+    <string name="_3_0_ras_9_0"><![CDATA[3.0 >= RAS* >= 9.0]]></string>
+    <string name="irrigacao_por_superficie">Irrigação por superfície</string>
+    <string name="ras_3_0"><![CDATA[RAS* < 3.0]]></string>
+    <string name="_4_1_cl_10_0"><![CDATA[4.1 >=]]> Cl<sup><small>-</small></sup> <![CDATA[>= 10.0]]></string>
+    <string name="_2_1_cl_4_0"><![CDATA[2.1 >=]]> Cl<sup><small>-</small></sup> <![CDATA[>= 4.0]]></string>
+    <string name="cl_2_0">Cl<sup><small>-</small></sup> <![CDATA[<= 2.0]]></string>
+    <string name="cl_10_0">Cl<sup><small>-</small></sup> <![CDATA[> 10.0]]></string>
+    <string name="boro_info">Boro - B</string>
+    <string name="b_2_0"><![CDATA[B > 2.0]]></string>
+    <string name="_1_0_b_2_0"><![CDATA[1.0 < B <= 2.0]]></string>
+    <string name="_0_5_b_1_0"><![CDATA[0.5 <= B =< 1.0]]></string>
+    <string name="b_0_5"><![CDATA[B < 0.5]]></string>
 
 </resources>

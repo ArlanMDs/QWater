@@ -1,4 +1,4 @@
-package br.com.ufersa.qwater.Fragments;
+package br.com.ufersa.qwater.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -31,7 +31,7 @@ public class CreateReportFragment extends Fragment implements AdapterView.OnItem
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //you can set the title for your toolbar here for different fragments different titles
         getActivity().setTitle(getString(R.string.criar_relatorio));
@@ -46,8 +46,8 @@ public class CreateReportFragment extends Fragment implements AdapterView.OnItem
                 try {
                     waterReport = generateReport();
                     // Se nenhum parametro for NaN, procede.
-                    if(!checkInput(waterReport)) {
-                        Intent intent = new Intent(getActivity(), AnalyzeWaterReportActivity.class);
+                    if(!inputIsInvalid(waterReport)) {
+                        Intent intent = new Intent(view.getContext(), AnalyzeWaterReportActivity.class);
                         intent.putExtra("waterReport", waterReport);
                         startActivity(intent);
                     }else
@@ -66,13 +66,18 @@ public class CreateReportFragment extends Fragment implements AdapterView.OnItem
      * @param waterReport relatório
      * @return true caso algum parametro seja NaN
      */
-    private boolean checkInput(WaterReport waterReport) {
-        return ( Double.isNaN(waterReport.getWatCea()) && Double.isNaN(waterReport.getWatCa())
-                && Double.isNaN(waterReport.getWatMg()) &&  Double.isNaN(waterReport.getWatK())
-                && Double.isNaN(waterReport.getWatNa()) &&  Double.isNaN(waterReport.getWatCo3())
-                && Double.isNaN(waterReport.getWatCl()) &&  Double.isNaN(waterReport.getWatHco3())
-                && Double.isNaN(waterReport.getWatPH()) &&  Double.isNaN(waterReport.getWatSo4())
-                && Double.isNaN(waterReport.getWatB()));
+    private boolean inputIsInvalid(WaterReport waterReport) {
+        try {
+            return  (Double.isNaN(waterReport.getWatCea()) || Double.isNaN(waterReport.getWatCa())
+                    || Double.isNaN(waterReport.getWatMg()) || Double.isNaN(waterReport.getWatK())
+                    || Double.isNaN(waterReport.getWatNa()) || Double.isNaN(waterReport.getWatCo3())
+                    || Double.isNaN(waterReport.getWatCl()) || Double.isNaN(waterReport.getWatHco3())
+                    || Double.isNaN(waterReport.getWatPH()) || Double.isNaN(waterReport.getWatSo4())
+                    || Double.isNaN(waterReport.getWatB()));
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
     }
 
     private WaterReport generateReport() {
@@ -81,52 +86,52 @@ public class CreateReportFragment extends Fragment implements AdapterView.OnItem
         if(edtMg.getText().length() > 0)
             waterReport.setWatMg(parseToDouble(edtMg.getText().toString()));
         else
-            waterReport.setWatMg(0);
+            waterReport.setWatMg(0.0);
 
         if(edtK.getText().length() > 0)
             waterReport.setWatK(parseToDouble(edtK.getText().toString()));
         else
-            waterReport.setWatK(0);
+            waterReport.setWatK(0.0);
 
         if(edtCa.getText().length() > 0)
             waterReport.setWatCa(parseToDouble(edtCa.getText().toString()));
         else
-            waterReport.setWatCa(0);
+            waterReport.setWatCa(0.0);
 
         if(edtNa.getText().length() > 0)
             waterReport.setWatNa(parseToDouble(edtNa.getText().toString()));
         else
-            waterReport.setWatNa(0);
+            waterReport.setWatNa(0.0);
 
         if(edtCl.getText().length() > 0)
             waterReport.setWatCl(parseToDouble(edtCl.getText().toString()));
         else
-            waterReport.setWatCl(0);
+            waterReport.setWatCl(0.0);
 
         if(edtCo3.getText().length() > 0)
             waterReport.setWatCo3(parseToDouble(edtCo3.getText().toString()));
         else
-            waterReport.setWatCo3(0);
+            waterReport.setWatCo3(0.0);
 
         if(edtHco3.getText().length() > 0)
             waterReport.setWatHco3(parseToDouble(edtHco3.getText().toString()));
         else
-            waterReport.setWatHco3(0);
+            waterReport.setWatHco3(0.0);
 
         if(edtPH.getText().length() > 0)
             waterReport.setWatPH(parseToDouble(edtPH.getText().toString()));
         else
-            waterReport.setWatPH(0);
+            waterReport.setWatPH(0.0);
 
         if(edtSO4.getText().length() > 0)
             waterReport.setWatSo4(parseToDouble(edtSO4.getText().toString()));
         else
-            waterReport.setWatSo4(0);
+            waterReport.setWatSo4(0.0);
 
         if(edtB.getText().length() > 0)
             waterReport.setWatB(parseToDouble(edtB.getText().toString()));
         else
-            waterReport.setWatB(0);
+            waterReport.setWatB(0.0);
 
         waterReport.setWatCea(getCeaInDs_m());
 

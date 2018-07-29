@@ -1,4 +1,4 @@
-package br.com.ufersa.qwater.Fragments;
+package br.com.ufersa.qwater.fragments;
 
 import android.os.AsyncTask;
 import android.os.Bundle;

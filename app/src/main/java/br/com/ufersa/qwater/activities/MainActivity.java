@@ -14,12 +14,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import br.com.ufersa.qwater.Fragments.CreateReportFragment;
-import br.com.ufersa.qwater.Fragments.CreateSourceFragment;
-import br.com.ufersa.qwater.Fragments.HomeFragment;
-import br.com.ufersa.qwater.Fragments.ListReportsFragment;
-import br.com.ufersa.qwater.Fragments.ListSourcesFragment;
 import br.com.ufersa.qwater.R;
+import br.com.ufersa.qwater.fragments.CreateReportFragment;
+import br.com.ufersa.qwater.fragments.CreateSourceFragment;
+import br.com.ufersa.qwater.fragments.HomeFragment;
+import br.com.ufersa.qwater.fragments.ListReportsFragment;
+import br.com.ufersa.qwater.fragments.ListSourcesFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
