@@ -105,10 +105,11 @@
 
         <TextView
             android:id="@+id/textView58"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/CL1_info"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/imageView2"
             app:layout_constraintTop_toBottomOf="@+id/textView57" />
 
@@ -136,10 +137,11 @@
 
         <TextView
             android:id="@+id/textView61"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/CL2_info"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/imageView3"
             app:layout_constraintTop_toBottomOf="@+id/textView59" />
 
@@ -163,10 +165,13 @@
 
         <TextView
             android:id="@+id/textView62"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
             android:layout_marginTop="8dp"
             android:text="@string/CL3_info"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/imageView5"
             app:layout_constraintTop_toBottomOf="@+id/textView60" />
 
@@ -499,12 +504,13 @@
 
         <TextView
             android:id="@+id/textView89"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:text="@string/B1_info"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/imageView12"
-            app:layout_constraintTop_toBottomOf="@+id/textView88"
-            android:text="@string/B1_info" />
+            app:layout_constraintTop_toBottomOf="@+id/textView88" />
 
         <TextView
             android:id="@+id/textView90"
@@ -519,12 +525,13 @@
 
         <TextView
             android:id="@+id/textView91"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:text="@string/B2_info"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/imageView15"
-            app:layout_constraintTop_toBottomOf="@+id/textView90"
-            android:text="@string/B2_info" />
+            app:layout_constraintTop_toBottomOf="@+id/textView90" />
 
         <TextView
             android:id="@+id/textView92"
@@ -539,12 +546,13 @@
 
         <TextView
             android:id="@+id/textView93"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:text="@string/B3_info"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/imageView12"
-            app:layout_constraintTop_toBottomOf="@+id/textView92"
-            android:text="@string/B3_info" />
+            app:layout_constraintTop_toBottomOf="@+id/textView92" />
 
         <TextView
             android:id="@+id/textView94"
@@ -559,12 +567,13 @@
 
         <TextView
             android:id="@+id/textView95"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:text="@string/B4_info"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/imageView16"
-            app:layout_constraintTop_toBottomOf="@+id/textView94"
-            android:text="@string/B4_info" />
+            app:layout_constraintTop_toBottomOf="@+id/textView94" />
 
     </android.support.constraint.ConstraintLayout>
 

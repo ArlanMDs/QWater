@@ -53,13 +53,15 @@
 
             <TextView
                 android:id="@+id/PH_CLASSIFICATION_TEXTVIEW"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:freezesText="true"
                 android:gravity="fill"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="dummy" />
@@ -120,13 +122,15 @@
 
             <TextView
                 android:id="@+id/SAR_CLASSIFICATION_TEXTVIEW"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:freezesText="true"
                 android:gravity="fill"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="dummy" />
@@ -217,13 +221,15 @@
 
             <TextView
                 android:id="@+id/SALINITY_TEXTVIEW"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:freezesText="true"
                 android:gravity="fill"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="dummy" />
@@ -245,46 +251,53 @@
 
             <TextView
                 android:id="@+id/CL_CLASSIFICATION_TEXTVIEW"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:freezesText="true"
                 android:gravity="fill"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="dummy" />
 
             <TextView
                 android:id="@+id/B_CLASSIFICATION_TEXTVIEW"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:freezesText="true"
                 android:gravity="fill"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/CL_CLASSIFICATION_TEXTVIEW"
                 app:layout_constraintTop_toBottomOf="@+id/CL_CLASSIFICATION_TEXTVIEW"
                 tools:text="dummy" />
 
             <TextView
                 android:id="@+id/NA1_CLASSIFICATION_TEXTVIEW"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:freezesText="true"
                 android:gravity="fill"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/CL_CLASSIFICATION_TEXTVIEW"
                 app:layout_constraintTop_toBottomOf="@+id/B_CLASSIFICATION_TEXTVIEW"
                 tools:text="dummy" />
 
             <TextView
                 android:id="@+id/NA2_CLASSIFICATION_TEXTVIEW"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:freezesText="true"
                 android:gravity="fill"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/CL_CLASSIFICATION_TEXTVIEW"
                 app:layout_constraintTop_toBottomOf="@+id/NA1_CLASSIFICATION_TEXTVIEW"
                 tools:text="dummy" />
@@ -318,24 +331,27 @@
 
             <TextView
                 android:id="@+id/COHERENCE_TEXTVIEW"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:gravity="fill"
                 android:text="dummy"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/CORRECTED_SAR_TEXTVIEW"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:layout_marginStart="8dp"
                 android:gravity="fill"
                 android:text="dummy"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView3"
                 app:layout_constraintTop_toTopOf="@+id/textView3" />
 

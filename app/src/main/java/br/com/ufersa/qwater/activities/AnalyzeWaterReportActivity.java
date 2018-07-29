@@ -146,7 +146,6 @@ public class AnalyzeWaterReportActivity extends AppCompatActivity implements Vie
             correctedSARTextview.setText(String.valueOf(waterReport.getWatCorrectedSar()));
         else {
             correctedSARTextview.setText(getString(R.string.ras_nao_calculado));
-            Toast.makeText(AnalyzeWaterReportActivity.this, String.valueOf(waterReport.getWatCorrectedSar()), Toast.LENGTH_SHORT).show();
         }
         // riscos de infiltração
         if(!Double.isNaN(waterReport.getWatCorrectedSar()))

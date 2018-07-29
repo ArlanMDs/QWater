@@ -40,9 +40,7 @@
         <activity
             android:name=".activities.ListWaterSourcesActivity"
             android:theme="@style/AppTheme.PopupTheme" />
-        <activity
-            android:name=".activities.ClassificationDialogueActivity"
-            android:theme="@style/AppTheme.PopupTheme" />
+
         <activity
             android:name=".info_activities.CoherenceActivity"
             android:theme="@style/AppTheme.PopupTheme" />
