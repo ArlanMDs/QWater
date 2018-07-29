@@ -1,5 +1,6 @@
 package br.com.ufersa.qwater.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -20,6 +21,7 @@ import br.com.ufersa.qwater.fragments.CreateSourceFragment;
 import br.com.ufersa.qwater.fragments.HomeFragment;
 import br.com.ufersa.qwater.fragments.ListReportsFragment;
 import br.com.ufersa.qwater.fragments.ListSourcesFragment;
+import br.com.ufersa.qwater.info_activities.AboutActivity;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -62,7 +64,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_about) {
+            startActivity(new Intent(MainActivity.this, AboutActivity.class));
             return true;
         }
 

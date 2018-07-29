@@ -43,26 +43,25 @@
         <activity
             android:name=".activities.ClassificationDialogueActivity"
             android:theme="@style/AppTheme.PopupTheme" />
-
         <activity
             android:name=".info_activities.CoherenceActivity"
             android:theme="@style/AppTheme.PopupTheme" />
-
         <activity
             android:name=".info_activities.SalinityActivity"
             android:theme="@style/AppTheme.PopupTheme" />
-
         <activity
             android:name=".info_activities.SarActivity"
             android:theme="@style/AppTheme.PopupTheme" />
         <activity
             android:name=".info_activities.ToxityActivity"
             android:theme="@style/AppTheme.PopupTheme" />
-
         <activity
             android:name=".info_activities.PhActivity"
             android:theme="@style/AppTheme.PopupTheme" />
 
+        <activity
+            android:name=".info_activities.AboutActivity"
+            android:theme="@style/AppTheme.PopupTheme"/>
     </application>
 
 </manifest>
