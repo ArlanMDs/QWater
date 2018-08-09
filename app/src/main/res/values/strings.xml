@@ -218,7 +218,7 @@
     <string name="b_0_5"><![CDATA[B < 0.5]]></string>
     <string name="desenvolvido_por">Desenvolvido por:</string>
     <string name="professores_orientadores">Professores orientadores:</string>
-    <string name="nomes_professores">-Nildo da Silva Dias -Osvaldo Nogueira de Sousa Neto -Francisco de Assis Pereira Vasconcelos de Arruda</string>
+    <string name="nomes_professores">-Nildo da Silva Dias \n-Osvaldo Nogueira de Sousa Neto \n-Francisco de Assis Pereira Vasconcelos de Arruda</string>
     <string name="arlan_graduando">Arlan de Medeiros, graduando em Sistemas de Informação - UFERSA - Angicos</string>
 
 </resources>

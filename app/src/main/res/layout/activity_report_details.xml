@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.WaterReportDetailsActivity">
+    tools:context=".activities.ReportDetailsActivity">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -279,9 +279,14 @@
                 android:id="@+id/view5"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
+                android:layout_marginEnd="2dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginStart="2dp"
                 android:background="@android:color/darker_gray"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:layout_editor_absoluteX="2dp" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/CEA_VALUE"
@@ -387,18 +392,6 @@
                 android:textSize="14sp"
                 app:layout_constraintStart_toEndOf="@+id/textView14"
                 app:layout_constraintTop_toTopOf="@+id/textView14" />
-
-        </android.support.constraint.ConstraintLayout>
-
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.571"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="294dp">
-
 
         </android.support.constraint.ConstraintLayout>
 

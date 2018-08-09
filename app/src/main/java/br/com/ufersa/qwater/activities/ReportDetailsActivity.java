@@ -8,16 +8,16 @@ import android.widget.TextView;
 import java.util.Calendar;
 
 import br.com.ufersa.qwater.R;
-import br.com.ufersa.qwater.beans.WaterReport;
+import br.com.ufersa.qwater.beans.Report;
 
-public class WaterReportDetailsActivity extends AppCompatActivity {
+public class ReportDetailsActivity extends AppCompatActivity {
 
     private TextView cea, ca, mg, k, na, co3, hco3, cl, pH, normalSAR, correctedSAR, date, b, so4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_water_report_details);
+        setContentView(R.layout.activity_report_details);
 
         initiate();
 
@@ -26,24 +26,24 @@ public class WaterReportDetailsActivity extends AppCompatActivity {
     }
 
     private void getIncomingIntent(){
-        if(getIntent().hasExtra("waterReport")){
+        if(getIntent().hasExtra("report")){
 
-            WaterReport waterReport = getIntent().getParcelableExtra("waterReport");
+            Report report = getIntent().getParcelableExtra("report");
 
-            cea.setText(String.valueOf(waterReport.getWatCea()));
-            ca.setText(String.valueOf(waterReport.getWatCa()));
-            mg.setText(String.valueOf(waterReport.getWatMg()));
-            k.setText(String.valueOf(waterReport.getWatK()));
-            na.setText(String.valueOf(waterReport.getWatNa()));
-            co3.setText(String.valueOf(waterReport.getWatCo3()));
-            hco3.setText(String.valueOf(waterReport.getWatHco3()));
-            cl.setText(String.valueOf(waterReport.getWatCl()));
-            pH.setText(String.valueOf(waterReport.getWatPH()));
-            normalSAR.setText(String.valueOf(waterReport.getWatNormalSar()));
-            correctedSAR.setText(String.valueOf(waterReport.getWatCorrectedSar()));
-            date.setText(formatDate(waterReport.getWatDate()));
-            b.setText(String.valueOf(waterReport.getWatB()));
-            so4.setText(String.valueOf(waterReport.getWatSo4()));
+            cea.setText(String.valueOf(report.getCea()));
+            ca.setText(String.valueOf(report.getCa()));
+            mg.setText(String.valueOf(report.getMg()));
+            k.setText(String.valueOf(report.getK()));
+            na.setText(String.valueOf(report.getNa()));
+            co3.setText(String.valueOf(report.getCo3()));
+            hco3.setText(String.valueOf(report.getHco3()));
+            cl.setText(String.valueOf(report.getCl()));
+            pH.setText(String.valueOf(report.getPh()));
+            normalSAR.setText(String.valueOf(report.getNormalSar()));
+            correctedSAR.setText(String.valueOf(report.getCorrectedSar()));
+            date.setText(formatDate(report.getDate()));
+            b.setText(String.valueOf(report.getB()));
+            so4.setText(String.valueOf(report.getSo4()));
         }
     }
 

@@ -15,7 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import br.com.ufersa.qwater.R;
-import br.com.ufersa.qwater.beans.WaterReport;
+import br.com.ufersa.qwater.beans.Report;
 import br.com.ufersa.qwater.database.AppDatabase;
 import br.com.ufersa.qwater.info_activities.CoherenceActivity;
 import br.com.ufersa.qwater.info_activities.PhActivity;
@@ -24,21 +24,20 @@ import br.com.ufersa.qwater.info_activities.SarActivity;
 import br.com.ufersa.qwater.info_activities.ToxityActivity;
 import br.com.ufersa.qwater.util.SARCalculator;
 
-public class AnalyzeWaterReportActivity extends AppCompatActivity implements View.OnClickListener{
+public class AnalyzeReportActivity extends AppCompatActivity implements View.OnClickListener{
 
     private TextView salinityTextview, SARClassificationTextview, clClassificationTextview, bClassificationTextview, phClassificationTextview, coherenceClassificationTextview, correctedSARTextview;
     private TextView na1ClassificationTextview, na2ClassificationTextview;// o 1 se refere à irrigação por superfície, o 2 à irrigação por aspersão
     private ImageView coherenceStatus, salynityStatus, sarStatus, toxityStatus, phStatus;
-    private WaterReport waterReport;
+    private Report report;
     private AppDatabase appDatabase;
     private final static int REQUEST_CODE_SELECT_DATE = 1, REQUEST_CODE_SELECT_SOURCE = 2, OK = 1, CAUTION = 2, ALERT = 3, DANGER = 4;
     private int currentToxityValue = 0;
-    private ImageButton coherenceInfo, salynityInfo, sarInfo, toxityInfo, phInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_analyze_water_report);
+        setContentView(R.layout.activity_analyze_report);
 
         initiate();
         getIncomingIntent();
@@ -62,7 +61,7 @@ public class AnalyzeWaterReportActivity extends AppCompatActivity implements Vie
         if (id == R.id.action_save) {
 
             // abre uma nova activity e passa o relatório, lá, será inserida a data da amostra e o nome da fonte
-            Intent intent = new Intent(AnalyzeWaterReportActivity.this, SelectDateActivity.class);
+            Intent intent = new Intent(AnalyzeReportActivity.this, SelectDateActivity.class);
             startActivityForResult(intent, REQUEST_CODE_SELECT_DATE);
 
             return true;
@@ -72,34 +71,34 @@ public class AnalyzeWaterReportActivity extends AppCompatActivity implements Vie
         return super.onOptionsItemSelected(item);
     }
 
-    private void updateData(WaterReport waterReport){
+    private void updateData(Report report){
 
         try {
-            waterReport.setWatNormalSar(calculateNormalSAR(waterReport.getWatCa(), waterReport.getWatMg(), waterReport.getWatNa()));
+            report.setNormalSar(calculateNormalSAR(report.getCa(), report.getMg(), report.getNa()));
         }catch (Exception e){
             e.printStackTrace();
-            Toast.makeText(AnalyzeWaterReportActivity.this, "Erro ao tentar calcular a RAS", Toast.LENGTH_SHORT).show();
-            waterReport.setWatNormalSar(0.0);
+            Toast.makeText(AnalyzeReportActivity.this, "Erro ao tentar calcular a RAS", Toast.LENGTH_SHORT).show();
+            report.setNormalSar(0.0);
         }
         try {
-            waterReport.setWatCorrectedSar(calculateCorrectedSAR(waterReport.getWatCa(), waterReport.getWatMg(), waterReport.getWatNa(), waterReport.getWatHco3(), waterReport.getWatCea()));
+            report.setCorrectedSar(calculateCorrectedSAR(report.getCa(), report.getMg(), report.getNa(), report.getHco3(), report.getCea()));
         }catch (Exception e){
             e.printStackTrace();
-            Toast.makeText(AnalyzeWaterReportActivity.this, "Erro ao tentar calcular a RAS*", Toast.LENGTH_SHORT).show();
-            waterReport.setWatCorrectedSar(0.0);
+            Toast.makeText(AnalyzeReportActivity.this, "Erro ao tentar calcular a RAS*", Toast.LENGTH_SHORT).show();
+            report.setCorrectedSar(0.0);
         }
 
         // A classificação e armazenamento está sendo feito após o arredondamento das casas decimais!
-        this.waterReport = waterReport;
+        this.report = report;
 
         updateUI();
 
     }
 
     private void getIncomingIntent(){
-        if(getIntent().hasExtra("waterReport")) {
+        if(getIntent().hasExtra("report")) {
 
-            updateData((WaterReport) getIntent().getParcelableExtra("waterReport"));
+            updateData((Report) getIntent().getParcelableExtra("report"));
         }
     }
 
@@ -142,34 +141,34 @@ public class AnalyzeWaterReportActivity extends AppCompatActivity implements Vie
         //primeiro gera a string que representa a classificação, depois cria o ID a partir dessa string e busca seu valor no strings.xml
 
         // textview com valor da RAS*
-        if(!Double.isNaN(waterReport.getWatCorrectedSar()))
-            correctedSARTextview.setText(String.valueOf(waterReport.getWatCorrectedSar()));
+        if(!Double.isNaN(report.getCorrectedSar()))
+            correctedSARTextview.setText(String.valueOf(report.getCorrectedSar()));
         else {
             correctedSARTextview.setText(getString(R.string.ras_nao_calculado));
         }
         // riscos de infiltração
-        if(!Double.isNaN(waterReport.getWatCorrectedSar()))
-            SARClassificationTextview.setText(getStringIDFromResources(getSARClassificationID(waterReport.getWatCorrectedSar())));
+        if(!Double.isNaN(report.getCorrectedSar()))
+            SARClassificationTextview.setText(getStringIDFromResources(getSARClassificationID(report.getCorrectedSar())));
         else
             SARClassificationTextview.setText(getString(R.string.ras_nao_informado));
 
         // salinidade
-        if (waterReport.getWatCea() != 0)
-            salinityTextview.setText(getStringIDFromResources(getSalinityClassificationID(waterReport.getWatCea())));
+        if (report.getCea() != 0)
+            salinityTextview.setText(getStringIDFromResources(getSalinityClassificationID(report.getCea())));
         else
             salinityTextview.setText(getString(R.string.cea_nao_informado));
 
         // Toxidez de íons específicos
 
         // Cloreto
-        if(waterReport.getWatCl() != 0)
-            clClassificationTextview.setText(getStringIDFromResources(getClClassificationID(waterReport.getWatCl())));
+        if(report.getCl() != 0)
+            clClassificationTextview.setText(getStringIDFromResources(getClClassificationID(report.getCl())));
         else
             clClassificationTextview.setText(getString(R.string.cl_nao_informado));
 
         // boro
-        if(waterReport.getWatB() != 0)
-            bClassificationTextview.setText(getStringIDFromResources(getBClassificationID(waterReport.getWatB())));
+        if(report.getB() != 0)
+            bClassificationTextview.setText(getStringIDFromResources(getBClassificationID(report.getB())));
         else
             bClassificationTextview.setText(getString(R.string.boro_nao_informado));
 
@@ -179,20 +178,20 @@ public class AnalyzeWaterReportActivity extends AppCompatActivity implements Vie
         */
 
         // na1
-        if(!Double.isNaN(waterReport.getWatCorrectedSar()))
-            na1ClassificationTextview.setText(getStringIDFromResources(getNa1ClassificationID(waterReport.getWatCorrectedSar())));
+        if(!Double.isNaN(report.getCorrectedSar()))
+            na1ClassificationTextview.setText(getStringIDFromResources(getNa1ClassificationID(report.getCorrectedSar())));
         else
             na1ClassificationTextview.setText(getString(R.string.na1_nao_informado));
 
         // na2
-        if(waterReport.getWatNa() != 0)
-            na2ClassificationTextview.setText(getStringIDFromResources(getNa2ClassificationID(waterReport.getWatNa())));
+        if(report.getNa() != 0)
+            na2ClassificationTextview.setText(getStringIDFromResources(getNa2ClassificationID(report.getNa())));
         else
             na2ClassificationTextview.setText(getString(R.string.na2_nao_informado));
 
         // pH
-        if(waterReport.getWatPH() != 0)
-            phClassificationTextview.setText(getStringIDFromResources(getPhClassificationID(waterReport.getWatPH())));
+        if(report.getPh() != 0)
+            phClassificationTextview.setText(getStringIDFromResources(getPhClassificationID(report.getPh())));
         else
             phClassificationTextview.setText(getString(R.string.ph_nao_informado));
 
@@ -206,7 +205,7 @@ public class AnalyzeWaterReportActivity extends AppCompatActivity implements Vie
 
     private boolean userTypedAllCationsAndAnions() {
 
-        return waterReport.getWatMg() != 0 && waterReport.getWatK() != 0 && waterReport.getWatCa() != 0 && waterReport.getWatNa() != 0 && waterReport.getWatCl() != 0 && waterReport.getWatCo3() != 0 && waterReport.getWatSo4() != 0 && waterReport.getWatHco3() != 0;
+        return report.getMg() != 0 && report.getK() != 0 && report.getCa() != 0 && report.getNa() != 0 && report.getCl() != 0 && report.getCo3() != 0 && report.getSo4() != 0 && report.getHco3() != 0;
     }
 
     private int getStringIDFromResources(String classification) {
@@ -343,8 +342,8 @@ public class AnalyzeWaterReportActivity extends AppCompatActivity implements Vie
 
     private String getCoherenceClassificationID() {
 
-        double cations = waterReport.getWatMg() + waterReport.getWatK() + waterReport.getWatCa() + waterReport.getWatNa();
-        double anions = waterReport.getWatCl() + waterReport.getWatCo3() + waterReport.getWatSo4() + waterReport.getWatHco3();
+        double cations = report.getMg() + report.getK() + report.getCa() + report.getNa();
+        double anions = report.getCl() + report.getCo3() + report.getSo4() + report.getHco3();
         double r = Math.abs((cations - anions) / (cations + anions))*100;
 
         if (r < 5.0) {
@@ -372,32 +371,32 @@ public class AnalyzeWaterReportActivity extends AppCompatActivity implements Vie
 
                 switch (status) {
                     case OK:
-                        imageView.setImageDrawable(ContextCompat.getDrawable(AnalyzeWaterReportActivity.this, R.drawable.status_ok));
+                        imageView.setImageDrawable(ContextCompat.getDrawable(AnalyzeReportActivity.this, R.drawable.status_ok));
                         break;
                     case CAUTION:
-                        imageView.setImageDrawable(ContextCompat.getDrawable(AnalyzeWaterReportActivity.this, R.drawable.status_caution));
+                        imageView.setImageDrawable(ContextCompat.getDrawable(AnalyzeReportActivity.this, R.drawable.status_caution));
                         break;
                     case ALERT:
-                        imageView.setImageDrawable(ContextCompat.getDrawable(AnalyzeWaterReportActivity.this, R.drawable.status_alert));
+                        imageView.setImageDrawable(ContextCompat.getDrawable(AnalyzeReportActivity.this, R.drawable.status_alert));
                         break;
                     case DANGER:
-                        imageView.setImageDrawable(ContextCompat.getDrawable(AnalyzeWaterReportActivity.this, R.drawable.status_danger));
+                        imageView.setImageDrawable(ContextCompat.getDrawable(AnalyzeReportActivity.this, R.drawable.status_danger));
                         break;
                 }
             }
         } else {
             switch (status) {
                 case OK:
-                    imageView.setImageDrawable(ContextCompat.getDrawable(AnalyzeWaterReportActivity.this, R.drawable.status_ok));
+                    imageView.setImageDrawable(ContextCompat.getDrawable(AnalyzeReportActivity.this, R.drawable.status_ok));
                     break;
                 case CAUTION:
-                    imageView.setImageDrawable(ContextCompat.getDrawable(AnalyzeWaterReportActivity.this, R.drawable.status_caution));
+                    imageView.setImageDrawable(ContextCompat.getDrawable(AnalyzeReportActivity.this, R.drawable.status_caution));
                     break;
                 case ALERT:
-                    imageView.setImageDrawable(ContextCompat.getDrawable(AnalyzeWaterReportActivity.this, R.drawable.status_alert));
+                    imageView.setImageDrawable(ContextCompat.getDrawable(AnalyzeReportActivity.this, R.drawable.status_alert));
                     break;
                 case DANGER:
-                    imageView.setImageDrawable(ContextCompat.getDrawable(AnalyzeWaterReportActivity.this, R.drawable.status_danger));
+                    imageView.setImageDrawable(ContextCompat.getDrawable(AnalyzeReportActivity.this, R.drawable.status_danger));
                     break;
             }
         }
@@ -409,7 +408,6 @@ public class AnalyzeWaterReportActivity extends AppCompatActivity implements Vie
      * @return valor arredondado
      */
     private double formatFractionDigits(double value){
-        //NumberFormat  format = NumberFormat.getInstance();
         try {
             return (Math.ceil(value *10000.0 )) / 10000.0;
         }catch (Exception e){
@@ -435,19 +433,19 @@ public class AnalyzeWaterReportActivity extends AppCompatActivity implements Vie
         toxityStatus = findViewById(R.id.TOXITY_STATUS);
         phStatus = findViewById(R.id.PH_STATUS);
         // info
-        coherenceInfo= findViewById(R.id.COHERENCE_INFO);
+        ImageButton coherenceInfo = findViewById(R.id.COHERENCE_INFO);
         coherenceInfo.setOnClickListener(this);
-        salynityInfo = findViewById(R.id.SALINITY_INFO);
+        ImageButton salynityInfo = findViewById(R.id.SALINITY_INFO);
         salynityInfo.setOnClickListener(this);
-        sarInfo = findViewById(R.id.SAR_INFO);
+        ImageButton sarInfo = findViewById(R.id.SAR_INFO);
         sarInfo.setOnClickListener(this);
-        toxityInfo = findViewById(R.id.TOXITY_INFO);
+        ImageButton toxityInfo = findViewById(R.id.TOXITY_INFO);
         toxityInfo.setOnClickListener(this);
-        phInfo = findViewById(R.id.PH_INFO);
+        ImageButton phInfo = findViewById(R.id.PH_INFO);
         phInfo.setOnClickListener(this);
 
         // prepara o bd
-        appDatabase = AppDatabase.getInstance(AnalyzeWaterReportActivity.this);
+        appDatabase = AppDatabase.getInstance(AnalyzeReportActivity.this);
 
         Toolbar mTopToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(mTopToolbar);
@@ -469,26 +467,26 @@ public class AnalyzeWaterReportActivity extends AppCompatActivity implements Vie
         switch (v.getId()){
 
             case R.id.COHERENCE_INFO:
-                startActivity(new Intent(AnalyzeWaterReportActivity.this, CoherenceActivity.class));
+                startActivity(new Intent(AnalyzeReportActivity.this, CoherenceActivity.class));
                 break;
 
             case R.id.SALINITY_INFO:
-                startActivity(new Intent(AnalyzeWaterReportActivity.this, SalinityActivity.class));
+                startActivity(new Intent(AnalyzeReportActivity.this, SalinityActivity.class));
 
                 break;
 
             case R.id.SAR_INFO:
-                startActivity(new Intent(AnalyzeWaterReportActivity.this, SarActivity.class));
+                startActivity(new Intent(AnalyzeReportActivity.this, SarActivity.class));
 
                 break;
 
             case R.id.TOXITY_INFO:
-                startActivity(new Intent(AnalyzeWaterReportActivity.this, ToxityActivity.class));
+                startActivity(new Intent(AnalyzeReportActivity.this, ToxityActivity.class));
 
                 break;
 
             case R.id.PH_INFO:
-                startActivity(new Intent(AnalyzeWaterReportActivity.this, PhActivity.class));
+                startActivity(new Intent(AnalyzeReportActivity.this, PhActivity.class));
 
                 break;
 
@@ -505,9 +503,9 @@ public class AnalyzeWaterReportActivity extends AppCompatActivity implements Vie
             case REQUEST_CODE_SELECT_DATE:
 
                 if(resultCode == RESULT_OK) {
-                    waterReport.setWatDate(data.getLongExtra("date", 0));
+                    report.setDate(data.getLongExtra("date", 0));
 
-                    Intent intent = new Intent(AnalyzeWaterReportActivity.this, ListWaterSourcesActivity.class);
+                    Intent intent = new Intent(AnalyzeReportActivity.this, ListSourcesActivity.class);
                     intent.putExtra("callingActivity", 1);
                     startActivityForResult(intent, REQUEST_CODE_SELECT_SOURCE);
 
@@ -517,22 +515,22 @@ public class AnalyzeWaterReportActivity extends AppCompatActivity implements Vie
             case REQUEST_CODE_SELECT_SOURCE:
 
                 if(resultCode == RESULT_OK) {
-                    waterReport.setWat_souID(data.getIntExtra("sourceID", 0));
-                    waterReport.setWat_souName(data.getStringExtra("sourceName"));
+                    report.setSouId(data.getIntExtra("sourceID", 0));
+                    report.setSouName(data.getStringExtra("sourceName"));
 
                     //tentativa de corrigir o problema de salvar o relatório
-                    if(Double.isNaN(waterReport.getWatCorrectedSar()))
-                        waterReport.setWatCorrectedSar(0.0);
+                    if(Double.isNaN(report.getCorrectedSar()))
+                        report.setCorrectedSar(0.0);
 
-                    if(Double.isNaN(waterReport.getWatNormalSar()))
-                        waterReport.setWatNormalSar(0.0);
+                    if(Double.isNaN(report.getNormalSar()))
+                        report.setNormalSar(0.0);
 
                     try{
                         // Pronto para armazenar no BD
                         new AsyncInsert().execute();
                     }catch (Exception e){
                         e.printStackTrace();
-                        Toast.makeText(AnalyzeWaterReportActivity.this, getString(R.string.erro_salvar), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AnalyzeReportActivity.this, getString(R.string.erro_salvar), Toast.LENGTH_SHORT).show();
                     }
                 }
             break;
@@ -551,7 +549,7 @@ public class AnalyzeWaterReportActivity extends AppCompatActivity implements Vie
         @Override
         protected Void doInBackground(Void... voids) {
 
-            appDatabase.waterReportDao().insert(waterReport);
+            appDatabase.reportDao().insert(report);
             return null;
         }
 
@@ -559,7 +557,7 @@ public class AnalyzeWaterReportActivity extends AppCompatActivity implements Vie
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
 
-            Toast.makeText(AnalyzeWaterReportActivity.this, R.string.relatorio_salvo, Toast.LENGTH_SHORT).show();
+            Toast.makeText(AnalyzeReportActivity.this, R.string.relatorio_salvo, Toast.LENGTH_SHORT).show();
         }
     }
 

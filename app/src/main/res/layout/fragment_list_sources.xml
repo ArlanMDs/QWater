@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.ListWaterSourcesActivity">
+    tools:context=".activities.ListSourcesActivity">
 
-    <include layout="@layout/content_water_source" />
+    <include layout="@layout/content_source" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/FAB_LIST_WATERSOURCES"

@@ -5,10 +5,10 @@ import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
-import br.com.ufersa.qwater.beans.WaterReport;
-import br.com.ufersa.qwater.beans.WaterSource;
+import br.com.ufersa.qwater.beans.Report;
+import br.com.ufersa.qwater.beans.Source;
 
-@Database(entities = {WaterReport.class, WaterSource.class}, version = 1)
+@Database(entities = {Report.class, Source.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static final String DB_NAME = "appDatabase.db";
@@ -30,6 +30,6 @@ public abstract class AppDatabase extends RoomDatabase {
                 .build();
     }
 
-    public abstract WaterReportDao waterReportDao();
-    public abstract WaterSourceDao waterSourceDao();
+    public abstract ReportDao reportDao();
+    public abstract SourceDao sourceDao();
 }

@@ -15,8 +15,8 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import br.com.ufersa.qwater.R;
-import br.com.ufersa.qwater.adapters.WaterSourceAdapter;
-import br.com.ufersa.qwater.beans.WaterSource;
+import br.com.ufersa.qwater.adapters.SourceAdapter;
+import br.com.ufersa.qwater.beans.Source;
 import br.com.ufersa.qwater.database.AppDatabase;
 
 public class ListSourcesFragment extends Fragment {
@@ -70,7 +70,7 @@ public class ListSourcesFragment extends Fragment {
 
     }
 
-    private class AsyncRead extends AsyncTask<Void, Void, List<WaterSource>> {
+    private class AsyncRead extends AsyncTask<Void, Void, List<Source>> {
         // referência https://stackoverflow.com/questions/11833978/asynctask-pass-two-or-more-values-from-doinbackground-to-onpostexecute
         @Override
         protected void onPreExecute() {
@@ -79,15 +79,15 @@ public class ListSourcesFragment extends Fragment {
         }
 
         @Override
-        protected List<WaterSource> doInBackground(Void... voids) {
+        protected List<Source> doInBackground(Void... voids) {
 
-            return appDatabase.waterSourceDao().getAll();
+            return appDatabase.sourceDao().getAll();
         }
 
         @Override
-        protected void onPostExecute(List<WaterSource> waterSources) {
+        protected void onPostExecute(List<Source> sources) {
 
-            RecyclerView.Adapter adapter = new WaterSourceAdapter(getCodeOfIncomingIntent(), getActivity(), waterSources);
+            RecyclerView.Adapter adapter = new SourceAdapter(getCodeOfIncomingIntent(), getActivity(), sources);
             recyclerView.setAdapter(adapter);
 
         }

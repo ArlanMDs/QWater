@@ -15,38 +15,38 @@ import java.util.Date;
 import java.util.List;
 
 import br.com.ufersa.qwater.R;
-import br.com.ufersa.qwater.activities.WaterReportDetailsActivity;
-import br.com.ufersa.qwater.beans.WaterReport;
+import br.com.ufersa.qwater.activities.ReportDetailsActivity;
+import br.com.ufersa.qwater.beans.Report;
 
-public class WaterReportAdapter extends RecyclerView.Adapter<WaterReportAdapter.ViewHolder>{
+public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ViewHolder>{
 
-    private final List<WaterReport> waterReports;
+    private final List<Report> reports;
     private final Context context;
 
-    public WaterReportAdapter(Context context, List<WaterReport> waterReports) {
-        this.waterReports = waterReports;
+    public ReportAdapter(Context context, List<Report> reports) {
+        this.reports = reports;
         this.context = context;
     }
 
     @NonNull
     @Override
-    public WaterReportAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.water_report_row, parent, false);
-        return new WaterReportAdapter.ViewHolder(view);
+    public ReportAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.report_row, parent, false);
+        return new ReportAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull WaterReportAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull ReportAdapter.ViewHolder holder, final int position) {
 
-        holder.reportSourceName.setText(waterReports.get(position).getWat_souName());
-        holder.reportDate.setText(longToDateFormat(waterReports.get(position).getWatDate()));
+        holder.reportSourceName.setText(reports.get(position).getSouName());
+        holder.reportDate.setText(longToDateFormat(reports.get(position).getDate()));
         // o listener passa o ID da amostra selecionada para a activity de detalhes
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(context, WaterReportDetailsActivity.class);
-                intent.putExtra("waterReport",waterReports.get(position));
+                Intent intent = new Intent(context, ReportDetailsActivity.class);
+                intent.putExtra("report", reports.get(position));
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);//app deu crash, o log do erro pediu essa flag.
                 context.startActivity(intent);
             }
@@ -61,7 +61,7 @@ public class WaterReportAdapter extends RecyclerView.Adapter<WaterReportAdapter.
 
     @Override
     public int getItemCount() {
-        return waterReports.size();
+        return reports.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{

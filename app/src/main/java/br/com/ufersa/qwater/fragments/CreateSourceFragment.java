@@ -59,7 +59,7 @@ import java.util.Locale;
 import br.com.ufersa.qwater.BuildConfig;
 import br.com.ufersa.qwater.R;
 import br.com.ufersa.qwater.activities.MainActivity;
-import br.com.ufersa.qwater.beans.WaterSource;
+import br.com.ufersa.qwater.beans.Source;
 import br.com.ufersa.qwater.database.AppDatabase;
 
 // referências: https://www.androidhive.info/2012/07/android-gps-location-manager-tutorial/
@@ -104,7 +104,7 @@ public class CreateSourceFragment extends Fragment implements View.OnClickListen
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_create_water_source, container, false);
+        return inflater.inflate(R.layout.fragment_create_source, container, false);
     }
 
     @Override
@@ -239,7 +239,7 @@ public class CreateSourceFragment extends Fragment implements View.OnClickListen
         @Override
         protected Void doInBackground(Void... voids) {
 
-            appDatabase.waterSourceDao().insert(new WaterSource(name, type, latitude, longitude));
+            appDatabase.sourceDao().insert(new Source(name, type, latitude, longitude));
             return null;
         }
 

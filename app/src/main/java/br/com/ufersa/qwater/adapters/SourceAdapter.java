@@ -14,13 +14,13 @@ import android.widget.TextView;
 import java.util.List;
 
 import br.com.ufersa.qwater.R;
-import br.com.ufersa.qwater.beans.WaterSource;
+import br.com.ufersa.qwater.beans.Source;
 
 import static android.app.Activity.RESULT_OK;
 
-public class WaterSourceAdapter extends RecyclerView.Adapter<WaterSourceAdapter.ViewHolder> {
+public class SourceAdapter extends RecyclerView.Adapter<SourceAdapter.ViewHolder> {
 
-    private final List<WaterSource> waterSources;
+    private final List<Source> sources;
     private final Context context;
     private final int callingActivity;
     private final static int REQUEST_CODE_ANALISE_ACTIVITY = 1;
@@ -30,30 +30,30 @@ public class WaterSourceAdapter extends RecyclerView.Adapter<WaterSourceAdapter.
         AnalyzeWaterReportActivity: 1
 
      */
-    public WaterSourceAdapter(int callingActivity, Context context, List<WaterSource> waterSources) {
-        this.waterSources = waterSources;
+    public SourceAdapter(int callingActivity, Context context, List<Source> sources) {
+        this.sources = sources;
         this.context = context;
         this.callingActivity = callingActivity;
     }
 
     @NonNull
     @Override
-    public WaterSourceAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.water_source_row, parent, false);
+    public SourceAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.source_row, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull WaterSourceAdapter.ViewHolder holder, final int position) {
-        holder.sourceName.setText(waterSources.get(position).getSouName());
+    public void onBindViewHolder(@NonNull SourceAdapter.ViewHolder holder, final int position) {
+        holder.sourceName.setText(sources.get(position).getName());
 
         if (callingActivity == REQUEST_CODE_ANALISE_ACTIVITY){
             holder.parentLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent();
-                    intent.putExtra("sourceID", waterSources.get(position).getSouID());
-                    intent.putExtra("sourceName", waterSources.get(position).getSouName());
+                    intent.putExtra("sourceID", sources.get(position).getId());
+                    intent.putExtra("sourceName", sources.get(position).getName());
                     ((Activity) context).setResult(RESULT_OK, intent);
                     ((Activity) context).finish();
 
@@ -64,7 +64,7 @@ public class WaterSourceAdapter extends RecyclerView.Adapter<WaterSourceAdapter.
 
     @Override
     public int getItemCount() {
-        return waterSources.size();
+        return sources.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{

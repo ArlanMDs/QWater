@@ -17,7 +17,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activities.WaterReportDetailsActivity"
+            android:name=".activities.ReportDetailsActivity"
             android:noHistory="true" />
         <activity
             android:name=".activities.SplashActivity"
@@ -29,16 +29,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.PopupGraphActivity"
-            android:theme="@style/AppTheme.PopupTheme" />
-        <activity
-            android:name=".activities.AnalyzeWaterReportActivity"
+            android:name=".activities.AnalyzeReportActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.SelectDateActivity"
             android:theme="@style/AppTheme.PopupTheme" />
         <activity
-            android:name=".activities.ListWaterSourcesActivity"
+            android:name=".activities.ListSourcesActivity"
             android:theme="@style/AppTheme.PopupTheme" />
 
         <activity

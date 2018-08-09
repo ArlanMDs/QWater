@@ -8,24 +8,24 @@ import android.arch.persistence.room.Update;
 
 import java.util.List;
 
-import br.com.ufersa.qwater.beans.WaterSource;
+import br.com.ufersa.qwater.beans.Source;
 
 @Dao
-public interface WaterSourceDao {
+public interface SourceDao {
 
-    @Query("SELECT * FROM watersource")
-    List<WaterSource> getAll();
-
-    @Insert
-    void insertAll(List<WaterSource> waterSources);
+    @Query("SELECT * FROM Source")
+    List<Source> getAll();
 
     @Insert
-    void insert(WaterSource watersource);
+    void insertAll(List<Source> sources);
+
+    @Insert
+    void insert(Source watersource);
 
     @Update
-    void update(WaterSource watersource);
+    void update(Source watersource);
 
     @Delete
-    void delete(WaterSource watersource);
+    void delete(Source watersource);
 
 }
