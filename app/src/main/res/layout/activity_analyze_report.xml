@@ -27,6 +27,19 @@
             app:title="@string/analise_do_relatorio" />
 
         <TextView
+            android:id="@+id/textView40"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="85dp"
+            android:text="@string/coerencia"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -303,19 +316,6 @@
                 tools:text="dummy" />
         </android.support.constraint.ConstraintLayout>
 
-        <TextView
-            android:id="@+id/textView40"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="12dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="56dp"
-            android:text="@string/coerencia"
-            android:textColor="@android:color/black"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <android.support.constraint.ConstraintLayout
             android:id="@+id/COHERENCE_LAYOUT"
             android:layout_width="0dp"
@@ -367,53 +367,48 @@
 
         <ImageView
             android:id="@+id/COHERENCE_STATUS"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_marginTop="3dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView40"
             app:layout_constraintEnd_toStartOf="@+id/COHERENCE_INFO"
-            app:layout_constraintTop_toTopOf="@+id/textView40"
             app:srcCompat="@drawable/status_null" />
 
         <ImageView
             android:id="@+id/SALINITY_STATUS"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_marginTop="3dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView28"
             app:layout_constraintEnd_toStartOf="@+id/SALINITY_INFO"
-            app:layout_constraintTop_toTopOf="@+id/textView28"
             app:srcCompat="@drawable/status_null" />
 
         <ImageView
             android:id="@+id/SAR_STATUS"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_marginTop="3dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView17"
             app:layout_constraintEnd_toStartOf="@+id/SAR_INFO"
-            app:layout_constraintTop_toTopOf="@+id/textView17"
             app:srcCompat="@drawable/status_null" />
 
         <ImageView
             android:id="@+id/TOXITY_STATUS"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_marginTop="3dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView29"
             app:layout_constraintEnd_toStartOf="@+id/TOXITY_INFO"
-            app:layout_constraintTop_toTopOf="@+id/textView29"
             app:srcCompat="@drawable/status_null" />
 
         <ImageView
             android:id="@+id/PH_STATUS"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_marginTop="3dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView2"
             app:layout_constraintEnd_toStartOf="@+id/PH_INFO"
-            app:layout_constraintTop_toTopOf="@+id/textView2"
             app:srcCompat="@drawable/status_null" />
 
         <ImageButton
             android:id="@+id/COHERENCE_INFO"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
             android:background="@drawable/info_button"
@@ -422,32 +417,32 @@
 
         <ImageButton
             android:id="@+id/SAR_INFO"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
             android:background="@drawable/info_button"
             app:layout_constraintEnd_toEndOf="@+id/SALINITY_INFO"
             app:layout_constraintTop_toTopOf="@+id/SAR_STATUS" />
 
         <ImageButton
             android:id="@+id/TOXITY_INFO"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
             android:background="@drawable/info_button"
             app:layout_constraintEnd_toEndOf="@+id/SAR_INFO"
             app:layout_constraintTop_toTopOf="@+id/TOXITY_STATUS" />
 
         <ImageButton
             android:id="@+id/PH_INFO"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
             android:background="@drawable/info_button"
             app:layout_constraintEnd_toEndOf="@+id/TOXITY_INFO"
             app:layout_constraintTop_toTopOf="@+id/PH_STATUS" />
 
         <ImageButton
             android:id="@+id/SALINITY_INFO"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
             android:background="@drawable/info_button"
             app:layout_constraintEnd_toEndOf="@+id/COHERENCE_INFO"
             app:layout_constraintTop_toTopOf="@+id/SALINITY_STATUS" />

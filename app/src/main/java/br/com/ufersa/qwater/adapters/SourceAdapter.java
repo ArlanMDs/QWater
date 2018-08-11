@@ -17,13 +17,13 @@ import br.com.ufersa.qwater.R;
 import br.com.ufersa.qwater.beans.Source;
 
 import static android.app.Activity.RESULT_OK;
+import static br.com.ufersa.qwater.util.Flags.MAIN_ACTIVITY;
 
 public class SourceAdapter extends RecyclerView.Adapter<SourceAdapter.ViewHolder> {
 
     private final List<Source> sources;
     private final Context context;
     private final int callingActivity;
-    private final static int REQUEST_CODE_ANALISE_ACTIVITY = 1;
     /*
         precisei criar uma maneira para diferenciar a activity que cria o adapter, para assim poder atribuir diferentes funções ao clicar em uma row
         tentei o context, mas por algum motivo deu errado...
@@ -47,7 +47,7 @@ public class SourceAdapter extends RecyclerView.Adapter<SourceAdapter.ViewHolder
     public void onBindViewHolder(@NonNull SourceAdapter.ViewHolder holder, final int position) {
         holder.sourceName.setText(sources.get(position).getName());
 
-        if (callingActivity == REQUEST_CODE_ANALISE_ACTIVITY){
+        if (callingActivity != MAIN_ACTIVITY){//se não é a main, é a analyze! então é necessário ativar o listener que retorna o nome e id
             holder.parentLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -60,6 +60,7 @@ public class SourceAdapter extends RecyclerView.Adapter<SourceAdapter.ViewHolder
                 }
             });
         }
+        //TODO listener pra quando vier do main
     }
 
     @Override

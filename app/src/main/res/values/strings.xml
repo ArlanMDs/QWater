@@ -61,6 +61,7 @@
     <string name="ras_corrigida">RAS corrigida</string>
     <string name="ras_unidade">Unidade da RAS*: mmol<small>c</small> L<sup><small>-1</small></sup></string>
     <string name="ras_asterisco">RAS* :</string>
+    <string name="ras_asterisco_sem_pontos">RAS*</string>
     <string name="condutividade_eletrica">Condutividade Elétrica</string>
     <string name="classificacao">Classificação</string>
     <string name="riscos_salinidade">Riscos de salinidade</string>
@@ -220,5 +221,13 @@
     <string name="professores_orientadores">Professores orientadores:</string>
     <string name="nomes_professores">-Nildo da Silva Dias \n-Osvaldo Nogueira de Sousa Neto \n-Francisco de Assis Pereira Vasconcelos de Arruda</string>
     <string name="arlan_graduando">Arlan de Medeiros, graduando em Sistemas de Informação - UFERSA - Angicos</string>
+    <string name="fonte">Fonte</string>
+    <string name="erro_atualizar_relatorio">Erro ao tentar atualizar o relatório, tente novamente.</string>
+    <string name="edit_location">editar localização</string>
+    <string name="edit_date">editar data</string>
+    <string name="relatorio_atualizado">Relatório atualizado com sucesso!</string>
+    <string name="avaliar_e_atualizar">Avaliar e atualizar</string>
+    <string name="data_atualizada">Data modificada! Aperte o botão salvar para atualizar o relatório</string>
+    <string name="localizacao_atualizada">Localização modificada! Aperte o botão salvar para atualizar o relatório.</string>
 
 </resources>

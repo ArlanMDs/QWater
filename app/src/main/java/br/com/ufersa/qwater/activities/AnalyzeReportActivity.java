@@ -24,6 +24,20 @@ import br.com.ufersa.qwater.info_activities.SarActivity;
 import br.com.ufersa.qwater.info_activities.ToxityActivity;
 import br.com.ufersa.qwater.util.SARCalculator;
 
+import static br.com.ufersa.qwater.util.Flags.ALERT;
+import static br.com.ufersa.qwater.util.Flags.ANALYZE_REPORT_ACTIVITY;
+import static br.com.ufersa.qwater.util.Flags.CALLING_ACTIVITY;
+import static br.com.ufersa.qwater.util.Flags.CAUTION;
+import static br.com.ufersa.qwater.util.Flags.DANGER;
+import static br.com.ufersa.qwater.util.Flags.GOING_TO;
+import static br.com.ufersa.qwater.util.Flags.INSERT_SELECT_DATE;
+import static br.com.ufersa.qwater.util.Flags.INSERT_SELECT_SOURCE;
+import static br.com.ufersa.qwater.util.Flags.OK;
+import static br.com.ufersa.qwater.util.Flags.REPORT;
+import static br.com.ufersa.qwater.util.Flags.UPDATE;
+import static br.com.ufersa.qwater.util.Flags.UPDATE_SELECT_DATE;
+import static br.com.ufersa.qwater.util.Flags.UPDATE_SELECT_SOURCE;
+
 public class AnalyzeReportActivity extends AppCompatActivity implements View.OnClickListener{
 
     private TextView salinityTextview, SARClassificationTextview, clClassificationTextview, bClassificationTextview, phClassificationTextview, coherenceClassificationTextview, correctedSARTextview;
@@ -31,7 +45,6 @@ public class AnalyzeReportActivity extends AppCompatActivity implements View.OnC
     private ImageView coherenceStatus, salynityStatus, sarStatus, toxityStatus, phStatus;
     private Report report;
     private AppDatabase appDatabase;
-    private final static int REQUEST_CODE_SELECT_DATE = 1, REQUEST_CODE_SELECT_SOURCE = 2, OK = 1, CAUTION = 2, ALERT = 3, DANGER = 4;
     private int currentToxityValue = 0;
 
     @Override
@@ -46,7 +59,14 @@ public class AnalyzeReportActivity extends AppCompatActivity implements View.OnC
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.analyze, menu);
+        // Muda o menu caso o usuário esteja atualizando um report ou inserindo um novo
+        if(getIntent().hasExtra(REPORT)) {
+            if (getIntent().getIntExtra(GOING_TO, 0) == UPDATE)
+                getMenuInflater().inflate(R.menu.analyze_update, menu);
+            else
+                getMenuInflater().inflate(R.menu.analyze_insert, menu);
+        }//TODO rever isso aqui...
+
         return true;
     }
 
@@ -58,14 +78,38 @@ public class AnalyzeReportActivity extends AppCompatActivity implements View.OnC
         int id = item.getItemId();
 
 
-        if (id == R.id.action_save) {
+        switch(id){
+            case R.id.action_insert:
+                // abre uma nova activity e passa o relatório, lá, será inserida a data da amostra e o nome da fonte
+                startActivityForResult(new Intent(AnalyzeReportActivity.this, SelectDateActivity.class), INSERT_SELECT_DATE);
 
-            // abre uma nova activity e passa o relatório, lá, será inserida a data da amostra e o nome da fonte
-            Intent intent = new Intent(AnalyzeReportActivity.this, SelectDateActivity.class);
-            startActivityForResult(intent, REQUEST_CODE_SELECT_DATE);
+            return true;
+
+            case R.id.action_update:
+
+                try{
+                    // Pronto para atualizar no BD
+                    new AsyncUpdate().execute();
+                }catch (Exception e){
+                    e.printStackTrace();
+                    Toast.makeText(AnalyzeReportActivity.this, getString(R.string.erro_atualizar_relatorio), Toast.LENGTH_SHORT).show();
+                }
+
+            return true;
+
+            case R.id.action_update_source:
+                Intent intent = new Intent(AnalyzeReportActivity.this, ListSourcesActivity.class);
+                intent.putExtra(CALLING_ACTIVITY, ANALYZE_REPORT_ACTIVITY);
+                startActivityForResult(intent, UPDATE_SELECT_SOURCE);
+
+            return true;
+
+            case R.id.action_update_date:
+                startActivityForResult(new Intent(AnalyzeReportActivity.this, SelectDateActivity.class), UPDATE_SELECT_DATE);
 
             return true;
         }
+
 
 
         return super.onOptionsItemSelected(item);
@@ -96,9 +140,9 @@ public class AnalyzeReportActivity extends AppCompatActivity implements View.OnC
     }
 
     private void getIncomingIntent(){
-        if(getIntent().hasExtra("report")) {
+        if(getIntent().hasExtra(REPORT)) {
 
-            updateData((Report) getIntent().getParcelableExtra("report"));
+            updateData((Report) getIntent().getParcelableExtra(REPORT));
         }
     }
 
@@ -500,30 +544,23 @@ public class AnalyzeReportActivity extends AppCompatActivity implements View.OnC
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch(requestCode) {
-            case REQUEST_CODE_SELECT_DATE:
+            case INSERT_SELECT_DATE:
 
                 if(resultCode == RESULT_OK) {
-                    report.setDate(data.getLongExtra("date", 0));
+                    report.setDate(data.getLongExtra("date",  System.currentTimeMillis()));
 
                     Intent intent = new Intent(AnalyzeReportActivity.this, ListSourcesActivity.class);
-                    intent.putExtra("callingActivity", 1);
-                    startActivityForResult(intent, REQUEST_CODE_SELECT_SOURCE);
+                    intent.putExtra(CALLING_ACTIVITY, ANALYZE_REPORT_ACTIVITY);
+                    startActivityForResult(intent, INSERT_SELECT_SOURCE);
 
                 }
             break;
 
-            case REQUEST_CODE_SELECT_SOURCE:
+            case INSERT_SELECT_SOURCE:
 
                 if(resultCode == RESULT_OK) {
                     report.setSouId(data.getIntExtra("sourceID", 0));
                     report.setSouName(data.getStringExtra("sourceName"));
-
-                    //tentativa de corrigir o problema de salvar o relatório
-                    if(Double.isNaN(report.getCorrectedSar()))
-                        report.setCorrectedSar(0.0);
-
-                    if(Double.isNaN(report.getNormalSar()))
-                        report.setNormalSar(0.0);
 
                     try{
                         // Pronto para armazenar no BD
@@ -534,7 +571,37 @@ public class AnalyzeReportActivity extends AppCompatActivity implements View.OnC
                     }
                 }
             break;
+
+            case UPDATE_SELECT_SOURCE:
+
+                if(resultCode == RESULT_OK) {
+                    report.setSouId(data.getIntExtra("sourceID", 0));
+                    report.setSouName(data.getStringExtra("sourceName"));
+                    Toast.makeText(this, R.string.localizacao_atualizada, Toast.LENGTH_LONG).show();
+
+                }
+            break;
+
+            case UPDATE_SELECT_DATE:
+
+                if(resultCode == RESULT_OK) {
+                    report.setDate(data.getLongExtra("date", System.currentTimeMillis()));
+                    Toast.makeText(this, R.string.data_atualizada, Toast.LENGTH_LONG).show();
+
+                }
+            break;
+
+
         }
+    }
+
+    private void removeNaNFromSAR(){
+        //tentativa de corrigir o problema de salvar o relatório
+        if(Double.isNaN(report.getCorrectedSar()))
+            report.setCorrectedSar(0.0);
+
+        if(Double.isNaN(report.getNormalSar()))
+            report.setNormalSar(0.0);
     }
 
     //TODO resolver o problema do leak https://stackoverflow.com/questions/44309241/warning-this-asynctask-class-should-be-static-or-leaks-might-occur
@@ -543,7 +610,7 @@ public class AnalyzeReportActivity extends AppCompatActivity implements View.OnC
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-
+            removeNaNFromSAR();
         }
 
         @Override
@@ -558,6 +625,29 @@ public class AnalyzeReportActivity extends AppCompatActivity implements View.OnC
             super.onPostExecute(aVoid);
 
             Toast.makeText(AnalyzeReportActivity.this, R.string.relatorio_salvo, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private class AsyncUpdate extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            removeNaNFromSAR();
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+
+            appDatabase.reportDao().update(report);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+            Toast.makeText(AnalyzeReportActivity.this, R.string.relatorio_atualizado, Toast.LENGTH_SHORT).show();
         }
     }
 

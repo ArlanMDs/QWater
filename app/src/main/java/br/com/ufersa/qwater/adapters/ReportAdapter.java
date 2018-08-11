@@ -55,7 +55,7 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ViewHolder
 
     private String longToDateFormat(long longValue){
 
-        return new SimpleDateFormat("dd/MM/yyyy").format(new Date(longValue));
+        return new SimpleDateFormat("dd/MM/yyyy").format(new Date(longValue));// TODO resolver data
 
     }
 

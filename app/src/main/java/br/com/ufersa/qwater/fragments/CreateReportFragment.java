@@ -17,11 +17,17 @@ import br.com.ufersa.qwater.R;
 import br.com.ufersa.qwater.activities.AnalyzeReportActivity;
 import br.com.ufersa.qwater.beans.Report;
 
+import static br.com.ufersa.qwater.util.Flags.GOING_TO;
+import static br.com.ufersa.qwater.util.Flags.REPORT;
+import static br.com.ufersa.qwater.util.Flags.UPDATE;
+
 public class CreateReportFragment extends Fragment implements AdapterView.OnItemSelectedListener{
 
     private EditText edtCea, edtCa, edtMg, edtK, edtNa, edtCo3, edtHco3, edtCl, edtPH, edtSO4, edtB;
     private Button analyzeButton;
     private Spinner spinnerCEa;
+    private boolean isUpdatingReport = false;
+    private Report report;
 
     //TODO na CaTable, o valor limite para a Cea é 8.0
     @Nullable
@@ -38,27 +44,67 @@ public class CreateReportFragment extends Fragment implements AdapterView.OnItem
 
         initiate(view);
 
+        // checa se o bundle vem vazio, se contem algo, é para dar update
+        // Se o fragmento está atualizando o relatório, não é necessário instanciar um novo relatório
+        // Dessa forma, o ID e o nome da fonte não são perdidos
+        if (this.getArguments() != null) {
+            try {
+                report = this.getArguments().getParcelable(REPORT);
+                updateUI(report);
+                isUpdatingReport = true;
+            }catch (Exception e) {
+                e.printStackTrace();
+                report = new Report();
+                Toast.makeText(view.getContext(), R.string.erro_atualizar_relatorio, Toast.LENGTH_LONG).show();
+            }
+        }else
+            report = new Report();
+
         analyzeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Report report;
 
                 try {
                     report = generateReport();
                     // Se nenhum parametro for NaN, procede.
-                    if(!inputIsInvalid(report)) {
+                    if (!inputIsInvalid(report)) {
+
                         Intent intent = new Intent(view.getContext(), AnalyzeReportActivity.class);
-                        intent.putExtra("report", report);
+                        intent.putExtra(REPORT, report);
+
+                        // Sinaliza que o relatório está vindo para ser atualizado (ao invés de insert, será update no BD)
+                        if(isUpdatingReport)
+                            intent.putExtra(GOING_TO, UPDATE);
+
                         startActivity(intent);
-                    }else
+
+                    } else
                         Toast.makeText(getContext(), getString(R.string.erro_verifique_dados), Toast.LENGTH_LONG).show();
 
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                     Toast.makeText(getContext(), getString(R.string.erro_verifique_dados), Toast.LENGTH_LONG).show();
                 }
             }
         });
+    }
+
+    private void updateUI(Report report){
+        // troca o texto do botão
+        analyzeButton.setText(R.string.avaliar_e_atualizar);
+
+        edtCea.setText(String.valueOf(report.getCea()));
+        edtCa.setText(String.valueOf(report.getCa()));
+        edtMg.setText(String.valueOf(report.getMg()));
+        edtK.setText(String.valueOf(report.getK()));
+        edtNa.setText(String.valueOf(report.getNa()));
+        edtCo3.setText(String.valueOf(report.getCo3()));
+        edtHco3.setText(String.valueOf(report.getHco3()));
+        edtCl.setText(String.valueOf(report.getCl()));
+        edtPH.setText(String.valueOf(report.getPh()));
+        edtB.setText(String.valueOf(report.getB()));
+        edtSO4.setText(String.valueOf(report.getSo4()));
+
     }
 
     /**
@@ -81,7 +127,6 @@ public class CreateReportFragment extends Fragment implements AdapterView.OnItem
     }
 
     private Report generateReport() {
-        Report report = new Report();
 
         if(edtMg.getText().length() > 0)
             report.setMg(parseToDouble(edtMg.getText().toString()));

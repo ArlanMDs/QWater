@@ -16,12 +16,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import br.com.ufersa.qwater.R;
+import br.com.ufersa.qwater.beans.Report;
 import br.com.ufersa.qwater.fragments.CreateReportFragment;
 import br.com.ufersa.qwater.fragments.CreateSourceFragment;
 import br.com.ufersa.qwater.fragments.HomeFragment;
 import br.com.ufersa.qwater.fragments.ListReportsFragment;
 import br.com.ufersa.qwater.fragments.ListSourcesFragment;
 import br.com.ufersa.qwater.info_activities.AboutActivity;
+
+import static br.com.ufersa.qwater.util.Flags.REPORT;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -42,11 +45,35 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //add this line to display menu when the activity is loaded
-        displaySelectedScreen(R.id.HOME);
-        navigationView.setCheckedItem(R.id.HOME);
+        // Se contém um relatório, manda ele para o fragmento de criar relatórios
+        if(getIntent().hasExtra(REPORT)) {
+            Report report = getIntent().getParcelableExtra(REPORT);
+            passReportFromMainToFragment(report);
+        }
+        else {
+            //add this line to display menu when the activity is loaded
+            displaySelectedScreen(R.id.HOME);
+            navigationView.setCheckedItem(R.id.HOME);
+        }
+    }
 
+    /*
+    SEND DATA TO FRAGMENT
+     */
+    private void passReportFromMainToFragment(Report report) {
 
+        //PACK DATA IN A BUNDLE
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(REPORT, report);
+
+        //PASS OVER THE BUNDLE TO OUR FRAGMENT
+        Fragment fragment = new CreateReportFragment();
+        fragment.setArguments(bundle);
+
+        //THEN NOW SHOW OUR FRAGMENT
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.content_frame, fragment, "UPDATE_REPORT");
+        ft.commit();
     }
 
     @Override

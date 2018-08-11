@@ -1,14 +1,21 @@
 package br.com.ufersa.qwater.util;
 
-public class Flags {
+public final class Flags {
 
     // usados para distinguir qual activity foi chamada quando um relatório está sendo armazenado no BD
-    private final static int REQUEST_CODE_SELECT_DATE = 1, REQUEST_CODE_SELECT_SOURCE = 2;
+    public final static int INSERT_SELECT_DATE = 1, INSERT_SELECT_SOURCE = 2, UPDATE_SELECT_DATE = 3, UPDATE_SELECT_SOURCE = 4;
 
     // usados para setar a cor do ícone de aviso
-    private final static int OK = 1, CAUTION = 2, ALERT = 3, DANGER = 4;
+    public final static int OK = 1, CAUTION = 2, ALERT = 3, DANGER = 4;
 
-    // usados para diferenciar qual activity chamou a AnalyzeReport
-    private final static int INSERT = 1, UPDATE = 2;
+    // geralmente usados para nomear as tags de bundles e extras
+    public final static String GOING_TO = "going_to";
+    public final static String CALLING_ACTIVITY = "callingActivity";
+    public final static int UPDATE = 1;
+    public final static String REPORT = "report";
+
+    public final static int MAIN_ACTIVITY = 0, ANALYZE_REPORT_ACTIVITY = 1;
+
+
 
 }

@@ -14,6 +14,9 @@ import br.com.ufersa.qwater.adapters.SourceAdapter;
 import br.com.ufersa.qwater.beans.Source;
 import br.com.ufersa.qwater.database.AppDatabase;
 
+import static br.com.ufersa.qwater.util.Flags.CALLING_ACTIVITY;
+import static br.com.ufersa.qwater.util.Flags.MAIN_ACTIVITY;
+
 //referência recyclerView https://www.youtube.com/watch?v=CTBiwKlO5IU&t=2762s
 
 public class ListSourcesActivity extends AppCompatActivity {
@@ -60,14 +63,13 @@ public class ListSourcesActivity extends AppCompatActivity {
         }
     }
     private int getCodeOfIncomingIntent(){
-        if(getIntent().hasExtra("callingActivity")) {
-            // Caso a activity que chamou seja a analize, esconde o fab para que não vá para a activity de criar
+        if(getIntent().hasExtra(CALLING_ACTIVITY)) {
+            // Caso a activity que chamou seja a analize, a intent tem esse extra
             // E troca o título da activity
-            return getIntent().getIntExtra("callingActivity",0);
+            return getIntent().getIntExtra(CALLING_ACTIVITY,MAIN_ACTIVITY);// em caso de vazio, volta pra main
         }
-        else{
-            return 0;//TODO aqui é se quem chama é a mainactivity
-        }
+        else
+            return MAIN_ACTIVITY;
     }
 
     //para nao voltar para a activity de coordenadas
