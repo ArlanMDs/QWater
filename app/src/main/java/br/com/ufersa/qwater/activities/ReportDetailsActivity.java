@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -94,11 +95,7 @@ public class ReportDetailsActivity extends AppCompatActivity{
     private void deleteReport() {
         try {
             new AsyncDelete().execute();
-
-            // se eu der somente um finish(), a lista de relatórios não atualiza...
-            Intent intent = new Intent(ReportDetailsActivity.this, MainActivity.class);
-            intent.putExtra(GOING_TO, DELETE_REPORT);
-            startActivity(intent);
+            // no post execute é direcionado para o fragment de listar relatórios
         }catch (Exception e){
             e.printStackTrace();
             Toast.makeText(this, R.string.erro_deletar_relatorio, Toast.LENGTH_SHORT).show();
@@ -106,9 +103,9 @@ public class ReportDetailsActivity extends AppCompatActivity{
         }
     }
     private void getIncomingIntent(){
-        if(getIntent().hasExtra("report")){
+        if(getIntent().hasExtra(REPORT)){
 
-            report = getIntent().getParcelableExtra("report");
+            report = getIntent().getParcelableExtra(REPORT);
 
             cea.setText(String.valueOf(report.getCea()));
             ca.setText(String.valueOf(report.getCa()));
@@ -145,6 +142,13 @@ public class ReportDetailsActivity extends AppCompatActivity{
 
         Toolbar mTopToolbar = findViewById(R.id.details_toolbar);
         setSupportActionBar(mTopToolbar);
+        mTopToolbar.setNavigationIcon(R.drawable.action_navigation_arrow);
+        mTopToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         // prepara o bd
         appDatabase = AppDatabase.getInstance(ReportDetailsActivity.this);
@@ -175,6 +179,10 @@ public class ReportDetailsActivity extends AppCompatActivity{
             super.onPostExecute(aVoid);
 
             Toast.makeText(ReportDetailsActivity.this, R.string.relatorio_deletado, Toast.LENGTH_SHORT).show();
+            // se eu der somente um finish(), a lista de relatórios não atualiza...
+            Intent intent = new Intent(ReportDetailsActivity.this, MainActivity.class);
+            intent.putExtra(GOING_TO, DELETE_REPORT);
+            startActivity(intent);
         }
     }
 }

@@ -23,7 +23,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:title="@string/analise_do_relatorio" />
+            app:title="@string/analise_do_relatorio"
+            app:titleTextAppearance="@style/Toolbar.TitleText" />
 
         <TextView
             android:id="@+id/textView40"

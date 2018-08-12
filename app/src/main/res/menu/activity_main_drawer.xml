@@ -20,12 +20,12 @@
                     android:icon="@drawable/ic_action_note_add"
                     android:title="@string/novo_relatorio" />
                 <item
-                    android:id="@+id/LIST_SOURCES"
-                    android:icon="@drawable/ic_action_view_list"
-                    android:title="@string/listar_fontes" />
-                <item
                     android:id="@+id/LIST_REPORTS"
-                    android:title="@string/listar_relatorios" />
+                    android:icon="@drawable/ic_action_view_list"
+                    android:title="@string/listar_relatorios"/>
+                <item
+                    android:id="@+id/LIST_SOURCES"
+                    android:title="@string/listar_fontes"/>
             </group>
         </menu>
     </item>

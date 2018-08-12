@@ -642,10 +642,14 @@ public class AnalyzeReportActivity extends AppCompatActivity implements View.OnC
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            //TODO ao atualizar, seria interessante voltar para a activity de detalhes com o relatório atualizado, pois apertando o botão voltar as informações aparecem desatualizadas
             // passar o relatorio para a activity de detalhes junto com uma flag apontando que vem da atualização
             // preciso limpar o histórico para o usuário não apertar back e ver os dados desatualizados
             Toast.makeText(AnalyzeReportActivity.this, R.string.relatorio_atualizado, Toast.LENGTH_SHORT).show();
+
+            Intent intent = new Intent(AnalyzeReportActivity.this, ReportDetailsActivity.class);
+            intent.putExtra(REPORT, report);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);//app deu crash, o log do erro pediu essa flag.
+            startActivity(intent);
         }
     }
 

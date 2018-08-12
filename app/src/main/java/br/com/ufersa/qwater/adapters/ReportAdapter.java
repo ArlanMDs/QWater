@@ -18,6 +18,8 @@ import br.com.ufersa.qwater.R;
 import br.com.ufersa.qwater.activities.ReportDetailsActivity;
 import br.com.ufersa.qwater.beans.Report;
 
+import static br.com.ufersa.qwater.util.Flags.REPORT;
+
 public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ViewHolder>{
 
     private final List<Report> reports;
@@ -46,7 +48,7 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ViewHolder
             public void onClick(View v) {
 
                 Intent intent = new Intent(context, ReportDetailsActivity.class);
-                intent.putExtra("report", reports.get(position));
+                intent.putExtra(REPORT, reports.get(position));
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);//app deu crash, o log do erro pediu essa flag.
                 context.startActivity(intent);
             }
