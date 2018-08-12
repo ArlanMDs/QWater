@@ -9,10 +9,9 @@ public final class Flags {
     public final static int OK = 1, CAUTION = 2, ALERT = 3, DANGER = 4;
 
     // geralmente usados para nomear as tags de bundles e extras
-    public final static String GOING_TO = "going_to";
-    public final static String CALLING_ACTIVITY = "callingActivity";
-    public final static int UPDATE = 1;
-    public final static String REPORT = "report";
+    public final static String GOING_TO = "going_to", CALLING_ACTIVITY = "callingActivity",  REPORT = "report";
+
+    public final static int UPDATE_REPORT = 1, SEE_REPORT = 2, DELETE_REPORT = 3;
 
     public final static int MAIN_ACTIVITY = 0, ANALYZE_REPORT_ACTIVITY = 1;
 

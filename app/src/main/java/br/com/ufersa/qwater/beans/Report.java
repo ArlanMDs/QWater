@@ -33,7 +33,7 @@ public class Report implements Parcelable{//TODO resolver o que fazer quando del
     private double ph;
     private double normalSar;
     private double correctedSar;
-    private long date; //A data é criada no momento de inserir no banco
+    private long date;
     private int souId;
     private String souName;// Esse atributo poderia fazer parte da chave. No momento ele está aqui apenas para facilitar e não precisar fazer outra
                             // consulta no banco na hora de exibir o nome da source durante a listagem dos reports

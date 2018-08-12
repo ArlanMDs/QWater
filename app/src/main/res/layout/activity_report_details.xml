@@ -8,7 +8,20 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/details_toolbar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="@string/detalhes_relatorio" />
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/constraintLayout2"
@@ -130,7 +143,7 @@
             android:paddingBottom="16dp"
             app:layout_constraintEnd_toEndOf="@+id/constraintLayout2"
             app:layout_constraintStart_toStartOf="@+id/constraintLayout2"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/details_toolbar">
 
             <TextView
                 android:id="@+id/textView14"
@@ -406,27 +419,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView34" />
 
         </android.support.constraint.ConstraintLayout>
-
-        <ImageButton
-            android:id="@+id/DETAILS_EDIT"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            app:layout_constraintEnd_toStartOf="@+id/DETAILS_DELETE"
-            app:layout_constraintTop_toTopOf="@+id/DETAILS_DELETE"
-            app:srcCompat="@drawable/edit_report" />
-
-        <ImageButton
-            android:id="@+id/DETAILS_DELETE"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout4"
-            app:srcCompat="@drawable/delete_report" />
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

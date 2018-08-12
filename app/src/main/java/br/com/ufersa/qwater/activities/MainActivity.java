@@ -24,11 +24,15 @@ import br.com.ufersa.qwater.fragments.ListReportsFragment;
 import br.com.ufersa.qwater.fragments.ListSourcesFragment;
 import br.com.ufersa.qwater.info_activities.AboutActivity;
 
+import static br.com.ufersa.qwater.util.Flags.DELETE_REPORT;
+import static br.com.ufersa.qwater.util.Flags.GOING_TO;
 import static br.com.ufersa.qwater.util.Flags.REPORT;
+import static br.com.ufersa.qwater.util.Flags.UPDATE_REPORT;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private NavigationView navigationView;
+    private boolean isUpdatingReport = false; // Para controle do onBackPressed
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +49,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        // Se contém um relatório, manda ele para o fragmento de criar relatórios
-        if(getIntent().hasExtra(REPORT)) {
-            Report report = getIntent().getParcelableExtra(REPORT);
-            passReportFromMainToFragment(report);
+        // Se tem a flag going to e ela for para atualizar, então o extra contém um relatório para ser atualizado
+        // Se a flag for de delete, a intenção é colocar o fragmento de lista de reports para a lista ser atualizada
+        if(getIntent().hasExtra(GOING_TO)) {
+            if (getIntent().getIntExtra(GOING_TO, 0) == UPDATE_REPORT) {
+                Report report = getIntent().getParcelableExtra(REPORT);
+                isUpdatingReport = true;
+                passReportFromMainToFragment(report);
+            }
+            else if(getIntent().getIntExtra(GOING_TO, 0) == DELETE_REPORT){
+                displaySelectedScreen(R.id.LIST_REPORTS);
+                navigationView.setCheckedItem(R.id.LIST_REPORTS);
+            }
         }
         else {
             //add this line to display menu when the activity is loaded
@@ -167,12 +179,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             FragmentManager fragmentManager = getSupportFragmentManager();
             Fragment currentFragment = fragmentManager.findFragmentById(R.id.content_frame);
 
+            // se estiver atualizando um relatório, deve voltar para a activity de detalhes
+            if (isUpdatingReport)
+                super.onBackPressed();
+
             // Se o fragmento atual exibido não for a home, o botão voltar direciona para ela
-            if (!currentFragment.getTag().equals("HOME")) {
+            else if (!currentFragment.getTag().equals("HOME")) {
                 displaySelectedScreen(R.id.HOME);
                 navigationView.setCheckedItem(R.id.HOME);
-            }
-            else
+            }else
                 super.onBackPressed();
         }
     }

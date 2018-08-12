@@ -226,8 +226,20 @@
     <string name="edit_location">editar localização</string>
     <string name="edit_date">editar data</string>
     <string name="relatorio_atualizado">Relatório atualizado com sucesso!</string>
-    <string name="avaliar_e_atualizar">Avaliar e atualizar</string>
+    <string name="avaliar_antes_de_atualizar">Avaliar antes de atualizar</string>
     <string name="data_atualizada">Data modificada! Aperte o botão salvar para atualizar o relatório</string>
     <string name="localizacao_atualizada">Localização modificada! Aperte o botão salvar para atualizar o relatório.</string>
+    <string name="editar_relatorio">Editar relatório</string>
+    <string name="remover_relatorio">Remover relatório</string>
+    <string name="ver_relatorio">Ver relatório</string>
+    <string name="detalhes_relatorio">Detalhes do relatório</string>
+    <string name="relatorio_deletado">Relatório deletado com sucesso!</string>
+    <string name="deletando_relatorio">Deletando um relatório</string>
+    <string name="certeza_deletar_relatorio">Tem certeza que deseja deletar esse relatório?</string>
+    <string name="sim">sim</string>
+    <string name="nao">não</string>
+    <string name="erro_deletar_relatorio">Erro ao deletar relatório.</string>
+    <string name="erro_calcular_ras">Erro ao tentar calcular a RAS</string>
+    <string name="erro_calcular_ras_corrigida">Erro ao tentar calcular a RAS*</string>
 
 </resources>

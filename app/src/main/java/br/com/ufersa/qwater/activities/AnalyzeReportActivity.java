@@ -34,7 +34,8 @@ import static br.com.ufersa.qwater.util.Flags.INSERT_SELECT_DATE;
 import static br.com.ufersa.qwater.util.Flags.INSERT_SELECT_SOURCE;
 import static br.com.ufersa.qwater.util.Flags.OK;
 import static br.com.ufersa.qwater.util.Flags.REPORT;
-import static br.com.ufersa.qwater.util.Flags.UPDATE;
+import static br.com.ufersa.qwater.util.Flags.SEE_REPORT;
+import static br.com.ufersa.qwater.util.Flags.UPDATE_REPORT;
 import static br.com.ufersa.qwater.util.Flags.UPDATE_SELECT_DATE;
 import static br.com.ufersa.qwater.util.Flags.UPDATE_SELECT_SOURCE;
 
@@ -59,10 +60,12 @@ public class AnalyzeReportActivity extends AppCompatActivity implements View.OnC
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        // Muda o menu caso o usuário esteja atualizando um report ou inserindo um novo
+        // Muda o menu caso o usuário esteja atualizando um report, vendo o relatório ou inserindo um novo
         if(getIntent().hasExtra(REPORT)) {
-            if (getIntent().getIntExtra(GOING_TO, 0) == UPDATE)
+            if (getIntent().getIntExtra(GOING_TO, 0) == UPDATE_REPORT)
                 getMenuInflater().inflate(R.menu.analyze_update, menu);
+            else if (getIntent().getIntExtra(GOING_TO, 0) == SEE_REPORT)
+                getMenuInflater().inflate(R.menu.analyze_see, menu);
             else
                 getMenuInflater().inflate(R.menu.analyze_insert, menu);
         }//TODO rever isso aqui...
@@ -75,10 +78,7 @@ public class AnalyzeReportActivity extends AppCompatActivity implements View.OnC
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-
-        switch(id){
+        switch(item.getItemId()){
             case R.id.action_insert:
                 // abre uma nova activity e passa o relatório, lá, será inserida a data da amostra e o nome da fonte
                 startActivityForResult(new Intent(AnalyzeReportActivity.this, SelectDateActivity.class), INSERT_SELECT_DATE);
@@ -109,26 +109,23 @@ public class AnalyzeReportActivity extends AppCompatActivity implements View.OnC
 
             return true;
         }
-
-
-
         return super.onOptionsItemSelected(item);
     }
 
-    private void updateData(Report report){
-
+    private void updateActivityReport(Report report){
+        // TODO as coisas não estão no lugar certo...
         try {
             report.setNormalSar(calculateNormalSAR(report.getCa(), report.getMg(), report.getNa()));
         }catch (Exception e){
             e.printStackTrace();
-            Toast.makeText(AnalyzeReportActivity.this, "Erro ao tentar calcular a RAS", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AnalyzeReportActivity.this, R.string.erro_calcular_ras, Toast.LENGTH_SHORT).show();
             report.setNormalSar(0.0);
         }
         try {
             report.setCorrectedSar(calculateCorrectedSAR(report.getCa(), report.getMg(), report.getNa(), report.getHco3(), report.getCea()));
         }catch (Exception e){
             e.printStackTrace();
-            Toast.makeText(AnalyzeReportActivity.this, "Erro ao tentar calcular a RAS*", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AnalyzeReportActivity.this, R.string.erro_calcular_ras_corrigida, Toast.LENGTH_SHORT).show();
             report.setCorrectedSar(0.0);
         }
 
@@ -141,8 +138,7 @@ public class AnalyzeReportActivity extends AppCompatActivity implements View.OnC
 
     private void getIncomingIntent(){
         if(getIntent().hasExtra(REPORT)) {
-
-            updateData((Report) getIntent().getParcelableExtra(REPORT));
+            updateActivityReport((Report) getIntent().getParcelableExtra(REPORT));
         }
     }
 
@@ -491,7 +487,7 @@ public class AnalyzeReportActivity extends AppCompatActivity implements View.OnC
         // prepara o bd
         appDatabase = AppDatabase.getInstance(AnalyzeReportActivity.this);
 
-        Toolbar mTopToolbar = findViewById(R.id.my_toolbar);
+        Toolbar mTopToolbar = findViewById(R.id.analyze_toolbar);
         setSupportActionBar(mTopToolbar);
         mTopToolbar.setNavigationIcon(R.drawable.action_navigation_arrow);
         mTopToolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -646,7 +642,9 @@ public class AnalyzeReportActivity extends AppCompatActivity implements View.OnC
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-
+            //TODO ao atualizar, seria interessante voltar para a activity de detalhes com o relatório atualizado, pois apertando o botão voltar as informações aparecem desatualizadas
+            // passar o relatorio para a activity de detalhes junto com uma flag apontando que vem da atualização
+            // preciso limpar o histórico para o usuário não apertar back e ver os dados desatualizados
             Toast.makeText(AnalyzeReportActivity.this, R.string.relatorio_atualizado, Toast.LENGTH_SHORT).show();
         }
     }

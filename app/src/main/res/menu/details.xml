@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_see"
+        android:icon="@drawable/see_report"
+        android:orderInCategory="100"
+        android:title="@string/ver_relatorio"
+        app:showAsAction="always|withText" />
+
+    <item
+        android:id="@+id/action_edit"
+        android:icon="@drawable/edit_report"
+        android:orderInCategory="100"
+        android:title="@string/editar_relatorio"
+        app:showAsAction="always|withText" />
+    <item
+        android:id="@+id/action_delete"
+        android:icon="@drawable/delete_report"
+        android:orderInCategory="100"
+        android:title="@string/remover_relatorio"
+        app:showAsAction="ifRoom|withText" />
+</menu>

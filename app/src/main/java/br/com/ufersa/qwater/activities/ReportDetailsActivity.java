@@ -1,26 +1,36 @@
 package br.com.ufersa.qwater.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.ImageButton;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import br.com.ufersa.qwater.R;
 import br.com.ufersa.qwater.beans.Report;
+import br.com.ufersa.qwater.database.AppDatabase;
 
+import static br.com.ufersa.qwater.util.Flags.DELETE_REPORT;
 import static br.com.ufersa.qwater.util.Flags.GOING_TO;
 import static br.com.ufersa.qwater.util.Flags.REPORT;
-import static br.com.ufersa.qwater.util.Flags.UPDATE;
+import static br.com.ufersa.qwater.util.Flags.SEE_REPORT;
+import static br.com.ufersa.qwater.util.Flags.UPDATE_REPORT;
 
-public class ReportDetailsActivity extends AppCompatActivity implements View.OnClickListener{
+public class ReportDetailsActivity extends AppCompatActivity{
 
     private TextView cea, ca, mg, k, na, co3, hco3, cl, pH, sourceName, correctedSAR, date, b, so4;
     private Report report;
+    private AppDatabase appDatabase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +42,69 @@ public class ReportDetailsActivity extends AppCompatActivity implements View.OnC
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.details, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        Intent intent;
+        switch(item.getItemId()){
+            case R.id.action_see:
+
+                intent = new Intent(ReportDetailsActivity.this, AnalyzeReportActivity.class);
+                intent.putExtra(GOING_TO, SEE_REPORT);
+                intent.putExtra(REPORT, report);
+                startActivity(intent);
+
+                return true;
+            case R.id.action_edit:
+
+                intent = new Intent(ReportDetailsActivity.this, MainActivity.class);
+                intent.putExtra(GOING_TO, UPDATE_REPORT);
+                intent.putExtra(REPORT, report);
+                startActivity(intent);
+
+                return true;
+            case R.id.action_delete:
+
+                new AlertDialog.Builder(this)
+                        .setTitle(R.string.deletando_relatorio)
+                        .setMessage(R.string.certeza_deletar_relatorio)
+                        .setPositiveButton(R.string.sim,
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        deleteReport();
+                                    }
+                                })
+                        .setNegativeButton(R.string.nao, null)
+                        .show();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void deleteReport() {
+        try {
+            new AsyncDelete().execute();
+
+            // se eu der somente um finish(), a lista de relatórios não atualiza...
+            Intent intent = new Intent(ReportDetailsActivity.this, MainActivity.class);
+            intent.putExtra(GOING_TO, DELETE_REPORT);
+            startActivity(intent);
+        }catch (Exception e){
+            e.printStackTrace();
+            Toast.makeText(this, R.string.erro_deletar_relatorio, Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(ReportDetailsActivity.this, MainActivity.class));
+        }
+    }
     private void getIncomingIntent(){
         if(getIntent().hasExtra("report")){
 
@@ -70,46 +143,38 @@ public class ReportDetailsActivity extends AppCompatActivity implements View.OnC
         b = findViewById(R.id.B_VALUE);
         so4 = findViewById(R.id.SO4_VALUE);
 
-        ImageButton delete = findViewById(R.id.DETAILS_DELETE);
-        delete.setOnClickListener(this);
+        Toolbar mTopToolbar = findViewById(R.id.details_toolbar);
+        setSupportActionBar(mTopToolbar);
 
-        ImageButton edit = findViewById(R.id.DETAILS_EDIT);
-        edit.setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.DETAILS_DELETE:
-
-
-                break;
-
-            case R.id.DETAILS_EDIT:
-
-                Intent intent = new Intent(ReportDetailsActivity.this, MainActivity.class);
-                intent.putExtra(GOING_TO, UPDATE);
-                intent.putExtra(REPORT, report);
-                startActivity(intent);
-
-                break;
-        }
+        // prepara o bd
+        appDatabase = AppDatabase.getInstance(ReportDetailsActivity.this);
     }
 
     private String formatDate(long timeInMillis){
-//        String date;
-//        Calendar cal = Calendar.getInstance();
-//        cal.setTimeInMillis(timeInMillis);
-//
-//        date =  String.valueOf(cal.get(Calendar.DAY_OF_MONTH)) + "/" +
-//                String.valueOf(cal.get(Calendar.MONTH)) + "/" +
-////                String.valueOf(cal.get(Calendar.YEAR));
-//
-//        return date;
-
+        //TODO rever formato da data para internacionalizaço
         return new SimpleDateFormat("dd/MM/yyyy").format(new Date(timeInMillis));
 
     }
 
+    private class AsyncDelete extends AsyncTask<Void, Void, Void> {
 
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+
+            appDatabase.reportDao().delete(report);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+            Toast.makeText(ReportDetailsActivity.this, R.string.relatorio_deletado, Toast.LENGTH_SHORT).show();
+        }
+    }
 }

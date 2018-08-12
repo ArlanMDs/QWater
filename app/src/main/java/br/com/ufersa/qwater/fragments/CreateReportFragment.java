@@ -19,7 +19,7 @@ import br.com.ufersa.qwater.beans.Report;
 
 import static br.com.ufersa.qwater.util.Flags.GOING_TO;
 import static br.com.ufersa.qwater.util.Flags.REPORT;
-import static br.com.ufersa.qwater.util.Flags.UPDATE;
+import static br.com.ufersa.qwater.util.Flags.UPDATE_REPORT;
 
 public class CreateReportFragment extends Fragment implements AdapterView.OnItemSelectedListener{
 
@@ -74,7 +74,7 @@ public class CreateReportFragment extends Fragment implements AdapterView.OnItem
 
                         // Sinaliza que o relatório está vindo para ser atualizado (ao invés de insert, será update no BD)
                         if(isUpdatingReport)
-                            intent.putExtra(GOING_TO, UPDATE);
+                            intent.putExtra(GOING_TO, UPDATE_REPORT);
 
                         startActivity(intent);
 
@@ -90,8 +90,8 @@ public class CreateReportFragment extends Fragment implements AdapterView.OnItem
     }
 
     private void updateUI(Report report){
-        // troca o texto do botão
-        analyzeButton.setText(R.string.avaliar_e_atualizar);
+        // troca o texto do botão quando vem para update
+        analyzeButton.setText(R.string.avaliar_antes_de_atualizar);
 
         edtCea.setText(String.valueOf(report.getCea()));
         edtCa.setText(String.valueOf(report.getCa()));
