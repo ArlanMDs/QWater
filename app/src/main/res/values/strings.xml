@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">QWater</string>
-    <string name="novo_relatorio">Novo Relatório</string>
+    <string name="novo_relatorio">Analisar Relatório</string>
     <string name="listar_relatorios">Listar Relatórios</string>
     <string name="listar_fontes">Listar Fontes</string>
     <string name="registrar_fonte">Registrar Fonte</string>
@@ -30,7 +30,7 @@
     <string name="cloreto">Cloreto - Cl<sup><small>-</small></sup></string>
     <string name="co3" translatable="false">CO<sub><small>3</small></sub><sup><small>2-</small></sup></string>
     <string name="hco3" translatable="false">HCO<sub><small>3</small></sub><sup><small>-</small></sup></string>
-    <string name="so4" translatable="false">SO4<sup><small>2-</small></sup></string>
+    <string name="so4" translatable="false">SO<sub><small>4</small></sub><sup><small>2-</small></sup></string>
 
     <string name="cea_unit" translatable="false">Unidade da CE<small>a</small></string>
     <string name="cea_hint" translatable="false">CE<small>a</small></string>
