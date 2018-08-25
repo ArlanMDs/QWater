@@ -273,8 +273,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:padding="2dp"
                 android:text="@string/so4"
                 android:textColor="@android:color/black"
+                android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="@+id/textView8"
                 app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
@@ -286,7 +288,7 @@
                 android:padding="2dp"
                 android:text="@string/hco3"
                 android:textColor="@android:color/black"
-                android:textSize="10sp"
+                android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="@+id/textView12"
                 app:layout_constraintTop_toBottomOf="@+id/textView12" />
 

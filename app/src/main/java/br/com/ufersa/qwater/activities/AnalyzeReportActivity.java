@@ -25,19 +25,15 @@ import br.com.ufersa.qwater.info_activities.ToxityActivity;
 import br.com.ufersa.qwater.util.SARCalculator;
 
 import static br.com.ufersa.qwater.util.Flags.ALERT;
-import static br.com.ufersa.qwater.util.Flags.ANALYZE_REPORT_ACTIVITY;
-import static br.com.ufersa.qwater.util.Flags.CALLING_ACTIVITY;
 import static br.com.ufersa.qwater.util.Flags.CAUTION;
 import static br.com.ufersa.qwater.util.Flags.DANGER;
 import static br.com.ufersa.qwater.util.Flags.GOING_TO;
-import static br.com.ufersa.qwater.util.Flags.INSERT_SELECT_DATE;
-import static br.com.ufersa.qwater.util.Flags.INSERT_SELECT_SOURCE;
+import static br.com.ufersa.qwater.util.Flags.INSERT_SAVE_REPORT;
 import static br.com.ufersa.qwater.util.Flags.OK;
 import static br.com.ufersa.qwater.util.Flags.REPORT;
 import static br.com.ufersa.qwater.util.Flags.SEE_REPORT;
 import static br.com.ufersa.qwater.util.Flags.UPDATE_REPORT;
-import static br.com.ufersa.qwater.util.Flags.UPDATE_SELECT_DATE;
-import static br.com.ufersa.qwater.util.Flags.UPDATE_SELECT_SOURCE;
+import static br.com.ufersa.qwater.util.Flags.UPDATE_SAVE_REPORT;
 
 public class AnalyzeReportActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -81,33 +77,32 @@ public class AnalyzeReportActivity extends AppCompatActivity implements View.OnC
         switch(item.getItemId()){
             case R.id.action_insert:
                 // abre uma nova activity e passa o relatório, lá, será inserida a data da amostra e o nome da fonte
-                startActivityForResult(new Intent(AnalyzeReportActivity.this, SelectDateActivity.class), INSERT_SELECT_DATE);
+                startActivityForResult(new Intent(AnalyzeReportActivity.this, SaveReportActivity.class), INSERT_SAVE_REPORT);
 
             return true;
 
             case R.id.action_update:
+                Intent intent = new Intent(AnalyzeReportActivity.this, SaveReportActivity.class);
+                intent.putExtra("sourceName", report.getSouName());
+                intent.putExtra("reportDate",report.getDate());
+                intent.putExtra("sourceID", report.getSouId());
 
-                try{
-                    // Pronto para atualizar no BD
-                    new AsyncUpdate().execute();
-                }catch (Exception e){
-                    e.printStackTrace();
-                    Toast.makeText(AnalyzeReportActivity.this, getString(R.string.erro_atualizar_relatorio), Toast.LENGTH_SHORT).show();
-                }
+                startActivityForResult(intent, UPDATE_SAVE_REPORT);
 
-            return true;
-
-            case R.id.action_update_source:
-                Intent intent = new Intent(AnalyzeReportActivity.this, ListSourcesActivity.class);
-                intent.putExtra(CALLING_ACTIVITY, ANALYZE_REPORT_ACTIVITY);
-                startActivityForResult(intent, UPDATE_SELECT_SOURCE);
 
             return true;
 
-            case R.id.action_update_date:
-                startActivityForResult(new Intent(AnalyzeReportActivity.this, SelectDateActivity.class), UPDATE_SELECT_DATE);
+//            case R.id.action_update_source:
+//                Intent intent = new Intent(AnalyzeReportActivity.this, ListSourcesActivity.class);
+//                intent.putExtra(CALLING_ACTIVITY, SAVE_REPORT_ACTIVITY);
+//                startActivityForResult(intent, UPDATE_SELECT_SOURCE);
 
-            return true;
+//            return true;
+//
+//            case R.id.action_update_date:
+//                startActivityForResult(new Intent(AnalyzeReportActivity.this, SaveReportActivity.class), UPDATE_SAVE_REPORT);
+//
+//            return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -540,21 +535,10 @@ public class AnalyzeReportActivity extends AppCompatActivity implements View.OnC
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch(requestCode) {
-            case INSERT_SELECT_DATE:
+            case INSERT_SAVE_REPORT:
 
                 if(resultCode == RESULT_OK) {
                     report.setDate(data.getLongExtra("date",  System.currentTimeMillis()));
-
-                    Intent intent = new Intent(AnalyzeReportActivity.this, ListSourcesActivity.class);
-                    intent.putExtra(CALLING_ACTIVITY, ANALYZE_REPORT_ACTIVITY);
-                    startActivityForResult(intent, INSERT_SELECT_SOURCE);
-
-                }
-            break;
-
-            case INSERT_SELECT_SOURCE:
-
-                if(resultCode == RESULT_OK) {
                     report.setSouId(data.getIntExtra("sourceID", 0));
                     report.setSouName(data.getStringExtra("sourceName"));
 
@@ -568,22 +552,20 @@ public class AnalyzeReportActivity extends AppCompatActivity implements View.OnC
                 }
             break;
 
-            case UPDATE_SELECT_SOURCE:
+            case UPDATE_SAVE_REPORT:
 
                 if(resultCode == RESULT_OK) {
+                    report.setDate(data.getLongExtra("date",  System.currentTimeMillis()));
                     report.setSouId(data.getIntExtra("sourceID", 0));
                     report.setSouName(data.getStringExtra("sourceName"));
-                    Toast.makeText(this, R.string.localizacao_atualizada, Toast.LENGTH_LONG).show();
 
-                }
-            break;
-
-            case UPDATE_SELECT_DATE:
-
-                if(resultCode == RESULT_OK) {
-                    report.setDate(data.getLongExtra("date", System.currentTimeMillis()));
-                    Toast.makeText(this, R.string.data_atualizada, Toast.LENGTH_LONG).show();
-
+                    try{
+                        // Pronto para atualizar no BD
+                        new AsyncUpdate().execute();
+                    }catch (Exception e){
+                        e.printStackTrace();
+                        Toast.makeText(AnalyzeReportActivity.this, getString(R.string.erro_atualizar_relatorio), Toast.LENGTH_SHORT).show();
+                    }
                 }
             break;
 

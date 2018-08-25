@@ -185,7 +185,7 @@
                 android:padding="2dp"
                 android:text="@string/hco3"
                 android:textColor="@android:color/black"
-                android:textSize="10sp"
+                android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="@+id/textView21"
                 app:layout_constraintTop_toTopOf="@+id/EDIT_HCO3" />
 
@@ -260,8 +260,10 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
+                android:padding="2dp"
                 android:text="@string/so4"
                 android:textColor="@android:color/black"
+                android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/EDIT_SO4" />
 

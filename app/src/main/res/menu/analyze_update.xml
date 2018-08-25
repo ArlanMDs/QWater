@@ -8,15 +8,4 @@
         android:title="@string/save"
         app:showAsAction="always|withText" />
 
-    <item
-        android:id="@+id/action_update_source"
-        android:icon="@drawable/edit_report_location"
-        android:orderInCategory="100"
-        android:title="@string/edit_location"
-        app:showAsAction="ifRoom|withText" />
-    <item
-        android:id="@+id/action_update_date"
-        android:icon="@drawable/edit_report_date"
-        android:orderInCategory="101"
-        android:title="@string/edit_date" />
 </menu>

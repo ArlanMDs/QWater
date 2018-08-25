@@ -15,7 +15,7 @@
 
 
     <!-- inicio fragment_create_report -->
-    <string name="criar_relatorio">Criar relatório</string>
+    <string name="analisar_relatorio">Analisar relatório</string>
     <string name="erro_verifique_dados">Algum erro nos dados de entrada. Dica: use ponto ao invés de vírgula.</string>
     <string name="cations">Cátions (mmol<small>c</small> L<sup><small>-1</small></sup>)</string>
     <string name="anions">Ânions (mmol<small>c</small> L<sup><small>-1</small></sup>)</string>
@@ -148,7 +148,8 @@
     <string name="obter_localizacao">Obter Localização</string>
 
     <string name="escolher_a_data">Toque para escolher a data…</string>
-    <string name="informacao_da_data">Por favor, insira a data em que a análise de água foi feita</string>
+    <string name="informacao_da_data">Selecione a data da análise</string>
+    <string name="informacao_da_fonte">Selecione a fonte da análise</string>
     <string name="escolher_fonte">Escolha a fonte da amostra</string>
 
     <string name="title_activity_main">Início</string>
@@ -227,7 +228,7 @@
     <string name="edit_date">editar data</string>
     <string name="relatorio_atualizado">Relatório atualizado com sucesso!</string>
     <string name="avaliar_antes_de_atualizar">Avaliar antes de atualizar</string>
-    <string name="data_atualizada">Data modificada! Aperte o botão salvar para atualizar o relatório</string>
+    <string name="update_realizado">Relatório atualizado com sucesso!</string>
     <string name="localizacao_atualizada">Localização modificada! Aperte o botão salvar para atualizar o relatório.</string>
     <string name="editar_relatorio">Editar relatório</string>
     <string name="remover_relatorio">Remover relatório</string>
@@ -241,5 +242,8 @@
     <string name="erro_deletar_relatorio">Erro ao deletar relatório.</string>
     <string name="erro_calcular_ras">Erro ao tentar calcular a RAS</string>
     <string name="erro_calcular_ras_corrigida">Erro ao tentar calcular a RAS*</string>
+    <string name="escolher_a_fonte">Toque para escolher a fonte...</string>
+    <string name="salvar">salvar</string>
+    <string name="selecione_a_data_e_fonte">Selecione a data e a fonte.</string>
 
 </resources>

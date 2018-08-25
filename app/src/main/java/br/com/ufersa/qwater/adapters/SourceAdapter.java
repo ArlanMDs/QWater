@@ -47,7 +47,7 @@ public class SourceAdapter extends RecyclerView.Adapter<SourceAdapter.ViewHolder
     public void onBindViewHolder(@NonNull SourceAdapter.ViewHolder holder, final int position) {
         holder.sourceName.setText(sources.get(position).getName());
 
-        if (callingActivity != MAIN_ACTIVITY){//se não é a main, é a analyze! então é necessário ativar o listener que retorna o nome e id
+        if (callingActivity != MAIN_ACTIVITY){//se não é a main, é a save report! então é necessário ativar o listener que retorna o nome e id
             holder.parentLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

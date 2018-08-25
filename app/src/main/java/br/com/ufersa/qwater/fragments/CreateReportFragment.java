@@ -40,7 +40,7 @@ public class CreateReportFragment extends Fragment implements AdapterView.OnItem
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //you can set the title for your toolbar here for different fragments different titles
-        getActivity().setTitle(getString(R.string.criar_relatorio));
+        getActivity().setTitle(getString(R.string.analisar_relatorio));
 
         initiate(view);
 

@@ -35,7 +35,7 @@
             android:name=".activities.AnalyzeReportActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activities.SelectDateActivity"
+            android:name=".activities.SaveReportActivity"
             android:theme="@style/AppTheme.PopupTheme" />
         <activity
             android:name=".activities.ListSourcesActivity"

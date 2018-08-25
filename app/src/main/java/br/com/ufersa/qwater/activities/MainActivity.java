@@ -15,9 +15,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 import br.com.ufersa.qwater.R;
 import br.com.ufersa.qwater.beans.Report;
 import br.com.ufersa.qwater.fragments.CreateReportFragment;
@@ -67,19 +64,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         else {
             //add this line to display menu when the activity is loaded
-
+            displaySelectedScreen(R.id.HOME);
+            navigationView.setCheckedItem(R.id.HOME);
             //abrir o menu de navegação
-            try {
-                new Timer().schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        drawer.openDrawer(GravityCompat.START);
-                    }
-                }, 1500);
-            }finally {
-                displaySelectedScreen(R.id.HOME);
-                navigationView.setCheckedItem(R.id.HOME);
-            }
         }
     }
 
