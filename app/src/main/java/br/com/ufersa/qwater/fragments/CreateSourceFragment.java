@@ -53,6 +53,9 @@ import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 
@@ -83,6 +86,7 @@ public class CreateSourceFragment extends Fragment implements View.OnClickListen
     private View view;
     private Source source;
     private boolean isUpdatingSource = false;
+    private String[] existingSourcesNames;
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -117,6 +121,9 @@ public class CreateSourceFragment extends Fragment implements View.OnClickListen
         super.onViewCreated(view, savedInstanceState);
         this.view = view;
         initiate();
+        // Faz uma lista com os nomes de fontes existentes, para checar antes de salvar
+        new AsyncRead().execute();
+
         // restore the values from saved instance state
         restoreValuesFromBundle(savedInstanceState);
         getActivity().setTitle(getString(R.string.adicionar_fonte));
@@ -204,11 +211,9 @@ public class CreateSourceFragment extends Fragment implements View.OnClickListen
                 stopLocationUpdates();
 
                 if(isUpdatingSource) {
-                    AsyncUpdate asyncUpdate = new AsyncUpdate();
-                    asyncUpdate.execute();
+                    new AsyncUpdate().execute();
                 }else{
-                    AsyncInsert asyncInsert = new AsyncInsert();
-                    asyncInsert.execute();
+                    new AsyncInsert().execute();
                 }
                 break;
 
@@ -259,14 +264,21 @@ public class CreateSourceFragment extends Fragment implements View.OnClickListen
             if (nameTextView.getText().length() > 0 ) {
 
                 name = String.valueOf(nameTextView.getText());
-                type = String.valueOf(spinner.getSelectedItem().toString());
 
-                if(latitudeTextView.getText().length() > 0 && longitudeTextView.getText().length() > 0) {
-                    latitude = String.valueOf(latitudeTextView.getText());
-                    longitude = String.valueOf(longitudeTextView.getText());
-                }else{
-                    latitude = getString(R.string.nao_informada);
-                    longitude = getString(R.string.nao_informada);
+                if(sourceAlreadyExists_onInsert(name)){
+                    Toast.makeText(getActivity(), R.string.nome_da_fonte_ja_existe, Toast.LENGTH_SHORT).show();
+                    this.cancel(true);
+
+                }else {
+                    type = String.valueOf(spinner.getSelectedItem().toString());
+
+                    if (latitudeTextView.getText().length() > 0 && longitudeTextView.getText().length() > 0) {
+                        latitude = String.valueOf(latitudeTextView.getText());
+                        longitude = String.valueOf(longitudeTextView.getText());
+                    } else {
+                        latitude = getString(R.string.nao_informada);
+                        longitude = getString(R.string.nao_informada);
+                    }
                 }
 
             }else {
@@ -296,7 +308,7 @@ public class CreateSourceFragment extends Fragment implements View.OnClickListen
 
     private class AsyncUpdate extends AsyncTask<Void, Void, Void> {
 
-
+        private String originalName = source.getName();
 
         @Override
         protected void onPreExecute() {
@@ -304,11 +316,17 @@ public class CreateSourceFragment extends Fragment implements View.OnClickListen
 
             if (nameTextView.getText().length() > 0 ) {
 
-                source.setName(String.valueOf(nameTextView.getText()));
-                source.setType(String.valueOf(spinner.getSelectedItem().toString()));
-                // aqui já tenho a certeza que os textviews não estão vazios
-                source.setLatitude(String.valueOf(latitudeTextView.getText()));
-                source.setLongitude(String.valueOf(longitudeTextView.getText()));
+                if(sourceAlreadyExists_onUpdate(originalName, String.valueOf(nameTextView.getText()))){
+                    Toast.makeText(getActivity(), R.string.nome_da_fonte_ja_existe, Toast.LENGTH_SHORT).show();
+                    this.cancel(true);
+
+                }else {
+                    source.setName(String.valueOf(nameTextView.getText()));
+                    source.setType(String.valueOf(spinner.getSelectedItem().toString()));
+                    // aqui já tenho a certeza que os textviews não estão vazios
+                    source.setLatitude(String.valueOf(latitudeTextView.getText()));
+                    source.setLongitude(String.valueOf(longitudeTextView.getText()));
+                }
 
             }else {
                 Toast.makeText(getActivity(), R.string.erro_nome_vazio, Toast.LENGTH_SHORT).show();
@@ -338,6 +356,35 @@ public class CreateSourceFragment extends Fragment implements View.OnClickListen
         }
     }
 
+    private class AsyncRead extends AsyncTask<Void, Void, String[]>  {
+        // referência https://stackoverflow.com/questions/11833978/asynctask-pass-two-or-more-values-from-doinbackground-to-onpostexecute
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+
+        @Override
+        protected String[] doInBackground(Void... voids) {
+
+            return appDatabase.sourceDao().getSourcesNames();
+        }
+
+        @Override
+        protected void onPostExecute(String[] names) {
+            existingSourcesNames = names;
+
+        }
+    }
+
+    private boolean sourceAlreadyExists_onInsert(String newName){
+        return Arrays.asList(existingSourcesNames).contains(newName);
+    }
+    private boolean sourceAlreadyExists_onUpdate(String newName, String originalName){
+        Collection c = new ArrayList(Arrays.asList(existingSourcesNames));
+        c.remove(originalName);
+        return c.contains(newName);
+    }
 
     /**
      * Restoring values from saved instance state

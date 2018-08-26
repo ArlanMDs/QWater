@@ -19,6 +19,12 @@ import static br.com.ufersa.qwater.util.Flags.MAIN_ACTIVITY;
 
 //referência recyclerView https://www.youtube.com/watch?v=CTBiwKlO5IU&t=2762s
 
+/**
+ *
+ * Esta activity existe para exibir a lista de fontes quando vai salvar um relatório, pois não deu certo usar o fragmento de lista da main
+ *
+ *
+ */
 public class ListSourcesActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
@@ -35,8 +41,7 @@ public class ListSourcesActivity extends AppCompatActivity {
         //prepara o bd
         appDatabase = AppDatabase.getInstance(ListSourcesActivity.this);
 
-        AsyncRead asyncRead = new AsyncRead();
-        asyncRead.execute();
+        new AsyncRead().execute();
 
     }
 
@@ -62,6 +67,7 @@ public class ListSourcesActivity extends AppCompatActivity {
 
         }
     }
+
     private int getCodeOfIncomingIntent(){
         if(getIntent().hasExtra(CALLING_ACTIVITY)) {
             // Caso a activity que chamou seja a analize, a intent tem esse extra

@@ -16,6 +16,9 @@ public interface SourceDao {
     @Query("SELECT * FROM Source")
     List<Source> getAll();
 
+    @Query("SELECT name FROM Source")
+    String[] getSourcesNames();
+
     @Insert
     void insertAll(List<Source> sources);
 

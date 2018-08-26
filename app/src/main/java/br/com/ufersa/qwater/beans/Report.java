@@ -12,12 +12,22 @@ import android.os.Parcelable;
 
 // O parcelable é usado para passar um objeto (report) entre activities
 
-@Entity(foreignKeys = @ForeignKey(
-        entity = Source.class,
-        parentColumns = "id",
-        childColumns = "souId",
-        onDelete = ForeignKey.CASCADE,
-        onUpdate = ForeignKey.CASCADE))
+@Entity(foreignKeys = {
+        @ForeignKey(
+                entity = Source.class,
+                parentColumns = "id",
+                childColumns = "souId",
+                onDelete = ForeignKey.CASCADE,
+                onUpdate = ForeignKey.CASCADE
+        ),
+        @ForeignKey(
+                entity = Source.class,
+                parentColumns = "name",
+                childColumns = "souName",
+                onDelete = ForeignKey.CASCADE,
+                onUpdate = ForeignKey.CASCADE
+        )
+})
 public class Report implements Parcelable{
 
     @PrimaryKey(autoGenerate = true)
