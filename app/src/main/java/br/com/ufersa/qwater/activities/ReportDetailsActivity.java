@@ -46,7 +46,7 @@ public class ReportDetailsActivity extends AppCompatActivity{
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.details, menu);
+        getMenuInflater().inflate(R.menu.report_details, menu);
         return true;
     }
 
@@ -57,7 +57,7 @@ public class ReportDetailsActivity extends AppCompatActivity{
         // as you specify a parent activity in AndroidManifest.xml.
         Intent intent;
         switch(item.getItemId()){
-            case R.id.action_see:
+            case R.id.action_see_report:
 
                 intent = new Intent(ReportDetailsActivity.this, AnalyzeReportActivity.class);
                 intent.putExtra(GOING_TO, SEE_REPORT);
@@ -65,7 +65,7 @@ public class ReportDetailsActivity extends AppCompatActivity{
                 startActivity(intent);
 
                 return true;
-            case R.id.action_edit:
+            case R.id.action_edit_report:
 
                 intent = new Intent(ReportDetailsActivity.this, MainActivity.class);
                 intent.putExtra(GOING_TO, UPDATE_REPORT);
@@ -73,7 +73,7 @@ public class ReportDetailsActivity extends AppCompatActivity{
                 startActivity(intent);
 
                 return true;
-            case R.id.action_delete:
+            case R.id.action_delete_report:
 
                 new AlertDialog.Builder(this)
                         .setTitle(R.string.deletando_relatorio)
@@ -102,26 +102,31 @@ public class ReportDetailsActivity extends AppCompatActivity{
             startActivity(new Intent(ReportDetailsActivity.this, MainActivity.class));
         }
     }
+
     private void getIncomingIntent(){
         if(getIntent().hasExtra(REPORT)){
 
             report = getIntent().getParcelableExtra(REPORT);
-
-            cea.setText(String.valueOf(report.getCea()));
-            ca.setText(String.valueOf(report.getCa()));
-            mg.setText(String.valueOf(report.getMg()));
-            k.setText(String.valueOf(report.getK()));
-            na.setText(String.valueOf(report.getNa()));
-            co3.setText(String.valueOf(report.getCo3()));
-            hco3.setText(String.valueOf(report.getHco3()));
-            cl.setText(String.valueOf(report.getCl()));
-            pH.setText(String.valueOf(report.getPh()));
-            sourceName.setText(String.valueOf(report.getSouName()));
-            correctedSAR.setText(String.valueOf(report.getCorrectedSar()));
-            date.setText(formatDate(report.getDate()));
-            b.setText(String.valueOf(report.getB()));
-            so4.setText(String.valueOf(report.getSo4()));
+            updateUI();
         }
+    }
+
+    private void updateUI(){
+
+        cea.setText(String.valueOf(report.getCea()));
+        ca.setText(String.valueOf(report.getCa()));
+        mg.setText(String.valueOf(report.getMg()));
+        k.setText(String.valueOf(report.getK()));
+        na.setText(String.valueOf(report.getNa()));
+        co3.setText(String.valueOf(report.getCo3()));
+        hco3.setText(String.valueOf(report.getHco3()));
+        cl.setText(String.valueOf(report.getCl()));
+        pH.setText(String.valueOf(report.getPh()));
+        sourceName.setText(String.valueOf(report.getSouName()));
+        correctedSAR.setText(String.valueOf(report.getCorrectedSar()));
+        date.setText(formatDate(report.getDate()));
+        b.setText(String.valueOf(report.getB()));
+        so4.setText(String.valueOf(report.getSo4()));
     }
 
     private void initiate(){
@@ -140,7 +145,7 @@ public class ReportDetailsActivity extends AppCompatActivity{
         b = findViewById(R.id.B_VALUE);
         so4 = findViewById(R.id.SO4_VALUE);
 
-        Toolbar mTopToolbar = findViewById(R.id.details_toolbar);
+        Toolbar mTopToolbar = findViewById(R.id.REPORT_DETAILS_TOOLBAR);
         setSupportActionBar(mTopToolbar);
         mTopToolbar.setNavigationIcon(R.drawable.action_navigation_arrow);
         mTopToolbar.setNavigationOnClickListener(new View.OnClickListener() {

@@ -61,6 +61,10 @@ import br.com.ufersa.qwater.R;
 import br.com.ufersa.qwater.activities.MainActivity;
 import br.com.ufersa.qwater.beans.Source;
 import br.com.ufersa.qwater.database.AppDatabase;
+import br.com.ufersa.qwater.util.Flags;
+
+import static br.com.ufersa.qwater.util.Flags.GOING_TO;
+import static br.com.ufersa.qwater.util.Flags.SEE_UPDATED_SOURCE;
 
 // referências: https://www.androidhive.info/2012/07/android-gps-location-manager-tutorial/
 // https://android.jlelse.eu/room-store-your-data-c6d49b4d53a3
@@ -77,6 +81,8 @@ public class CreateSourceFragment extends Fragment implements View.OnClickListen
     private Spinner spinner;
     private AppDatabase appDatabase;
     private View view;
+    private Source source;
+    private boolean isUpdatingSource = false;
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -100,7 +106,6 @@ public class CreateSourceFragment extends Fragment implements View.OnClickListen
     // boolean flag to toggle the ui
     private Boolean mRequestingLocationUpdates;
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -116,10 +121,34 @@ public class CreateSourceFragment extends Fragment implements View.OnClickListen
         restoreValuesFromBundle(savedInstanceState);
         getActivity().setTitle(getString(R.string.adicionar_fonte));
 
-
+        // checa se o bundle vem vazio, se contem algo, é para dar update
+        // Se o fragmento está atualizando a fonte, não é necessário instanciar uma nova fonte
+        // Dessa forma, o ID e o nome da fonte não são perdidos
+        if (this.getArguments() != null) {
+            try {
+                source = this.getArguments().getParcelable(Flags.SOURCE);
+                updateUI();
+                isUpdatingSource = true;
+            }catch (Exception e) {
+                e.printStackTrace();
+                startActivity(new Intent(view.getContext(), MainActivity.class));
+            }
+        }else
+            source = new Source();
 
 
     }
+
+    private void updateUI() {
+        nameTextView.setText(source.getName());
+        //TODO selecionar o item certo do spinner
+        latitudeTextView.setText(source.getLatitude());
+        longitudeTextView.setText(source.getLongitude());
+        startUpdatesButton.setText(R.string.atualizar_localizacao);
+        layoutAddress.setVisibility(View.VISIBLE);
+
+    }
+
 
     private void initiate(){
 
@@ -174,8 +203,13 @@ public class CreateSourceFragment extends Fragment implements View.OnClickListen
                 mRequestingLocationUpdates = false;
                 stopLocationUpdates();
 
-                AsyncInsert asyncInsert = new AsyncInsert();
-                asyncInsert.execute();
+                if(isUpdatingSource) {
+                    AsyncUpdate asyncUpdate = new AsyncUpdate();
+                    asyncUpdate.execute();
+                }else{
+                    AsyncInsert asyncInsert = new AsyncInsert();
+                    asyncInsert.execute();
+                }
                 break;
 
             case R.id.BUTTON_START_LOCATION_UPDATES:
@@ -215,23 +249,28 @@ public class CreateSourceFragment extends Fragment implements View.OnClickListen
 
         private String name;
         private String type;
-        private double latitude;
-        private double longitude;
+        private String latitude;
+        private String longitude;
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
 
-            //TODO pedir número mínimo de caracteres para o nome?
-            // se não houver campo nulo, cria o objeto e adiciona-o no bd
-            if (nameTextView.getText().length() > 0 && latitudeTextView.getText().length() > 0 && longitudeTextView.getText().length() > 0) {
+            if (nameTextView.getText().length() > 0 ) {
 
                 name = String.valueOf(nameTextView.getText());
                 type = String.valueOf(spinner.getSelectedItem().toString());
-                latitude = Double.valueOf(String.valueOf(latitudeTextView.getText()));
-                longitude = Double.valueOf(String.valueOf(longitudeTextView.getText()));
+
+                if(latitudeTextView.getText().length() > 0 && longitudeTextView.getText().length() > 0) {
+                    latitude = String.valueOf(latitudeTextView.getText());
+                    longitude = String.valueOf(longitudeTextView.getText());
+                }else{
+                    latitude = getString(R.string.nao_informada);
+                    longitude = getString(R.string.nao_informada);
+                }
+
             }else {
-                Toast.makeText(getActivity(), R.string.erro_campo_vazio, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), R.string.erro_nome_vazio, Toast.LENGTH_SHORT).show();
                 this.cancel(true);
             }
         }
@@ -252,6 +291,50 @@ public class CreateSourceFragment extends Fragment implements View.OnClickListen
                     .beginTransaction()
                     .replace(R.id.content_frame, new CreateReportFragment())
                     .commit();
+        }
+    }
+
+    private class AsyncUpdate extends AsyncTask<Void, Void, Void> {
+
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            if (nameTextView.getText().length() > 0 ) {
+
+                source.setName(String.valueOf(nameTextView.getText()));
+                source.setType(String.valueOf(spinner.getSelectedItem().toString()));
+                // aqui já tenho a certeza que os textviews não estão vazios
+                source.setLatitude(String.valueOf(latitudeTextView.getText()));
+                source.setLongitude(String.valueOf(longitudeTextView.getText()));
+
+            }else {
+                Toast.makeText(getActivity(), R.string.erro_nome_vazio, Toast.LENGTH_SHORT).show();
+                this.cancel(true);
+            }
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+
+            appDatabase.sourceDao().update(source);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            // passar o relatorio para a activity de detalhes junto com uma flag apontando que vem da atualização
+            // preciso limpar o histórico para o usuário não apertar back e ver os dados desatualizados
+            Toast.makeText(view.getContext(), R.string.fonte_atualizada, Toast.LENGTH_SHORT).show();
+
+            Intent intent = new Intent(view.getContext(), MainActivity.class)
+                    .putExtra(GOING_TO, SEE_UPDATED_SOURCE)
+                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);//app deu crash, o log do erro pediu essa flag.
+
+            startActivity(intent);
         }
     }
 
@@ -313,8 +396,6 @@ public class CreateSourceFragment extends Fragment implements View.OnClickListen
         if (mCurrentLocation != null) {
             //mostra o layout do endereço
             layoutAddress.setVisibility(View.VISIBLE);
-            //permite dar ok
-            sourceOKButton.setEnabled(true);
 
             double latitude = mCurrentLocation.getLatitude();
             double longitude = mCurrentLocation.getLongitude();
@@ -375,8 +456,6 @@ public class CreateSourceFragment extends Fragment implements View.OnClickListen
 
         } else {
             startUpdatesButton.setEnabled(true);
-            sourceOKButton.setEnabled(false);
-
         }
     }
 

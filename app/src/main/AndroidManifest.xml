@@ -16,11 +16,9 @@
             android:label="@string/title_activity_main"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".activities.ReportDetailsActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.SplashActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -30,7 +28,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".activities.AnalyzeReportActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -40,7 +37,6 @@
         <activity
             android:name=".activities.ListSourcesActivity"
             android:theme="@style/AppTheme.PopupTheme" />
-
         <activity
             android:name=".info_activities.CoherenceActivity"
             android:theme="@style/AppTheme.PopupTheme" />
@@ -56,10 +52,13 @@
         <activity
             android:name=".info_activities.PhActivity"
             android:theme="@style/AppTheme.PopupTheme" />
-
         <activity
             android:name=".info_activities.AboutActivity"
-            android:theme="@style/AppTheme.PopupTheme"/>
+            android:theme="@style/AppTheme.PopupTheme" />
+        <activity
+            android:name=".activities.SourceDetailsActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
     </application>
 
 </manifest>

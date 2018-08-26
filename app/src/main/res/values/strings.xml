@@ -159,7 +159,7 @@
     <string name="nav_header_subtitle">Open beta</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_about">Sobre</string>
-    <string name="erro_campo_vazio">Erro: algum campo está vazio</string>
+    <string name="erro_nome_vazio">Insira o nome da fonte</string>
     <string name="adicionar_fonte">Adicionar fonte</string>
     <string name="erro_calculo">Não foi possível calcular</string>
 
@@ -220,13 +220,14 @@
     <string name="b_0_5"><![CDATA[B < 0.5]]></string>
     <string name="desenvolvido_por">Desenvolvido por:</string>
     <string name="professores_orientadores">Professores orientadores:</string>
-    <string name="nomes_professores">-Nildo da Silva Dias \n-Osvaldo Nogueira de Sousa Neto \n-Francisco de Assis Pereira Vasconcelos de Arruda</string>
+    <string name="nomes_professores">-Francisco de Assis Pereira Vasconcelos de Arruda \n-Nildo da Silva Dias \n-Osvaldo Nogueira de Sousa Neto</string>
     <string name="arlan_graduando">Arlan de Medeiros, graduando em Sistemas de Informação - UFERSA - Angicos</string>
     <string name="fonte">Fonte</string>
     <string name="erro_atualizar_relatorio">Erro ao tentar atualizar o relatório, tente novamente.</string>
     <string name="edit_location">editar localização</string>
     <string name="edit_date">editar data</string>
     <string name="relatorio_atualizado">Relatório atualizado com sucesso!</string>
+    <string name="fonte_atualizada">Fonte atualizada com sucesso!</string>
     <string name="avaliar_antes_de_atualizar">Avaliar antes de atualizar</string>
     <string name="update_realizado">Relatório atualizado com sucesso!</string>
     <string name="localizacao_atualizada">Localização modificada! Aperte o botão salvar para atualizar o relatório.</string>
@@ -236,6 +237,9 @@
     <string name="detalhes_relatorio">Detalhes do relatório</string>
     <string name="relatorio_deletado">Relatório deletado com sucesso!</string>
     <string name="deletando_relatorio">Deletando um relatório</string>
+    <string name="certeza_deletar_fonte">Tem certeza que deseja deletar essa fonte? Todos os relatórios sobre essa fonte serão apagados.</string>
+    <string name="fonte_deletada">Fonte deletada com sucesso!</string>
+    <string name="deletando_fonte">Deletando uma fonte</string>
     <string name="certeza_deletar_relatorio">Tem certeza que deseja deletar esse relatório?</string>
     <string name="sim">sim</string>
     <string name="nao">não</string>
@@ -245,5 +249,22 @@
     <string name="escolher_a_fonte">Toque para escolher a fonte...</string>
     <string name="salvar">salvar</string>
     <string name="selecione_a_data_e_fonte">Selecione a data e a fonte.</string>
+    <string name="tipo">Tipo</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitude">Longitude</string>
+    <string name="adicionar_local_da_fonte">Adicionar local da fonte de água</string>
+    <string name="tipo_da_fonte">Tipo da fonte</string>
+    <string name="nome_da_fonte">Nome da fonte</string>
+    <string name="toque_para_escrever">Toque para escrever</string>
+    <string name="longitude_da_fonte">Longitude da fonte</string>
+    <string name="latitude_da_fonte">Latitude da fonte</string>
+    <string name="endereco_aproximado">Endereço aproximado</string>
+    <string name="confirmar">Confirmar</string>
+    <string name="detalhes_fonte">Detalhes da fonte</string>
+    <string name="editar_fonte">Editar Fonte</string>
+    <string name="remover_fonte">Remover fonte</string>
+    <string name="erro_deletar_fonte">Erro ao deletar fonte.</string>
+    <string name="nao_informada">não informada</string>
+    <string name="atualizar_localizacao">Atualizar localização</string>
 
 </resources>

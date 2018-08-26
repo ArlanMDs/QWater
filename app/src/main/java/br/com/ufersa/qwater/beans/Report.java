@@ -10,13 +10,15 @@ import android.os.Parcelable;
 // https://www.bignerdranch.com/blog/room-data-storage-for-everyone/
 // https://medium.com/@tonyowen/room-entity-annotations-379150e1ca82
 
-// O parcelable é usado para passar um objeto (report) da activity que faz a listagem via RecyclerView para a activity de detalhes
+// O parcelable é usado para passar um objeto (report) entre activities
 
 @Entity(foreignKeys = @ForeignKey(
         entity = Source.class,
         parentColumns = "id",
-        childColumns = "souId"))
-public class Report implements Parcelable{//TODO resolver o que fazer quando deletar um parent
+        childColumns = "souId",
+        onDelete = ForeignKey.CASCADE,
+        onUpdate = ForeignKey.CASCADE))
+public class Report implements Parcelable{
 
     @PrimaryKey(autoGenerate = true)
     private int id;

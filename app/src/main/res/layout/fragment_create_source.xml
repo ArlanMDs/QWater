@@ -20,7 +20,7 @@
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="Adicionar local da fonte de água"
+            android:text="@string/adicionar_local_da_fonte"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -31,11 +31,11 @@
         <TextView
             android:id="@+id/textView20"
             android:layout_width="wrap_content"
-            android:layout_height="16dp"
+            android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="Tipo da fonte:"
+            android:text="@string/tipo_da_fonte"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView23" />
 
@@ -45,21 +45,21 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:layout_marginStart="8dp"
-            android:text="Nome da fonte:"
+            android:text="@string/nome_da_fonte"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView22" />
 
         <EditText
             android:id="@+id/EDIT_SOURCE_NAME"
             android:layout_width="wrap_content"
-            android:layout_height="15dp"
-            android:layout_marginLeft="4dp"
-            android:layout_marginStart="4dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
             android:background="@null"
             android:gravity="center"
-            android:hint="Toque para escrever"
+            android:hint="@string/toque_para_escrever"
             android:padding="0dp"
-            android:textSize="12sp"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@+id/textView23"
             app:layout_constraintStart_toEndOf="@+id/textView23" />
 
@@ -86,6 +86,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:animateLayoutChanges="true"
+            android:background="@drawable/customborder"
+            android:padding="8dp"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -95,21 +97,18 @@
                 android:id="@+id/textView19"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
                 android:layout_weight="1"
-                android:text="Latitude:"
+                android:text="@string/latitude"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/EDIT_SOURCE_LONGITUDE"
                 android:layout_width="wrap_content"
-                android:layout_height="16dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:layout_marginStart="8dp"
-                android:hint="Longitude da fonte"
+                android:hint="@string/longitude_da_fonte"
                 app:layout_constraintStart_toEndOf="@+id/textView18"
                 app:layout_constraintTop_toTopOf="@+id/textView18" />
 
@@ -119,7 +118,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:layout_marginStart="8dp"
-                android:hint="Latitude da fonte"
+                android:hint="@string/latitude_da_fonte"
                 app:layout_constraintStart_toEndOf="@+id/textView19"
                 app:layout_constraintTop_toTopOf="@+id/textView19" />
 
@@ -129,7 +128,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_weight="1"
-                android:text="Longitude:"
+                android:text="@string/longitude"
                 app:layout_constraintStart_toStartOf="@+id/textView19"
                 app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
@@ -138,7 +137,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Endereço aproximado"
+                android:text="@string/endereco_aproximado"
                 app:layout_constraintStart_toStartOf="@+id/textView18"
                 app:layout_constraintTop_toBottomOf="@+id/textView18" />
         </android.support.constraint.ConstraintLayout>
@@ -148,8 +147,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="@string/obter_localizacao"
@@ -165,7 +162,7 @@
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="Confirmar"
+            android:text="@string/confirmar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"

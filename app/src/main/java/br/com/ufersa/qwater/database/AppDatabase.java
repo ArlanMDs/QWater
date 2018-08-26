@@ -8,7 +8,7 @@ import android.content.Context;
 import br.com.ufersa.qwater.beans.Report;
 import br.com.ufersa.qwater.beans.Source;
 
-@Database(entities = {Report.class, Source.class}, version = 2)
+@Database(entities = {Report.class, Source.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static final String DB_NAME = "appDatabase.db";

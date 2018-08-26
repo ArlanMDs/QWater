@@ -12,7 +12,7 @@
         android:orientation="vertical">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/details_toolbar"
+            android:id="@+id/REPORT_DETAILS_TOOLBAR"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="?attr/colorPrimary"
@@ -144,7 +144,7 @@
             android:paddingBottom="16dp"
             app:layout_constraintEnd_toEndOf="@+id/constraintLayout2"
             app:layout_constraintStart_toStartOf="@+id/constraintLayout2"
-            app:layout_constraintTop_toBottomOf="@+id/details_toolbar">
+            app:layout_constraintTop_toBottomOf="@+id/REPORT_DETAILS_TOOLBAR">
 
             <TextView
                 android:id="@+id/textView14"

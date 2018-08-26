@@ -14,10 +14,15 @@ import android.widget.TextView;
 import java.util.List;
 
 import br.com.ufersa.qwater.R;
+import br.com.ufersa.qwater.activities.SourceDetailsActivity;
 import br.com.ufersa.qwater.beans.Source;
 
 import static android.app.Activity.RESULT_OK;
 import static br.com.ufersa.qwater.util.Flags.MAIN_ACTIVITY;
+import static br.com.ufersa.qwater.util.Flags.SAVE_REPORT_ACTIVITY;
+import static br.com.ufersa.qwater.util.Flags.SOURCE;
+import static br.com.ufersa.qwater.util.Flags.SOURCE_ID;
+import static br.com.ufersa.qwater.util.Flags.SOURCE_NAME;
 
 public class SourceAdapter extends RecyclerView.Adapter<SourceAdapter.ViewHolder> {
 
@@ -47,20 +52,30 @@ public class SourceAdapter extends RecyclerView.Adapter<SourceAdapter.ViewHolder
     public void onBindViewHolder(@NonNull SourceAdapter.ViewHolder holder, final int position) {
         holder.sourceName.setText(sources.get(position).getName());
 
-        if (callingActivity != MAIN_ACTIVITY){//se não é a main, é a save report! então é necessário ativar o listener que retorna o nome e id
+        if (callingActivity == SAVE_REPORT_ACTIVITY){//se não é a main, é a save report! então é necessário ativar o listener que retorna o nome e id
             holder.parentLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent();
-                    intent.putExtra("sourceID", sources.get(position).getId());
-                    intent.putExtra("sourceName", sources.get(position).getName());
+                    intent.putExtra(SOURCE_ID, sources.get(position).getId());
+                    intent.putExtra(SOURCE_NAME, sources.get(position).getName());
                     ((Activity) context).setResult(RESULT_OK, intent);
                     ((Activity) context).finish();
 
                 }
             });
+        }else if( callingActivity == MAIN_ACTIVITY){
+            holder.parentLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+            Intent intent = new Intent(context, SourceDetailsActivity.class)
+                    .putExtra(SOURCE, sources.get(position))
+                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+            context.startActivity(intent);
+                }
+            });
         }
-        //TODO listener pra quando vier do main
     }
 
     @Override

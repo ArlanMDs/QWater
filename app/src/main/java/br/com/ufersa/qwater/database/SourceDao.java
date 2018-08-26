@@ -20,12 +20,12 @@ public interface SourceDao {
     void insertAll(List<Source> sources);
 
     @Insert
-    void insert(Source watersource);
+    void insert(Source source);
 
     @Update
-    void update(Source watersource);
+    void update(Source source);
 
     @Delete
-    void delete(Source watersource);
+    void delete(Source source);
 
 }
