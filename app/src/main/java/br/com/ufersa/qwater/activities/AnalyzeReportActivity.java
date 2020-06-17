@@ -39,7 +39,7 @@ public class AnalyzeReportActivity extends AppCompatActivity implements View.OnC
 
     private TextView salinityTextview, SARClassificationTextview, clClassificationTextview, bClassificationTextview, phClassificationTextview, coherenceClassificationTextview, correctedSARTextview;
     private TextView na1ClassificationTextview, na2ClassificationTextview;// o 1 se refere à irrigação por superfície, o 2 à irrigação por aspersão
-    private ImageView coherenceStatus, salynityStatus, sarStatus, toxityStatus, phStatus;
+    private ImageView coherenceStatus, salinityStatus, sarStatus, toxityStatus, phStatus;
     private Report report;
     private AppDatabase appDatabase;
     private int currentToxityValue = 0;
@@ -249,21 +249,29 @@ public class AnalyzeReportActivity extends AppCompatActivity implements View.OnC
 
     private String getSalinityClassificationID(double CEa) {
 
-        if(CEa < 0.75) {
-            updateStatus(salynityStatus, OK);
+        if(CEa < 0.25) {
+            updateStatus(salinityStatus, OK);
             return "C1";
         }
-        else if(CEa >= 0.75 && CEa < 1.50) {
-            updateStatus(salynityStatus, CAUTION);
+        else if(CEa >= 0.25 && CEa < 0.75) {
+            updateStatus(salinityStatus, CAUTION);
             return "C2";
         }
-        else if(CEa >=1.50 && CEa <= 3.0) {
-            updateStatus(salynityStatus, ALERT);
+        else if(CEa >= 0.75 && CEa < 2.25) {
+            updateStatus(salinityStatus, ALERT);
             return "C3";
         }
-        else {
-            updateStatus(salynityStatus, DANGER);
+        else if(CEa >= 2.25 && CEa < 4.0){
+            updateStatus(salinityStatus, ALERT);
             return "C4";
+        }
+        else if(CEa >= 4.0 && CEa < 6.0){
+            updateStatus(salinityStatus, DANGER);
+            return "C5";
+        }
+        else {
+            updateStatus(salinityStatus, DANGER);
+            return "C6";
         }
     }
 
@@ -463,7 +471,7 @@ public class AnalyzeReportActivity extends AppCompatActivity implements View.OnC
         correctedSARTextview = findViewById(R.id.CORRECTED_SAR_TEXTVIEW);
         // status
         coherenceStatus = findViewById(R.id.COHERENCE_STATUS);
-        salynityStatus = findViewById(R.id.SALINITY_STATUS);
+        salinityStatus = findViewById(R.id.SALINITY_STATUS);
         sarStatus = findViewById(R.id.SAR_STATUS);
         toxityStatus = findViewById(R.id.TOXITY_STATUS);
         phStatus = findViewById(R.id.PH_STATUS);

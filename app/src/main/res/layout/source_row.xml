@@ -16,7 +16,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:padding="1dp"
-        android:text="Nome da Fonte"
+        android:text="@string/nome_da_fonte"
         app:layout_constraintStart_toEndOf="@+id/IMAGEVIEW_WATERSOURCE_ICON"
         app:layout_constraintTop_toTopOf="parent" />
 

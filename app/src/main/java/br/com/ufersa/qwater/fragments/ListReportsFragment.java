@@ -34,7 +34,7 @@ public class ListReportsFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //you can set the title for your toolbar here for different fragments different titles
-        getActivity().setTitle("Lista de relatórios");
+        getActivity().setTitle(getString(R.string.reports_list));
         this.view = view;
 
         initiate();

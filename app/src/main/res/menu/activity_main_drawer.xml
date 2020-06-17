@@ -4,7 +4,7 @@
     tools:showIn="navigation_view">
 
 
-    <item android:title="Análise de água">
+    <item android:title="@string/water_analysis">
         <menu>
             <group android:checkableBehavior="single">
                 <item

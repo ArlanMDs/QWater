@@ -1,270 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">QWater</string>
-    <string name="novo_relatorio">Analisar Relatório</string>
-    <string name="listar_relatorios">Listar Relatórios</string>
-    <string name="listar_fontes">Listar Fontes</string>
-    <string name="registrar_fonte">Registrar Fonte</string>
+<string name="app_name">QWater</string>
+<string name="novo_relatorio">Report</string>
+<string name="listar_relatorios">List Reports</string>
+<string name="listar_fontes">List Sources</string>
+<string name="registrar_fonte">Register Source</string>
 
-    <string name="classificacao_cea">Classificação da CE<small>a</small></string>
-    <string name="classificacao_ras_corrigida">Classificação do RAS corrigida</string>
-    <string name="classe_salinidade">Classe de Salinidade: </string>
-    <string name="analise_do_relatorio">Análise do relatório</string>
-    <string name="mostrar_grafico">mostrar gráfico</string>
+<string name="classificacao_cea">EC Classification</string>
+<string name="classificacao_ras_corrigida">Corrected SAR classification</string>
+<string name="classe_salinidade">Salinity Class: </string>
+<string name="analise_do_relatorio">Quality parameters</string>
+<string name="mostrar_grafico">show graph</string>
 
-    <string name="cea" translatable="false">CE<small>a</small>:</string>
-
-
-    <!-- inicio fragment_create_report -->
-    <string name="analisar_relatorio">Analisar relatório</string>
-    <string name="erro_verifique_dados">Algum erro nos dados de entrada. Dica: use ponto ao invés de vírgula.</string>
-    <string name="cations">Cátions (mmol<small>c</small> L<sup><small>-1</small></sup>)</string>
-    <string name="anions">Ânions (mmol<small>c</small> L<sup><small>-1</small></sup>)</string>
-
-    <string name="mg" translatable="false">Mg<sup><small>2+</small></sup></string>
-    <string name="ca" translatable="false">Ca<sup><small>2+</small></sup></string>
-    <string name="k" translatable="false">K<sup><small>+</small></sup></string>
-    <string name="na" translatable="false">Na<sup><small>+</small></sup></string>
-    <string name="sodio">Sódio - Na<sup><small>+</small></sup></string>
-
-    <string name="cl" translatable="false">Cl<sup><small>-</small></sup></string>
-    <string name="cloreto">Cloreto - Cl<sup><small>-</small></sup></string>
-    <string name="co3" translatable="false">CO<sub><small>3</small></sub><sup><small>2-</small></sup></string>
-    <string name="hco3" translatable="false">HCO<sub><small>3</small></sub><sup><small>-</small></sup></string>
-    <string name="so4" translatable="false">SO<sub><small>4</small></sub><sup><small>2-</small></sup></string>
-
-    <string name="cea_unit" translatable="false">Unidade da CE<small>a</small></string>
-    <string name="cea_hint" translatable="false">CE<small>a</small></string>
-    <string name="cea_unidade" translatable="false">Unidade da CE<small>a</small>: dS m<sup><small>-1</small></sup></string>
-    <string name="boro" translatable="false">B<sub><small>(ppm)</small></sub></string>
-    <string name="avaliar_qualidade">Avaliar a qualidade</string>
-
-    <!-- a ordem dos itens afeta o método formatUnits, em SARCalculator -->
-    <string-array name="molecules" translatable="false">
-        <item>mmol<small>c</small> L<sup><small>-1</small></sup></item>
-        <item>mg L<sup><small>-1</small></sup></item>
-        <item>mEq L<sup><small>-1</small></sup></item>
-    </string-array>
-
-    <!-- a ordem dos itens afeta o método formatUnits, em SARCalculator -->
-    <string-array name="condutividade" translatable="false">
-        <item>dS m<sup><small>-1</small></sup></item>
-        <item>mS cm<sup><small>-1</small></sup></item>
-        <item>μS cm<sup><small>-1</small></sup></item>
-    </string-array>
-
-    <!-- fim fragment_create_report -->
-
-    <!-- inicio activity_analyze_water_report -->
-
-    <string name="coerencia">Coerência dos resultados</string>
-    <string name="ras">RAS</string>
-    <string name="ras_corrigida">RAS corrigida</string>
-    <string name="ras_unidade">Unidade da RAS*: mmol<small>c</small> L<sup><small>-1</small></sup></string>
-    <string name="ras_asterisco">RAS* :</string>
-    <string name="ras_asterisco_sem_pontos">RAS*</string>
-    <string name="condutividade_eletrica">Condutividade Elétrica</string>
-    <string name="classificacao">Classificação</string>
-    <string name="riscos_salinidade">Riscos de salinidade</string>
-    <string name="problemas_infiltracao">Problemas de Infiltração</string>
-    <string name="riscos_toxidez">Riscos de toxidez</string>
-    <string name="riscos_toxidez_titulo">Riscos de toxidez: Impacto do contato com raiz e folha</string>
-    <string name="problemas_ph">Problemas com pH</string>
-    <string name="save">Armazenar</string>
-    <string name="relatorio_salvo">Relatório armazenado com sucesso.</string>
-
-    <!-- Salinidade -->
-    <string name="C1">Classificação C1: Baixa. \n\n\tNenhum efeito prejudicial nas plantas ou no acúmulo em solos.</string>
-    <string name="C2">Classificação C2: Média. \n\n\tEstresse para plantas sensíveis. A lixiviação moderada impede o acúmulo de sais.</string>
-    <string name="C3">Classificação C3: Alta. \n\n\tRequer plantas tolerantes aos sais. Irrigação cuidadosa, boa drenagem e lixiviação.</string>
-    <string name="C4">Classificação C3: Muito alta. \n\n\tRequer manejo intensivo, excelente drenagem e lixiviação frequente.</string>
-    <!-- RAS -->
-    <string name="S1">Classificação S1: Baixa. \n\n\tPode ser usada para qualquer condição de solo sem causar deterioração da estrutura.</string>
-    <string name="S2">Classificação S2: Média. \n\n\tBoa em todos os solos de textura grossa.</string>
-    <string name="S3">Classificação S3: Alta. \n\n\tO acúmulo de sódio exigirá um manejo intensivo: Melhoradoes químicos e lixiviação.</string>
-    <string name="S4">Classificação S4: Muito alta. \n\n\tGeralmente não é adequada para irrigação, exceto em níveis muito baixo de sódio no solo com manejo intensivo.</string>
-    <!-- cloro -->
-    <string name="CL1"><b>Cloreto:</b> Risco baixo. Geralmente seguro para todas as plantas.</string>
-    <string name="CL2"><b>Cloreto:</b> Risco médio. Plantas sensíveis geralmente apresentam injúrias leves a moderadas.</string>
-    <string name="CL3"><b>Cloreto:</b> Risco alto. Plantas moderadamente tolerantes apresentam injúrias leves à substanciais.</string>
-    <string name="CL4"><b>Cloreto:</b> Risco muito alto. Problemas severos</string>
-
-    <string name="CL1_info">Risco baixo. Geralmente seguro para todas as plantas.</string>
-    <string name="CL2_info">Risco médio. Plantas sensíveis geralmente apresentam injúrias leves a moderadas.</string>
-    <string name="CL3_info">Risco alto. Plantas moderadamente tolerantes apresentam injúrias leves à substanciais.</string>
-    <string name="CL4_info">Risco muito alto. Problemas severos</string>
-    <!-- boro -->
-    <string name="B1"><b>Boro:</b> Risco baixo. Satisfatório para todas as culturas.</string>
-    <string name="B2"><b>Boro:</b> Risco médio. Satisfatório para a maioria das culturas. Culturas sensíveis podem apresentar danos.</string>
-    <string name="B3"><b>Boro:</b> Risco alto. Satisfatório para culturas semi-tolerantes. Em culturas sensíveis há redução do vigor e do crescimento.</string>
-    <string name="B4"><b>Boro:</b> Risco muito alto. Adequado apenas para plantas tolerantes.</string>
-
-    <string name="B1_info">Risco baixo. Satisfatório para todas as culturas.</string>
-    <string name="B2_info">Risco médio. Satisfatório para a maioria das culturas. Culturas sensíveis podem apresentar danos.</string>
-    <string name="B3_info">Risco alto. Satisfatório para culturas semi-tolerantes. Em culturas sensíveis há redução do vigor e do crescimento.</string>
-    <string name="B4_info">Risco muito alto. Adequado apenas para plantas tolerantes.</string>
-    <!-- PH -->
-    <string name="PH1">Nenhuma restrição de uso.</string>
-    <string name="PH2">Restrição leve à moderada.</string>
-    <string name="PH3">Restrição severa.</string>
-    <!-- Sódio
-            SS = Irrigação por superfície
-            SA = Irrigação por aspersão
-        -->
-    <string name="SS1"><b>Sódio, irrigação por superfície:</b> Nenhum risco.</string>
-    <string name="SS2"><b>Sódio, irrigação por superfície:</b> Risco moderado.</string>
-    <string name="SS3"><b>Sódio, irrigação por superfície:</b> Risco severo.</string>
-    <string name="SA1"><b>Sódio, irrigação por aspersão:</b> Nenhum risco.</string>
-    <string name="SA2"><b>Sódio, irrigação por aspersão:</b> Risco moderado.</string>
-
-    <string name="SS1_info">Nenhum risco.</string>
-    <string name="SS2_info">Risco moderado.</string>
-    <string name="SS3_info">Risco severo.</string>
-    <string name="SA1_info">Nenhum risco.</string>
-    <string name="SA2_info">Risco moderado.</string>
-
-    <!-- Coerência -->
-    <string name="CO1">Resultado excelente.</string>
-    <string name="CO2">Resultado aceitável.</string>
-    <string name="CO3">Resultado duvidoso. É indicado rever os dados do relatório.</string>
-
-    <string name="coerencia_nao_informado">Não é possível calcular a coerência dos dados, pois nem todos os cátions e ânions foram informados.</string>
-    <string name="ph_nao_informado">Não foi possível estimar os problemas com pH. Valor não informado.</string>
-    <string name="na1_nao_informado"><b>Sódio, irrigação por superfície:</b> Não foi possível estimar. Verifique os dados de entrada.</string>
-    <string name="na2_nao_informado"><b>Sódio, irrigação por aspersão:</b> Não foi possível estimar. Verifique os dados de entrada.</string>
-    <string name="cea_nao_informado">Condutividade Elétrica não informada.</string>
-    <string name="ras_nao_informado">Não foi possível estimar os problemas de infiltração. Verifique os dados de entrada.</string>
-    <string name="ras_nao_calculado">Não foi possível calcular a RAS*. Verifique os dados de entrada.</string>
-    <string name="boro_nao_informado"><b>Boro: </b>Valor não informado.</string>
-    <string name="cl_nao_informado"><b>Cloreto: </b>Valor não informado.</string>
-    <string name="na_nao_informado"><b>Sódio: </b>Valor não informado.</string>
-
-    <string name="erro_salvar">Erro ao armazenar o relatório.</string>
-    <string name="classification_error">Erro na classificação</string>
-
-    <!-- fim activity_analyze_water_report -->
-
-    <string name="valor_incorreto">Algum valor digitado está com formato incorreto</string>
-
-    <string name="obter_localizacao">Obter Localização</string>
-
-    <string name="escolher_a_data">Toque para escolher a data…</string>
-    <string name="informacao_da_data">Selecione a data da análise</string>
-    <string name="informacao_da_fonte">Selecione a fonte da análise</string>
-    <string name="escolher_fonte">Escolha a fonte da amostra</string>
-
-    <string name="title_activity_main">Início</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">QWater</string>
-    <string name="nav_header_subtitle">Open beta</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_about">Sobre</string>
-    <string name="erro_nome_vazio">Insira o nome da fonte</string>
-    <string name="adicionar_fonte">Adicionar fonte</string>
-    <string name="erro_calculo">Não foi possível calcular</string>
+<string name="cea">EC<small>w</small>:</string>
 
 
-    <string-array name="fontes" translatable="true">
-        <item>Açude</item>
-        <item>Poço</item>
-        <item>Barragem</item>
-        <item>Rio</item>
-        <item>Lagoa</item>
-    </string-array>
+<!-- inicio fragment_create_report -->
+<string name="analisar_relatorio">Analyze report</string>
+<string name="erro_verifique_dados">Input data error. Tip: use a period instead of a comma.</string>
+<string name="cations">Cations (mmol<small>c</small> L<sup><small>-1</small></sup>)</string>
+<string name="anions">Anions (mmol<small>c</small> L<sup><small>-1</small></sup>)</string>
+
+<string name="mg" translatable="false">Mg<sup><small>2+</small></sup></string>
+<string name="ca" translatable="false">Ca<sup><small>2+</small></sup></string>
+<string name="k" translatable="false">K<sup><small>+</small></sup></string>
+<string name="na" translatable="false">Na<sup><small>+</small></sup></string>
+<string name="sodio">Sodium - Na<sup><small>+</small></sup></string>
+
+<string name="cl" translatable="false">Cl<sup><small>-</small></sup></string>
+<string name="cloreto">Cloreto - Cl<sup><small>-</small></sup></string>
+<string name="co3" translatable="false">CO<sub><small>3</small></sub><sup><small>2-</small></sup></string>
+<string name="hco3" translatable="false">HCO<sub><small>3</small></sub><sup><small>-</small></sup></string>
+<string name="so4" translatable="false">SO<sub><small>4</small></sub><sup><small>2-</small></sup></string>
+
+<string name="cea_unit">EC<small>w</small> unit</string>
+<string name="cea_hint">EC<small>w</small></string>
+<string name="cea_unidade">EC<small>w</small> unit: dS m<sup><small>-1</small></sup></string>
+<string name="boro" translatable="false">B<sub><small>(ppm)</small></sub></string>
+<string name="avaliar_qualidade">Assess the quality</string>
+
+<!-- a ordem dos itens afeta o método formatUnits, em SARCalculator -->
+<string-array name="molecules" translatable="false">
+    <item>mmol<small>c</small> L<sup><small>-1</small></sup></item>
+    <item>mg L<sup><small>-1</small></sup></item>
+    <item>mEq L<sup><small>-1</small></sup></item>
+</string-array>
+
+<!-- a ordem dos itens afeta o método formatUnits, em SARCalculator -->
+<string-array name="condutividade" translatable="false">
+    <item>dS m<sup><small>-1</small></sup></item>
+    <item>mS cm<sup><small>-1</small></sup></item>
+    <item>μS cm<sup><small>-1</small></sup></item>
+</string-array>
+
+<!-- fim fragment_create_report -->
+
+<!-- inicio activity_analyze_water_report -->
+
+<string name="coerencia">Results coherence</string>
+<string name="ras">SAR</string>
+<string name="ras_corrigida">Corrected SAR</string>
+<string name="ras_unidade">SAR* unity: mmol<small>c</small> L<sup><small>-1</small></sup></string>
+<string name="ras_asterisco">SAR* :</string>
+<string name="ras_asterisco_sem_pontos">SAR*</string>
+<string name="condutividade_eletrica">Electric conductivity</string>
+<string name="classificacao">Classification</string>
+<string name="riscos_salinidade">Salinity risks</string>
+<string name="problemas_infiltracao">Infiltration Problems</string>
+<string name="riscos_toxidez">Toxicity risks</string>
+<string name="riscos_toxidez_titulo">Toxicity risks: Impact of contact with root and leaf</string>
+<string name="problemas_ph">pH problems</string>
+<string name="save">Save</string>
+<string name="relatorio_salvo">Report successfully stored.</string>
+
+<!-- Salinidade -->
+<string name="C1">C1 Classification: Low. \n\n\tCan be safely for most crops on most soils. No detrimental effects will usually be noticed.</string>
+<string name="C2">C2 Classification: Moderate. \n\n\tCan be used for all but extremely salt sensitive.</string>
+<string name="C3">C3 Classification: Medium. \n\n\tCan be used on soils of moderate to good permeability. Regular leaching may be needed. Crops with moderate to good salt tolerance should be grown.</string>
+<string name="C4">C4 Classification: High. \n\n\tCan be used only in soils of good permeability. Special leaching is needed. Salt tolerant crops are suitable.</string>
+<string name="C5">C5 Classification: Very high. \n\n\tUndesirable for irrigation and should be used only in highly permeable soils with frequent leaching and with plants of high salt tolerance. Soil should be tested for salinity increases yearly.</string>
+<string name="C6">C6 Classification: Excessive. \n\n\tUnsuitable for irrigation but cultivation of halophyte species</string>
+<!-- RAS -->
+<string name="S1">S1 Classification: Low. \n\n\tCan be used on all soil with little danger of accumulation of exchangeable sodium.</string>
+<string name="S2">S2 Classification: Medium. \n\n\tCan be used in all soil with good permeability; appreciable sodium hazards in soils of high clay and low organic matter.</string>
+<string name="S3">S3 Classification: High. \n\n\tTends to cause harmful sodium accumulation in most soil: needs good drainage, high leaching and organic matter addition.</string>
+<string name="S4">S4 Classification: Very high. \n\n\tGenerally unsatisfactory for irrigation.</string>
+<!-- cloro -->
+<string name="CL1"><b>Cloreto:</b> Low risk. Generally safe for all plants.</string>
+<string name="CL2"><b>Cloreto:</b> Medium risk. Sensitive plants usually show slight to moderate injury.</string>
+<string name="CL3"><b>Cloreto:</b> High risk. Moderately tolerant plants usually show slight to substantial injury.</string>
+<string name="CL4"><b>Cloreto:</b> Very high risk. Severe problems</string>
+
+<string name="CL1_info">Low risk. Generally safe for all plants.</string>
+<string name="CL2_info">Medium risk. Sensitive plants usually show slight to moderate injury.</string>
+<string name="CL3_info">High risk. Moderately tolerant plants usually show slight to substantial injury.</string>
+<string name="CL4_info">Very high risk. Severe problems</string>
+<!-- boro -->
+<string name="B1"><b>Boron:</b> Low risk. Satisfactory for all crops.</string>
+<string name="B2"><b>Boron:</b> Medium risk. Satisfactory for most crops; sensitive crops may show injury.</string>
+<string name="B3"><b>Boron:</b> High risk. Satisfactory for semi-tolerant crops; sensitive crops are usually reduced in plant vigour.</string>
+<string name="B4"><b>Boron:</b> Very high risk. Suitable only for tolerant plants.</string>
+
+<string name="B1_info">Low risk. Satisfactory for all crops.</string>
+<string name="B2_info">Medium risk. Satisfactory for most crops; sensitive crops may show injury.</string>
+<string name="B3_info">High risk. Satisfactory for semi-tolerant crops; sensitive crops are usually reduced in plant vigour.</string>
+<string name="B4_info">Very high risk. Suitable only for tolerant plants.</string>
+<!-- PH -->
+<string name="PH1">No use restriction.</string>
+<string name="PH2">Mild to moderate restriction.</string>
+<string name="PH3">Severe restriction.</string>
+<!-- Sódio
+        SS = Irrigação por superfície
+        SA = Irrigação por aspersão
+    -->
+<string name="SS1"><b>Sodium, surface irrigation:</b> No risk.</string>
+<string name="SS2"><b>Sodium, surface irrigation:</b> Moderate risk.</string>
+<string name="SS3"><b>Sodium, surface irrigation:</b> Severe risk.</string>
+<string name="SA1"><b>Sodium, sprinkler irrigation:</b> No risk.</string>
+<string name="SA2"><b>Sodium, sprinkler irrigation:</b> Moderate risk.</string>
+
+<string name="SS1_info">No risk.</string>
+<string name="SS2_info">Moderate risk.</string>
+<string name="SS3_info">Severe risk.</string>
+<string name="SA1_info">No risk.</string>
+<string name="SA2_info">Moderate risk.</string>
+
+<!-- Coerência -->
+<string name="CO1">Excellent result.</string>
+<string name="CO2">Acceptable result.</string>
+<string name="CO3">Uncertain outcome. It is recommended to review the report data.</string>
+
+<string name="coerencia_nao_informado">It is not possible to calculate the coherence of the data, as not all cations and anions have been informed.</string>
+<string name="ph_nao_informado">It was not possible to estimate the pH problems. Value not informed.</string>
+<string name="na1_nao_informado"><b>Sodium, surface irrigation:</b> It was not possible to estimate. Check the input data.</string>
+<string name="na2_nao_informado"><b>Sodium, sprinkler irrigation:</b> It was not possible to estimate. Check the input data.</string>
+<string name="cea_nao_informado">Electrical Conductivity value not inserted.</string>
+<string name="ras_nao_informado">It was not possible to estimate the infiltration problems. Check the input data.</string>
+<string name="ras_nao_calculado">It was not possible to calculate SAR*. Check the input data.</string>
+<string name="boro_nao_informado"><b>Boron: </b>Value not informed.</string>
+<string name="cl_nao_informado"><b>Chloride: </b>Value not informed.</string>
+<string name="na_nao_informado"><b>Sodium: </b>Value not informed.</string>
+
+<string name="erro_salvar">Error storing the report.</string>
+<string name="classification_error">Rating error.</string>
+
+<!-- fim activity_analyze_water_report -->
+
+<string name="valor_incorreto">Some value entered is incorrectly formatted</string>
+
+<string name="obter_localizacao">Get Location</string>
+
+<string name="escolher_a_data">Tap to choose the date…</string>
+<string name="informacao_da_data">Select the analysis date</string>
+<string name="informacao_da_fonte">Select the analysis source</string>
+<string name="escolher_fonte">Choose the sample source</string>
+
+<string name="title_activity_main">Home</string>
+<string name="navigation_drawer_open">Open navigation drawer</string>
+<string name="navigation_drawer_close">Close navigation drawer</string>
+<string name="nav_header_title">QWater</string>
+<string name="nav_header_subtitle">Open beta</string>
+<string name="nav_header_desc">Navigation header</string>
+<string name="action_about">About</string>
+<string name="erro_nome_vazio">Type the source name</string>
+<string name="adicionar_fonte">Add source</string>
+<string name="erro_calculo">Could not calculate</string>
 
 
-    <string name="home_title">Início</string>
-    <string name="local_adicionado">Local Adicionado</string>
-    <string name="coerencia_titulo">Coerência dos resultados de análise química de água</string>
-    <string name="concentracao_cation_anions">Concentração de Cátions e  Ânions</string>
-    <string name="r_formula_top"> | Σ Cátions - Σ Ânions |</string>
-    <string name="r_formula_bot"> | Σ Cátions + Σ  Ânions |</string>
-    <string name="resultado_excelente">Resultado excelente</string>
-    <string name="resultado_aceitavel">Resultado aceitável</string>
-    <string name="resultado_duvidoso">Resultado duvidoso</string>
-    <string name="r_5"><![CDATA[R < 5%]]></string>
-    <string name="_5_r_10"><![CDATA[5% <= R <= 10%]]></string>
-    <string name="r_10"><![CDATA[R > 10%]]></string>
-    <string name="r_igual">R =</string>
-    <string name="x_100">x 100</string>
-    <string name="problemas_com_ph">Problemas com pH</string>
-    <string name="ph_7_0"><![CDATA[pH < 7.0]]></string>
-    <string name="_7_0_ph_8_0"><![CDATA[7.0 <= pH <= 8.0]]></string>
-    <string name="ph_8_0"><![CDATA[pH > 8.0]]></string>
-    <string name="salinidade_titulo">Diretrizes para interpretar a qualidade da água de irrigação: Salinidade</string>
-    <string name="ce_0_75"><![CDATA[CE < 0.75]]></string>
-    <string name="_0_75_ce_1_5">0.75 <![CDATA[<]]>= CE<small>a</small> <![CDATA[<]]> 1.5</string>
-    <string name="_1_5_ce_3_00">1.5 <![CDATA[<]]>= CE<small>a</small> <![CDATA[<]]>= 3.00</string>
-    <string name="ce_3_0">CE<small>a</small> <![CDATA[>]]> 3.0</string>
-    <string name="voltar">Voltar</string>
-    <string name="ras_titulo">Problemas de Infiltração: Impacto sob a estrutura do solo</string>
-    <string name="ras_10_0"><![CDATA[RAS* < 10.0]]></string>
-    <string name="_10_0_ras_18_0"><![CDATA[10.0 <= RAS* < 18.0]]></string>
-    <string name="_18_0_ras_26_0"><![CDATA[18.0 <= RAS* <= 26.0]]></string>
-    <string name="ras_26_0"><![CDATA[RAS* > 26.0]]></string>
-    <string name="na_3_0">Na<sup><small>+</small></sup> > 3.0</string>
-    <string name="na_3_0_">Na<sup><small>+</small></sup> <![CDATA[<]]>= 3.0</string>
-    <string name="irrigacao_por_aspersao">Irrigação por aspersão</string>
-    <string name="ras_9_0"><![CDATA[RAS* > 9.0]]></string>
-    <string name="_3_0_ras_9_0"><![CDATA[3.0 >= RAS* >= 9.0]]></string>
-    <string name="irrigacao_por_superficie">Irrigação por superfície</string>
-    <string name="ras_3_0"><![CDATA[RAS* < 3.0]]></string>
-    <string name="_4_1_cl_10_0"><![CDATA[4.1 >=]]> Cl<sup><small>-</small></sup> <![CDATA[>= 10.0]]></string>
-    <string name="_2_1_cl_4_0"><![CDATA[2.1 >=]]> Cl<sup><small>-</small></sup> <![CDATA[>= 4.0]]></string>
-    <string name="cl_2_0">Cl<sup><small>-</small></sup> <![CDATA[<= 2.0]]></string>
-    <string name="cl_10_0">Cl<sup><small>-</small></sup> <![CDATA[> 10.0]]></string>
-    <string name="boro_info">Boro - B</string>
-    <string name="b_2_0"><![CDATA[B > 2.0]]></string>
-    <string name="_1_0_b_2_0"><![CDATA[1.0 < B <= 2.0]]></string>
-    <string name="_0_5_b_1_0"><![CDATA[0.5 <= B =< 1.0]]></string>
-    <string name="b_0_5"><![CDATA[B < 0.5]]></string>
-    <string name="desenvolvido_por">Desenvolvido por:</string>
-    <string name="professores_orientadores">Professores orientadores:</string>
-    <string name="nomes_professores">-Francisco de Assis Pereira Vasconcelos de Arruda \n-Nildo da Silva Dias \n-Osvaldo Nogueira de Sousa Neto</string>
-    <string name="arlan_graduando">Arlan de Medeiros, graduando em Sistemas de Informação - UFERSA - Angicos</string>
-    <string name="fonte">Fonte</string>
-    <string name="erro_atualizar_relatorio">Erro ao tentar atualizar o relatório, tente novamente.</string>
-    <string name="edit_location">editar localização</string>
-    <string name="edit_date">editar data</string>
-    <string name="relatorio_atualizado">Relatório atualizado com sucesso!</string>
-    <string name="fonte_atualizada">Fonte atualizada com sucesso!</string>
-    <string name="avaliar_antes_de_atualizar">Avaliar antes de atualizar</string>
-    <string name="update_realizado">Relatório atualizado com sucesso!</string>
-    <string name="localizacao_atualizada">Localização modificada! Aperte o botão salvar para atualizar o relatório.</string>
-    <string name="editar_relatorio">Editar relatório</string>
-    <string name="remover_relatorio">Remover relatório</string>
-    <string name="ver_relatorio">Ver relatório</string>
-    <string name="detalhes_relatorio">Detalhes do relatório</string>
-    <string name="relatorio_deletado">Relatório deletado com sucesso!</string>
-    <string name="deletando_relatorio">Deletando um relatório</string>
-    <string name="certeza_deletar_fonte">Tem certeza que deseja deletar essa fonte? Todos os relatórios sobre essa fonte serão apagados.</string>
-    <string name="fonte_deletada">Fonte deletada com sucesso!</string>
-    <string name="deletando_fonte">Deletando uma fonte</string>
-    <string name="certeza_deletar_relatorio">Tem certeza que deseja deletar esse relatório?</string>
-    <string name="sim">sim</string>
-    <string name="nao">não</string>
-    <string name="erro_deletar_relatorio">Erro ao deletar relatório.</string>
-    <string name="erro_calcular_ras">Erro ao tentar calcular a RAS</string>
-    <string name="erro_calcular_ras_corrigida">Erro ao tentar calcular a RAS*</string>
-    <string name="escolher_a_fonte">Toque para escolher a fonte...</string>
-    <string name="salvar">salvar</string>
-    <string name="selecione_a_data_e_fonte">Selecione a data e a fonte.</string>
-    <string name="tipo">Tipo</string>
-    <string name="latitude">Latitude</string>
-    <string name="longitude">Longitude</string>
-    <string name="adicionar_local_da_fonte">Adicionar local da fonte de água</string>
-    <string name="tipo_da_fonte">Tipo da fonte</string>
-    <string name="nome_da_fonte">Nome da fonte</string>
-    <string name="toque_para_escrever">Toque para escrever</string>
-    <string name="longitude_da_fonte">Longitude da fonte</string>
-    <string name="latitude_da_fonte">Latitude da fonte</string>
-    <string name="endereco_aproximado">Endereço aproximado</string>
-    <string name="confirmar">Confirmar</string>
-    <string name="detalhes_fonte">Detalhes da fonte</string>
-    <string name="editar_fonte">Editar Fonte</string>
-    <string name="remover_fonte">Remover fonte</string>
-    <string name="erro_deletar_fonte">Erro ao deletar fonte.</string>
-    <string name="nao_informada">não informada</string>
-    <string name="atualizar_localizacao">Atualizar localização</string>
+<string-array name="fontes" translatable="true">
+    <item>Weir</item>
+    <item>Well</item>
+    <item>Dam</item>
+    <item>River</item>
+    <item>Lake</item>
+</string-array>
+
+
+<string name="home_title">Home</string>
+<string name="local_adicionado">Added Location</string>
+<string name="coerencia_titulo">Coherence of the results of the chemical analysis of water</string>
+<string name="concentracao_cation_anions">Cations and Anions Concentration</string>
+<string name="r_formula_top"> | Σ Cations - Σ Anions |</string>
+<string name="r_formula_bot"> | Σ Cations + Σ  Anions |</string>
+<string name="resultado_excelente">Excellent result</string>
+<string name="resultado_aceitavel">Acceptable result</string>
+<string name="resultado_duvidoso">Uncertain outcome</string>
+<string name="r_5"><![CDATA[R < 5%]]></string>
+<string name="_5_r_10"><![CDATA[5% <= R <= 10%]]></string>
+<string name="r_10"><![CDATA[R > 10%]]></string>
+<string name="r_igual">R =</string>
+<string name="x_100">x 100</string>
+<string name="problemas_com_ph">pH problems</string>
+<string name="ph_7_0"><![CDATA[pH < 7.0]]></string>
+<string name="_7_0_ph_8_0"><![CDATA[7.0 <= pH <= 8.0]]></string>
+<string name="ph_8_0"><![CDATA[pH > 8.0]]></string>
+<string name="salinidade_titulo">Salinity risks</string>
+<string name="ce_025">EC<small>w</small><![CDATA[  < 0.25]]></string>
+<string name="_025_ce_075">0.25 <![CDATA[<]]>= EC<small>w</small> <![CDATA[<]]> 0.75</string>
+<string name="_075_ce_225">0.75 <![CDATA[<]]>= EC<small>w</small> <![CDATA[<]]> 2.25</string>
+<string name="_225_ce_400">2.25 <![CDATA[<]]>= EC<small>w</small> <![CDATA[<]]> 4.0</string>
+<string name="_400_ce_600">4.00 <![CDATA[<]]>= EC<small>w</small> <![CDATA[<]]> 6.0</string>
+<string name="_ce_600">EC<small>w</small> <![CDATA[>=]]> 6.0</string>
+<string name="voltar">Back</string>
+<string name="ras_titulo">Water infiltration problems</string>
+<string name="ras_10_0"><![CDATA[SAR* < 10.0]]></string>
+<string name="_10_0_ras_18_0"><![CDATA[10.0 <= SAR* < 18.0]]></string>
+<string name="_18_0_ras_26_0"><![CDATA[18.0 <= SAR* <= 26.0]]></string>
+<string name="ras_26_0"><![CDATA[SAR* > 26.0]]></string>
+<string name="na_3_0">Na<sup><small>+</small></sup> > 3.0</string>
+<string name="na_3_0_">Na<sup><small>+</small></sup> <![CDATA[<]]>= 3.0</string>
+<string name="irrigacao_por_aspersao">Irrigação por aspersão</string>
+<string name="ras_9_0"><![CDATA[SAR* > 9.0]]></string>
+<string name="_3_0_ras_9_0"><![CDATA[3.0 >= SAR* >= 9.0]]></string>
+<string name="irrigacao_por_superficie">Surface irrigation</string>
+<string name="ras_3_0"><![CDATA[SAR* < 3.0]]></string>
+<string name="_4_1_cl_10_0"><![CDATA[4.1 >=]]> Cl<sup><small>-</small></sup> <![CDATA[>= 10.0]]></string>
+<string name="_2_1_cl_4_0"><![CDATA[2.1 >=]]> Cl<sup><small>-</small></sup> <![CDATA[>= 4.0]]></string>
+<string name="cl_2_0">Cl<sup><small>-</small></sup> <![CDATA[<= 2.0]]></string>
+<string name="cl_10_0">Cl<sup><small>-</small></sup> <![CDATA[> 10.0]]></string>
+<string name="boro_info">Boron - B</string>
+<string name="b_2_0"><![CDATA[B > 2.0]]></string>
+<string name="_1_0_b_2_0"><![CDATA[1.0 < B <= 2.0]]></string>
+<string name="_0_5_b_1_0"><![CDATA[0.5 <= B =< 1.0]]></string>
+<string name="b_0_5"><![CDATA[B < 0.5]]></string>
+<string name="desenvolvido_por">Developed by:</string>
+<string name="professores_orientadores">Guiding teachers:</string>
+<string name="nomes_professores">-Francisco de Assis Pereira Vasconcelos de Arruda \n-Nildo da Silva Dias \n-Osvaldo Nogueira de Sousa Neto</string>
+<string name="arlan_graduando">Arlan de Medeiros, graduated in Information Systems - UFERSA - Angicos</string>
+<string name="fonte">Source</string>
+<string name="erro_atualizar_relatorio">Error trying to update the report, please try again.</string>
+<string name="edit_location">edit location</string>
+<string name="edit_date">edit date</string>
+<string name="relatorio_atualizado">Report updated successfully!</string>
+<string name="fonte_atualizada">Water source updated successfully!</string>
+<string name="avaliar_antes_de_atualizar">Evaluate before updating</string>
+<string name="update_realizado">Report updated successfully!</string>
+<string name="localizacao_atualizada">The location has been modified! Press the save button to update the report.</string>
+<string name="editar_relatorio">Edit report</string>
+<string name="remover_relatorio">Remove report</string>
+<string name="ver_relatorio">View report</string>
+<string name="detalhes_relatorio">Report details</string>
+<string name="relatorio_deletado">Report successfully deleted!</string>
+<string name="deletando_relatorio">Deleting a report</string>
+<string name="certeza_deletar_fonte">Are you sure you want to delete this source? All reports on that source will be deleted.</string>
+<string name="fonte_deletada">Source Successfully deleted!</string>
+<string name="deletando_fonte">Deleting a source</string>
+<string name="certeza_deletar_relatorio">Are you sure you want to delete this report?</string>
+<string name="sim">yes</string>
+<string name="nao">no</string>
+<string name="erro_deletar_relatorio">Error deleting report.</string>
+<string name="erro_calcular_ras">Error when trying to calculate SAR</string>
+<string name="erro_calcular_ras_corrigida">Error when trying to calculate SAR*</string>
+<string name="escolher_a_fonte">Tap to choose the font…</string>
+<string name="salvar">save</string>
+<string name="selecione_a_data_e_fonte">Select date and source.</string>
+<string name="tipo">Type</string>
+<string name="latitude">Latitude</string>
+<string name="longitude">Longitude</string>
+<string name="adicionar_local_da_fonte">Add water source location</string>
+<string name="tipo_da_fonte">Source type</string>
+<string name="nome_da_fonte">Source name</string>
+<string name="toque_para_escrever">Tap to write</string>
+<string name="longitude_da_fonte">Water source longitude</string>
+<string name="latitude_da_fonte">Water source Latitude</string>
+<string name="endereco_aproximado">Approximate address</string>
+<string name="confirmar">Confirm</string>
+<string name="detalhes_fonte">Source Details</string>
+<string name="editar_fonte">Source edit</string>
+<string name="remover_fonte">Source delete</string>
+<string name="erro_deletar_fonte">Error while deleting source.</string>
+<string name="nao_informada">not informed</string>
+<string name="atualizar_localizacao">Update location</string>
+<string name="nome_da_fonte_ja_existe">That name already exists</string>
+<string name="water_analysis">Water Analysis</string>
+<string name="date">Date</string>
+<string name="ph" translatable="false">pH</string>
+<string name="qwater_beta" translatable="false">Qwater- beta</string>
+<string name="bem_vindo">Welcome!</string>
+<string name="font_e">Source:</string>
+<string name="reports_list">Reports List</string>
+<string name="sources_list">Sources list</string>
+
 
 </resources>
+
