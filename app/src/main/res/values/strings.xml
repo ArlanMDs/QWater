@@ -275,11 +275,16 @@
 <string name="water_analysis">Water Analysis</string>
 <string name="date">Date</string>
 <string name="ph" translatable="false">pH</string>
-<string name="qwater_beta" translatable="false">Qwater- beta</string>
+<string name="qwater_beta" translatable="false">Qwater</string>
 <string name="bem_vindo">Welcome!</string>
 <string name="font_e">Source:</string>
 <string name="reports_list">Reports List</string>
 <string name="sources_list">Sources list</string>
+    <string name="welcome_info_message">This application was developed by an interdisciplinary team, formed by teachers and students from the Federal Rural University of the Semi-Arid
+        of Campi Mossoró and Angicos RN, whose objective is to interpret water quality reports for irrigation purposes. \n\nThe application will estimate the risks of salinity, ionic toxicity,
+        obstruction of drippers in localized irrigation, and problems with water infiltration in the soil. \n\nAlso, this app aims to provide support in making decisions about the best
+        irrigation management practices when using saline water, such as application strategies and the indication of tolerant plants according to the level of water salinity.
+        The app includes a tutorial about how to use it.</string>
 
 
 </resources>

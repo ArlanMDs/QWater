@@ -269,6 +269,11 @@
     <string name="sources_list">Lista de fontes</string>
     <string name="_400_ce_600">4.00 <![CDATA[<]]>= CE<small>a</small> <![CDATA[<]]> 6.0</string>
     <string name="_ce_600">"CE<small>a</small> <![CDATA[>=]]> 6.0 "</string>
+    <string name="welcome_info_message">Este aplicativo foi desenvolvido por uma equipe interdisciplinar, formada por professores e alunos da Universidade Federal Rural do Semiárido dos
+        Campi de Mossoró e Angicos RN, cujo objetivo é interpretar relatórios de qualidade de água para fins de irrigação. \n\nO aplicativo irá estimar os riscos de salinidade, a toxidez de iônica,
+        riscos de obstruções de gotejadores na irrigação localizada e problema com infiltração de água no solo. \n\nAlém disso, este app pretende dar subsídios na tomada de decisões sobre
+        as melhores práticas de manejo de irrigação quando se utiliza água salina como, por exemplo, as estratégias de aplicação e a indicação de plantas tolerantes de acordo com o nível
+        de salinidade da água. O aplicativo inclue instruções sobre como utilizá-lo.</string>
 
 </resources>
 
