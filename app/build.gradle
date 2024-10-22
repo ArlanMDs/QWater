@@ -10,8 +10,8 @@ android {
         applicationId "br.com.ufersa.qwater"
         minSdkVersion 21
         targetSdkVersion 34 // Atualizado para Android 14
-        versionCode 19
-        versionName "1.0.3"
+        versionCode 22
+        versionName "1.1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
