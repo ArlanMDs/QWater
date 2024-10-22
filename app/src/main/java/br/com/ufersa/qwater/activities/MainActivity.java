@@ -2,16 +2,7 @@ package br.com.ufersa.qwater.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -33,6 +24,18 @@ import static br.com.ufersa.qwater.util.Flags.SEE_UPDATED_SOURCE;
 import static br.com.ufersa.qwater.util.Flags.SOURCE;
 import static br.com.ufersa.qwater.util.Flags.UPDATE_REPORT;
 import static br.com.ufersa.qwater.util.Flags.UPDATE_SOURCE;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -155,37 +158,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         // ATENÇÃO: O floating button dentro dos fragmentos de listar também estão usando tag, pois eles fazem commit dentro dos seus click listeners.
         // Caso mude aqui, também deve ser mudado lá!
-        switch (itemId) {
-            case R.id.HOME:
-                fragment = new HomeFragment();
-                tag = "HOME";
-                break;
-
-            case R.id.CREATE_SOURCE:
-                fragment = new CreateSourceFragment();
-                tag = "CREATE_SOURCE";
-                break;
-
-            case R.id.CREATE_REPORT:
-                fragment = new CreateReportFragment();
-                tag = "CREATE_REPORT";
-                break;
-
-            case R.id.LIST_REPORTS:
-                fragment = new ListReportsFragment();
-                tag = "LIST_REPORTS";
-                break;
-
-            case R.id.LIST_SOURCES:
-                fragment = new ListSourcesFragment();
-                tag = "LIST_SOURCES";
-                break;
-
-            default:
-                tag = "NULL";
-                break;
-
+        if (itemId == R.id.HOME) {
+            fragment = new HomeFragment();
+            tag = "HOME";
+        } else if (itemId == R.id.CREATE_SOURCE) {
+            fragment = new CreateSourceFragment();
+            tag = "CREATE_SOURCE";
+        } else if (itemId == R.id.CREATE_REPORT) {
+            fragment = new CreateReportFragment();
+            tag = "CREATE_REPORT";
+        } else if (itemId == R.id.LIST_REPORTS) {
+            fragment = new ListReportsFragment();
+            tag = "LIST_REPORTS";
+        } else if (itemId == R.id.LIST_SOURCES) {
+            fragment = new ListSourcesFragment();
+            tag = "LIST_SOURCES";
+        } else {
+            tag = "NULL";
         }
+
 
         //replacing the fragment
         if (fragment != null) {

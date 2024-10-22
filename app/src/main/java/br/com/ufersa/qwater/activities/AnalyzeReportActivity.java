@@ -3,9 +3,10 @@ package br.com.ufersa.qwater.activities;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -74,36 +75,16 @@ public class AnalyzeReportActivity extends AppCompatActivity implements View.OnC
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        switch(item.getItemId()){
-            case R.id.action_insert:
-                // abre uma nova activity e passa o relatório, lá, será inserida a data da amostra e o nome da fonte
-                startActivityForResult(new Intent(AnalyzeReportActivity.this, SaveReportActivity.class), INSERT_SAVE_REPORT);
-
-            return true;
-
-            case R.id.action_update:
-                Intent intent = new Intent(AnalyzeReportActivity.this, SaveReportActivity.class);
-                intent.putExtra("sourceName", report.getSouName());
-                intent.putExtra("reportDate",report.getDate());
-                intent.putExtra("sourceID", report.getSouId());
-
-                startActivityForResult(intent, UPDATE_SAVE_REPORT);
-
-
-            return true;
-
-//            case R.id.action_update_source:
-//                Intent intent = new Intent(AnalyzeReportActivity.this, ListSourcesActivity.class);
-//                intent.putExtra(CALLING_ACTIVITY, SAVE_REPORT_ACTIVITY);
-//                startActivityForResult(intent, UPDATE_SELECT_SOURCE);
-
-//            return true;
-//
-//            case R.id.action_update_date:
-//                startActivityForResult(new Intent(AnalyzeReportActivity.this, SaveReportActivity.class), UPDATE_SAVE_REPORT);
-//
-//            return true;
+        if (item.getItemId() == R.id.action_insert) {
+            startActivityForResult(new Intent(AnalyzeReportActivity.this, SaveReportActivity.class), INSERT_SAVE_REPORT);
+        } else if (item.getItemId() == R.id.action_update) {
+            Intent intent = new Intent(AnalyzeReportActivity.this, SaveReportActivity.class);
+            intent.putExtra("sourceName", report.getSouName());
+            intent.putExtra("reportDate", report.getDate());
+            intent.putExtra("sourceID", report.getSouId());
+            startActivityForResult(intent, UPDATE_SAVE_REPORT);
         }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -507,32 +488,16 @@ public class AnalyzeReportActivity extends AppCompatActivity implements View.OnC
      */
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-
-            case R.id.COHERENCE_INFO:
-                startActivity(new Intent(AnalyzeReportActivity.this, CoherenceActivity.class));
-                break;
-
-            case R.id.SALINITY_INFO:
-                startActivity(new Intent(AnalyzeReportActivity.this, SalinityActivity.class));
-
-                break;
-
-            case R.id.SAR_INFO:
-                startActivity(new Intent(AnalyzeReportActivity.this, SarActivity.class));
-
-                break;
-
-            case R.id.TOXITY_INFO:
-                startActivity(new Intent(AnalyzeReportActivity.this, ToxityActivity.class));
-
-                break;
-
-            case R.id.PH_INFO:
-                startActivity(new Intent(AnalyzeReportActivity.this, PhActivity.class));
-
-                break;
-
+        if (v.getId() == R.id.COHERENCE_INFO) {
+            startActivity(new Intent(AnalyzeReportActivity.this, CoherenceActivity.class));
+        } else if (v.getId() == R.id.SALINITY_INFO) {
+            startActivity(new Intent(AnalyzeReportActivity.this, SalinityActivity.class));
+        } else if (v.getId() == R.id.SAR_INFO) {
+            startActivity(new Intent(AnalyzeReportActivity.this, SarActivity.class));
+        } else if (v.getId() == R.id.TOXITY_INFO) {
+            startActivity(new Intent(AnalyzeReportActivity.this, ToxityActivity.class));
+        } else if (v.getId() == R.id.PH_INFO) {
+            startActivity(new Intent(AnalyzeReportActivity.this, PhActivity.class));
         }
     }
 

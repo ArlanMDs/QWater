@@ -1,14 +1,17 @@
 package br.com.ufersa.qwater.adapters;
 
+import static br.com.ufersa.qwater.util.Flags.REPORT;
+
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.constraint.ConstraintLayout;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -18,9 +21,7 @@ import br.com.ufersa.qwater.R;
 import br.com.ufersa.qwater.activities.ReportDetailsActivity;
 import br.com.ufersa.qwater.beans.Report;
 
-import static br.com.ufersa.qwater.util.Flags.REPORT;
-
-public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ViewHolder>{
+public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ViewHolder> {
 
     private final List<Report> reports;
     private final Context context;
@@ -32,33 +33,15 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ViewHolder
 
     @NonNull
     @Override
-    public ReportAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.report_row, parent, false);
-        return new ReportAdapter.ViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ReportAdapter.ViewHolder holder, final int position) {
-
-        holder.reportSourceName.setText(reports.get(position).getSouName());
-        holder.reportDate.setText(longToDateFormat(reports.get(position).getDate()));
-        // o listener passa o ID da amostra selecionada para a activity de detalhes
-        holder.parentLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(context, ReportDetailsActivity.class);
-                intent.putExtra(REPORT, reports.get(position));
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);//app deu crash, o log do erro pediu essa flag.
-                context.startActivity(intent);
-            }
-        });
-    }
-
-    private String longToDateFormat(long longValue){
-
-        return new SimpleDateFormat("dd/MM/yyyy").format(new Date(longValue));// TODO resolver data
-
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Report report = reports.get(position);
+        holder.bind(report);
     }
 
     @Override
@@ -66,17 +49,32 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ViewHolder
         return reports.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView reportSourceName;
         private final TextView reportDate;
         final ConstraintLayout parentLayout;
 
-        ViewHolder(View itemView){
+        ViewHolder(View itemView) {
             super(itemView);
             reportSourceName = itemView.findViewById(R.id.TEXTVIEW_REPORT_SOURCE_NAME);
-            parentLayout = itemView.findViewById(R.id.LAYOUT_WATER_REPORT_ROW);
             reportDate = itemView.findViewById(R.id.TEXTVIEW_REPORT_DATE);
+            parentLayout = itemView.findViewById(R.id.LAYOUT_WATER_REPORT_ROW);
+        }
 
+        void bind(Report report) {
+            reportSourceName.setText(report.getSouName());
+            reportDate.setText(longToDateFormat(report.getDate()));
+            parentLayout.setOnClickListener(v -> openReportDetails(report));
+        }
+
+        private void openReportDetails(Report report) {
+            Intent intent = new Intent(context, ReportDetailsActivity.class);
+            intent.putExtra(REPORT, report);
+            context.startActivity(intent);
+        }
+
+        private String longToDateFormat(long longValue) {
+            return new SimpleDateFormat("dd/MM/yyyy").format(new Date(longValue));
         }
     }
 }

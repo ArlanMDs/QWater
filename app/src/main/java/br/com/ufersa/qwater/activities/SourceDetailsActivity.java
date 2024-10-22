@@ -4,9 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +19,10 @@ import static br.com.ufersa.qwater.util.Flags.DELETE_SOURCE;
 import static br.com.ufersa.qwater.util.Flags.GOING_TO;
 import static br.com.ufersa.qwater.util.Flags.SOURCE;
 import static br.com.ufersa.qwater.util.Flags.UPDATE_SOURCE;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 public class SourceDetailsActivity extends AppCompatActivity {
 
@@ -51,34 +53,28 @@ public class SourceDetailsActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         Intent intent;
-        switch(item.getItemId()){
+        if (item.getItemId() == R.id.action_edit_source) {
+            intent = new Intent(SourceDetailsActivity.this, MainActivity.class)
+                    .putExtra(GOING_TO, UPDATE_SOURCE)
+                    .putExtra(SOURCE, source);
+            startActivity(intent);
+            return true;
 
-            case R.id.action_edit_source:
-
-                intent = new Intent(SourceDetailsActivity.this, MainActivity.class)
-                        .putExtra(GOING_TO, UPDATE_SOURCE)
-                        .putExtra(SOURCE,source);
-
-                startActivity(intent);
-
-                return true;
-
-            case R.id.action_delete_source:
-
-                new AlertDialog.Builder(this)
-                        .setTitle(R.string.deletando_fonte)
-                        .setMessage(R.string.certeza_deletar_fonte)
-                        .setPositiveButton(R.string.sim,
-                                new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        deleteSource();
-                                    }
-                                })
-                        .setNegativeButton(R.string.nao, null)
-                        .show();
-                return true;
+        } else if (item.getItemId() == R.id.action_delete_source) {
+            new AlertDialog.Builder(this)
+                    .setTitle(R.string.deletando_fonte)
+                    .setMessage(R.string.certeza_deletar_fonte)
+                    .setPositiveButton(R.string.sim, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            deleteSource();
+                        }
+                    })
+                    .setNegativeButton(R.string.nao, null)
+                    .show();
+            return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
     private void initiate() {

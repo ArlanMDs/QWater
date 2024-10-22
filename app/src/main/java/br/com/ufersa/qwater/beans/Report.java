@@ -1,10 +1,12 @@
 package br.com.ufersa.qwater.beans;
 
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.ForeignKey;
-import android.arch.persistence.room.PrimaryKey;
+
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.PrimaryKey;
 
 // Tutorial da relação one-to-many no Romm:
 // https://www.bignerdranch.com/blog/room-data-storage-for-everyone/

@@ -6,11 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".activities.SourceDetailsActivity">
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <android.support.v7.widget.Toolbar
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/SOURCE_DETAILS_TOOLBAR"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -23,7 +23,7 @@
             app:title="@string/detalhes_fonte"
             app:titleTextAppearance="@style/Toolbar.TitleText" />
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -127,6 +127,6 @@
                 android:text="TextView"
                 app:layout_constraintStart_toStartOf="@+id/SOURCE_DETAILS_LATITUDE"
                 app:layout_constraintTop_toBottomOf="@+id/SOURCE_DETAILS_LATITUDE" />
-        </android.support.constraint.ConstraintLayout>
-    </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

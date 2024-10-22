@@ -4,9 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,7 +24,11 @@ import static br.com.ufersa.qwater.util.Flags.REPORT;
 import static br.com.ufersa.qwater.util.Flags.SEE_REPORT;
 import static br.com.ufersa.qwater.util.Flags.UPDATE_REPORT;
 
-public class ReportDetailsActivity extends AppCompatActivity{
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+public class ReportDetailsActivity extends AppCompatActivity {
 
     private TextView cea, ca, mg, k, na, co3, hco3, cl, pH, sourceName, correctedSAR, date, b, so4;
     private Report report;
@@ -56,39 +58,35 @@ public class ReportDetailsActivity extends AppCompatActivity{
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         Intent intent;
-        switch(item.getItemId()){
-            case R.id.action_see_report:
+        if (item.getItemId() == R.id.action_see_report) {
+            intent = new Intent(ReportDetailsActivity.this, AnalyzeReportActivity.class);
+            intent.putExtra(GOING_TO, SEE_REPORT);
+            intent.putExtra(REPORT, report);
+            startActivity(intent);
+            return true;
 
-                intent = new Intent(ReportDetailsActivity.this, AnalyzeReportActivity.class);
-                intent.putExtra(GOING_TO, SEE_REPORT);
-                intent.putExtra(REPORT, report);
-                startActivity(intent);
+        } else if (item.getItemId() == R.id.action_edit_report) {
+            intent = new Intent(ReportDetailsActivity.this, MainActivity.class);
+            intent.putExtra(GOING_TO, UPDATE_REPORT);
+            intent.putExtra(REPORT, report);
+            startActivity(intent);
+            return true;
 
-                return true;
-            case R.id.action_edit_report:
-
-                intent = new Intent(ReportDetailsActivity.this, MainActivity.class);
-                intent.putExtra(GOING_TO, UPDATE_REPORT);
-                intent.putExtra(REPORT, report);
-                startActivity(intent);
-
-                return true;
-            case R.id.action_delete_report:
-
-                new AlertDialog.Builder(this)
-                        .setTitle(R.string.deletando_relatorio)
-                        .setMessage(R.string.certeza_deletar_relatorio)
-                        .setPositiveButton(R.string.sim,
-                                new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        deleteReport();
-                                    }
-                                })
-                        .setNegativeButton(R.string.nao, null)
-                        .show();
+        } else if (item.getItemId() == R.id.action_delete_report) {
+            new AlertDialog.Builder(this)
+                    .setTitle(R.string.deletando_relatorio)
+                    .setMessage(R.string.certeza_deletar_relatorio)
+                    .setPositiveButton(R.string.sim, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            deleteReport();
+                        }
+                    })
+                    .setNegativeButton(R.string.nao, null)
+                    .show();
             return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
 

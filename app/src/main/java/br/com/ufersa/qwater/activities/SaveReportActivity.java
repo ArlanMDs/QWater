@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -21,6 +20,8 @@ import br.com.ufersa.qwater.R;
 import static br.com.ufersa.qwater.util.Flags.CALLING_ACTIVITY;
 import static br.com.ufersa.qwater.util.Flags.INSERT_SELECT_SOURCE;
 import static br.com.ufersa.qwater.util.Flags.SAVE_REPORT_ACTIVITY;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class SaveReportActivity extends AppCompatActivity {
 

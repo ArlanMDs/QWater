@@ -14,11 +14,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Looper;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,6 +41,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.karumi.dexter.BuildConfig;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
@@ -59,7 +56,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 
-import br.com.ufersa.qwater.BuildConfig;
 import br.com.ufersa.qwater.R;
 import br.com.ufersa.qwater.activities.MainActivity;
 import br.com.ufersa.qwater.beans.Source;
@@ -68,6 +64,12 @@ import br.com.ufersa.qwater.util.Flags;
 
 import static br.com.ufersa.qwater.util.Flags.GOING_TO;
 import static br.com.ufersa.qwater.util.Flags.SEE_UPDATED_SOURCE;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
 
 // referências: https://www.androidhive.info/2012/07/android-gps-location-manager-tutorial/
 // https://android.jlelse.eu/room-store-your-data-c6d49b4d53a3
@@ -204,8 +206,8 @@ public class CreateSourceFragment extends Fragment implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.SOURCE_OK_BUTTON:
+
+        if (v.getId() == R.id.SOURCE_OK_BUTTON) {
 
                 mRequestingLocationUpdates = false;
                 stopLocationUpdates();
@@ -215,9 +217,8 @@ public class CreateSourceFragment extends Fragment implements View.OnClickListen
                 }else{
                     new AsyncInsert().execute();
                 }
-                break;
 
-            case R.id.BUTTON_START_LOCATION_UPDATES:
+        } else if (v.getId() == R.id.BUTTON_START_LOCATION_UPDATES) {
 
                 // Requesting ACCESS_FINE_LOCATION using Dexter library
                 Dexter.withActivity(getActivity())
@@ -244,7 +245,6 @@ public class CreateSourceFragment extends Fragment implements View.OnClickListen
                             }
                         }).check();
 
-                break;
         }
 
     }

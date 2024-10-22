@@ -7,7 +7,7 @@
     android:scrollbars="horizontal"
     tools:context=".info_activities.PhActivity">
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp">
@@ -179,6 +179,6 @@
             android:text="@string/PH3"
             app:layout_constraintStart_toStartOf="@+id/textView54"
             app:layout_constraintTop_toTopOf="@+id/textView52" />
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>
